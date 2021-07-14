@@ -6,7 +6,7 @@
   <link href="https://leexiaop.github.io/atom.xml" rel="self"/>
   
   <link href="https://leexiaop.github.io/"/>
-  <updated>2021-07-14T06:21:08.342Z</updated>
+  <updated>2021-07-14T10:09:27.868Z</updated>
   <id>https://leexiaop.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>leeCode算法--买卖股票的最佳时机</title>
+    <link href="https://leexiaop.github.io/algorithm/24/"/>
+    <id>https://leexiaop.github.io/algorithm/24/</id>
+    <published>2021-07-14T09:46:55.000Z</published>
+    <updated>2021-07-14T10:09:27.868Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;题目：给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子</summary>
+        
+      
+    
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
+    
+  </entry>
+  
+  <entry>
     <title>leeCode算法--多数元素问题</title>
     <link href="https://leexiaop.github.io/algorithm/23/"/>
     <id>https://leexiaop.github.io/algorithm/23/</id>
     <published>2021-07-14T06:00:59.000Z</published>
-    <updated>2021-07-14T06:21:08.342Z</updated>
+    <updated>2021-07-14T10:05:55.755Z</updated>
     
     
       
@@ -46,7 +71,7 @@
     <link href="https://leexiaop.github.io/algorithm/22/"/>
     <id>https://leexiaop.github.io/algorithm/22/</id>
     <published>2021-07-13T09:52:55.000Z</published>
-    <updated>2021-07-14T02:57:02.502Z</updated>
+    <updated>2021-07-14T10:04:38.866Z</updated>
     
     
       
@@ -155,7 +180,7 @@
     <link href="https://leexiaop.github.io/react/3/"/>
     <id>https://leexiaop.github.io/react/3/</id>
     <published>2021-05-28T03:38:36.000Z</published>
-    <updated>2021-07-13T08:57:11.728Z</updated>
+    <updated>2021-07-14T09:20:59.112Z</updated>
     
     
       
@@ -163,7 +188,7 @@
         
         
     <summary type="html">&lt;p&gt;说到React，版本16将是一个较大的分水岭，尤其是在算法优化方面有了很大的更新，之前是stack算法而之后改成了fiber算法。&lt;/p&gt;
-&lt;h3 id=&quot;stack算法原理&quot;&gt;&lt;a href=&quot;#stack算法原理&quot; class=&quot;headerlink&quot;</summary>
+&lt;h3 id=&quot;stack算法的问题&quot;&gt;&lt;a href=&quot;#stack算法的问题&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -510,31 +535,6 @@
         
         
     <summary type="html">&lt;p&gt;题目：给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。例如，121 是回文，而 123</summary>
-        
-      
-    
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode算法--反转整数</title>
-    <link href="https://leexiaop.github.io/algorithm/13/"/>
-    <id>https://leexiaop.github.io/algorithm/13/</id>
-    <published>2021-05-10T09:59:19.000Z</published>
-    <updated>2021-05-22T09:50:54.282Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;题目：给你一个 32 位的有符号整数 x ，返回将 x 中的数字部分反转后的结果。如果反转后整数超过 32 位的有符号整数的范围 [−2&lt;sup&gt;31&lt;/sup&gt;,  2&lt;sup&gt;31&lt;/sup&gt; − 1] ，就返回</summary>
         
       
     
