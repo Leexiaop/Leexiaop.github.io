@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>React--React中React Hooks的实现原理是什么？</title>
+    <url>/react/4/</url>
+    <content><![CDATA[<h3 id="曾经的react"><a href="#曾经的react" class="headerlink" title="曾经的react"></a>曾经的react</h3><p>react技术栈的迭代是非常快的，但是版本16也许是一次革命性的迭代。从版本16开始，react的底层由stack算法转变为fiber算法，大大提高了性能。而在16.8之后react又新增了hooks的概念。在老版本的react中，开发者所开发的大多都是class组件和少部分的函数组件，对于函数组件来说，它仅仅只是一个纯UI的展示组件，只能接受props，而不能有自己的state。而对于class组件来说，问题也是不少：组件状态复用艰难，让人无奈的this问题，高阶组件和函数组件的嵌套层次太深，复杂组件变得难以理解，以及难以记忆的生命周期等问题很让人头大。</p>
+<h3 id="Hooks能做点什么"><a href="#Hooks能做点什么" class="headerlink" title="Hooks能做点什么"></a>Hooks能做点什么</h3><p>总的来说Hooks的出现就是为了解决这些问题而产生的：</p>
+<ul>
+<li>useState函数可以初始化状态，为函数组件赋予了状态；</li>
+<li>useEffect函数代替了之前的生命周期函数，接受包含命令式，可能有副作用代码的函数；</li>
+<li>useContext接受上下文对象，并返回上下文对象，让深嵌套的组件通信变的简单；</li>
+<li>useReducer 是useState的代替方案，接受类型为state，action =&gt; newState的reducer，并返回与dispatch方法配对的当前状态；</li>
+<li>useCallback返回一个记忆的memoried版本，该版本仅在其输入发生改变时才会更改，尤其是很好的解决了函数需要绑定this这一问题；</li>
+<li>useMemo一个纯记忆函数</li>
+<li>useRef返回一个可变的ref对象，其.current对象被定义为初始化传递的参数</li>
+<li>…</li>
+</ul>
+<h3 id="Hooks的实现原理"><a href="#Hooks的实现原理" class="headerlink" title="Hooks的实现原理"></a>Hooks的实现原理</h3><p>React会维护俩个链表，一个是currentHook，另外一个是WorkInProgressHook,每一个节点类型都是Hooks，每当hooks函数被调用，react就会创建一个hooks对象，并挂在链表的尾部，函数组件之所以能做一些类组件不能做的事儿，就是因为hook对象，函数组件的状态，计算值，缓存等都是交给hook去完成的，这样组件通过Fiber.memoizedState属性指向hook链表的头部来关联hook对象和当前组件，这样就发挥了hooks的作用。每次调用hooks API的时候，就会首先调用createWorkInProgressHook函数。得到hooks的串联不是一个数组，而是一个链式结构，从根节点workInProgressHook向下通过next进行串联，这也是为什么Hooks不能嵌套使用，不能在条件判断中使用，不能在循环中使用，否则链式就会被破坏。</p>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>leeCode算法--搜索插入位置</title>
     <url>/algorithm/25/</url>
     <content><![CDATA[<p>题目：给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。你可以假设数组中无重复元素。</p>
