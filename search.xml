@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>leeCode算法--搜索插入位置</title>
+    <url>/algorithm/25/</url>
+    <content><![CDATA[<p>题目：给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。你可以假设数组中无重复元素。</p>
+<p>解析：</p>
+<ul>
+<li>首先给定的是一个有序数组，那么我们直接循环就OK，时间复杂度应该是O(1)</li>
+<li>题目要求返回的是索引，并不是将目标元素插入到数组的某个位置，这就简单了，并不会对数组做什么操作。那么就可以说是<code>只要发现元素大于等于(&gt;=)目标元素就找到了这个位置</code>,否则就是没有找到这个位置，那么目标值一定是最大值，返回最后一个的下标就OK！</li>
+<li>注意处理边界值。<figure class="highlight glsl"><table><tr><td class="code"><pre><span class="line">let searchInsert = (nums, target) =&gt; &#123;</span><br><span class="line">    let <span class="keyword">index</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">0</span>;</span><br><span class="line">        i &lt; nums.<span class="built_in">length</span> - <span class="number">1</span>;</span><br><span class="line">        i++</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt;= target) &#123;</span><br><span class="line">            <span class="keyword">index</span> = i</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">index</span> = nums.<span class="built_in">length</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">index</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+题还是比较简单，但是别让自己的思维走进死胡同，其实对于Javascript来说，有个方法叫reduce，此法也许更简洁。That’s all!</li>
+</ul>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>leeCode算法--买卖股票的最佳时机</title>
     <url>/algorithm/24/</url>
     <content><![CDATA[<p>题目：给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回0。<br>分析：看到这个题，第一反应应该就是选择排序的思想。是的没有错。采用prices[i]和后面的每一个元素做对比。</p>
