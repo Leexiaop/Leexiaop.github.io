@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>leeCode算法--找出只出现一次的数字</title>
+    <url>/algorithm/27/</url>
+    <content><![CDATA[<p>题目：给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。算法应该具有线性复杂度，并且不使用额外的空间。</p>
+<p>解析：在给定的数组中，很有规律，除了只出现一次的元素外，其他的每个元素均只出现俩次，这就让我们想到了<code>异或运算(^)</code>。即，任意数a和0的运算：a⊕a=0;a⊕0=a,所以代码如下：</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">let singleNumber = nums =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!nums.length) &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    let m = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(let <span class="selector-tag">i</span> of nums) &#123;</span><br><span class="line">        m ^= <span class="selector-tag">i</span></span><br><span class="line">    &#125;</span><br><span class="line">    return m</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">singleNumber</span><span class="params">([<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>])</span></span>   <span class="comment">//  4</span></span><br><span class="line"><span class="function"><span class="title">singleNumber</span><span class="params">([<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>])</span></span>   <span class="comment">//  1</span></span><br></pre></td></tr></table></figure>
+<p>所以本题的思路是非常难的，代码很简单，快补充一下<code>异或运算</code>啊。</p>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>leeCode算法--买卖股票的最佳时机(II)</title>
     <url>/algorithm/26/</url>
     <content><![CDATA[<p>题目：给定一个数组 prices ，其中 prices[i] 是一支给定股票第 i 天的价格。设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
