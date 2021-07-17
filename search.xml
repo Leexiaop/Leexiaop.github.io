@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>leeCode算法--反转字符串</title>
+    <url>/algorithm/28/</url>
+    <content><![CDATA[<p>题目：编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</p>
+<p>分析：本地中没什么难度，只是要注意的是不要使用额外空间，空间复杂度是O(1).</p>
+<figure class="highlight coq"><table><tr><td class="code"><pre><span class="line">var reverseString = function(s) &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">left</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">right</span> = s.length - <span class="number">1</span></span><br><span class="line">    while (<span class="built_in">left</span> &lt;= <span class="built_in">right</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> temp = s[<span class="built_in">left</span>]</span><br><span class="line">        s[<span class="built_in">left</span>] = s[<span class="built_in">right</span>]</span><br><span class="line">        s[<span class="built_in">right</span>] = temp</span><br><span class="line">        <span class="built_in">left</span>++</span><br><span class="line">        <span class="built_in">right</span>--</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;;</span><br><span class="line">reverseString([<span class="string">&quot;h&quot;</span>,<span class="string">&quot;e&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;o&quot;</span>])</span><br><span class="line">//  [<span class="string">&quot;o&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;e&quot;</span>,<span class="string">&quot;h&quot;</span>]</span><br><span class="line">reverseString([<span class="string">&quot;H&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;n&quot;</span>,<span class="string">&quot;n&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;h&quot;</span>])</span><br><span class="line">//  [<span class="string">&quot;h&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;n&quot;</span>,<span class="string">&quot;n&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;H&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p>That’s all!</p>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>leeCode算法--找出只出现一次的数字</title>
     <url>/algorithm/27/</url>
     <content><![CDATA[<p>题目：给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。算法应该具有线性复杂度，并且不使用额外的空间。</p>

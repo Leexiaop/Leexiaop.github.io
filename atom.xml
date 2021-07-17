@@ -6,7 +6,7 @@
   <link href="https://leexiaop.github.io/atom.xml" rel="self"/>
   
   <link href="https://leexiaop.github.io/"/>
-  <updated>2021-07-16T13:55:48.915Z</updated>
+  <updated>2021-07-17T13:55:05.036Z</updated>
   <id>https://leexiaop.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leeCode算法--反转字符串</title>
+    <link href="https://leexiaop.github.io/algorithm/28/"/>
+    <id>https://leexiaop.github.io/algorithm/28/</id>
+    <published>2021-07-17T13:49:49.000Z</published>
+    <updated>2021-07-17T13:55:05.036Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;题目：编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。你可以假设数组中的所有字符都是 ASCII</summary>
+        
+      
+    
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>leeCode算法--找出只出现一次的数字</title>
@@ -514,31 +539,6 @@
     <summary type="html">&lt;p&gt;题目：实现一个strStr()方法，要求strStr有俩个参数，hayStack和needle参数，找出字符串hayStack中needle的位置，并返回这个位置。如果找不到就返回-1.&lt;/p&gt;
 &lt;p&gt;解析：查找位置，只能双层遍历，依次比对。&lt;/p&gt;
 &lt;figure</summary>
-        
-      
-    
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leeCode算法--删除数组中的指定元素</title>
-    <link href="https://leexiaop.github.io/algorithm/19/"/>
-    <id>https://leexiaop.github.io/algorithm/19/</id>
-    <published>2021-05-16T12:18:35.000Z</published>
-    <updated>2021-05-22T09:50:54.283Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;题目：给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地</summary>
         
       
     
