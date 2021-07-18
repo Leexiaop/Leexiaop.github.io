@@ -6,7 +6,7 @@
   <link href="https://leexiaop.github.io/atom.xml" rel="self"/>
   
   <link href="https://leexiaop.github.io/"/>
-  <updated>2021-07-17T16:00:02.791Z</updated>
+  <updated>2021-07-18T14:50:17.591Z</updated>
   <id>https://leexiaop.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>leeCode算法--存在重复元素</title>
+    <title>leeCode算法--存在重复元素(II)</title>
+    <link href="https://leexiaop.github.io/algorithm/30/"/>
+    <id>https://leexiaop.github.io/algorithm/30/</id>
+    <published>2021-07-18T14:33:26.000Z</published>
+    <updated>2021-07-18T14:50:17.591Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;题目：给定一个整数数组和一个整数 k，判断数组中是否存在两个不同的索引 i 和 j，使得 nums [i] = nums [j]，并且 i 和 j 的差的 绝对值 至多为</summary>
+        
+      
+    
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>leeCode算法--存在重复元素(I)</title>
     <link href="https://leexiaop.github.io/algorithm/29/"/>
     <id>https://leexiaop.github.io/algorithm/29/</id>
     <published>2021-07-17T15:56:52.000Z</published>
-    <updated>2021-07-17T16:00:02.791Z</updated>
+    <updated>2021-07-18T14:50:12.436Z</updated>
     
     
       
@@ -508,35 +533,6 @@
 &lt;li&gt;listSize: 保存列表中元素的个数；&lt;/li&gt;
 &lt;li&gt;pos: 列表中当前元素的位置；&lt;/li&gt;
 &lt;li&gt;length():</summary>
-        
-      
-    
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
-    
-    <category term="数据结构" scheme="https://leexiaop.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基础数据结构--手动用数组实现栈及其相关方法</title>
-    <link href="https://leexiaop.github.io/algorithm/structures/1/"/>
-    <id>https://leexiaop.github.io/algorithm/structures/1/</id>
-    <published>2021-05-21T07:57:48.000Z</published>
-    <updated>2021-05-23T15:31:23.281Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;栈的定义：栈是一种特殊的列表,栈内的元素只能通过栈的一端去访问，就是栈顶，所以栈就有了&lt;code&gt;先进后出&lt;/code&gt;的特点。也就是说除了栈顶可以访问栈内元素，其他都不可以。一般操作栈的方法有以下三个：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;push():</summary>
         
       
     

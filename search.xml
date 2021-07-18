@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>leeCode算法--存在重复元素</title>
+    <title>leeCode算法--存在重复元素(II)</title>
+    <url>/algorithm/30/</url>
+    <content><![CDATA[<p>题目：给定一个整数数组和一个整数 k，判断数组中是否存在两个不同的索引 i 和 j，使得 nums [i] = nums [j]，并且 i 和 j 的差的 绝对值 至多为 k。</p>
+<p>分析：看题目，直接就想到了<code>哈希</code>方式。统计字符出现的次数。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> containsNearbyDuplicate = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> obj = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>;i &lt; nums.length;i++) &#123;</span><br><span class="line">       <span class="keyword">if</span> (obj[nums[i]] !== <span class="literal">undefined</span> &amp;&amp;</span><br><span class="line">            i - obj[nums[i]] &lt;= k) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">       &#125;</span><br><span class="line">       obj[nums[i]] = i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;;</span><br><span class="line">containsNearbyDuplicate([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>], <span class="number">3</span>) <span class="comment">// true</span></span><br><span class="line">containsNearbyDuplicate([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="number">2</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>That’s all!</p>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>leeCode算法--存在重复元素(I)</title>
     <url>/algorithm/29/</url>
     <content><![CDATA[<p>题目：给定一个整数数组，判断是否存在重复元素。如果存在一值在数组中出现至少两次，函数返回 true 。如果数组中每个元素都不相同，则返回 false 。</p>
 <p>分析：这个题应该是比较简单的，哈希方式，统计字符出现的次数这个思路即可。</p>
