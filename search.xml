@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>React--React中key的作用是什么？</title>
+    <url>/react/7/</url>
+    <content><![CDATA[<p>这是一个简单的问题。key是react用来追踪哪些列表的元素被修改，被添加或者是被删除的辅助标示。在开发过程中我们需要保证某个元素的key在其同级元素中具有唯一性。</p>
+<p>在react的diff算法中react会借助元素的key来判断该元素是最新创建的还是被移动而来的，从而减少不必要的元素渲染。除此之外，react还要根据key来判断元素与本地状态的关联关系。</p>
+<p>注意点：</p>
+<ul>
+<li>key的值一定要和具体的元素一一对应</li>
+<li>尽量不要用数组中的index来作为key的值</li>
+<li>永远不要视图在render的时候用随机数或者是其他的操作来给key加上不稳定的key，这样造成的性能开销比不加key的情况更糟糕。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React--React的高阶组件是怎么一回事？</title>
+    <url>/react/6/</url>
+    <content><![CDATA[<p>A higher-order component is a function that takes a component and returns a new component.这是官方给出的关于高阶组件的解释。通俗讲，高阶组件是一个函数接受一个组件返回一个新的组件。</p>
+<h3 id="高阶组件的应用场景"><a href="#高阶组件的应用场景" class="headerlink" title="高阶组件的应用场景"></a>高阶组件的应用场景</h3><ul>
+<li>代码复用，逻辑抽象</li>
+<li>渲染劫持</li>
+<li>state抽象和更改</li>
+<li>props更改<h3 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WrappedComponent</span> <span class="title">extend</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>这是普通组件<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Hoc = <span class="function"><span class="params">WrappedComponent</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//  在此做一些额外的操作</span></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">WrappedComponent</span> &#123;<span class="attr">...this.props</span>&#125;&gt;</span></span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+我们可以看到，Hoc就是一个高阶组件，普通组件WrappedComponent没有什么感知。但是Hoc的出现提高了代码逻辑的复用。<h3 id="Hoc和mixin的比较"><a href="#Hoc和mixin的比较" class="headerlink" title="Hoc和mixin的比较"></a>Hoc和mixin的比较</h3>mixin的意思是混入。在vue常有这种操作， 而高阶组件属于函数式编程(functional programming)思想，对于被包裹的组件时不会感知到高阶组件的存在，而高阶组件返回的组件会在原来的组件之上具有功能增强的效果。而Mixin这种混入的模式，会给组件不断增加新的方法和属性，组件本身不仅可以感知，甚至需要做相关的处理(例如命名冲突、状态维护)，一旦混入的模块变多时，整个组件就变的难以维护，也就是为什么如此多的React库都采用高阶组件的方式进行开发。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>leeCode算法--求俩个数组的交集</title>
     <url>/algorithm/31/</url>
     <content><![CDATA[<p>题目：给定两个数组，编写一个函数来计算它们的交集。</p>
@@ -2095,34 +2133,6 @@ To summarize, we’ve created a todo list app that meets all of our requirements
       </tags>
   </entry>
   <entry>
-    <title>Recoil简介--设计初衷</title>
-    <url>/recoil/introduce/motivation/</url>
-    <content><![CDATA[<h3 id="Motivation-初衷"><a href="#Motivation-初衷" class="headerlink" title="Motivation 初衷"></a>Motivation 初衷</h3><p>For reasons of compatibility and simplicity, it’s best to use React’s built-in state management capabilities rather than external global state. But React has certain limitations:<br>秉承简单与兼容性至上的原则，最好的状态管理方式当然是直接使用 React 内置能力而不是外部全部状态。然而 React 确实存在着一些问题：</p>
-<ul>
-<li>Component state can only be shared by pushing it up to the common ancestor, but this might include a huge tree that then needs to re-render.<br>组件状态只能与其祖先组件进行共享，这可能会带来组件树中大量的重绘开销。</li>
-<li>Context can only store a single value, not an indefinite set of values each with its own consumers.<br>Context 只能保存一个特定值而不是与其 Consumer 共享一组不确定的值。</li>
-<li>Both of these make it difficult to code-split the top of the tree (where the state has to live) from the leaves of the tree (where the state is used).<br>以上两点导致组件树顶部组件（状态生产者）与组件树底部组件（状态消费者）之间的代码拆分变得非常困难。</li>
-</ul>
-<p>We want to improve this while keeping both the API and the semantics and behavior as Reactish as possible.<br>我们希望在尽可能保持 React 代码风格和语义化的前提下解决以上问题。</p>
-<p>Recoil defines a directed graph orthogonal to but also intrinsic and attached to your React tree. State changes flow from the roots of this graph (which we call atoms) through pure functions (which we call selectors) and into components. With this approach:<br>Recoil 在组件树中定义了一个正交且内聚的单向图谱。状态变更通过以下方法从图谱的底部（atoms）通过纯函数（selectors）进入组件：</p>
-<ul>
-<li>We get a boilerplate-free API where shared state has the same simple get/set interface as React local state (yet can be encapsulated with reducers etc. if needed).<br>我们提供了一些无依赖的方法，这些方法像 React 局部状态一样暴露相同的 get/set 接口（简单理解为 reducers 之类的概念亦可）。</li>
-<li>We have the possibility of compatibility with Concurrent Mode and other new React features as they become available.<br>我们能够与一些 React 新功能（比如并发模式）兼容。</li>
-<li>The state definition is incremental and distributed, making code-splitting possible.<br>状态定义是可伸缩和分布式的，代码拆分成为可能。</li>
-<li>State can be replaced with derived data without modifying the components that use it.<br>不用修改组件即可派生数据状态。</li>
-<li>Derived data can move between being synchronous and asynchronous without modifying the components that use it.<br>派生数据状态支持同步和异步。</li>
-<li>We can treat navigation as a first-class concept, even encoding state transitions in links.<br>我们把跳转看作一级概念，甚至可以对链接中的状态流转进行编码。</li>
-<li>It’s easy to persist the entire application state in a way that is backwards-compatible, so persisted states can survive application changes.<br>所以可以简单地使用向后兼容的方式来持久化整个应用的状态，应用变更时持久化状态也可以因此得以保留。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>recoil</category>
-      </categories>
-      <tags>
-        <tag>recoil</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Recoil简介--开始应用</title>
     <url>/recoil/introduce/start/</url>
     <content><![CDATA[<h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><h3 id="Create-React-App-创建应用"><a href="#Create-React-App-创建应用" class="headerlink" title="Create React App 创建应用"></a>Create React App 创建应用</h3><p>Recoil is a state management library for React, so you need to have React installed and running to use Recoil. The easiest and recommended way for bootstrapping a React application is to use <a href="https://github.com/facebook/create-react-app#creating-an-app">Create React App</a>:<br>Recoil是一个为Reactk开发的状态管理库，所以运行Recoil的先安装React,推荐最简单的安装React应用方式就是用如下命令：</p>
@@ -2147,6 +2157,34 @@ To summarize, we’ve created a todo list app that meets all of our requirements
 <p>We can use the <code>useRecoilValue()</code> hook to read the value of <code>charCountState</code>:<br>我们可以用<code>useRecoilValue()</code>钩子来读取<code>charCountState</code>的值：</p>
 <figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span></span> CharacterCount() &#123;</span><br><span class="line">    const <span class="built_in">count</span> = useRecoilValue(charCountState);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &lt;&gt;<span class="keyword">Character</span> <span class="built_in">Count</span>: &#123;<span class="built_in">count</span>&#125;&lt;/&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><p>略</p>
+]]></content>
+      <categories>
+        <category>recoil</category>
+      </categories>
+      <tags>
+        <tag>recoil</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Recoil简介--设计初衷</title>
+    <url>/recoil/introduce/motivation/</url>
+    <content><![CDATA[<h3 id="Motivation-初衷"><a href="#Motivation-初衷" class="headerlink" title="Motivation 初衷"></a>Motivation 初衷</h3><p>For reasons of compatibility and simplicity, it’s best to use React’s built-in state management capabilities rather than external global state. But React has certain limitations:<br>秉承简单与兼容性至上的原则，最好的状态管理方式当然是直接使用 React 内置能力而不是外部全部状态。然而 React 确实存在着一些问题：</p>
+<ul>
+<li>Component state can only be shared by pushing it up to the common ancestor, but this might include a huge tree that then needs to re-render.<br>组件状态只能与其祖先组件进行共享，这可能会带来组件树中大量的重绘开销。</li>
+<li>Context can only store a single value, not an indefinite set of values each with its own consumers.<br>Context 只能保存一个特定值而不是与其 Consumer 共享一组不确定的值。</li>
+<li>Both of these make it difficult to code-split the top of the tree (where the state has to live) from the leaves of the tree (where the state is used).<br>以上两点导致组件树顶部组件（状态生产者）与组件树底部组件（状态消费者）之间的代码拆分变得非常困难。</li>
+</ul>
+<p>We want to improve this while keeping both the API and the semantics and behavior as Reactish as possible.<br>我们希望在尽可能保持 React 代码风格和语义化的前提下解决以上问题。</p>
+<p>Recoil defines a directed graph orthogonal to but also intrinsic and attached to your React tree. State changes flow from the roots of this graph (which we call atoms) through pure functions (which we call selectors) and into components. With this approach:<br>Recoil 在组件树中定义了一个正交且内聚的单向图谱。状态变更通过以下方法从图谱的底部（atoms）通过纯函数（selectors）进入组件：</p>
+<ul>
+<li>We get a boilerplate-free API where shared state has the same simple get/set interface as React local state (yet can be encapsulated with reducers etc. if needed).<br>我们提供了一些无依赖的方法，这些方法像 React 局部状态一样暴露相同的 get/set 接口（简单理解为 reducers 之类的概念亦可）。</li>
+<li>We have the possibility of compatibility with Concurrent Mode and other new React features as they become available.<br>我们能够与一些 React 新功能（比如并发模式）兼容。</li>
+<li>The state definition is incremental and distributed, making code-splitting possible.<br>状态定义是可伸缩和分布式的，代码拆分成为可能。</li>
+<li>State can be replaced with derived data without modifying the components that use it.<br>不用修改组件即可派生数据状态。</li>
+<li>Derived data can move between being synchronous and asynchronous without modifying the components that use it.<br>派生数据状态支持同步和异步。</li>
+<li>We can treat navigation as a first-class concept, even encoding state transitions in links.<br>我们把跳转看作一级概念，甚至可以对链接中的状态流转进行编码。</li>
+<li>It’s easy to persist the entire application state in a way that is backwards-compatible, so persisted states can survive application changes.<br>所以可以简单地使用向后兼容的方式来持久化整个应用的状态，应用变更时持久化状态也可以因此得以保留。</li>
+</ul>
 ]]></content>
       <categories>
         <category>recoil</category>

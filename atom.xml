@@ -6,7 +6,7 @@
   <link href="https://leexiaop.github.io/atom.xml" rel="self"/>
   
   <link href="https://leexiaop.github.io/"/>
-  <updated>2021-07-19T03:17:44.879Z</updated>
+  <updated>2021-07-19T07:09:44.374Z</updated>
   <id>https://leexiaop.github.io/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React--React中key的作用是什么？</title>
+    <link href="https://leexiaop.github.io/react/7/"/>
+    <id>https://leexiaop.github.io/react/7/</id>
+    <published>2021-07-19T07:06:09.000Z</published>
+    <updated>2021-07-19T07:09:44.374Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;这是一个简单的问题。key是react用来追踪哪些列表的元素被修改，被添加或者是被删除的辅助标示。在开发过程中我们需要保证某个元素的key在其同级元素中具有唯一性。&lt;/p&gt;
+&lt;p&gt;在react的diff算法中react会借助元素的key来判断该元素是最新创建的还是被移动而来</summary>
+        
+      
+    
+    
+    
+    <category term="React" scheme="https://leexiaop.github.io/categories/React/"/>
+    
+    
+    <category term="React" scheme="https://leexiaop.github.io/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React--React的高阶组件是怎么一回事？</title>
+    <link href="https://leexiaop.github.io/react/6/"/>
+    <id>https://leexiaop.github.io/react/6/</id>
+    <published>2021-07-19T03:32:23.000Z</published>
+    <updated>2021-07-19T07:03:57.096Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;A higher-order component is a function that takes a component and returns a new</summary>
+        
+      
+    
+    
+    
+    <category term="React" scheme="https://leexiaop.github.io/categories/React/"/>
+    
+    
+    <category term="React" scheme="https://leexiaop.github.io/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title>leeCode算法--求俩个数组的交集</title>
@@ -476,61 +527,6 @@
         
     <summary type="html">&lt;p&gt;我们之前说过React是一个组件至上的技术栈，所以，组件之间的通信就是大家关注的话题。主要有以下几种：&lt;/p&gt;
 &lt;h3 id=&quot;父子组件&quot;&gt;&lt;a href=&quot;#父子组件&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="React" scheme="https://leexiaop.github.io/categories/React/"/>
-    
-    
-    <category term="React" scheme="https://leexiaop.github.io/tags/React/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基础数据结构--手动实现队列及其相关方法</title>
-    <link href="https://leexiaop.github.io/algorithm/structures/3/"/>
-    <id>https://leexiaop.github.io/algorithm/structures/3/</id>
-    <published>2021-05-25T03:04:26.000Z</published>
-    <updated>2021-05-26T08:20:45.872Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;队列的定义：队列其实应该是属于列表的一种，又像是俩个栈拼接形成一样来存储有序数据。队列是一种先进先出的数据结构，就像是公交车一样，前门上车后门下车.所以对于队列的操作最主要的就是俩种：对列尾部插入，队列头部删除。既入队和出对。&lt;/p&gt;
-&lt;p&gt;队列实现的属性有：&lt;/p&gt;
-&lt;f</summary>
-        
-      
-    
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
-    
-    <category term="数据结构" scheme="https://leexiaop.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React--React技术栈设计初衷什么？</title>
-    <link href="https://leexiaop.github.io/react/1/"/>
-    <id>https://leexiaop.github.io/react/1/</id>
-    <published>2021-05-24T09:46:01.000Z</published>
-    <updated>2021-05-27T03:04:49.123Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;React作为当前最为流行的三大前端技术栈之一，备受大家开发者的关注。我们就来讲讲React技术栈的设计初衷是什么？打开React的官网可以醒目的看到一行大字—用于构建用户界面的JavaScript库。这基本就概括了React的核心：构建用户界面。&lt;/p&gt;
-&lt;h3</summary>
         
       
     
