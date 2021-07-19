@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>leeCode算法--求俩个数组的交集</title>
+    <url>/algorithm/31/</url>
+    <content><![CDATA[<p>题目：给定两个数组，编写一个函数来计算它们的交集。</p>
+<p>分析：这是一个较为基础且常见的题，方法很多，比如：双指针法，去重法，二分查找法等：</p>
+<figure class="highlight inform7"><table><tr><td class="code"><pre><span class="line">var intersection = function(nums1, nums2) &#123;</span><br><span class="line">    let arr = <span class="comment">[]</span></span><br><span class="line">    for (let i =0;i&lt;nums1.length;i++) &#123;</span><br><span class="line">        for (let j=0;j&lt;nums2.length;j++) &#123;</span><br><span class="line">            if (arr.indexOf(nums1<span class="comment">[i]</span>) === -1</span><br><span class="line">                &amp;&amp; arr.indexOf(nums2<span class="comment">[j]</span>) ===-1</span><br><span class="line">                    &amp;&amp; nums1<span class="comment">[i]</span> === nums2<span class="comment">[j]</span>) &#123;</span><br><span class="line">                arr.push(nums2<span class="comment">[j]</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr</span><br><span class="line">&#125;</span><br><span class="line">intersection(<span class="comment">[1,2,2,1]</span>, <span class="comment">[2,2]</span>)  //  <span class="comment">[2]</span></span><br><span class="line">intersection(<span class="comment">[4,9,5]</span>, <span class="comment">[9,4,9,8,4]</span>)  //  <span class="comment">[4,9]</span></span><br></pre></td></tr></table></figure>
+<p>运行结果： 执行用时：596 ms, 在所有 JavaScript 提交中击败了5.22的用户<br>内存消耗：38 MB, 在所有 JavaScript 提交中击败了99.13%的用户<br>可以看到双指针法的时间复杂度较高，而空间复杂度低。</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">var</span> intersection = function(nums1, nums2) &#123;</span><br><span class="line">    return <span class="selector-attr">[...new Set(nums1)]</span><span class="selector-class">.filter</span>(n =&gt; nums2<span class="selector-class">.includes</span>(n))</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">intersection</span><span class="params">([<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>], [<span class="number">2</span>,<span class="number">2</span>])</span></span>  <span class="comment">//  [2]</span></span><br><span class="line"><span class="function"><span class="title">intersection</span><span class="params">([<span class="number">4</span>,<span class="number">9</span>,<span class="number">5</span>], [<span class="number">9</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">4</span>])</span></span>  <span class="comment">//  [4,9]</span></span><br></pre></td></tr></table></figure>
+<p>先用new Set()对nums1去重，再过滤，这种方法本人认为局限性较大。</p>
+<p>That’s all!</p>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>leeCode算法--存在重复元素(II)</title>
     <url>/algorithm/30/</url>
     <content><![CDATA[<p>题目：给定一个整数数组和一个整数 k，判断数组中是否存在两个不同的索引 i 和 j，使得 nums [i] = nums [j]，并且 i 和 j 的差的 绝对值 至多为 k。</p>

@@ -6,7 +6,7 @@
   <link href="https://leexiaop.github.io/atom.xml" rel="self"/>
   
   <link href="https://leexiaop.github.io/"/>
-  <updated>2021-07-18T14:50:17.591Z</updated>
+  <updated>2021-07-19T03:17:44.879Z</updated>
   <id>https://leexiaop.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leeCode算法--求俩个数组的交集</title>
+    <link href="https://leexiaop.github.io/algorithm/31/"/>
+    <id>https://leexiaop.github.io/algorithm/31/</id>
+    <published>2021-07-19T03:10:48.000Z</published>
+    <updated>2021-07-19T03:17:44.879Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;题目：给定两个数组，编写一个函数来计算它们的交集。&lt;/p&gt;
+&lt;p&gt;分析：这是一个较为基础且常见的题，方法很多，比如：双指针法，去重法，二分查找法等：&lt;/p&gt;
+&lt;figure class=&quot;highlight inform7&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>leeCode算法--存在重复元素(II)</title>
@@ -513,37 +540,6 @@
     
     
     <category term="React" scheme="https://leexiaop.github.io/tags/React/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基础数据结构--手动实现列表及其相关方法</title>
-    <link href="https://leexiaop.github.io/algorithm/structures/2/"/>
-    <id>https://leexiaop.github.io/algorithm/structures/2/</id>
-    <published>2021-05-24T02:47:49.000Z</published>
-    <updated>2021-05-25T05:55:05.074Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;列表的定义：列表是一组有序的数据。其中的元素可以是任意类型。列表一般有的属性为：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;listSize: 保存列表中元素的个数；&lt;/li&gt;
-&lt;li&gt;pos: 列表中当前元素的位置；&lt;/li&gt;
-&lt;li&gt;length():</summary>
-        
-      
-    
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
-    
-    <category term="数据结构" scheme="https://leexiaop.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
