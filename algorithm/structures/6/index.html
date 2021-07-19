@@ -15,7 +15,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>基础数据结构--手动实现散列表及其相关方法 |  Lee前端技术栈</title>
+      <title>基础数据结构--手动实现集合及其相关方法 |  Lee前端技术栈</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -69,7 +69,7 @@ var _hmt = _hmt || [];
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  基础数据结构--手动实现散列表及其相关方法
+  基础数据结构--手动实现集合及其相关方法
 </h1>
  
 
@@ -78,7 +78,7 @@ var _hmt = _hmt || [];
      
     <div class="article-meta">
       <a href="/algorithm/structures/6/" class="article-date">
-  <time datetime="2021-07-13T06:56:17.000Z" itemprop="datePublished">2021-07-13</time>
+  <time datetime="2021-07-19T08:56:17.000Z" itemprop="datePublished">2021-07-19</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
@@ -89,7 +89,7 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3</span>
+            <span class="post-count">478</span>
         </span>
     </span>
 
@@ -98,20 +98,26 @@ var _hmt = _hmt || [];
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>散裂表</p>
+  <p>集合(set)是一种包含不同元素的数据结构。每个元素只能存在一次，不能有重复元素出现。<br>• 不包含任何成员的集合称为空集，全集则是包含一切可能成员的集合。<br>• 如果两个集合的成员完全相同，则称两个集合相等。<br>• 如果一个集合中所有的成员都属于另外一个集合，则前一集合称为后一集合的子集。</p>
+<p>对集合的几种常见的操作：</p>
+<p>• 并集 将两个集合中的成员进行合并，得到一个新集合。<br>• 交集 两个集合中共同存在的成员组成一个新的集合。<br>• 补集 属于一个集合而不属于另一个集合的成员组成的集合。</p>
+<h4 id="Set类的实现"><a href="#Set类的实现" class="headerlink" title="Set类的实现"></a>Set类的实现</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">function Set () &#123;</span><br><span class="line">    <span class="keyword">this</span>.dataStore = []</span><br><span class="line">    <span class="comment">//  添加</span></span><br><span class="line">    <span class="keyword">this</span>.add = add</span><br><span class="line">    <span class="comment">//  删除</span></span><br><span class="line">    <span class="keyword">this</span>.remove = remove</span><br><span class="line">    <span class="comment">//  长度</span></span><br><span class="line">    <span class="keyword">this</span>.size = size</span><br><span class="line">    <span class="comment">//  展示</span></span><br><span class="line">    <span class="keyword">this</span>.show = show</span><br><span class="line">    <span class="comment">//  并集</span></span><br><span class="line">    <span class="keyword">this</span>.union = union</span><br><span class="line">    <span class="comment">//  交集</span></span><br><span class="line">    <span class="keyword">this</span>.intersect = intersect</span><br><span class="line">    <span class="comment">//  子集</span></span><br><span class="line">    <span class="keyword">this</span>.subset = subset</span><br><span class="line">    <span class="comment">// 属于第一个集合但是不属于第二个集合</span></span><br><span class="line">    <span class="keyword">this</span>.difference = difference</span><br><span class="line">&#125;</span><br><span class="line">function add (<span class="keyword">data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.dataStore.indexOf(<span class="keyword">data</span>) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.dataStore.push(<span class="keyword">data</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">function remove (<span class="keyword">data</span>) &#123;</span><br><span class="line">    let pos = <span class="keyword">this</span>.dataStore.indexOf(<span class="keyword">data</span>)</span><br><span class="line">    <span class="keyword">if</span> (pos &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.dataStore.splice(pos, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">function size () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore.length</span><br><span class="line">&#125;</span><br><span class="line">function show () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore</span><br><span class="line">&#125;</span><br><span class="line">function union (<span class="keyword">set</span>) &#123;</span><br><span class="line">    let temp = new Set()</span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">0</span>;i &lt; <span class="keyword">this</span>.dataStore.length;i++) &#123;</span><br><span class="line">        temp.add(<span class="keyword">this</span>.dataStore[i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">0</span>;i &lt; <span class="keyword">set</span>.dataStore.length;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!temp.contains(<span class="keyword">set</span>.dataStore[i])) &#123;</span><br><span class="line">            temp.dataStore.push(<span class="keyword">set</span>.dataStore[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> temp</span><br><span class="line">&#125;</span><br><span class="line">function intersect (<span class="keyword">set</span>) &#123;</span><br><span class="line">    let temp = new Set()</span><br><span class="line">    <span class="keyword">for</span>(let i = <span class="number">0</span>;i &lt; <span class="keyword">this</span>.dataStore.length;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">set</span>.contains(<span class="keyword">this</span>.dataStore[i])) &#123;</span><br><span class="line">            temp.add(<span class="keyword">this</span>.dataStore[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> temp</span><br><span class="line">&#125;</span><br><span class="line">function subSet (<span class="keyword">set</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.size() &lt; <span class="keyword">set</span>.size()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(let key of <span class="keyword">this</span>.dataStore) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">set</span>.contains(<span class="keyword">this</span>.dataStore[key])) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line">function contains (<span class="keyword">data</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore.indexOf(<span class="keyword">data</span>) &gt; -<span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：集合的实现相对比较简单。</p>
  
       <!-- reward -->
       
@@ -195,19 +201,10 @@ var _hmt = _hmt || [];
    
   <nav class="article-nav">
     
-      <a href="/algorithm/21/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            leeCode算法--验证是不是回文字符串
-          
-        </div>
-      </a>
     
-    
-      <a href="/algorithm/structures/5/" class="article-nav-link">
+      <a href="/react/7/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">基础数据结构--手动实现字典及其相关方法</div>
+        <div class="article-nav-title">React--React中key的作用是什么？</div>
       </a>
     
   </nav>

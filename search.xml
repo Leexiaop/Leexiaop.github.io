@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>基础数据结构--手动实现集合及其相关方法</title>
+    <url>/algorithm/structures/6/</url>
+    <content><![CDATA[<p>集合(set)是一种包含不同元素的数据结构。每个元素只能存在一次，不能有重复元素出现。<br>• 不包含任何成员的集合称为空集，全集则是包含一切可能成员的集合。<br>• 如果两个集合的成员完全相同，则称两个集合相等。<br>• 如果一个集合中所有的成员都属于另外一个集合，则前一集合称为后一集合的子集。</p>
+<p>对集合的几种常见的操作：</p>
+<p>• 并集 将两个集合中的成员进行合并，得到一个新集合。<br>• 交集 两个集合中共同存在的成员组成一个新的集合。<br>• 补集 属于一个集合而不属于另一个集合的成员组成的集合。</p>
+<h4 id="Set类的实现"><a href="#Set类的实现" class="headerlink" title="Set类的实现"></a>Set类的实现</h4><figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">function Set () &#123;</span><br><span class="line">    <span class="keyword">this</span>.dataStore = []</span><br><span class="line">    <span class="comment">//  添加</span></span><br><span class="line">    <span class="keyword">this</span>.add = add</span><br><span class="line">    <span class="comment">//  删除</span></span><br><span class="line">    <span class="keyword">this</span>.remove = remove</span><br><span class="line">    <span class="comment">//  长度</span></span><br><span class="line">    <span class="keyword">this</span>.size = size</span><br><span class="line">    <span class="comment">//  展示</span></span><br><span class="line">    <span class="keyword">this</span>.show = show</span><br><span class="line">    <span class="comment">//  并集</span></span><br><span class="line">    <span class="keyword">this</span>.union = union</span><br><span class="line">    <span class="comment">//  交集</span></span><br><span class="line">    <span class="keyword">this</span>.intersect = intersect</span><br><span class="line">    <span class="comment">//  子集</span></span><br><span class="line">    <span class="keyword">this</span>.subset = subset</span><br><span class="line">    <span class="comment">// 属于第一个集合但是不属于第二个集合</span></span><br><span class="line">    <span class="keyword">this</span>.difference = difference</span><br><span class="line">&#125;</span><br><span class="line">function add (<span class="keyword">data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.dataStore.indexOf(<span class="keyword">data</span>) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.dataStore.push(<span class="keyword">data</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">function remove (<span class="keyword">data</span>) &#123;</span><br><span class="line">    let pos = <span class="keyword">this</span>.dataStore.indexOf(<span class="keyword">data</span>)</span><br><span class="line">    <span class="keyword">if</span> (pos &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.dataStore.splice(pos, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">function size () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore.length</span><br><span class="line">&#125;</span><br><span class="line">function show () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore</span><br><span class="line">&#125;</span><br><span class="line">function union (<span class="keyword">set</span>) &#123;</span><br><span class="line">    let temp = new Set()</span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">0</span>;i &lt; <span class="keyword">this</span>.dataStore.length;i++) &#123;</span><br><span class="line">        temp.add(<span class="keyword">this</span>.dataStore[i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">0</span>;i &lt; <span class="keyword">set</span>.dataStore.length;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!temp.contains(<span class="keyword">set</span>.dataStore[i])) &#123;</span><br><span class="line">            temp.dataStore.push(<span class="keyword">set</span>.dataStore[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> temp</span><br><span class="line">&#125;</span><br><span class="line">function intersect (<span class="keyword">set</span>) &#123;</span><br><span class="line">    let temp = new Set()</span><br><span class="line">    <span class="keyword">for</span>(let i = <span class="number">0</span>;i &lt; <span class="keyword">this</span>.dataStore.length;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">set</span>.contains(<span class="keyword">this</span>.dataStore[i])) &#123;</span><br><span class="line">            temp.add(<span class="keyword">this</span>.dataStore[i])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> temp</span><br><span class="line">&#125;</span><br><span class="line">function subSet (<span class="keyword">set</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.size() &lt; <span class="keyword">set</span>.size()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(let key of <span class="keyword">this</span>.dataStore) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">set</span>.contains(<span class="keyword">this</span>.dataStore[key])) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line">function contains (<span class="keyword">data</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore.indexOf(<span class="keyword">data</span>) &gt; -<span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：集合的实现相对比较简单。</p>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React--React中key的作用是什么？</title>
     <url>/react/7/</url>
     <content><![CDATA[<p>这是一个简单的问题。key是react用来追踪哪些列表的元素被修改，被添加或者是被删除的辅助标示。在开发过程中我们需要保证某个元素的key在其同级元素中具有唯一性。</p>
@@ -251,19 +268,6 @@ Yes, that’s all!</li>
       </categories>
       <tags>
         <tag>algorithm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基础数据结构--手动实现散列表及其相关方法</title>
-    <url>/algorithm/structures/6/</url>
-    <content><![CDATA[<p>散裂表</p>
-]]></content>
-      <categories>
-        <category>algorithm</category>
-      </categories>
-      <tags>
-        <tag>algorithm</tag>
-        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -2133,6 +2137,34 @@ To summarize, we’ve created a todo list app that meets all of our requirements
       </tags>
   </entry>
   <entry>
+    <title>Recoil简介--设计初衷</title>
+    <url>/recoil/introduce/motivation/</url>
+    <content><![CDATA[<h3 id="Motivation-初衷"><a href="#Motivation-初衷" class="headerlink" title="Motivation 初衷"></a>Motivation 初衷</h3><p>For reasons of compatibility and simplicity, it’s best to use React’s built-in state management capabilities rather than external global state. But React has certain limitations:<br>秉承简单与兼容性至上的原则，最好的状态管理方式当然是直接使用 React 内置能力而不是外部全部状态。然而 React 确实存在着一些问题：</p>
+<ul>
+<li>Component state can only be shared by pushing it up to the common ancestor, but this might include a huge tree that then needs to re-render.<br>组件状态只能与其祖先组件进行共享，这可能会带来组件树中大量的重绘开销。</li>
+<li>Context can only store a single value, not an indefinite set of values each with its own consumers.<br>Context 只能保存一个特定值而不是与其 Consumer 共享一组不确定的值。</li>
+<li>Both of these make it difficult to code-split the top of the tree (where the state has to live) from the leaves of the tree (where the state is used).<br>以上两点导致组件树顶部组件（状态生产者）与组件树底部组件（状态消费者）之间的代码拆分变得非常困难。</li>
+</ul>
+<p>We want to improve this while keeping both the API and the semantics and behavior as Reactish as possible.<br>我们希望在尽可能保持 React 代码风格和语义化的前提下解决以上问题。</p>
+<p>Recoil defines a directed graph orthogonal to but also intrinsic and attached to your React tree. State changes flow from the roots of this graph (which we call atoms) through pure functions (which we call selectors) and into components. With this approach:<br>Recoil 在组件树中定义了一个正交且内聚的单向图谱。状态变更通过以下方法从图谱的底部（atoms）通过纯函数（selectors）进入组件：</p>
+<ul>
+<li>We get a boilerplate-free API where shared state has the same simple get/set interface as React local state (yet can be encapsulated with reducers etc. if needed).<br>我们提供了一些无依赖的方法，这些方法像 React 局部状态一样暴露相同的 get/set 接口（简单理解为 reducers 之类的概念亦可）。</li>
+<li>We have the possibility of compatibility with Concurrent Mode and other new React features as they become available.<br>我们能够与一些 React 新功能（比如并发模式）兼容。</li>
+<li>The state definition is incremental and distributed, making code-splitting possible.<br>状态定义是可伸缩和分布式的，代码拆分成为可能。</li>
+<li>State can be replaced with derived data without modifying the components that use it.<br>不用修改组件即可派生数据状态。</li>
+<li>Derived data can move between being synchronous and asynchronous without modifying the components that use it.<br>派生数据状态支持同步和异步。</li>
+<li>We can treat navigation as a first-class concept, even encoding state transitions in links.<br>我们把跳转看作一级概念，甚至可以对链接中的状态流转进行编码。</li>
+<li>It’s easy to persist the entire application state in a way that is backwards-compatible, so persisted states can survive application changes.<br>所以可以简单地使用向后兼容的方式来持久化整个应用的状态，应用变更时持久化状态也可以因此得以保留。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>recoil</category>
+      </categories>
+      <tags>
+        <tag>recoil</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Recoil简介--开始应用</title>
     <url>/recoil/introduce/start/</url>
     <content><![CDATA[<h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><h3 id="Create-React-App-创建应用"><a href="#Create-React-App-创建应用" class="headerlink" title="Create React App 创建应用"></a>Create React App 创建应用</h3><p>Recoil is a state management library for React, so you need to have React installed and running to use Recoil. The easiest and recommended way for bootstrapping a React application is to use <a href="https://github.com/facebook/create-react-app#creating-an-app">Create React App</a>:<br>Recoil是一个为Reactk开发的状态管理库，所以运行Recoil的先安装React,推荐最简单的安装React应用方式就是用如下命令：</p>
@@ -2157,34 +2189,6 @@ To summarize, we’ve created a todo list app that meets all of our requirements
 <p>We can use the <code>useRecoilValue()</code> hook to read the value of <code>charCountState</code>:<br>我们可以用<code>useRecoilValue()</code>钩子来读取<code>charCountState</code>的值：</p>
 <figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span></span> CharacterCount() &#123;</span><br><span class="line">    const <span class="built_in">count</span> = useRecoilValue(charCountState);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &lt;&gt;<span class="keyword">Character</span> <span class="built_in">Count</span>: &#123;<span class="built_in">count</span>&#125;&lt;/&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><p>略</p>
-]]></content>
-      <categories>
-        <category>recoil</category>
-      </categories>
-      <tags>
-        <tag>recoil</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Recoil简介--设计初衷</title>
-    <url>/recoil/introduce/motivation/</url>
-    <content><![CDATA[<h3 id="Motivation-初衷"><a href="#Motivation-初衷" class="headerlink" title="Motivation 初衷"></a>Motivation 初衷</h3><p>For reasons of compatibility and simplicity, it’s best to use React’s built-in state management capabilities rather than external global state. But React has certain limitations:<br>秉承简单与兼容性至上的原则，最好的状态管理方式当然是直接使用 React 内置能力而不是外部全部状态。然而 React 确实存在着一些问题：</p>
-<ul>
-<li>Component state can only be shared by pushing it up to the common ancestor, but this might include a huge tree that then needs to re-render.<br>组件状态只能与其祖先组件进行共享，这可能会带来组件树中大量的重绘开销。</li>
-<li>Context can only store a single value, not an indefinite set of values each with its own consumers.<br>Context 只能保存一个特定值而不是与其 Consumer 共享一组不确定的值。</li>
-<li>Both of these make it difficult to code-split the top of the tree (where the state has to live) from the leaves of the tree (where the state is used).<br>以上两点导致组件树顶部组件（状态生产者）与组件树底部组件（状态消费者）之间的代码拆分变得非常困难。</li>
-</ul>
-<p>We want to improve this while keeping both the API and the semantics and behavior as Reactish as possible.<br>我们希望在尽可能保持 React 代码风格和语义化的前提下解决以上问题。</p>
-<p>Recoil defines a directed graph orthogonal to but also intrinsic and attached to your React tree. State changes flow from the roots of this graph (which we call atoms) through pure functions (which we call selectors) and into components. With this approach:<br>Recoil 在组件树中定义了一个正交且内聚的单向图谱。状态变更通过以下方法从图谱的底部（atoms）通过纯函数（selectors）进入组件：</p>
-<ul>
-<li>We get a boilerplate-free API where shared state has the same simple get/set interface as React local state (yet can be encapsulated with reducers etc. if needed).<br>我们提供了一些无依赖的方法，这些方法像 React 局部状态一样暴露相同的 get/set 接口（简单理解为 reducers 之类的概念亦可）。</li>
-<li>We have the possibility of compatibility with Concurrent Mode and other new React features as they become available.<br>我们能够与一些 React 新功能（比如并发模式）兼容。</li>
-<li>The state definition is incremental and distributed, making code-splitting possible.<br>状态定义是可伸缩和分布式的，代码拆分成为可能。</li>
-<li>State can be replaced with derived data without modifying the components that use it.<br>不用修改组件即可派生数据状态。</li>
-<li>Derived data can move between being synchronous and asynchronous without modifying the components that use it.<br>派生数据状态支持同步和异步。</li>
-<li>We can treat navigation as a first-class concept, even encoding state transitions in links.<br>我们把跳转看作一级概念，甚至可以对链接中的状态流转进行编码。</li>
-<li>It’s easy to persist the entire application state in a way that is backwards-compatible, so persisted states can survive application changes.<br>所以可以简单地使用向后兼容的方式来持久化整个应用的状态，应用变更时持久化状态也可以因此得以保留。</li>
-</ul>
 ]]></content>
       <categories>
         <category>recoil</category>
