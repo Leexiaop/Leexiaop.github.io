@@ -6,7 +6,7 @@
   <link href="https://leexiaop.github.io/atom.xml" rel="self"/>
   
   <link href="https://leexiaop.github.io/"/>
-  <updated>2021-07-19T09:51:29.138Z</updated>
+  <updated>2021-07-20T06:32:09.850Z</updated>
   <id>https://leexiaop.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leeCode算法--找出第一个不重复的字符</title>
+    <link href="https://leexiaop.github.io/algorithm/32/"/>
+    <id>https://leexiaop.github.io/algorithm/32/</id>
+    <published>2021-07-20T02:41:20.000Z</published>
+    <updated>2021-07-20T06:32:09.850Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;题目：给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。&lt;/p&gt;
+&lt;p&gt;分析：这种题目应该直接就会想到哈希表法。直接上代码。&lt;/p&gt;
+&lt;figure class=&quot;highlight coq&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>基础数据结构--手动实现集合及其相关方法</title>
@@ -99,7 +126,7 @@
     <link href="https://leexiaop.github.io/algorithm/31/"/>
     <id>https://leexiaop.github.io/algorithm/31/</id>
     <published>2021-07-19T03:10:48.000Z</published>
-    <updated>2021-07-19T03:17:44.879Z</updated>
+    <updated>2021-07-20T06:30:10.053Z</updated>
     
     
       
@@ -509,32 +536,6 @@
     <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
     
     <category term="数据结构" scheme="https://leexiaop.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React--React中组件间的如何通信？</title>
-    <link href="https://leexiaop.github.io/react/2/"/>
-    <id>https://leexiaop.github.io/react/2/</id>
-    <published>2021-05-27T03:39:43.000Z</published>
-    <updated>2021-05-28T03:14:44.321Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;我们之前说过React是一个组件至上的技术栈，所以，组件之间的通信就是大家关注的话题。主要有以下几种：&lt;/p&gt;
-&lt;h3 id=&quot;父子组件&quot;&gt;&lt;a href=&quot;#父子组件&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="React" scheme="https://leexiaop.github.io/categories/React/"/>
-    
-    
-    <category term="React" scheme="https://leexiaop.github.io/tags/React/"/>
     
   </entry>
   

@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>leeCode算法--找出第一个不重复的字符</title>
+    <url>/algorithm/32/</url>
+    <content><![CDATA[<p>题目：给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。</p>
+<p>分析：这种题目应该直接就会想到哈希表法。直接上代码。</p>
+<figure class="highlight coq"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> firstUniqChar = s =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> len = s.length</span><br><span class="line">    //  这里采用的是集合</span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">set</span> = new <span class="keyword">Set</span>()</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len;i++) &#123;</span><br><span class="line">        <span class="built_in">set</span>[s[i]] = <span class="built_in">set</span>[s[i]] ? s[i] + <span class="number">1</span> : <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; len;j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">set</span>[s[j]] === <span class="number">1</span>) <span class="keyword">return</span> j</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本题中，空间复杂度为O(1),时间复杂度为O(2N),注意边界值。</p>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基础数据结构--手动实现集合及其相关方法</title>
     <url>/algorithm/structures/6/</url>
     <content><![CDATA[<p>集合(set)是一种包含不同元素的数据结构。每个元素只能存在一次，不能有重复元素出现。<br>• 不包含任何成员的集合称为空集，全集则是包含一切可能成员的集合。<br>• 如果两个集合的成员完全相同，则称两个集合相等。<br>• 如果一个集合中所有的成员都属于另外一个集合，则前一集合称为后一集合的子集。</p>
