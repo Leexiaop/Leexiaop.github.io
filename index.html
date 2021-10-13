@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="前端技术栈 前端技术 前端博客 JavaScript HTML5 CSS3 VUE React Angular node Deno typeSctipt webpack wechat flutter recoil" />
+       
+      <meta name="description" content="敲着代码，记着BUG，通过博客的方式，记录下工作中的点点滴滴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> Lee前端技术栈</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Lee前端技术栈" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
+        target="_blank"><img width="149" height="149" src="/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover1.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">Lee前端技术栈</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  
+  <ul class="ads">
+    
+        <li>
+            <a target="_blank" rel="noopener" href="https://curl.qcloud.com/kvO7hb43">
+                <img src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/ten_1.jpg" width="300" alt="云服务器限时秒杀">
+            </a>
+        </li>
+    
+        <li>
+            <a target="_blank" rel="noopener" href="https://www.vultr.com/?ref=8630075">
+                <img src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/vultr.png" width="300" alt="vultr优惠vps">
+            </a>
+        </li>
+    
+</ul>
+  
+  
+  
+
+<div class="notice" style="margin-top:50px">
+    <i class="ri-heart-fill"></i>
+    <div class="notice-content" id="broad"></div>
+</div>
+<script type="text/javascript">
+    fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("broad").innerHTML = data.hitokoto;
+        })
+        .catch(console.error)
+</script>
+
+<style>
+    .notice {
+        padding: 20px;
+        border: 1px dashed #e6e6e6;
+        color: #969696;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        background: #fbfbfb50;
+        border-radius: 10px;
+    }
+
+    .notice i {
+        float: left;
+        color: #999;
+        font-size: 16px;
+        padding-right: 10px;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    .notice-content {
+        display: initial;
+        vertical-align: middle;
+    }
+</style>
+  
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-ts/4"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/ts/4/"
+    >Typescript--接口的使用</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/ts/4/" class="article-date">
+  <time datetime="2021-10-12T11:30:27.000Z" itemprop="datePublished">2021-10-12</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/typescript/">typescript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h6 id="接口的定义"><a href="#接口的定义" class="headerlink" title="接口的定义"></a>接口的定义</h6><p>在面向对象的编程中，接口是一种规范的定义，它定义了行为和动作的规范。在程序设计里，接口起到了限制和规范的作用。接口定义了某一批类所需要遵守的规范，接口不关心类内部的状态数据。也不关心这些类的内部方法实现的具体细节。他只关心这些类必须提供某些方法。提供这些方法的类就可以满足实际需求。typescript中的类有点类似于java，同时还增加了更加灵活的接口类型。包括属性，方法，可索引和类等。</p>
+<h5 id="属性接口"><a href="#属性接口" class="headerlink" title="属性接口"></a>属性接口</h5> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-ts/3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/ts/3/"
+    >Typescript--类的使用</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/ts/3/" class="article-date">
+  <time datetime="2021-09-26T06:56:46.000Z" itemprop="datePublished">2021-09-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/typescript/">typescript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h6 id="类的定义"><a href="#类的定义" class="headerlink" title="类的定义"></a>类的定义</h6><p>在ts中类的定义是通过class来定义的。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="attr">name</span>:<span class="built_in">string</span> <span class="comment">//  属性，省略了public字段</span></span><br><span class="line">    <span class="title">constructor</span> (<span class="params">name:<span class="built_in">string</span></span>) &#123;    <span class="comment">//  构造函数，实例化类时，触发的方法</span></span><br><span class="line">        <span class="built_in">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">    run ():<span class="built_in">void</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person(<span class="string">&#x27;张三&#x27;</span>)</span><br><span class="line">p.run() <span class="comment">//  张三</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="ts中实现继承"><a href="#ts中实现继承" class="headerlink" title="ts中实现继承"></a>ts中实现继承</h6><p>在ts中实现继承的方式是通过<code>extends</code>、<code>super</code>字符来实现的。父类和子类的方法一至。子类可以扩展自己的方法。如果子类和父类有同名方法的时候，调用子类方法，那么优先执行子类方法。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    name: string</span><br><span class="line">    constructor (name: string) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">    run ():string &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">children</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    constructor (name: string) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name) <span class="comment">//  初始化父类的构造函数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="类中的修饰符"><a href="#类中的修饰符" class="headerlink" title="类中的修饰符"></a>类中的修饰符</h6><p>在ts的类中定义属性的时候提供了三种修饰符。<br>public      公有属性，在类，子类，以及类外都可以被访问<br>protected   保护属性，在类，子类，中可以被访问，在类之外不能被访问<br>private     私有属性，在类中可以被访问，在子类，以及类外是不能被访问的</p>
+<p>如果属性不加任何修饰符，那么默认是public,表示公有属性。</p>
+<h6 id="静态方法和静态属性"><a href="#静态方法和静态属性" class="headerlink" title="静态方法和静态属性"></a>静态方法和静态属性</h6><p>ts中静态方法和属性通过static字符来定义，并且通过类名来调用。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> name:<span class="built_in">string</span> = <span class="string">&#x27;小明&#x27;</span>  <span class="comment">//  这是定义的静态属性</span></span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">name:<span class="built_in">string</span></span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//  静态方法</span></span><br><span class="line">    <span class="keyword">static</span> getName ():<span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//  实例方法</span></span><br><span class="line">    run ():<span class="built_in">string</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  调用静态方法</span></span><br><span class="line">Person.getName()    <span class="comment">//  小明</span></span><br><span class="line"><span class="comment">//  调用实例方法，必须先创建实例，通过实例来调用</span></span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> Person(<span class="string">&#x27;小刚&#x27;</span>)</span><br><span class="line">p.run() <span class="comment">//  小刚</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="继承多态"><a href="#继承多态" class="headerlink" title="继承多态"></a>继承多态</h6><p>父类定义一个方法不去实现，让子类来实现，并且在子类中可以有不同的表现形式。多态也是继承的一种表现。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    public name:string</span><br><span class="line">    constructor(name:string) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">    &#125;</span><br><span class="line">    eat ():void &#123;</span><br><span class="line">        console.log(`$&#123;<span class="keyword">this</span>.name&#125;爱吃肉！`)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Girl</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    constructor(name:string)&#123;</span><br><span class="line">        <span class="keyword">super</span>(name)</span><br><span class="line">    &#125;</span><br><span class="line">    eat ():void &#123;</span><br><span class="line">        <span class="comment">//  do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Boy</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    constructor(name:string)&#123;</span><br><span class="line">        <span class="keyword">super</span>(name)</span><br><span class="line">    &#125;</span><br><span class="line">    eat ():void &#123;</span><br><span class="line">        <span class="comment">//  do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="抽象类和抽象方法"><a href="#抽象类和抽象方法" class="headerlink" title="抽象类和抽象方法"></a>抽象类和抽象方法</h6><p>ts中的抽象类是提供其他类继承的基类，不能直接实例化。用abstract关键字来实现抽象类和抽象方法。抽象类中的抽象方法不包含具体的实现并且必须在派生类中实现。abstruct字段只能放到抽象类中。要求子类中必须包含抽象类中的方法。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">abstruct <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    abstruct eat():any</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  let p = new Person()    错误写法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Children</span> <span class="keyword">extends</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    constructor(name:string) &#123;</span><br><span class="line">        <span class="keyword">super</span>(name)</span><br><span class="line">    &#125;</span><br><span class="line">    eat():any &#123;</span><br><span class="line">        <span class="comment">//  do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-ts/2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/ts/2/"
+    >Typescript--函数方法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/ts/2/" class="article-date">
+  <time datetime="2021-09-26T01:50:46.000Z" itemprop="datePublished">2021-09-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/typescript/">typescript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h6 id="函数的定义方式"><a href="#函数的定义方式" class="headerlink" title="函数的定义方式"></a>函数的定义方式</h6><p>函数的定义方式有俩种，即function定义方式和匿名函数方式，但是要求指定返回值类型。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun1</span> <span class="params">()</span>:number </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">123</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun2</span> <span class="params">()</span>:void </span>&#123;</span><br><span class="line">    console.log(<span class="string">&#x27;hello world&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>function方式定义的的函数，并且要求返回值是一个数字。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fun3 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>):<span class="title">string</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;hello world&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> fun4 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>):<span class="title">void</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;hello world&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h6 id="typescript中的传参方式"><a href="#typescript中的传参方式" class="headerlink" title="typescript中的传参方式"></a>typescript中的传参方式</h6><ul>
+<li><p>ts中的参数需要指定参数的类型</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function <span class="function"><span class="title">fun</span> <span class="params">(a:<span class="type">number</span>)</span></span>:number &#123;</span><br><span class="line">    <span class="keyword">return</span> a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要求传入的参数a是一个number类型，并且该函数返回一个number类型的返回值。</p>
+</li>
+<li><p>ts中可以用<code>?</code>来表示某个参数是可选参数，但是<code>必须要放到所有参数的最后面</code>。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function <span class="function"><span class="title">fun</span> <span class="params">(name:<span class="type">string</span>, age?:<span class="type">number</span>)</span></span>:string &#123;</span><br><span class="line">    <span class="keyword">return</span> `我是$&#123;name&#125;,我的年龄是$&#123;age&#125;`</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我门可以看到，其中参数age为可选参数，可以不传。</p>
+</li>
+<li><p>ts中的默认参数</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function <span class="function"><span class="title">fun</span> <span class="params">(name:<span class="type">string</span>, age?:<span class="type">number</span> = <span class="number">30</span>)</span></span>: string &#123;</span><br><span class="line">    <span class="keyword">return</span> `我叫$&#123;name&#125;,我今年$&#123;age&#125;岁`</span><br><span class="line">&#125;</span><br><span class="line">console.log(<span class="function"><span class="title">fun</span><span class="params">(<span class="string">&#x27;章三&#x27;</span>)</span></span>)</span><br><span class="line"><span class="comment">//  我叫章三,我今年30岁</span></span><br><span class="line">console.log(<span class="function"><span class="title">fun</span><span class="params">(<span class="string">&#x27;李四&#x27;</span>, <span class="number">90</span>)</span></span>)</span><br><span class="line"><span class="comment">//  我叫李四,问今年90岁</span></span><br></pre></td></tr></table></figure></li>
+<li><p>ts中剩余参数，剩余参数可以用拓展符<code>...</code>来表示</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function <span class="function"><span class="title">fun</span> <span class="params">(a:<span class="type">number</span>, b:<span class="type">number</span>, c:<span class="type">number</span>, d:<span class="type">number</span>, e:<span class="type">number</span>)</span></span>:number &#123;</span><br><span class="line">    <span class="keyword">return</span> a + b + c + d + e</span><br><span class="line">&#125;</span><br><span class="line">console.log(<span class="function"><span class="title">fun</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span></span>) <span class="comment">//  15</span></span><br></pre></td></tr></table></figure>
+<p>这样的参数会很繁琐。那么我们来用…缩减一下参数。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span> <span class="params">(<span class="rest_arg">...res</span>:number[])</span>:number </span>&#123;</span><br><span class="line">    let sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">0</span>;i &lt; res.length - <span class="number">1</span>;i++) &#123;</span><br><span class="line">        sum += res[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum</span><br><span class="line">&#125;</span><br><span class="line">console.log(fun(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)) <span class="comment">//  15</span></span><br></pre></td></tr></table></figure>
+<h6 id="函数的重载"><a href="#函数的重载" class="headerlink" title="函数的重载"></a>函数的重载</h6><p>为同一个函数提供多个函数类型定义来进行函数重载。多个函数函数名相同，函数的参数类型,顺序,个数不同。注意函数重载与返回值类型无关。ts的函数重载比较鸡肋，最终函数逻辑的实现还是在一个函数体内去判断它的参数类型，然后做相应的操作。ts重载的作用，感觉只是多了一个参数校验的功能。也就是说在进行函数调用的时候，会对参数进行检查，只有传入的参数类型，顺序，个数与定义的重载函数的参数相同，才能调用成功，否则报错。返回值类型不会进行校验（函数重载与返回值类型无关）。</p>
+</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUser</span> (<span class="params">name:<span class="built_in">string</span></span>):<span class="title">string</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUser</span> (<span class="params">age:<span class="built_in">number</span></span>):<span class="title">number</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUser</span> (<span class="params">str:<span class="built_in">string</span></span>):<span class="title">any</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> str === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`我叫<span class="subst">$&#123;str&#125;</span>`</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`我的年龄是<span class="subst">$&#123;str&#125;</span>`</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(getUser(<span class="string">&#x27;张三&#x27;</span>))    <span class="comment">//  我叫张三</span></span><br><span class="line"><span class="built_in">console</span>.log(getUser(<span class="number">30</span>))    <span class="comment">//  我的年龄是30</span></span><br><span class="line"><span class="built_in">console</span>.log(getUser(<span class="literal">true</span>))  <span class="comment">//  报错</span></span><br></pre></td></tr></table></figure>
+<h6 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h6><p>箭头函数和js中一样，但是需要注意的this的指向问题。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-ts/1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/ts/1/"
+    >Typescript--数据类型</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/ts/1/" class="article-date">
+  <time datetime="2021-09-24T06:28:55.000Z" itemprop="datePublished">2021-09-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/typescript/">typescript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Typescript是Javascript的超集，所以大多数的数据类型和Javascript相同。下面是Typescript的数据类型：</p>
+<ul>
+<li>字符串类型(String)</li>
+<li>数字类型(Number)</li>
+<li>布尔类型(Boolean)</li>
+<li>数组类型(Array)</li>
+<li>元组类型(tuple)</li>
+<li>枚举类型(enum)</li>
+<li>任意类型(any)</li>
+<li>null 和 undifined</li>
+<li>void类型</li>
+<li>never类型</li>
+</ul>
+<p>在typescript中大概有这么十种数据类型。</p>
+<h6 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h6><p>字符串类型的生明必须声明类型，<code>一旦声明类型，不能再赋值其他类型的数据</code>。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str1:<span class="keyword">string</span> = &#x27;<span class="keyword">this</span> is a <span class="keyword">string</span>!&#x27;</span><br><span class="line"><span class="keyword">var</span> str2:<span class="keyword">string</span> = <span class="number">345</span></span><br><span class="line"></span><br><span class="line">str1 = <span class="number">&#x27;he</span>llo world&#x27;</span><br><span class="line">str2 = <span class="number">123</span>    <span class="comment">//  报错</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h6><p>数字类型的生明必须声明类型，<code>一旦声明类型，不能再赋值其他类型的数据</code>。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num1:<span class="built_in">number</span> = <span class="number">123</span></span><br><span class="line"><span class="keyword">var</span> num2:<span class="built_in">number</span> = <span class="number">345</span></span><br><span class="line"></span><br><span class="line">num1 = <span class="number">543</span></span><br><span class="line">num2 = <span class="string">&#x27;num&#x27;</span>    <span class="comment">//  报错</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="布尔类型"><a href="#布尔类型" class="headerlink" title="布尔类型"></a>布尔类型</h6><p>布尔类型的值只有俩个：true和false，而且声明的时候，必须声明类型，<code>一旦声明类型，不能再赋值其他类型的数据</code>。</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> bol1:<span class="built_in">boolean</span> = <span class="literal">true</span></span><br><span class="line"><span class="built_in">var</span> bol2:<span class="built_in">boolean</span> = <span class="literal">false</span></span><br><span class="line">bol1 = <span class="literal">false</span></span><br><span class="line">bol2 = <span class="number">123</span> <span class="comment">//   报错</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="数组类型"><a href="#数组类型" class="headerlink" title="数组类型"></a>数组类型</h6><p>定义数组的方式有俩种：</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let arr:number<span class="comment">[]</span> = <span class="comment">[1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr:<span class="built_in">Array</span>&lt;<span class="built_in">number</span>&gt; = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<p>上面是俩种定义数组的方式，但是<code>在数组中只能是number类型，不能有其他类型的值</code></p>
+<h6 id="元组类型"><a href="#元组类型" class="headerlink" title="元组类型"></a>元组类型</h6><p>元组类型属于数组的一种，元组可以指定数组中每个元素的类型。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr:[<span class="built_in">number</span>, <span class="built_in">string</span>, <span class="built_in">boolean</span>] = [<span class="number">123</span>, <span class="string">&#x27;hello world&#x27;</span>, <span class="literal">true</span>]</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，数组中的每一个元素必须要与之前的类型一一对应。</p>
+<h6 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h6><p>事先考虑到某一变量可能取到的值，尽量用自然语言中的含义清楚的词来表示他的每一个值，这种方法称为枚举方法，用这种方法定义的类型称为枚举类型。</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">enum <span class="built_in">Flag</span> = &#123;success = <span class="number">1</span>, error = -<span class="number">1</span>&#125;</span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">Flag</span>.success)   <span class="comment">//  1</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Color &#123; <span class="built_in">red</span>, <span class="built_in">blue</span>, white &#125;</span><br><span class="line">var c:Color = Color.<span class="built_in">red</span> <span class="comment">//  0 返回的是索引</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> Color &#123; <span class="built_in">red</span>, <span class="built_in">blue</span> = <span class="number">5</span>, white &#125;</span><br><span class="line">var c:Color = Color.<span class="built_in">red</span> <span class="comment">//  0 返回的是索引</span></span><br><span class="line">var c:Color = Color.<span class="built_in">blue</span> <span class="comment">//  5 返回的是索引</span></span><br><span class="line">var c:Color = Color.white <span class="comment">//  6 返回的是索引,会以上一个为基准返回</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="任意类型"><a href="#任意类型" class="headerlink" title="任意类型"></a>任意类型</h6><p>任意类型用any来表示，实际和js中不指定类型有点相似。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var s:<span class="attr">any</span> = <span class="number">123</span></span><br><span class="line"><span class="attr">s</span> = &#x27;hello&#x27;</span><br><span class="line"><span class="attr">s</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>以上的这些操作的都是被允许的。<br><code>因为在ts中没有Object这个类型，那么当数据是对象的时候，可以指定其为any类型</code>。</p>
+<h6 id="null-和-undifined"><a href="#null-和-undifined" class="headerlink" title="null 和 undifined"></a>null 和 undifined</h6><p>null和undefined是其他类型的子类型。null和undefined用来定义不同的数据类型。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num:<span class="built_in">number</span> | <span class="literal">null</span> | <span class="literal">undefined</span></span><br></pre></td></tr></table></figure>
+<h6 id="void类型"><a href="#void类型" class="headerlink" title="void类型"></a>void类型</h6><p>void类型表示没有任何类型，一半用于定义方法的时候没有任何返回值。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run1</span> <span class="params">()</span>: void </span>&#123;</span><br><span class="line">    console.log(<span class="string">&#x27;2134566&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line">run1()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run2</span> <span class="params">()</span>: number </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">111</span></span><br><span class="line">&#125;</span><br><span class="line">run2()</span><br></pre></td></tr></table></figure>
+
+<h6 id="never类型"><a href="#never类型" class="headerlink" title="never类型"></a>never类型</h6><p>never类型是其他类型，包含undefined 和 null,代表从不出现的值，这就意味着never类型的变量只能被never类型赋值。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a:never</span><br><span class="line"><span class="function"><span class="title">a</span> = (<span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;throw&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>never类型基本用不到！</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/42"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/42/"
+    >leeCode算法--删除链表中的重复项</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/42/" class="article-date">
+  <time datetime="2021-08-05T06:14:02.000Z" itemprop="datePublished">2021-08-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：存在一个按升序排列的链表，给你这个链表的头节点 head ，请你删除所有重复的元素，使每个元素 只出现一次 。返回同样按升序排列的结果链表。</p>
+<p>分析：升序链表，那么重复项一定就是相邻项，所以只需要判断相邻项是否相等，如果相等则就指向下一项即。</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> ListNode (val, <span class="keyword">next</span>) &#123;</span><br><span class="line">    this.val = (val === undefined ? <span class="number">0</span> : val)</span><br><span class="line">    this.<span class="keyword">next</span> = (<span class="keyword">next</span> === undefined ? : null : <span class="keyword">next</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> deleteDuplicates =<span class="built_in"> head</span> =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">!head</span>) <span class="keyword">return</span><span class="built_in"> head</span></span><br><span class="line">    <span class="keyword">let</span> current =<span class="built_in"> head</span></span><br><span class="line">    while (current.<span class="keyword">next</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (current.val === current.<span class="keyword">next</span>.val) &#123;</span><br><span class="line">            current.<span class="keyword">next</span> = current.<span class="keyword">next</span>.<span class="keyword">next</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            current = current.<span class="keyword">next</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span><span class="built_in"> head</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>That’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/41"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/41/"
+    >leeCode算法--求一个数的平方根</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/41/" class="article-date">
+  <time datetime="2021-08-04T02:40:18.000Z" itemprop="datePublished">2021-08-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：实现一个函数sqrt(x)，计算并返回x的平方根，其中x为非负整数，由于返回的类型为整数，结果只保留整数部分，小数部分将被舍去。</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let mySqrt = x =&gt; &#123;</span><br><span class="line">    <span class="built_in">var</span> high = x, low = <span class="number">1</span>, <span class="built_in">mid</span></span><br><span class="line">    while (low &lt;= high) &#123;</span><br><span class="line">        <span class="built_in">mid</span> = Math.floor((low + high)/<span class="number">2</span>)</span><br><span class="line">        <span class="built_in">if</span> (<span class="built_in">mid</span> * <span class="built_in">mid</span> &gt; x)&#123;</span><br><span class="line">            high = <span class="built_in">mid</span> - <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">        else <span class="built_in">if</span> (<span class="built_in">mid</span> * <span class="built_in">mid</span> &lt; x)&#123;</span><br><span class="line">            low = <span class="built_in">mid</span> + <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            return <span class="built_in">mid</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return high</span><br><span class="line">&#125;</span><br><span class="line">mySqrt(<span class="number">8</span>) //    <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>That’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/40"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/40/"
+    >leeCode算法--爬楼梯问题</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/40/" class="article-date">
+  <time datetime="2021-08-03T02:40:22.000Z" itemprop="datePublished">2021-08-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：假设你正在爬楼梯，需要n阶才能到达楼顶，每次你可以爬1或2个台阶，你有多少种不同爬到楼顶的方法？注：给定n是一个正整数。</p>
+<p>分析：我们看下具体的解法：<br>0开始：     1种 –&gt; 1<br>1第一节楼梯：1种 –&gt; 1<br>2第二节楼梯：2种 –&gt; 11, 2<br>3第三节楼梯：3种 –&gt; 111, 12, 21<br>4第四节楼梯：5种 –&gt; 1111, 121, 112, 211, 22<br>5第五节楼梯：8种 –&gt; 11111, 1112, 1121, 1211, 2111, 221, 212, 122<br>.<br>.<br>.<br>1，1，2，3，5，8，13，21，44，65…<br>有没有发现一个规律，有没有，有没有，有没有，我擦…这不就是意大利数学家斐波那契额在1202年发现的那个兔子增长的规律吗？没错就是斐波那契数列。直接上代码:</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> climbStairs =<span class="function"> <span class="params">n</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">        return n</span><br><span class="line">    &#125;</span><br><span class="line">    return climb<span class="constructor">Stairs(<span class="params">n</span> - 1)</span> + climb<span class="constructor">Stairs(<span class="params">n</span>-2)</span></span><br><span class="line">&#125;</span><br><span class="line">climb<span class="constructor">Stairs(6)</span> <span class="comment">//   8</span></span><br><span class="line">climb<span class="constructor">Stairs(10)</span> <span class="comment">//   55</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> climbStairs =<span class="function"> <span class="params">n</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">val</span> = <span class="literal">[]</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= n;i++) &#123;</span><br><span class="line">        <span class="keyword">val</span><span class="literal">[<span class="identifier">i</span>]</span> = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">2</span>) return <span class="number">1</span></span><br><span class="line">    <span class="keyword">val</span><span class="literal">[<span class="number">1</span>]</span> = <span class="number">1</span></span><br><span class="line">    <span class="keyword">val</span><span class="literal">[<span class="number">2</span>]</span> = <span class="number">2</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">3</span>; i &lt;= n;i++) &#123;</span><br><span class="line">        <span class="keyword">val</span><span class="literal">[<span class="identifier">i</span>]</span> = <span class="keyword">val</span><span class="literal">[<span class="identifier">i</span>-<span class="number">1</span>]</span> + <span class="keyword">val</span><span class="literal">[<span class="identifier">i</span>-<span class="number">2</span>]</span></span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="keyword">val</span><span class="literal">[<span class="identifier">n</span>]</span></span><br><span class="line">&#125;</span><br><span class="line">climb<span class="constructor">Stairs(6)</span> <span class="comment">//   8</span></span><br><span class="line">climb<span class="constructor">Stairs(10)</span> <span class="comment">//   55</span></span><br></pre></td></tr></table></figure>
+<p>Yes, So easy!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/39"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/39/"
+    >leeCode算法--斐波那契数列的实现及优化</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/39/" class="article-date">
+  <time datetime="2021-08-02T06:38:37.000Z" itemprop="datePublished">2021-08-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：写一个函数，输入n,求斐波那契数列的第n项，即F(n)斐波那契数列的定义如下，F(0) = 0, F(1) = 1, F(n) = F(n - 1) + F(n - 2)(n&gt;1), 既： 0，1，1，2，3，5，8，13，21，44，65…</p>
+<p>分析：斐波那契数列数列，是1202年由意大利数学家提出，用来描述兔子的增长过程发明的，既该序列是由前两项数值相加而成的。</p>
+<p>所以，简单的代码实现就是递归：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let fib = n =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        return n</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        return fib(n - <span class="number">1</span>) + fib(n - <span class="number">2</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">fib</span><span class="params">(<span class="number">0</span>)</span></span> <span class="comment">//   0</span></span><br><span class="line"><span class="function"><span class="title">fib</span><span class="params">(<span class="number">1</span>)</span></span> <span class="comment">//   1</span></span><br><span class="line"><span class="function"><span class="title">fib</span><span class="params">(<span class="number">2</span>)</span></span> <span class="comment">//   1</span></span><br><span class="line"><span class="function"><span class="title">fib</span><span class="params">(<span class="number">5</span>)</span></span> <span class="comment">//   5</span></span><br><span class="line"><span class="function"><span class="title">fib</span><span class="params">(<span class="number">6</span>)</span></span> <span class="comment">//   8</span></span><br><span class="line"><span class="function"><span class="title">fib</span><span class="params">(<span class="number">10</span>)</span></span> <span class="comment">//   55</span></span><br></pre></td></tr></table></figure>
+<p><img src="/algorithm/39/1.png" alt="斐波那契数列"><br>我们可以看到代码实现非常的简单，但是存在的问题是执行效率太低了。从上图中可以看到，递归树中太多的值被重新计算。那么如何提高该数列的执行效率呢？答案是动态规划。来看下面的具体代码：</p>
+<figure class="highlight pony"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fib = n =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="meta">val</span> = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= n;i++) &#123;</span><br><span class="line">        <span class="meta">val</span>[i] = <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n === <span class="number">1</span> || n === <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="meta">val</span>[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        <span class="meta">val</span>[<span class="number">2</span>] = <span class="number">2</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">3</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="meta">val</span>[i] = <span class="meta">val</span>[i<span class="number">-1</span>] + <span class="meta">val</span>[i<span class="number">-2</span>]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="meta">val</span>[n<span class="number">-1</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">fib(<span class="number">0</span>) <span class="comment">//   0</span></span><br><span class="line">fib(<span class="number">1</span>) <span class="comment">//   1</span></span><br><span class="line">fib(<span class="number">2</span>) <span class="comment">//   1</span></span><br><span class="line">fib(<span class="number">5</span>) <span class="comment">//   5</span></span><br><span class="line">fib(<span class="number">6</span>) <span class="comment">//   8</span></span><br><span class="line">fib(<span class="number">10</span>) <span class="comment">//   55</span></span><br></pre></td></tr></table></figure>
+<p>我们通过val数组来保存中间值结果来优化递归执行效率低的问题。所以这样应该是斐波那契数列的一个优化版本。That’s all.</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/38"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/38/"
+    >leeCode算法--计算加1问题</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/38/" class="article-date">
+  <time datetime="2021-08-02T03:32:40.000Z" itemprop="datePublished">2021-08-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<p>解析：题目中看似比较简单只是计算了一个数字加上1而已，但是这里却有不少的坑，比如：</p>
+<ul>
+<li>最后加一后是不是需要向前一位进一；</li>
+<li>加一之后，有那些位需要进一</li>
+<li>如果一个数字加一后，比原来的数多了一位怎么办。</li>
+</ul>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">let plusOne = <span class="keyword">digits</span> =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">digits</span>.length) &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    //  数字要从后向前遍历</span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="keyword">digits</span>.length - <span class="number">1</span>;i &gt;= <span class="number">0</span>; i<span class="comment">--) &#123;</span></span><br><span class="line">        //  从后向前加一</span><br><span class="line">        <span class="keyword">digits</span>[i]++</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">digits</span>[i] &gt;= <span class="number">10</span>) &#123;</span><br><span class="line">            //  如果某一位数加一大于等于<span class="number">10</span>，</span><br><span class="line">            //  将本位数改为<span class="number">0</span>，前一位数加一</span><br><span class="line">            <span class="keyword">digits</span>[i] = <span class="number">0</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            //  否则，说明只是简单的加一，直接返回数组极好</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">digits</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //  当出现加完一后，新数要比原数多一位，只需要在最前面加<span class="number">1</span>就好</span><br><span class="line">    <span class="keyword">digits</span>.unshift(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">digits</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>yes, do you understand?</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/37"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/37/"
+    >leeCode算法--实现最小栈操作</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/37/" class="article-date">
+  <time datetime="2021-07-28T06:21:20.000Z" itemprop="datePublished">2021-07-28</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：设计一个支持 push，pop，top操作，并能在常数时间内检索到最小元素的栈。</p>
+<ul>
+<li>push(x) —— 将元素 x 推入栈中。</li>
+<li>pop() —— 删除栈顶的元素。</li>
+<li>top() —— 获取栈顶元素。</li>
+<li>getMin() —— 检索栈中的最小元素。<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">let MinStack = function () &#123;</span><br><span class="line">    <span class="keyword">this</span>.<span class="keyword">data</span> = []</span><br><span class="line">&#125;</span><br><span class="line">MinStack.prototype.push = function (x) &#123;</span><br><span class="line">    <span class="keyword">this</span>.<span class="keyword">data</span>.push(x)</span><br><span class="line">&#125;</span><br><span class="line">MinStack.prototype.pop() = function () &#123;</span><br><span class="line">    <span class="keyword">this</span>.<span class="keyword">data</span>.pop()</span><br><span class="line">&#125;</span><br><span class="line">MinStack.prototype.top = function () &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.<span class="keyword">data</span>.length) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.<span class="keyword">data</span>.slice(<span class="keyword">this</span>.<span class="keyword">data</span>.length - <span class="number">1</span>, <span class="keyword">this</span>.<span class="keyword">data</span>.length)</span><br><span class="line">&#125;</span><br><span class="line">MinStack.prototype.getMin = function () &#123;</span><br><span class="line">    let num = <span class="keyword">this</span>.<span class="keyword">data</span>[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">1</span>; i &lt; <span class="keyword">this</span>.<span class="keyword">data</span>.length;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num &gt;= <span class="keyword">this</span>.<span class="keyword">data</span>[i]) &#123;</span><br><span class="line">            num = <span class="keyword">this</span>.<span class="keyword">data</span>[i]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num</span><br><span class="line">&#125;</span><br><span class="line">let stack = new MinStack()</span><br><span class="line">stack.push(<span class="number">3</span>)</span><br><span class="line">stack.push(<span class="number">1</span>)</span><br><span class="line">stack.push(<span class="number">5</span>)</span><br><span class="line">stack.push(<span class="number">2</span>)</span><br><span class="line">stack.push(<span class="number">4</span>)</span><br><span class="line">stack.pop() <span class="comment">//  4</span></span><br><span class="line">stack.top() <span class="comment">//  2</span></span><br><span class="line">stack.getMin() <span class="comment">//   1</span></span><br></pre></td></tr></table></figure>
+That’s all.</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/36"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/36/"
+    >leeCode算法--杨辉三角(II)</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/36/" class="article-date">
+  <time datetime="2021-07-27T02:29:21.000Z" itemprop="datePublished">2021-07-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：给定一个非负索引 rowIndex，返回「杨辉三角」的第 rowIndex 行。在「杨辉三角」中，每个数是它左上方和右上方的数的和。</p>
+<p><img src="/algorithm/36/../35/1.gif" alt="杨辉三角"></p>
+<p>分析：其实上图中的关系可以看出，杨辉三角的层级比题目要求的索引少1，那么在这个基础上，我们就可以将上一题稍加改造就OK了。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> getRow = rowIndex =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> result = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; rowIndex + <span class="number">1</span>;i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> tempArr = []</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; i;j++) &#123;</span><br><span class="line">            <span class="keyword">let</span> <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> (!result[i<span class="number">-1</span>]) &#123;</span><br><span class="line">                <span class="built_in">sum</span> = <span class="number">1</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">let</span> <span class="built_in">left</span> = result[i<span class="number">-1</span>][j<span class="number">-1</span>] |<span class="type">| 0</span></span><br><span class="line">                <span class="keyword">let</span> <span class="built_in">right</span> = result[i<span class="number">-1</span>][j] |<span class="type">| 0</span></span><br><span class="line">                <span class="built_in">sum</span> = <span class="built_in">left</span> + <span class="built_in">sum</span> + <span class="built_in">right</span></span><br><span class="line">            &#125;</span><br><span class="line">            tempArr.push(<span class="built_in">sum</span> |<span class="type">| 1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        result.push(tempArr)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result[rowIndex]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>That’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-javascript/10"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/javascript/10/"
+    >JavaScript--关于Promise该了解些什么</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/javascript/10/" class="article-date">
+  <time datetime="2021-07-26T09:23:00.000Z" itemprop="datePublished">2021-07-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Promise是解决异步编程的解决方案，比传统的回调解决方案，要更加强大合理。所谓Promise,其实就是一个容器，保存在未来才会结束的事件。从语法上讲，Promise是一个对象。他有俩个特点：<br>（1）Promise的状态不受外界影响，Promise是一个异步操作，有三种状态，padding，fulfilled, rejected.只有异步操作的结果，可以决定当前的状态是哪一种？任何其他操作都无法改变这个状态。<br>（2）一旦状态改变就不会再变。任何时候都可以得到这个结果。只能从padding到fulfilled，从padding到rejected.<br>Promise也有缺点：<br>（1）一旦创建，就无法取消。创建就会立即执行，无法中途取消。<br>（2）如果不设置回调，那么Promise内部的错误不会反映到外部。<br>（3）当Promise处于padding状态的时候，并不能确认进行到什么阶段。<br>Promise的一些方法：</p>
+<h4 id="Promise-prototype-then"><a href="#Promise-prototype-then" class="headerlink" title="Promise.prototype.then()"></a>Promise.prototype.then()</h4><p>then()方法定义在原型上，他的作用是为Promise实例添加状态时的回调函数。可以有俩个为function的参数，第一个为resolved状态的回调，第二个为rejected状态的回调，他们都是可选的。<code>then()返回一个新的Promise</code>,注意不是原来的那个实例，因此可以采用链式调用，后面接着then()</p>
+<h4 id="Promise-prototype-catch"><a href="#Promise-prototype-catch" class="headerlink" title="Promise.prototype.catch()"></a>Promise.prototype.catch()</h4><p>Promise.prototype.catch()方法是.then(null, rejection)或.then(undefined, rejection)的别名，用于指定发生错误时的回调函数。then()方法指定的回调函数，如果运行中抛出错误，也会被catch()方法捕获。<code>如果then()方法的错误被下一个then()方法的第二个参数捕获，则不会被catch()捕获。</code>。如果 Promise 状态已经变成resolved，再抛出错误是无效的。如果没有使用catch()方法处理错误，那么Promise对象跑出的错误不会传递到外层。另外需要注意的是：<code>在链式调用中，如果前面的then()方法并没有错误，那么就会跳过后面的catch()方法,继续执行后面的then()方法，如果这是出现错误只能被其后面的catch捕获，与前面的catch()无关。还有，当在catch()方法中跑出错误时，本身是不能捕获到错误的，只能是后面的catch()来捕获。</code></p>
+<h4 id="Promise-prototype-finally"><a href="#Promise-prototype-finally" class="headerlink" title="Promise.prototype.finally()"></a>Promise.prototype.finally()</h4><p>finally()方法的执行，与Promise的状态无关。finally()方法，旨在与不管promise对象最后的状态是什么都会执行的操作。finally方法的回调函数不接受任何参数，这意味着没有办法知道，前面的 Promise 状态到底是fulfilled还是rejected。这表明，finally方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果。</p>
+<h4 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all()"></a>Promise.all()</h4><p>Promise.all()的参数是一个数组，数组中是一个个Promise实例。当数组中所有的Promise实例的状态都变成fulfilled，Promise的状态才会变成fulfilled，此时返回值是一个数组。反之，只要有一个状态是rejected,那么Promise的状态就会变成rejected，此时返回值是第一个被rejected的实例的返回值。<br>如果某个promise实例是rejected，但是同时有自己的catch()，那么相对于Promise.all()并不会是rejected状态。而应该是正常返回到Promise.all()的fulfilled状态。</p>
+<h4 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a>Promise.race()</h4><p>Promise.race()和Promise.all()相似，他们区别在于。Promise.race()中的Promise实例，只要有一个状态发生变化，那么Promise.race()的状态就会发生变化。</p>
+<h4 id="Promise-allSettled"><a href="#Promise-allSettled" class="headerlink" title="Promise.allSettled()"></a>Promise.allSettled()</h4><p>Promise.allSettled()方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例。只有等到所有这些参数实例都返回结果，不管是fulfilled还是rejected，包装实例才会结束。一旦结束，状态总是fulfilled，不会变成rejected。状态变成fulfilled后，Promise 的监听函数接收到的参数是一个数组，每个成员对应一个传入Promise.allSettled()的 Promise 实例。<br>Promise.allSettle()的最大用处在于：<code>他可以返回所有Promise的结果。</code></p>
+<h4 id="Promise-any"><a href="#Promise-any" class="headerlink" title="Promise.any()"></a>Promise.any()</h4><p>该方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例返回。只要参数实例有一个变成fulfilled状态，包装实例就会变成fulfilled状态；如果所有参数实例都变成rejected状态，包装实例就会变成rejected状态。</p>
+<p>Promise.any()跟Promise.race()方法很像，只有一点不同，就是Promise.any()不会因为某个 Promise 变成rejected状态而结束，必须等到所有参数 Promise 变成rejected状态才会结束。</p>
+<h4 id="Promise-resolve"><a href="#Promise-resolve" class="headerlink" title="Promise.resolve()"></a>Promise.resolve()</h4><p>Promise.resolve()的作用是将现有对象转化为Promise对象。<br>（1）参数是一个Promise对象<br>此时，什么都不做，返回原来的Promise对象<br>（2）参数是一个thenable对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> thenable = &#123;</span><br><span class="line">    <span class="attr">then</span>: <span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        resolve(<span class="number">42</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Promise.resolve()方法会将这个对象转为 Promise 对象，然后就立即执行thenable对象的then()方法。<br>（3）参数不是具有then()方法的对象，或根本就不是对象<br>如果参数是一个原始值，或者是一个不具有then()方法的对象，则Promise.resolve()方法返回一个新的 Promise 对象，状态为resolved。<br>（4）Promise.resolve()方法允许调用时不带参数，直接返回一个resolved状态的 Promise 对象。所以，如果希望得到一个 Promise 对象，比较方便的方法就是直接调用Promise.resolve()方法。</p>
+<h4 id="Promise-reject"><a href="#Promise-reject" class="headerlink" title="Promise.reject()"></a>Promise.reject()</h4><p>Promise.reject(reason)方法也会返回一个新的 Promise 实例，该实例的状态为rejected。后面可以接catch()方法。</p>
+<h4 id="Promise-try"><a href="#Promise-try" class="headerlink" title="Promise.try()"></a>Promise.try()</h4><p>Promise.try()方法有点像try{}catch{}的用法，可以让同步函数，同步执行，异步函数，异步执行的时候，对于抛出的错误可以捕获。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.<span class="keyword">try</span>(<span class="function"><span class="params">()</span> =&gt;</span> database.users.get(&#123;id: userId&#125;))</span><br><span class="line">    .<span class="keyword">then</span>(...)</span><br><span class="line">    .<span class="keyword">catch</span>(...)</span><br></pre></td></tr></table></figure>
+<h4 id="Promise的应用"><a href="#Promise的应用" class="headerlink" title="Promise的应用"></a>Promise的应用</h4><p>加载图片，一旦加载完成，Promise的状态就发生改变。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> preloadImage = <span class="function"><span class="keyword">function</span> (<span class="params">path</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">        image.onload  = resolve;</span><br><span class="line">        image.onerror = reject;</span><br><span class="line">        image.src = path;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-javascript/9"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/javascript/9/"
+    >JavaScript--关于Set, WeakSet, Map, WeakMap的不同</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/javascript/9/" class="article-date">
+  <time datetime="2021-07-26T07:11:22.000Z" itemprop="datePublished">2021-07-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Set, WeakSet, Map, WeakMap都是ES2015提供的新的数据结构。</p>
+<h3 id="Set结构"><a href="#Set结构" class="headerlink" title="Set结构"></a>Set结构</h3><p>Set类似于数组，但是成员是唯一的，要求没有重复的成员值。Set本身是一种构造函数。用来生成Set数据结构。可以接受一个数组为参数作为初始化。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">let</span> set = new Set([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">4</span>])<span class="meta"></span></span><br><span class="line"><span class="meta">[...set] // [1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+<p>所以，为数组去重是set结构的一个重要用途。同理，那么也可以为字符串去重。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[...<span class="keyword">new</span> <span class="keyword">Set</span>(<span class="string">&#x27;aaccdd&#x27;</span>)].<span class="keyword">join</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>  <span class="string">&#x27;abc&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>向set结构中不会发生类型转化，所以5和’5’是俩个完全不同的值。这是因为set内部对于值的判断类似于精确元算符号(===)但是，也有例外，<code>NaN被认为是相等的俩个值，俩个对象总是不相等的俩个值</code>。</p>
+<p>set的属性和方法：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.constructor <span class="comment">//    构造函数，默认就是Set函数</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.size  <span class="comment">//  返回Set成员的数量</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.add(value) <span class="comment">// 向Set中添加成员</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.has(value) <span class="comment">// 表示是否为Set成员</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.delete(value) <span class="comment">//  删除Set成员中的成员，返回是否删除成功true[false]</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.clear<span class="literal">()</span>   <span class="comment">//  清空Set所有成员</span></span><br></pre></td></tr></table></figure>
+<p>set结构的四种遍历方法:<br>（1）keys()，values()，entries()<br>keys方法、values方法、entries方法返回的都是遍历器对象,由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以keys方法和values方法的行为完全一致。<br>（2）forEach()<br>Set 结构的实例与数组一样，也拥有forEach方法，用于对每个成员执行某种操作，没有返回值。</p>
+<h3 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h3><p>WeakSet 结构与 Set 类似，也是不重复的值的集合。但是，它与 Set 有两个区别。</p>
+<p>(1)区别1:<code>WeakSet的成员只能是对象，而不能是其他类型的值。</code><br>(2)区别2:<code>WeakSet中的对象是弱引用对象，即垃圾回收机制不考虑 WeakSet 对该对象的引用，也就是说，如果其他对象都不再引用该对象，那么垃圾回收机制会自动回收该对象所占用的内存，不考虑该对象还存在于 WeakSet 之中。这是因为垃圾回收机制根据对象的可达性（reachability）来判断回收，如果对象还能被访问到，垃圾回收机制就不会释放这块内存。</code><br>(3)区别2:<code>WeakMap是不可以遍历的。</code><br>因为WeakMap方法的以上的特点。WeakSet 的成员是不适合引用的，因为它会随时消失。另外，由于 WeakSet 内部有多少个成员，取决于垃圾回收机制有没有运行，运行前后很可能成员个数是不一样的，而垃圾回收机制何时运行是不可预测的。所以，WeakMap只有以下三个方法：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Set</span>.prototype.<span class="keyword">add</span>(<span class="keyword">value</span>) // 向<span class="keyword">Set</span>中添加成员</span><br><span class="line"><span class="keyword">Set</span>.prototype.has(<span class="keyword">value</span>) // 表示是否为<span class="keyword">Set</span>成员</span><br><span class="line"><span class="keyword">Set</span>.prototype.<span class="keyword">delete</span>(<span class="keyword">value</span>) //  删除<span class="keyword">Set</span>成员中的成员，返回是否删除成功<span class="keyword">true</span>[<span class="keyword">false</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>Map类似于对象，也是键值的集合。对象是’字符串-值’的对应。Map结构是’值-值’的对应关系，也就是说Map结构的键不仅仅可以是字符串，可以是任意类型的值。是一种更加完善的hash结构。<br>Map本身就是一个构造函数，可以通过new字段来创建Map,接受一个表示键值对的数组作为参数。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="built_in">map</span> = <span class="literal">new</span> <span class="built_in">Map</span>(<span class="meta">[</span></span><br><span class="line">    <span class="meta">[</span><span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;张三&#x27;</span><span class="meta">]</span></span><br><span class="line">    <span class="meta">[</span><span class="string">&#x27;age&#x27;</span>, <span class="number">21</span><span class="meta">]</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<p>Map结构的属性和方法</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">map<span class="selector-class">.size</span>()  <span class="comment">//  返回map结构成员的总数</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.set</span>(key, value)   <span class="comment">//  为Map添加成员</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.get</span>(key)   <span class="comment">//  为Map成员</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.has</span>(key)   <span class="comment">//  判断是否为Map成员</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.delete</span>(key)   <span class="comment">//  删除Map成员</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.clear</span>(key)   <span class="comment">//  清空Map成员</span></span><br></pre></td></tr></table></figure>
+<p>Map结构的遍历同Set一样，也是有四种方法：<br>（1）keys()，values()，entries()<br>keys方法、values方法、entries方法返回的都是遍历器对象,由于 Map 结构没有键名，只有键值（或者说键名和键值是同一个值），所以keys方法和values方法的行为完全一致。<br>（2）forEach()<br>Map 结构的实例与数组一样，也拥有forEach方法，用于对每个成员执行某种操作，没有返回值。<br>Map结构可以同其他数据结构进行相互转化：<br>（1）Map转为数组：扩展运算符[…map]<br>（2）数组转为Map: new Map([[‘name’, ‘张三’], [‘age’, 23]])<br>（3）对象转map：可以通过Object.entries()参照数组转Map,因为Object.entries()返回的是键值对数组<br>（4）map转对象：通过遍历的方式<br>（5）map转JSON，</p>
+<ul>
+<li>键名是字符串：直接通过JSON.stringify()转化为JSON</li>
+<li>键名是非字符串：选择转为数组 JSON，先将map结构转化为数组，再将数组转化为JSON<br>（6）JSON转map同上，只不过是调用JSON.parse()</li>
+</ul>
+<h3 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h3><p>WeakMap结构与Map结构类似，也是用于生成键值对的集合。但是有俩点区别：<br>（1）WeakMap只接受对象作为键名（null除外），不接受其他类型的值作为键名。<br>（2）WeakMap的键名所指向的对象，不计入垃圾回收机制。WeakMap作为临时存储非常方便。WeakMap 弱引用的只是键名，而不是键值。键值依然是正常引用。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/35"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/35/"
+    >leeCode算法--杨辉三角(I)</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/35/" class="article-date">
+  <time datetime="2021-07-26T02:32:43.000Z" itemprop="datePublished">2021-07-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目： 给定一个非负整数 numRows，生成「杨辉三角」的前 numRows 行。在「杨辉三角」中，每个数是它左上方和右上方的数的和。<br><img src="/algorithm/35/1.gif" alt="杨辉三角"></p>
+<p>分析：在「杨辉三角」中，每个数是它左上方和右上方的数的和。这就是我们要实现的规律。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> generate = numRows =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> result = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>;i &lt; numRows;i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> tempArr = []</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt;= i;j++) &#123;</span><br><span class="line">            <span class="keyword">let</span> <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> (!result[i - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="built_in">sum</span> = <span class="number">1</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">let</span> <span class="built_in">left</span> = result[i - <span class="number">1</span>][j - <span class="number">1</span>] |<span class="type">| 0</span></span><br><span class="line">                <span class="keyword">let</span> <span class="built_in">right</span> = result[i - <span class="number">1</span>][j] |<span class="type">| 0</span></span><br><span class="line">                <span class="built_in">sum</span> = <span class="built_in">left</span> + <span class="built_in">sum</span> + <span class="built_in">right</span></span><br><span class="line">            &#125;</span><br><span class="line">            tempArr.push(<span class="built_in">sum</span> |<span class="type">| 1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        result.push(tempArr)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>That’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/34"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/34/"
+    >leeCode算法--最大子序和</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/34/" class="article-date">
+  <time datetime="2021-07-25T04:07:31.000Z" itemprop="datePublished">2021-07-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> maxSubArray = nums =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (nums.<span class="built_in">length</span> &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">return</span> nums[<span class="number">0</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">let</span> <span class="built_in">sum</span> = nums[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">let</span> i = <span class="number">1</span>; i &lt; nums.<span class="built_in">length</span>;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i - <span class="number">1</span>] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            nums[i] += nums[i - <span class="number">1</span>]</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">sum</span> = <span class="built_in">sum</span> &gt; nums[i] ? <span class="built_in">sum</span> : nums[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> <span class="built_in">sum</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不知道怎么说什么，所以没有写分析，That’s all.</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2021
+        <i class="ri-heart-fill heart_icon"></i> Lee
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Lee前端技术栈"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

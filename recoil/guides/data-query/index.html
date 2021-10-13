@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="前端技术栈 前端技术 前端博客 JavaScript HTML5 CSS3 VUE React Angular node Deno typeSctipt webpack wechat flutter recoil" />
+       
+      <meta name="description" content="敲着代码，记着BUG，通过博客的方式，记录下工作中的点点滴滴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Recoil指南--Asynchronous Data Queries 异步数据请求 |  Lee前端技术栈</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Lee前端技术栈" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-recoil/guides/data-query"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Recoil指南--Asynchronous Data Queries 异步数据请求
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/recoil/guides/data-query/" class="article-date">
+  <time datetime="2020-11-09T03:07:13.000Z" itemprop="datePublished">2020-11-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/recoil/">recoil</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">16 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Recoil provides a way to map state and derived state to React components via a data-flow graph. What’s really powerful is that the functions in the graph can also be asynchronous. This makes it easy to use asynchronous functions in synchronous React component render functions. Recoil allows you to seamlessly mix synchronous and asynchronous functions in your data-flow graph of selectors. Simply return a Promise to a value instead of the value itself from a selector <code>get</code> callback, the interface remains exactly the same. Because these are just selectors, other selectors can also depend on them to further transform the data.<br>Recoil通过数据流图为react提供了俩中state.更为强大的是，函数式的数据流可以是异步的。这使得在同步的react组件中使用异步函数渲染变的非常容易。在Recoil的selector数据流中可以允同步和异步方法混合使用，翻译一个Promise来获取值，而不是Selector的<code>get</code>回调中。接口也是同样的类似，因为这些仅仅是Selector,其他的Selector可以依赖于这些Selector做更多的数据转化。<br>Selectors can be used as one way to incorporate asynchronous data into the Recoil data-flow graph. Please keep in mind that selectors represent “idempotent” functions: For a given set of inputs they should always produce the same results (at least for the lifetime of the application). This is important as selector evaluations may be cached, restarted, or executed multiple times. Because of this, selectors are generally a good way to model read-only DB queries. For mutable data you can use a <a target="_blank" rel="noopener" href="https://recoiljs.org/docs/guides/asynchronous-data-queries#query-refresh">Query Refresh</a> or to synchronize mutable state, persist state, or for other side-effects consider the experimental <a target="_blank" rel="noopener" href="https://recoiljs.org/docs/guides/atom-effects">Atom Effects API</a>.<br>Selector可以被视作为是注册异步数据的一种方式。切记，selector代表了’幂等’函数：对于给定的一组输入，它们应该总是产生相同的结果（至少在应用程序的生命周期内），这一点非常的重要，因为selector的运算可能被缓存，重新计算，或者被执行多次。尽管如此，Selector也是一个读取数据查询非常好的方式。对于那些可变的数据，可以<a target="_blank" rel="noopener" href="https://recoiljs.org/docs/guides/asynchronous-data-queries#query-refresh">刷新请求</a>或者同步可变状态，持久状态或者可以考虑其他的副作用的<a target="_blank" rel="noopener" href="https://recoiljs.org/docs/guides/atom-effects">Atom Api</a>.</p>
+<h3 id="Synchronous-Example-同步案例"><a href="#Synchronous-Example-同步案例" class="headerlink" title="Synchronous Example 同步案例"></a>Synchronous Example 同步案例</h3><p>For example, here is a simple synchronous <a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/core/atom">atom</a> and <a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/core/selector">selector</a> to get a user name:<br>例如，下面是一个简单的异步获取用户名的<a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/core/atom">Atom</a>和<a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/core/selector">Selector</a>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> currentUserIDState = atom(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;CurrentUserID&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="number">1</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> currentUserNameState = selector(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;CurrentUserName&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="function">(<span class="params">&#123;get&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> tableOfUsers[get(currentUserIDState)].name;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CurrentUserInfo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> userName = useRecoilValue(currentUserNameState);</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;userName&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyApp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">CurrentUserInfo</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Asynchronous-Example-异步案例"><a href="#Asynchronous-Example-异步案例" class="headerlink" title="Asynchronous Example 异步案例"></a>Asynchronous Example 异步案例</h3><p>If the user names were stored in some database we need to query, all we need to do is return a <code>Promise</code> or use an <code>async</code> function. If any dependencies change, the selector will be re-evaluated and execute a new query. The results are cached, so the query will only execute once per unique input.<br>如果我们需要的用户名是被存储到某个数据库，我们需要做的就是就是通过<code>async</code>方法返回一个<code>Promise</code>.如果一些依赖项发生变化，Selector也会重新计算，或者是重新发起请求。结果会被缓存，所以请求只会被执行一次。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> currentUserNameQuery = selector(&#123;</span><br><span class="line">    key: <span class="string">&#x27;CurrentUserName&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span>: <span class="keyword">async</span> (&#123;<span class="keyword">get</span>&#125;) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> response = <span class="keyword">await</span> myDBQuery(&#123;</span><br><span class="line">            userID: <span class="keyword">get</span>(currentUserIDState),</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> response.name;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function">function <span class="title">CurrentUserInfo</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> userName = useRecoilValue(currentUserNameQuery);</span><br><span class="line">    <span class="keyword">return</span> &lt;div&gt;&#123;userName&#125;&lt;/div&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The interface of the selector is the same, so the component using this selector doesn’t need to care if it was backed with synchronous atom state, derived selector state, or asynchronous queries!<br>Selector的接口也是一样的，因此组件中用到Selector并不需要关心是否支持同步的Atom 状态，派生Selector状态，或者是异步请求。<br>But, since React render functions are synchronous, what will it render before the promise resolves? Recoil is designed to work with <a target="_blank" rel="noopener" href="https://reactjs.org/docs/concurrent-mode-suspense.html">React Suspense</a> to handle pending data. Wrapping your component with a Suspense boundary will catch any descendants that are still pending and render a fallback UI:<br>但是，由于react的渲染是同步的，那么在promise reslove之前什么会被渲染？Recoil设计使用<a target="_blank" rel="noopener" href="https://reactjs.org/docs/concurrent-mode-suspense.html">react Suspense</a>来处理进行中的数据。将组件以及其后代组件暂时都挂起，返回等待中的UI界面：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyApp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">React.Suspense</span> <span class="attr">fallback</span>=<span class="string">&#123;</span>&lt;<span class="attr">div</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">div</span>&gt;</span>&#125;&gt;</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">CurrentUserInfo</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">React.Suspense</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Error-Handling-错误处理"><a href="#Error-Handling-错误处理" class="headerlink" title="Error Handling 错误处理"></a>Error Handling 错误处理</h3><p>But what if the request has an error? Recoil selectors can also throw errors which will then be thrown if a component tries to use that value. This can be caught with a React <a target="_blank" rel="noopener" href="https://reactjs.org/docs/error-boundaries.html"><ErrorBoundary></ErrorBoundary></a>. For example:<br>一旦请求出现错误怎么办？Recoil Selector可以扔出一个React组件可以捕获的错误。这个错误可以被React的<a target="_blank" rel="noopener" href="https://reactjs.org/docs/error-boundaries.html"><ErrorBoundary></ErrorBoundary></a>组件捕获。案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> currentUserNameQuery = selector(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;CurrentUserName&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">async</span> (&#123;get&#125;) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> response = <span class="keyword">await</span> myDBQuery(&#123;</span><br><span class="line">            <span class="attr">userID</span>: get(currentUserIDState),</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">if</span> (response.error) &#123;</span><br><span class="line">            <span class="keyword">throw</span> response.error;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> response.name;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CurrentUserInfo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> userName = useRecoilValue(currentUserNameQuery);</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;userName&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyApp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">ErrorBoundary</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">React.Suspense</span> <span class="attr">fallback</span>=<span class="string">&#123;</span>&lt;<span class="attr">div</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">div</span>&gt;</span>&#125;&gt;</span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;<span class="name">CurrentUserInfo</span> /&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;/<span class="name">React.Suspense</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">ErrorBoundary</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Queries-with-Parameters-带参请求"><a href="#Queries-with-Parameters-带参请求" class="headerlink" title="Queries with Parameters 带参请求"></a>Queries with Parameters 带参请求</h3><p>Sometimes you want to be able to query based on parameters that aren’t just based on derived state. For example, you may want to query based on the component props. You can do that using the <a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/utils/selectorFamily">selectorFamily</a> helper:<br>有时候你可能想要发起一个携带参数带请求的不仅仅依赖于派生状态。例如，你的请求是基于组件的props,那么你可以使用<a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/utils/selectorFamily">selectorFamily</a>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userNameQuery = selectorFamily(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;UserName&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="function"><span class="params">userID</span> =&gt;</span> <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> response = <span class="keyword">await</span> myDBQuery(&#123;userID&#125;);</span><br><span class="line">        <span class="keyword">if</span> (response.error) &#123;</span><br><span class="line">            <span class="keyword">throw</span> response.error;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> response.name;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">UserInfo</span>(<span class="params">&#123;userID&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> userName = useRecoilValue(userNameQuery(userID));</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;userName&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyApp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">ErrorBoundary</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">React.Suspense</span> <span class="attr">fallback</span>=<span class="string">&#123;</span>&lt;<span class="attr">div</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">div</span>&gt;</span>&#125;&gt;</span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;<span class="name">UserInfo</span> <span class="attr">userID</span>=<span class="string">&#123;1&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;<span class="name">UserInfo</span> <span class="attr">userID</span>=<span class="string">&#123;2&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;<span class="name">UserInfo</span> <span class="attr">userID</span>=<span class="string">&#123;3&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;/<span class="name">React.Suspense</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">ErrorBoundary</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Data-Flow-Graph-数据流"><a href="#Data-Flow-Graph-数据流" class="headerlink" title="Data-Flow Graph 数据流"></a>Data-Flow Graph 数据流</h3><p>Remember, by modeling queries as selectors, we can build a data-flow graph mixing state, derived state, and queries! This graph will automatically update and re-render React components as state is updated.<br>切记，我们可以通过模块查询来创建混合状态，派生状态，以及请求的Selector。这样数据状态一旦更新React的组件会自动更新并重新渲染。<br>The following example will render the current user’s name and a list of their friends. If a friend’s name is clicked on, they will become the current user and the name and list will be automatically updated.<br>下面的例子将会渲染当前的用户名，以及朋友列表，如果某一个朋友的名字被点击。他将会变成当前的用户，并且姓名和裂变会自动更新。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> currentUserIDState = atom(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;CurrentUserID&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="literal">null</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> userInfoQuery = selectorFamily(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;UserInfoQuery&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="function"><span class="params">userID</span> =&gt;</span> <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> response = <span class="keyword">await</span> myDBQuery(&#123;userID&#125;);</span><br><span class="line">        <span class="keyword">if</span> (response.error) &#123;</span><br><span class="line">            <span class="keyword">throw</span> response.error;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> response;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> currentUserInfoQuery = selector(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;CurrentUserInfoQuery&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="function">(<span class="params">&#123;get&#125;</span>) =&gt;</span> get(userInfoQuery(get(currentUserIDState))),</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> friendsInfoQuery = selector(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;FriendsInfoQuery&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="function">(<span class="params">&#123;get&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;friendList&#125; = get(currentUserInfoQuery);</span><br><span class="line">        <span class="keyword">return</span> friendList.map(<span class="function"><span class="params">friendID</span> =&gt;</span> get(userInfoQuery(friendID)));</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CurrentUserInfo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> currentUser = useRecoilValue(currentUserInfoQuery);</span><br><span class="line">    <span class="keyword">const</span> friends = useRecoilValue(friendsInfoQuery);</span><br><span class="line">    <span class="keyword">const</span> setCurrentUserID = useSetRecoilState(currentUserIDState);</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;currentUser.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">                &#123;friends.map(friend =&gt;</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;friend.id&#125;</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> setCurrentUserID(friend.id)&#125;&gt;</span></span><br><span class="line"><span class="xml">                    &#123;friend.name&#125;</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">                )&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyApp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">ErrorBoundary</span>&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">React.Suspense</span> <span class="attr">fallback</span>=<span class="string">&#123;</span>&lt;<span class="attr">div</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">div</span>&gt;</span>&#125;&gt;</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">CurrentUserInfo</span> /&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;/<span class="name">React.Suspense</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">ErrorBoundary</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Concurrent-Requests-当前请求"><a href="#Concurrent-Requests-当前请求" class="headerlink" title="Concurrent Requests 当前请求"></a>Concurrent Requests 当前请求</h3><p>If you notice in the above example, the <code>friendsInfoQuery</code> uses a query to get the info for each friend. But, by doing this in a loop they are essentially serialized. If the lookup is fast, maybe that’s ok. If it’s expensive, you can use a concurrency helper such as <a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/utils/waitForAll">waitForAll</a> to run them in parallel. This helper accepts both arrays and named objects of dependencies.<br>如果你注意到上面到例子。<code>friendsInfoQuery</code>发起请求来获取每一个朋友的信息。但是通过这样的循环是为了本质上的有序列化。如果查询速度够快，这没什么，要不然就，可以使用例如<a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/utils/waitForAll">waitForAll</a>的并发请求来处理。他既可以接受数组，也可以接受对象作为参数。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> friendsInfoQuery = selector(&#123;</span><br><span class="line">    key: <span class="string">&#x27;FriendsInfoQuery&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span>: (&#123;<span class="keyword">get</span>&#125;) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;friendList&#125; = <span class="keyword">get</span>(currentUserInfoQuery);</span><br><span class="line">        <span class="keyword">const</span> friends = <span class="keyword">get</span>(waitForAll(</span><br><span class="line">            friendList.map(friendID =&gt; userInfoQuery(friendID))</span><br><span class="line">        ));</span><br><span class="line">        <span class="keyword">return</span> friends;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>You can use <a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/utils/waitForNone">waitForNone</a> to handle incremental updates to the UI with partial data.<br>同样也可以使用<a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/utils/waitForNone">waitForNone</a>部分数据来处理UI层面的更新。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> friendsInfoQuery = selector(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;FriendsInfoQuery&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="function">(<span class="params">&#123;get&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;friendList&#125; = get(currentUserInfoQuery);</span><br><span class="line">        <span class="keyword">const</span> friendLoadables = get(waitForNone(</span><br><span class="line">                friendList.map(<span class="function"><span class="params">friendID</span> =&gt;</span> userInfoQuery(friendID))</span><br><span class="line">            ));</span><br><span class="line">        <span class="keyword">return</span> friendLoadables</span><br><span class="line">        .filter(<span class="function">(<span class="params">&#123;state&#125;</span>) =&gt;</span> state === <span class="string">&#x27;hasValue&#x27;</span>)</span><br><span class="line">        .map(<span class="function">(<span class="params">&#123;contents&#125;</span>) =&gt;</span> contents);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Pre-Fetching-预请求"><a href="#Pre-Fetching-预请求" class="headerlink" title="Pre-Fetching 预请求"></a>Pre-Fetching 预请求</h3><p>For performance reasons you may wish to kick off fetching before rendering. That way the query can be going while we start rendering. The <a target="_blank" rel="noopener" href="https://reactjs.org/docs/concurrent-mode-suspense.html#start-fetching-early">React docs</a> give some examples. This pattern works with Recoil as well.<br>由于一些其他的原因，你可能希望能在渲染之前开启请求。这当然也是没有问题的。在开始渲染的时候，是可以发起请求的。React文档给了我们例子，这当然也适用于Recoil.<br>Let’s change the above example to initiate a fetch for the next user info as soon as the user clicks the button to change users:<br>我们来修改一下上面的例子，在用户一点击按钮改变用户的时候为下一个用户初始化一个请求。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CurrentUserInfo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> currentUser = useRecoilValue(currentUserInfoQuery);</span><br><span class="line">    <span class="keyword">const</span> friends = useRecoilValue(friendsInfoQuery);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> changeUser = useRecoilCallback(<span class="function">(<span class="params">&#123;snapshot, set&#125;</span>) =&gt;</span> <span class="function"><span class="params">userID</span> =&gt;</span> &#123;</span><br><span class="line">        snapshot.getLoadable(userInfoQuery(userID)); <span class="comment">// pre-fetch user info</span></span><br><span class="line">        set(currentUserIDState, userID); <span class="comment">// change current user to start new render</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;currentUser.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">                &#123;friends.map(friend =&gt;</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;friend.id&#125;</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> changeUser(friend.id)&#125;&gt;</span></span><br><span class="line"><span class="xml">                    &#123;friend.name&#125;</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">                )&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Async-Queries-Without-React-Suspense-没有React-Suspense的异步请求"><a href="#Async-Queries-Without-React-Suspense-没有React-Suspense的异步请求" class="headerlink" title="Async Queries Without React Suspense 没有React Suspense的异步请求"></a>Async Queries Without React Suspense 没有React Suspense的异步请求</h3><p>It is not necessary to use React Suspense for handling pending asynchronous selectors. You can also use the <a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/core/useRecoilValueLoadable">useRecoilValueLoadable()</a> hook to determine the status during rendering:<br>使用React Subspense来处理进行中的异步Selector，并不是必须的。在渲染期间，也可以使用<a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/core/useRecoilValueLoadable">useRecoilValueLoadable()</a>钩子函数来处理状态。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">UserInfo</span>(<span class="params">&#123;userID&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> userNameLoadable = useRecoilValueLoadable(userNameQuery(userID));</span><br><span class="line">    <span class="keyword">switch</span> (userNameLoadable.state) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;hasValue&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;userNameLoadable.contents&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;loading&#x27;</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;hasError&#x27;</span>:</span><br><span class="line">            <span class="keyword">throw</span> userNameLoadable.contents;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Query-Refresh请求刷新"><a href="#Query-Refresh请求刷新" class="headerlink" title="Query Refresh请求刷新"></a>Query Refresh请求刷新</h3><p>When using selectors to model data queries, it’s important to remember that selector evaluation should always provide a consistent value for a given state. Selectors represent state derived from other atom and selector states. Thus, selector evaluation functions should be idempotent for a given input, as it may be cached or executed multiple times. Practically, that means a single selector should not be used for a query where you expect the results to vary during the application’s lifetime.<br>当使用Selector来发起数据请求的时候，切记，selector运算总是会提供和给定的状态一致的值。Selector代表状态派生到其他的Atom或者是selector状态。因此，对于给定的输入，Selector函数应该是幂等的。因为他可能会被缓存，或者是执行多次。实际上，这意味着一个Selector在整个应用的生命周期中不应该被应用于你希望得到的结果总是变化的请求。</p>
+<p>There are a few patterns you can use for working with mutable data:<br>下面是一些应用于修改数据的模式：</p>
+<h5 id="Use-a-Request-ID-用ID请求"><a href="#Use-a-Request-ID-用ID请求" class="headerlink" title="Use a Request ID 用ID请求"></a>Use a Request ID 用ID请求</h5><p>Selector evaluation should provide a consistent value for a given state based on input (dependent state or family parameters). So, you could add a request ID as either a family parameter or a dependency to your query. For example:<br>Selector运算需要为state提供基于输入（独立的状态或者是一组参数）一致的值，所以，需要为请求添加一个请求的ID，要不是参数，要不是依赖，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userInfoQueryRequestIDState = atomFamily(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;UserInfoQueryRequestID&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="number">0</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> userInfoQuery = selectorFamily(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;UserInfoQuery&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="function"><span class="params">userID</span> =&gt;</span> <span class="keyword">async</span> (&#123;get&#125;) =&gt; &#123;</span><br><span class="line">        get(userInfoQueryRequestIDState(userID)); <span class="comment">// Add request ID as a dependency</span></span><br><span class="line">        <span class="keyword">const</span> response = <span class="keyword">await</span> myDBQuery(&#123;userID&#125;);</span><br><span class="line">        <span class="keyword">if</span> (response.error) &#123;</span><br><span class="line">            <span class="keyword">throw</span> response.error;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> response;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useRefreshUserInfo</span>(<span class="params">userID</span>) </span>&#123;</span><br><span class="line">    setUserInfoQueryRequestID = useSetRecoilState(userInfoQueryRequestIDState(userID));</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        setUserInfoQueryRequestID(<span class="function"><span class="params">requestID</span> =&gt;</span> requestID++);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CurrentUserInfo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> currentUserID = useRecoilValue(currentUserIDState);</span><br><span class="line">    <span class="keyword">const</span> currentUserInfo = userRecoilValue(userInfoQuery(currentUserID));</span><br><span class="line">    <span class="keyword">const</span> refreshUserInfo = useRefreshUserInfo(currentUserID);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;currentUser.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;refreshUserInfo&#125;</span>&gt;</span>Refresh<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Use-an-Atom-Atom使用"><a href="#Use-an-Atom-Atom使用" class="headerlink" title="Use an Atom Atom使用"></a>Use an Atom Atom使用</h5><p>Another option is to use an atom, instead of a selector, to model the query results. You can imperatively update the atom state with the new query results based on your refresh policy.<br>另外一个方法就是使用Atom,而不是Selector来处理请求结果。可以根据刷新策略使用新的查询结果强制更新atom状态。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userInfoState = atomFamily(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;UserInfo&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="function"><span class="params">userID</span> =&gt;</span> fetch(userInfoURL(userID)),</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// React component to refresh query</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RefreshUserInfo</span>(<span class="params">&#123;userID&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> refreshUserInfo = useRecoilCallback(<span class="function">(<span class="params">&#123;set&#125;</span>) =&gt;</span> <span class="keyword">async</span> id =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> userInfo = <span class="keyword">await</span> myDBQuery(&#123;userID&#125;);</span><br><span class="line">        set(userInfoState(userID), userInfo);</span><br><span class="line">    &#125;, [userID]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Refresh user info every second</span></span><br><span class="line">    useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> intervalID = <span class="built_in">setInterval</span>(refreshUserInfo, <span class="number">1000</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> <span class="built_in">clearInterval</span>(intervalID);</span><br><span class="line">    &#125;, [refreshUserInfo]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>One downside to this approach is that atoms do not currently support accepting a Promise as the new value in order to automatically take advantage of React Suspense while the query refresh is pending, if that is your desired behavior. However, you could store an object which manually encodes the loading status as well as the results if desired.<br>这种方法的一个缺点是atoms当前不支持接受Promise作为新值，以便在查询刷新挂起时自动利用React-Suspense（如果这是您想要的行为）。但是，如果需要，您可以存储一个手动编码加载状态和结果的对象。</p>
+<p>Also consider <a target="_blank" rel="noopener" href="https://recoiljs.org/docs/guides/atom-effects">atom effects</a> for query synchronization of atoms.<br>同样需求考虑<a target="_blank" rel="noopener" href="https://recoiljs.org/docs/guides/atom-effects">Atom作用</a>对atom同步请求的影响。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://leexiaop.github.io/recoil/guides/data-query/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/recoil/guides/atom-effects/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Recoil指南--Atom Effects Atom副作用
+          
+        </div>
+      </a>
+    
+    
+      <a href="/recoil/tutorial/selectors/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Recoil基础--Selector纯函数</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2021
+        <i class="ri-heart-fill heart_icon"></i> Lee
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Lee前端技术栈"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

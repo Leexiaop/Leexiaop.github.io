@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="前端技术栈 前端技术 前端博客 JavaScript HTML5 CSS3 VUE React Angular node Deno typeSctipt webpack wechat flutter recoil" />
+       
+      <meta name="description" content="敲着代码，记着BUG，通过博客的方式，记录下工作中的点点滴滴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Recoil API手册--Selector(options) |  Lee前端技术栈</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Lee前端技术栈" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-recoil/api/recoil-state/selector"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Recoil API手册--Selector(options)
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/recoil/api/recoil-state/selector/" class="article-date">
+  <time datetime="2021-02-24T10:41:01.000Z" itemprop="datePublished">2021-02-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/recoil/">recoil</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Selectors represent a function, or <strong>derived state</strong> in Recoil. You can think of them as similar to an “idempotent” or “pure function” without side-effects that always returns the same value for a given set of dependency values. If only a get function is provided, the selector is read-only and returns a <code>RecoilValueReadOnly</code> object. If a <code>set</code> is also provided, it returns a writeable <code>RecoilState</code> object.</p>
+<p>Recoil manages atom and selector state changes to know when to notify components subscribing to that selector to re-render. If an object value of a selector is mutated directly it may bypass this and avoid properly notifying subscribing components. To help detect bugs, Recoil will freeze selector value objects in development mode.</p>
+<hr>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function selector<span class="params">&lt;T&gt;</span>(&#123;</span><br><span class="line"><span class="symbol">    key:</span> string,</span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">    get:</span> (&#123;</span><br><span class="line"><span class="symbol">        get:</span> GetRecoilValue</span><br><span class="line">    &#125;) =&gt; T | Promise<span class="params">&lt;T&gt;</span> | RecoilValue<span class="params">&lt;T&gt;</span>,</span><br><span class="line"></span><br><span class="line">    set?: (</span><br><span class="line">        &#123;</span><br><span class="line"><span class="symbol">            get:</span> GetRecoilValue,</span><br><span class="line"><span class="symbol">            set:</span> SetRecoilState,</span><br><span class="line"><span class="symbol">            reset:</span> ResetRecoilState,</span><br><span class="line">        &#125;,</span><br><span class="line"><span class="symbol">        newValue:</span> T | DefaultValue,</span><br><span class="line">    ) =&gt; void,</span><br><span class="line"></span><br><span class="line">    dangerouslyAllowMutability?: boolean,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="type">ValueOrUpdater</span>&lt;<span class="type">T</span>&gt; = <span class="type">T</span> | <span class="type">DefaultValue</span> | ((prevValue: <span class="type">T</span>) =&gt; <span class="type">T</span> | <span class="type">DefaultValue</span>);</span><br><span class="line"><span class="keyword">type</span> <span class="type">GetRecoilValue</span> = &lt;<span class="type">T</span>&gt;(<span class="type">RecoilValue</span>&lt;<span class="type">T</span>&gt;) =&gt; <span class="type">T</span>;</span><br><span class="line"><span class="keyword">type</span> <span class="type">SetRecoilState</span> = &lt;<span class="type">T</span>&gt;(<span class="type">RecoilState</span>&lt;<span class="type">T</span>&gt;, <span class="type">ValueOrUpdater</span>&lt;<span class="type">T</span>&gt;) =&gt; void;</span><br><span class="line"><span class="keyword">type</span> <span class="type">ResetRecoilState</span> = &lt;<span class="type">T</span>&gt;(<span class="type">RecoilState</span>&lt;<span class="type">T</span>&gt;) =&gt; void;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>key</code> - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application. It needs to be stable across executions if used for persistence.</p>
+</li>
+<li><p><code>get</code> - A function that evaluates the value for the derived state. It may return either a value directly or an asynchronous Promise or another atom or selector representing the same type. It is passed an object as the first parameter containing the following properties:</p>
+<ul>
+<li>get - a function used to retrieve values from other atoms/selectors. All atoms/selectors passed to this function will be implicitly added to a list of <strong>dependencies</strong> for the selector. If any of the selector’s dependencies change, the selector will re-evaluate.</li>
+</ul>
+</li>
+<li><p><code>set?</code> - If this property is set, the selector will return <strong>writeable</strong> state. A function that is passed an object of callbacks as the first parameter and the new incoming value. The incoming value may be a value of type T or maybe an object of type <code>DefaultValue</code> if the user reset the selector. The callbacks include:</p>
+<ul>
+<li><code>get</code> - a function used to retrieve values from other atoms/selectors. This function will not subscribe the selector to the given atoms/selectors.</li>
+<li><code>set</code> - a function used to set the values of upstream Recoil state. The first parameter is the Recoil state and the second parameter is the new value. The new value may be an updater function or a DefaultValue object to propagate reset actions.</li>
+</ul>
+</li>
+<li><p><code>dangerouslyAllowMutability</code> - In some cases it may be desireable allow mutating of objects stored in selectors that don’t represent state changes. Use this option to override freezing objects in development mode.</p>
+</li>
+</ul>
+<hr>
+<p>A selector with a simple static dependency:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mySelector = selector(&#123;</span><br><span class="line">    key: <span class="string">&#x27;MySelector&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span>: (&#123;<span class="keyword">get</span>&#125;) =&gt; <span class="keyword">get</span>(myAtom) * <span class="number">100</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Dynamic-Dependencies"><a href="#Dynamic-Dependencies" class="headerlink" title="Dynamic Dependencies"></a>Dynamic Dependencies</h3><p>A read-only selector has a <code>get</code> method which evaluates the value of the selector based on dependencies. If any of those dependencies are updated, then the selector will re-evaluate. The dependencies are dynamically determined based on the atoms or selectors you actually use when evaluating the selector. Depending on the values of the previous dependencies, you may dynamically use different additional dependencies. Recoil will automatically update the current data-flow graph so that the selector is only subscribed to updates from the current set of dependencies.</p>
+<p>In this example <code>mySelector</code> will depend on the <code>toggleState</code> atom as well as either <code>selectorA</code> or <code>selectorB</code> depending on the state of <code>toggleState</code>.</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> toggleState = atom(&#123;<span class="built_in">key</span>: <span class="string">&#x27;Toggle&#x27;</span>, <span class="keyword">default</span>: <span class="keyword">false</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mySelector = selector(&#123;</span><br><span class="line">    <span class="built_in">key</span>: <span class="string">&#x27;MySelector&#x27;</span>,</span><br><span class="line">    <span class="built_in">get</span>: (&#123;<span class="built_in">get</span>&#125;) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> toggle = <span class="built_in">get</span>(toggleState);</span><br><span class="line">        <span class="keyword">if</span> (toggle) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">get</span>(selectorA);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">get</span>(selectorB);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Writeable-Selectors"><a href="#Writeable-Selectors" class="headerlink" title="Writeable Selectors"></a>Writeable Selectors</h3><p>A bi-directional selector receives the incoming value as a parameter and can use that to propagate the changes back upstream along the data-flow graph. Because the user may either set the selector with a new value or reset the selector, the incoming value is either of the same type that the selector represents or a <code>DefaultValue</code> object which represents a reset action.</p>
+<p>This simple selector essentially wraps an atom to add an additional field. It just passes through set and reset operations to the upstream atom.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> proxySelector = selector(&#123;</span><br><span class="line">    key: <span class="string">&#x27;ProxySelector&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span>: (&#123;<span class="keyword">get</span>&#125;) =&gt; (&#123;...<span class="keyword">get</span>(myAtom), extraField: <span class="string">&#x27;hi&#x27;</span>&#125;),</span><br><span class="line">    <span class="keyword">set</span>: (&#123;<span class="keyword">set</span>&#125;, newValue) =&gt; <span class="keyword">set</span>(myAtom, newValue),</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>This selector transforms the data, so needs to check if the incoming value is a <code>DefaultValue</code>.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> transformSelector = selector(&#123;</span><br><span class="line">    key: <span class="string">&#x27;TransformSelector&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span>: (&#123;<span class="keyword">get</span>&#125;) =&gt; <span class="keyword">get</span>(myAtom) * <span class="number">100</span>,</span><br><span class="line">    <span class="keyword">set</span>: (&#123;<span class="keyword">set</span>&#125;, newValue) =&gt;</span><br><span class="line">        <span class="keyword">set</span>(myAtom, newValue instanceof DefaultValue ? newValue : newValue / <span class="number">100</span>),</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Asynchronous-Selectors"><a href="#Asynchronous-Selectors" class="headerlink" title="Asynchronous Selectors"></a>Asynchronous Selectors</h3><p>Selectors may also have asynchronous evaluation functions and return a <code>Promise</code> to the output value. Please see <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/guides/asynchronous-data-queries">this guide</a> for more information.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myQuery = selector(&#123;</span><br><span class="line">    key: <span class="string">&#x27;MyQuery&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span>: <span class="keyword">async</span> (&#123;<span class="keyword">get</span>&#125;) =&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">await</span> myAsyncQuery(<span class="keyword">get</span>(queryParamState));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Example-Synchronous"><a href="#Example-Synchronous" class="headerlink" title="Example (Synchronous)"></a>Example (Synchronous)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;atom, selector, useRecoilState, DefaultValue&#125; <span class="keyword">from</span> <span class="string">&#x27;recoil&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> tempFahrenheit = atom(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;tempFahrenheit&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="number">32</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> tempCelsius = selector(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;tempCelsius&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="function">(<span class="params">&#123;get&#125;</span>) =&gt;</span> ((get(tempFahrenheit) - <span class="number">32</span>) * <span class="number">5</span>) / <span class="number">9</span>,</span><br><span class="line">    <span class="attr">set</span>: <span class="function">(<span class="params">&#123;set&#125;, newValue</span>) =&gt;</span></span><br><span class="line">        set(</span><br><span class="line">            tempFahrenheit,</span><br><span class="line">            newValue <span class="keyword">instanceof</span> DefaultValue ? newValue : (newValue * <span class="number">9</span>) / <span class="number">5</span> + <span class="number">32</span></span><br><span class="line">        ),</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TempCelsius</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> [tempF, setTempF] = useRecoilState(tempFahrenheit);</span><br><span class="line">    <span class="keyword">const</span> [tempC, setTempC] = useRecoilState(tempCelsius);</span><br><span class="line">    <span class="keyword">const</span> resetTemp = useResetRecoilState(tempCelsius);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> addTenCelsius = <span class="function">() =&gt;</span> setTempC(tempC + <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">const</span> addTenFahrenheit = <span class="function">() =&gt;</span> setTempF(tempF + <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">const</span> reset = <span class="function">() =&gt;</span> resetTemp();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            Temp (Celsius): &#123;tempC&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            Temp (Fahrenheit): &#123;tempF&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;addTenCelsius&#125;</span>&gt;</span>Add 10 Celsius<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;addTenFahrenheit&#125;</span>&gt;</span>Add 10 Fahrenheit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;reset&#125;</span>&gt;</span>&gt;Reset<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Example-Asynchronous"><a href="#Example-Asynchronous" class="headerlink" title="Example (Asynchronous)"></a>Example (Asynchronous)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;selector, useRecoilValue&#125; <span class="keyword">from</span> <span class="string">&#x27;recoil&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myQuery = selector(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;MyDBQuery&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(getMyRequestUrl());</span><br><span class="line">        <span class="keyword">return</span> response.json();</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">QueryResults</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> queryResults = useRecoilValue(myQuery);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            &#123;queryResults.foo&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ResultsSection</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">React.Suspense</span> <span class="attr">fallback</span>=<span class="string">&#123;</span>&lt;<span class="attr">div</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">div</span>&gt;</span>&#125;&gt;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">QueryResults</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">React.Suspense</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Please see <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/guides/asynchronous-data-queries">this guide</a> for more complex examples.</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://leexiaop.github.io/recoil/api/recoil-state/selector/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/coding/2/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            手动实现Promise.all()方法
+          
+        </div>
+      </a>
+    
+    
+      <a href="/css/1/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">CSS--盒子模型</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2021
+        <i class="ri-heart-fill heart_icon"></i> Lee
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Lee前端技术栈"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="前端技术栈 前端技术 前端博客 JavaScript HTML5 CSS3 VUE React Angular node Deno typeSctipt webpack wechat flutter recoil" />
+       
+      <meta name="description" content="敲着代码，记着BUG，通过博客的方式，记录下工作中的点点滴滴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> Lee前端技术栈</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Lee前端技术栈" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
+        target="_blank"><img width="149" height="149" src="/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover1.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">Lee前端技术栈</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  
+  <ul class="ads">
+    
+        <li>
+            <a target="_blank" rel="noopener" href="https://curl.qcloud.com/kvO7hb43">
+                <img src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/ten_1.jpg" width="300" alt="云服务器限时秒杀">
+            </a>
+        </li>
+    
+        <li>
+            <a target="_blank" rel="noopener" href="https://www.vultr.com/?ref=8630075">
+                <img src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/vultr.png" width="300" alt="vultr优惠vps">
+            </a>
+        </li>
+    
+</ul>
+  
+  
+  
+
+<div class="notice" style="margin-top:50px">
+    <i class="ri-heart-fill"></i>
+    <div class="notice-content" id="broad"></div>
+</div>
+<script type="text/javascript">
+    fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("broad").innerHTML = data.hitokoto;
+        })
+        .catch(console.error)
+</script>
+
+<style>
+    .notice {
+        padding: 20px;
+        border: 1px dashed #e6e6e6;
+        color: #969696;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        background: #fbfbfb50;
+        border-radius: 10px;
+    }
+
+    .notice i {
+        float: left;
+        color: #999;
+        font-size: 16px;
+        padding-right: 10px;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    .notice-content {
+        display: initial;
+        vertical-align: middle;
+    }
+</style>
+  
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-algorithm/25"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/25/"
+    >leeCode算法--搜索插入位置</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/25/" class="article-date">
+  <time datetime="2021-07-15T02:28:19.000Z" itemprop="datePublished">2021-07-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。你可以假设数组中无重复元素。</p>
+<p>解析：</p>
+<ul>
+<li>首先给定的是一个有序数组，那么我们直接循环就OK，时间复杂度应该是O(1)</li>
+<li>题目要求返回的是索引，并不是将目标元素插入到数组的某个位置，这就简单了，并不会对数组做什么操作。那么就可以说是<code>只要发现元素大于等于(&gt;=)目标元素就找到了这个位置</code>,否则就是没有找到这个位置，那么目标值一定是最大值，返回最后一个的下标就OK！</li>
+<li>注意处理边界值。<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">let searchInsert = (nums, target) =&gt; &#123;</span><br><span class="line">    let <span class="keyword">index</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">0</span>;</span><br><span class="line">        i &lt; nums.<span class="built_in">length</span> - <span class="number">1</span>;</span><br><span class="line">        i++</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt;= target) &#123;</span><br><span class="line">            <span class="keyword">index</span> = i</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">index</span> = nums.<span class="built_in">length</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">index</span></span><br><span class="line">&#125;</span><br><span class="line">searchInsert([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>], <span class="number">5</span>)  <span class="comment">//  3</span></span><br><span class="line">searchInsert([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>], <span class="number">2</span>)  <span class="comment">//  1</span></span><br><span class="line">searchInsert([<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>], <span class="number">0</span>)  <span class="comment">//  0</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+题还是比较简单，但是别让自己的思维走进死胡同，其实对于Javascript来说，有个方法叫reduce，此法也许更简洁。That’s all!</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/24"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/24/"
+    >leeCode算法--买卖股票的最佳时机(I)</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/24/" class="article-date">
+  <time datetime="2021-07-14T09:46:55.000Z" itemprop="datePublished">2021-07-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回0。<br>分析：看到这个题，第一反应应该就是选择排序的思想。是的没有错。采用prices[i]和后面的每一个元素做对比。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> maxProfit = prices =&gt; &#123;</span><br><span class="line">    //  取第一个元素为最小值</span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">sum</span> = prices[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">let</span> po = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>;</span><br><span class="line">            i &lt; prices.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (prices[i] &lt; <span class="built_in">sum</span>) &#123;</span><br><span class="line">            <span class="built_in">sum</span> = prices[i]</span><br><span class="line">        &#125;</span><br><span class="line">        po = prices[i] - <span class="built_in">sum</span> &gt; po ? </span><br><span class="line">            (prices[i] - <span class="built_in">sum</span>) : po</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> po</span><br><span class="line">&#125;</span><br><span class="line">maxProfit([<span class="number">7</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">4</span>])    // <span class="number">5</span></span><br><span class="line">maxProfit([<span class="number">7</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>])    // <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>空间复杂度为O(1),时间复杂度为O(1),但是请考虑下面的代码是不有问题。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">maxProfit</span> = <span class="attr">prices</span> =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="attr">pr</span> = <span class="number">0</span></span><br><span class="line">    for (<span class="keyword">let</span> <span class="attr">i</span> = <span class="number">0</span>;i &lt; prices.length - <span class="number">1</span>;i++) &#123;</span><br><span class="line">        for (<span class="keyword">let</span> <span class="attr">j</span> = i+<span class="number">1</span>;j &lt; prices.length;j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (prices[j]&gt;prices[i]) &#123;</span><br><span class="line">                <span class="keyword">let</span> <span class="attr">sum</span> = prices[j] - prices[i]</span><br><span class="line">                <span class="keyword">if</span> (sum &gt; pr) <span class="attr">pr</span> = sum</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return pr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>请写下你的见解！</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/23"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/23/"
+    >leeCode算法--多数元素问题</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/23/" class="article-date">
+  <time datetime="2021-07-14T06:00:59.000Z" itemprop="datePublished">2021-07-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n/2 ⌋ 的元素。你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+<p>分析：看到这个题，其实我们就直接想到了，统计给定数组中元素出现次数的问题。所以照着这个方向做就OK！</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">let majorityElement = (nums) =&gt; &#123;</span><br><span class="line">    let obj = &#123;&#125;</span><br><span class="line">    let arr = <span class="selector-attr">[]</span></span><br><span class="line">    nums<span class="selector-class">.forEach</span>(n =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (!obj<span class="selector-class">.hasOwnProperty</span>(n)) &#123;</span><br><span class="line">            obj<span class="selector-attr">[n]</span> = <span class="number">1</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            obj<span class="selector-attr">[n]</span>++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">for</span> (let key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">        <span class="keyword">if</span> (obj<span class="selector-attr">[key]</span> &gt; (nums.length)/<span class="number">2</span>) &#123;</span><br><span class="line">            arr<span class="selector-class">.push</span>(key)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">majorityElement</span><span class="params">([<span class="number">3</span>,<span class="number">2</span>,<span class="number">3</span>])</span></span>    <span class="comment">//  3</span></span><br><span class="line"><span class="function"><span class="title">majorityElement</span><span class="params">([<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>])</span></span>    <span class="comment">//  2</span></span><br></pre></td></tr></table></figure>
+<p>其实，思路就是哈希表+排序方式，That’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/22"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/22/"
+    >leeCode算法--返回最后一个单词的长度</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/22/" class="article-date">
+  <time datetime="2021-07-13T09:52:55.000Z" itemprop="datePublished">2021-07-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：给你一个字符串 s，由若干单词组成，单词之间用空格隔开。返回字符串中最后一个单词的长度。如果不存在最后一个单词，请返回 0 。<br><strong>单词</strong> 是指仅由字母组成、不包含任何空格字符的最大子字符串。</p>
+<p>分析：此题中唯一需要注意的就是空字符串的问题，包括，一个空字符串，或者最后有一个空。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lengthOfLastWord = <span class="function">(<span class="params">s</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//  先将字符串通过空转化成数组</span></span><br><span class="line">    <span class="keyword">let</span> arr = s.split(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">    <span class="keyword">let</span> len = <span class="number">0</span></span><br><span class="line">    <span class="comment">//  注意i&gt;=0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = arr.length - <span class="number">1</span>;</span><br><span class="line">            i &gt;= <span class="number">0</span>;i--) &#123;</span><br><span class="line">        <span class="comment">//  判断后面第一个不是空</span></span><br><span class="line">        <span class="keyword">if</span> (arr[i]) &#123;</span><br><span class="line">            len = arr[i].length</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len</span><br><span class="line">&#125;</span><br><span class="line">lengthOfLastWord(<span class="string">&quot;hello world &quot;</span>) <span class="comment">// 5</span></span><br><span class="line">lengthOfLastWord(<span class="string">&quot; &quot;</span>) <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<p>较为简单，That’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/21"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/21/"
+    >leeCode算法--验证是不是回文字符串</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/21/" class="article-date">
+  <time datetime="2021-07-13T09:28:30.000Z" itemprop="datePublished">2021-07-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。本题中将空字符串,标点符号定义为有效回文字符串。</p>
+<p>分析：注意这里的坑。</p>
+<ul>
+<li>1.忽略大小写，那么就需要统一字符串中每一个字符，要不都答谢大写，要么都小写；</li>
+<li>2.将空字符串作为有效字符串，那么意味着需要将空字符串,标点符号跳过。<br>看代码：<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">var isPalindrome = <span class="keyword">function</span>(s) &#123;</span><br><span class="line">    <span class="comment">//  将字符串统一转成小写</span></span><br><span class="line">    s = s.<span class="keyword">to</span><span class="constructor">LocaleLowerCase()</span></span><br><span class="line">    <span class="keyword">let</span> left = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> right = s.length - <span class="number">1</span></span><br><span class="line">    <span class="keyword">let</span> isTrue = <span class="literal">false</span></span><br><span class="line">    <span class="comment">//  只考虑数字和字母，如果不是数字和字母，则跳过</span></span><br><span class="line">    <span class="keyword">let</span> reg = /^<span class="literal">[<span class="number">0</span>-<span class="number">9</span><span class="identifier">a</span>-<span class="identifier">zA</span>-Z]</span>+$/</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">while</span> (!reg.test(s<span class="literal">[<span class="identifier">left</span>]</span>)<span class="operator"> ||</span></span><br><span class="line"><span class="operator">            </span>!reg.test(s<span class="literal">[<span class="identifier">right</span>]</span>)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!reg.test(s<span class="literal">[<span class="identifier">left</span>]</span>)) &#123;</span><br><span class="line">                left++</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (!reg.test(s<span class="literal">[<span class="identifier">right</span>]</span>)) &#123;</span><br><span class="line">                right--</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        isTrue = s<span class="literal">[<span class="identifier">left</span>]</span><span class="operator"> === </span>s<span class="literal">[<span class="identifier">right</span>]</span></span><br><span class="line">        <span class="keyword">if</span>(isTrue) &#123;</span><br><span class="line">            left++</span><br><span class="line">            right--</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            isTrue = <span class="literal">false</span></span><br><span class="line">            break</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return isTrue</span><br><span class="line">&#125;;</span><br><span class="line">is<span class="constructor">Palindrome(&#x27;0P&#x27;)</span>  <span class="comment">// false</span></span><br><span class="line">is<span class="constructor">Palindrome(&#x27;A <span class="params">man</span>, <span class="params">a</span> <span class="params">plan</span>, <span class="params">a</span> <span class="params">canal</span>: Panama&#x27;)</span>  <span class="comment">// true</span></span><br><span class="line">is<span class="constructor">Palindrome(&#x27;<span class="params">race</span> <span class="params">a</span> <span class="params">car</span>&#x27;)</span>  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+Yes, that’s all!</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/structures/5"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/structures/5/"
+    >基础数据结构--手动实现字典及其相关方法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/structures/5/" class="article-date">
+  <time datetime="2021-05-31T02:46:03.000Z" itemprop="datePublished">2021-05-31</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>字典的定义：字典是一种以键–值来存储数据的数据结构。但是他的基础是Array,而不是Object.但是字典也是无序的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dictionary</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//  像字典中添加健--值</span></span><br><span class="line">    <span class="built_in">this</span>.add = add</span><br><span class="line">    <span class="comment">//  保存数据</span></span><br><span class="line">    <span class="built_in">this</span>.dataStore = <span class="keyword">new</span> <span class="built_in">Array</span></span><br><span class="line">    <span class="comment">//  查找键值</span></span><br><span class="line">    <span class="built_in">this</span>.find = find</span><br><span class="line">    <span class="comment">//  删除某一项</span></span><br><span class="line">    <span class="built_in">this</span>.remove = remove</span><br><span class="line">    <span class="comment">//  统计字典中的属性个数</span></span><br><span class="line">    <span class="built_in">this</span>.count = <span class="built_in">this</span>.count</span><br><span class="line">    <span class="comment">//  清空字典</span></span><br><span class="line">    <span class="built_in">this</span>.clear = clear</span><br><span class="line">    <span class="comment">//  显示字典中所有的项</span></span><br><span class="line">    <span class="built_in">this</span>.showAll = showAll</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span> (<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.dataStore[key] = value</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">find</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.dataStore[key]</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">remove</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">delete</span> <span class="built_in">this</span>.dataStore[key]</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> n = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> <span class="built_in">Object</span>.keys(<span class="built_in">this</span>.dataStore)) &#123;</span><br><span class="line">        ++n</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> n</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clear</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">Object</span>.keys(<span class="built_in">this</span>.dataStore).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">delete</span> <span class="built_in">this</span>.dataStore[key]</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showAll</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> <span class="built_in">Object</span>.keys(<span class="built_in">this</span>.dataStore).sort()) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.dataStore[key])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：字典的实现还是相对比较简单的。但是字典和对象一样，是无序的，需要自己排序。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-react/3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/react/3/"
+    >React--React中Fiber算法和stack算法有和优化之处？</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/react/3/" class="article-date">
+  <time datetime="2021-05-28T03:38:36.000Z" itemprop="datePublished">2021-05-28</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>说到React，版本16将是一个较大的分水岭，尤其是在算法优化方面有了很大的更新，之前是stack算法而之后改成了fiber算法。</p>
+<h3 id="stack算法的问题"><a href="#stack算法的问题" class="headerlink" title="stack算法的问题"></a>stack算法的问题</h3><p>在react一切都是组建的思想下，多层组建嵌套将会是一个非常常见的操作，那么生命周期的执行将会非常的繁琐。即，</p>
+<ul>
+<li>挂在阶段：<br>constructor<br>componentWillMount<br>render<br>componentDidMount</li>
+<li>更新阶段<br>shouldComponentUpdate<br>componentWillUpdate<br>render<br>componentDidUpdate<br><img src="/react/3/2.jpg" alt="生命周期"><br>从顶层组件一直往下，知道最底层组建，然后再往上，组件的更新阶段也是同理。stack算法底层使用递归，而递归的方式并不会被轻易打断。那么如果组件的嵌套较深，那么递归的运算就会一直在运行，这样，react的渲染一直会占用着浏览器的主线程，这将会花费很长的时间。那么页面中的其他操作就会无法进行，出现页面卡死的现象。<h3 id="fiber算法原理"><a href="#fiber算法原理" class="headerlink" title="fiber算法原理"></a>fiber算法原理</h3>为了解决stack算法的问题，新版本的react采用了fiber算法，大致是这样做的，就是react将任务分成若干个片段，给每个任务分配一定的时间去执行这个任务，当时间耗尽后，就会检查任务列表中有没有新的或者是优先级更高的任务，如果有执行此任务，如果没有，就继续执行原来的任务。这种方式就是一步渲染的方式。加入fiber的react组件更新分为俩个阶段，以render为界，之前为phase1,之后为phase2。</li>
+<li>phase1阶段<br>phase1阶段的生命周期是可中断的。每隔一段时间，就会跳出现有的渲染进程去确定是不是有新的，更重要的任务需要执行，主要是通过requestIdleCallback来构建新的tree，标出重要任务，放入到任务队列中。</li>
+<li>phase2阶段<br>phase2阶段的生命周期是不可被中断的。这个阶段就是在render之后执行的，主要就是将phase1阶段的变更一次性的全部更新到DOM上。所以phase1阶段一定是一个完成的任务，否则就会重新再次执行phase1的阶段，这也就导致了某些生命周期可能会执行多次的原因。所以最好保证phase1阶段都做同一件事儿，要不然就会出问题，因此最好都是纯函数。</li>
+</ul>
+<h3 id="fiber数据结构"><a href="#fiber数据结构" class="headerlink" title="fiber数据结构"></a>fiber数据结构</h3><p>fiber数据结构本质上是一个链表，他有child和sibling属性，指向第一个子节点和相邻兄弟节点，从而构成fiber树，return属性指向其父节点。更新队列updateQueue是一个链表，有first和last属性指向第一个和最后一个update对象，每个fiber结构都有updateQueue属性，指向其更新的队列。每一个fiber都有一个alternate属性开始的时候指向一个自己的clone体，更新的时候会先更新这个alternate,然后通过alternate取代当前的fiber.<br><img src="/react/3/4.jpg" alt="生命周期"></p>
+<h3 id="关键API–requestIdleCallback"><a href="#关键API–requestIdleCallback" class="headerlink" title="关键API–requestIdleCallback"></a>关键API–requestIdleCallback</h3><p>window.requestIdleCallback()方法将浏览器空闲时间段内的调用的函数排队。这使得主事件循环上执行后台和低优先级的工作。而不会影响延迟关键事件，如动画和输入响应。函数一般会按照先进先出的顺序执行。而如果回调函数指定执行超时，则有可能为了超时执行函数而打乱执行顺序，那么就可以在空闲回调函数中调用requestIdleCallback(),以便下一次通过时间循环之前调度另外一个回调。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>fiber算法和stack算法，做的优化主要是把任务才拆分成若干个小任务，可以随时控制任务开启和执行，采用异步的方式去执行任务。这样不会丢贞，而stack算法采用递归算法，无法中断，一条道走到黑，因此在动画等要求高的情况下，会出现卡顿现象。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/structures/4"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/structures/4/"
+    >基础数据结构--手动实现链表及其相关方法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/structures/4/" class="article-date">
+  <time datetime="2021-05-27T03:42:02.000Z" itemprop="datePublished">2021-05-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="单向链表"><a href="#单向链表" class="headerlink" title="单向链表"></a>单向链表</h3><p>链表的定义：链表是由一组节点组合而成的集合，每个节点都使用一个对象的引用指向他的后继。指向另一个节点的引用叫做链。链表靠他们相互之间的关系进行引用。所以对于链表的操作也很简单，既，查找，删除，插入等。只是改变元素的指向关系即可。<br>实现链表：</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Node</span> </span>(item) &#123;</span><br><span class="line">    <span class="comment">//  element保存节点上的数据</span></span><br><span class="line">    <span class="built_in">this</span>.element = item</span><br><span class="line">    <span class="comment">//  next表示指向下一个节点的链</span></span><br><span class="line">    <span class="built_in">this</span>.next = <span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Llist</span> </span>() &#123;</span><br><span class="line">    <span class="comment">//  链表的头</span></span><br><span class="line">    <span class="built_in">this</span>.header = <span class="keyword">new</span> <span class="type">Node</span>(<span class="string">&#x27;head&#x27;</span>)</span><br><span class="line">    <span class="comment">//  查找链表元素</span></span><br><span class="line">    <span class="built_in">this</span>.find = find</span><br><span class="line">    <span class="comment">//  向链表中插入元素</span></span><br><span class="line">    <span class="built_in">this</span>.insert = insert</span><br><span class="line">    <span class="comment">//  删除链表的某一个元素</span></span><br><span class="line">    <span class="built_in">this</span>.remove = remove</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">find</span> </span>(item) &#123;</span><br><span class="line">    <span class="comment">//  拿到列表的头节点</span></span><br><span class="line">    let currNode = <span class="built_in">this</span>.header</span><br><span class="line">    <span class="keyword">while</span>(currNode !== item) &#123;</span><br><span class="line">        <span class="comment">//  如果当前节点不是要找的节点</span></span><br><span class="line">        <span class="comment">//  就指向下一个节点</span></span><br><span class="line">        currNode = currNode.next</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currNode</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insert</span> </span>(<span class="keyword">new</span><span class="type">Item</span>, oldItem) &#123;</span><br><span class="line">    <span class="comment">//  先找到要在插入元素的前一个元素</span></span><br><span class="line">    let currNode = <span class="built_in">this</span>.find(oldItem)</span><br><span class="line">    const <span class="keyword">new</span><span class="type">Node</span> = Node(<span class="keyword">new</span><span class="type">Item</span>)</span><br><span class="line">    <span class="comment">//  前一个元素指向新节点</span></span><br><span class="line">    currNode.next = <span class="keyword">new</span><span class="type">Node</span></span><br><span class="line">    <span class="comment">//  新元素指向之前元素的下一个</span></span><br><span class="line">    <span class="keyword">new</span><span class="type">Node</span>.next = currNode.next</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">remove</span> </span>(item) &#123;</span><br><span class="line">    <span class="comment">//  首先要找到前一个元素</span></span><br><span class="line">    <span class="keyword">var</span> currNode = <span class="built_in">this</span>.header</span><br><span class="line">    <span class="keyword">while</span> (!(currNode ===  <span class="literal">null</span>) &amp;&amp;</span><br><span class="line">        currNode.next.element !== item) &#123;</span><br><span class="line">            currNode = currNode.next</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span> (!(currNode.next === <span class="literal">null</span>)) &#123;</span><br><span class="line">        currNode.next = currNode.next.next</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><p>双向了链表较单项链表而言，双向链表比单向链表要多一个属性，就是前驱。这样在删除元素的时候，就不需要再查找前一个元素了。也就是说，每个元素总有一个属性，指向了他的前一个元素。</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> Node (<span class="type">item</span>) &#123;</span><br><span class="line">    this.<span class="type">element</span> = <span class="type">item</span></span><br><span class="line">    this.<span class="keyword">next</span> = null</span><br><span class="line">    this.<span class="keyword">previous</span> = null</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> Llist () &#123;</span><br><span class="line">    this.header = new Node(<span class="string">&#x27;head&#x27;</span>)</span><br><span class="line">    this.find = find</span><br><span class="line">    this<span class="built_in">.remove</span> =<span class="built_in"> remove</span></span><br><span class="line">    this.<span class="keyword">insert</span> = <span class="keyword">insert</span></span><br><span class="line">    //  查找最后一个元素</span><br><span class="line">    this.findLast = findList</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> find (<span class="type">item</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> currNode = this.header</span><br><span class="line">    while (!(currNode.<span class="type">element</span> === <span class="type">item</span>)) &#123;</span><br><span class="line">        currNode = currNode.<span class="keyword">next</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currNode</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="keyword">insert</span> (newElement, <span class="type">item</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> curr = this.find(<span class="type">item</span>)</span><br><span class="line">    <span class="keyword">let</span> newNode = new Node(newElement)</span><br><span class="line">    curr.<span class="keyword">next</span> = newNode</span><br><span class="line">    newNode.<span class="keyword">next</span> = curr.<span class="keyword">next</span></span><br><span class="line">    newNode.<span class="keyword">previous</span> = curr</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span><span class="built_in"> remove</span> (<span class="type">item</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> curr = this.find(<span class="type">item</span>)</span><br><span class="line">    <span class="keyword">if</span> (!(curr.<span class="keyword">next</span> === <span class="type">item</span>)) &#123;</span><br><span class="line">        curr.<span class="keyword">previous</span>.<span class="keyword">next</span> = curr.<span class="keyword">next</span></span><br><span class="line">        curr.<span class="keyword">next</span>.<span class="keyword">previous</span> = curr.<span class="keyword">previous</span></span><br><span class="line">        curr.<span class="keyword">next</span> = null</span><br><span class="line">        curr.<span class="keyword">previous</span> = null</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> findLast (<span class="type">item</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> curr = this.header</span><br><span class="line">    while (!(curr.<span class="keyword">next</span> === <span class="type">item</span>)) &#123;</span><br><span class="line">        curr = curr.<span class="keyword">next</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> curr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><p>循环链表和单向链表很相似，唯一的区别就是循环链表的头节点的next属性指向自己。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Llist</span> <span class="params">(item)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.header = <span class="keyword">new</span> Node(item)</span><br><span class="line">    <span class="keyword">this</span>.header.next = <span class="keyword">this</span>.header</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>That’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-react/2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/react/2/"
+    >React--React中组件间的如何通信？</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/react/2/" class="article-date">
+  <time datetime="2021-05-27T03:39:43.000Z" itemprop="datePublished">2021-05-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>我们之前说过React是一个组件至上的技术栈，所以，组件之间的通信就是大家关注的话题。主要有以下几种：</p>
+<h3 id="父子组件"><a href="#父子组件" class="headerlink" title="父子组件"></a>父子组件</h3><p>父子组件的传值通过props来实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parent = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> name = <span class="string">&quot;I&#x27;m Lee!&quot;</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Child</span> <span class="attr">name</span>=<span class="string">&quot;&#123;name&#125;&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                props.name</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="子父组件"><a href="#子父组件" class="headerlink" title="子父组件"></a>子父组件</h3><p>子父组件的通信主要是通过callback来实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parent = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> onChildClick = <span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(item) <span class="comment">//    点我</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Child</span> <span class="attr">callback</span>=<span class="string">&#123;onChildClick&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child = <span class="function"><span class="params">props</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;</span> <span class="attr">props.callback</span>(&#x27;点我&#x27;) &#125;&gt;</span>点我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="父孙组件"><a href="#父孙组件" class="headerlink" title="父孙组件"></a>父孙组件</h3><p>父孙组建有俩中方式：</p>
+<ul>
+<li>以父子组件传值的方式，层层向下传递；</li>
+<li>context上下文的方式：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> context = createContext()</span><br><span class="line"><span class="keyword">var</span> parent = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> [count, setCount] = useState(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">context.Provider</span> <span class="attr">value</span>=<span class="string">&#123;</span> <span class="attr">count</span> &#125;&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">Child</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">context.Provider</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> child = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Son</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> son = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">context.Consumer</span>&gt;</span></span></span><br><span class="line"><span class="xml">            &#123;</span></span><br><span class="line"><span class="xml">                count =&gt; <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;count&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">            &#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">context.Consumer</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="无关-兄弟-组件"><a href="#无关-兄弟-组件" class="headerlink" title="无关(兄弟)组件"></a>无关(兄弟)组件</h3>非嵌套关系的组件通信主要有以下三种方式：</li>
+<li>兄弟组件，可以通过找到共同的父组件，通过父子，子父组件的方式实现通信</li>
+<li>可以通过redux, mobx, recoil等全局状态库来实现全局状态管理</li>
+<li>可以通过自定义事件（发布订阅）</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/structures/3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/structures/3/"
+    >基础数据结构--手动实现队列及其相关方法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/structures/3/" class="article-date">
+  <time datetime="2021-05-25T03:04:26.000Z" itemprop="datePublished">2021-05-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>队列的定义：队列其实应该是属于列表的一种，又像是俩个栈拼接形成一样来存储有序数据。队列是一种先进先出的数据结构，就像是公交车一样，前门上车后门下车.所以对于队列的操作最主要的就是俩种：对列尾部插入，队列头部删除。既入队和出对。</p>
+<p>队列实现的属性有：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">function Queue () &#123;</span><br><span class="line">    <span class="comment">//  存储数据</span></span><br><span class="line">    <span class="keyword">this</span>.dataStore = []</span><br><span class="line">    <span class="comment">//  向队尾push数据</span></span><br><span class="line">    <span class="keyword">this</span>.enqueue = enqueue</span><br><span class="line">    <span class="comment">//  从队头删除数据</span></span><br><span class="line">    <span class="keyword">this</span>.dequeue = dequeue</span><br><span class="line">    <span class="comment">//  获取对首元素</span></span><br><span class="line">    <span class="keyword">this</span>.front = front</span><br><span class="line">    <span class="comment">//  获取队尾元素</span></span><br><span class="line">    <span class="keyword">this</span>.back = back</span><br><span class="line">    <span class="comment">//  判断对列是不是空</span></span><br><span class="line">    <span class="keyword">this</span>.empty = empty</span><br><span class="line">    <span class="comment">//  显示队列中的所有元素</span></span><br><span class="line">    <span class="keyword">this</span>.toString = toString</span><br><span class="line">&#125;</span><br><span class="line">function enqueue (item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.dataStore.push(item)</span><br><span class="line">&#125;</span><br><span class="line">function dequeue () &#123;</span><br><span class="line">    <span class="keyword">this</span>.dataStore.shift()</span><br><span class="line">&#125;</span><br><span class="line">function empty () &#123;</span><br><span class="line">    <span class="keyword">return</span> !!<span class="keyword">this</span>.dataStore.length</span><br><span class="line">&#125;</span><br><span class="line">function front () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore[<span class="number">0</span>]</span><br><span class="line">&#125;</span><br><span class="line">function back () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore[<span class="keyword">this</span>.dataStore.length - <span class="number">1</span>]</span><br><span class="line">&#125;</span><br><span class="line">function toString () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore.reduce((total, curr) =&gt; &#123;</span><br><span class="line">        total += curr</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  测试</span></span><br><span class="line"><span class="keyword">var</span> queue = new Queue()</span><br></pre></td></tr></table></figure>
+<p>注：队列是一种比较重要的数据结构，诸如，排队，排序问题，利用队列将是非常好的解决方式。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-react/1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/react/1/"
+    >React--React技术栈设计初衷什么？</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/react/1/" class="article-date">
+  <time datetime="2021-05-24T09:46:01.000Z" itemprop="datePublished">2021-05-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>React作为当前最为流行的三大前端技术栈之一，备受大家开发者的关注。我们就来讲讲React技术栈的设计初衷是什么？打开React的官网可以醒目的看到一行大字—用于构建用户界面的JavaScript库。这基本就概括了React的核心：构建用户界面。</p>
+<h3 id="声明式"><a href="#声明式" class="headerlink" title="声明式"></a>声明式</h3><p>React是声明式的编码方式，这使得React构建用户界面变的异常简单，这可以为应用的每一个状态设计简洁的UI视图，当数据改变时，React可以更有效的更新并且正确的渲染组件。以声明式编写UI，可以让代码更加可靠并方便调试。</p>
+<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><p>组件化应该算是React的又一大特点，React里使用了更加简化的组建模式，它将整个UI上的每一个功能模块定义成组件。然后将小的组件通过组合或者嵌套的方式再构成更大的组件。React组件具有以下特点：</p>
+<ul>
+<li>可组合：可以将简单的组件组合成复杂的组件</li>
+<li>可重用：每个组件都是独立的，可以被其他组件调用</li>
+<li>可维护：组件是独立的，将逻辑和UI封装，可维护性更高</li>
+<li>可测试：组件的独立性决定了组件更容易测试</li>
+</ul>
+<h3 id="一次学习，随处遍写"><a href="#一次学习，随处遍写" class="headerlink" title="一次学习，随处遍写"></a>一次学习，随处遍写</h3><p>我认为React最强大的地方就在于一次学习，随处编写。就是说，无论你现在用的是什么技术栈，都可以随时引入React来开发新特性，而不需要重构现在的代码。React同时也支持服务端渲染，或者使用React Native开发原生App。React组件可以映射为对应的原声控件。在输出憝时候，到底输出的是web Dom, Ios，android控件是由平台决定的。</p>
+<h3 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h3><p>当前Web应用越来越广泛。性能方面是一个不得不考虑的问题。传统页面每次刷新页面，都需要手动更新dom,这样性能的消耗是非常大的，因此，React使用虚拟DOM这一JavaScript对象树在每次页面更新后都会重新重新计算虚拟DOM，并且和上一次的虚拟DOM做对比，然后将变化的虚拟DOM更新到真实DOM上。这样就可以大大降低直接更新真是DOM带来的性能消耗。当然React也提供了shouldComponentUpdate这样的生命周期函数，和pureComponent来减少不必要的虚拟DOM的对比，以保证性能。</p>
+<h3 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h3><p>函数式编程并不是起源于React,但是在我看来一定是扬于React,在新版本的React开发中，React提倡开发者使用函数式编程来开发组件。这样可以减少冗余代码，此外由于组件自身就是函数，更利于测试。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/structures/2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/structures/2/"
+    >基础数据结构--手动实现列表及其相关方法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/structures/2/" class="article-date">
+  <time datetime="2021-05-24T02:47:49.000Z" itemprop="datePublished">2021-05-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>列表的定义：列表是一组有序的数据。其中的元素可以是任意类型。列表一般有的属性为：</p>
+<ul>
+<li>listSize: 保存列表中元素的个数；</li>
+<li>pos: 列表中当前元素的位置；</li>
+<li>length(): 列表中元素的个数；</li>
+<li>clear(): 清空列表；</li>
+<li>toString(): 返回列表中的元素；</li>
+<li>getElement(): 返回当前位置的元素；</li>
+<li>insert(): 在现有元素的前后插入某个元素；</li>
+<li>append(): 在列表的末尾添加元素；</li>
+<li>find(): 查找列表中的指定元素；</li>
+<li>remove(): 删除列表中的指定元素；</li>
+<li>front(): 将当前元素移动到列表的第一个元素；</li>
+<li>end(): 将当前元素移动到列表的最后一个元素；</li>
+<li>pre(): 将当前元素前移一位；</li>
+<li>next(): 将当前元素后移一位；</li>
+<li>hasNext(): 判断后一位元素；</li>
+<li>hasPre(): 判断前一位元素；</li>
+<li>currPos(): 返回列表的当前位置；</li>
+<li>moveTo(): 将当前元素移动到指定位置；</li>
+<li>contains(): 判断给定的元素是不是包含在列表中。<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">function List () &#123;</span><br><span class="line">    <span class="comment">//  保存在列表中的数据</span></span><br><span class="line">    <span class="keyword">this</span>.dataStore = []</span><br><span class="line">    <span class="comment">//  列表的当前位置</span></span><br><span class="line">    <span class="keyword">this</span>.pos = <span class="number">0</span></span><br><span class="line">    <span class="comment">//  列表的元素个数</span></span><br><span class="line">    <span class="keyword">this</span>.listSize = <span class="number">0</span></span><br><span class="line">    <span class="keyword">this</span>.append = append</span><br><span class="line">    <span class="keyword">this</span>.</span><br><span class="line">&#125;</span><br><span class="line">function append (item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.dataStore[<span class="keyword">this</span>.listSize++] = item</span><br><span class="line">&#125;</span><br><span class="line">function find (item) &#123;</span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.dataStore.length;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.dataStore[i] === item) &#123;</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">function remove (item) &#123;</span><br><span class="line">    <span class="comment">//  先查找到要删除元素的位置</span></span><br><span class="line">    let index = find(item)</span><br><span class="line">    <span class="comment">//  判断是否找到了该元素</span></span><br><span class="line">    <span class="keyword">if</span> (index &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">//  splice方法删除找到的元素</span></span><br><span class="line">        <span class="keyword">this</span>.dataStore.splice(index, <span class="number">1</span>)</span><br><span class="line">        <span class="comment">//  整个列表的长度减1</span></span><br><span class="line">        --<span class="keyword">this</span>.listSize</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">function toString () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  item 要插入的元素</span></span><br><span class="line"><span class="comment">//  after在那个元素后插入</span></span><br><span class="line">function insert (item, after) &#123;</span><br><span class="line">    let index = find(after)</span><br><span class="line">    <span class="keyword">if</span> (index &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.dataStore.splice(index + <span class="number">1</span>, <span class="number">0</span>, item)</span><br><span class="line">        ++<span class="keyword">this</span>.listSize</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">function clear () &#123;</span><br><span class="line">    delete <span class="keyword">this</span>.dataStore</span><br><span class="line">    <span class="keyword">this</span>.listSize = <span class="number">0</span></span><br><span class="line">    <span class="keyword">this</span>.pos = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line">function contains (item) &#123;</span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.dataStore.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.dataStore[i] === item) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">function length () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.listSize</span><br><span class="line">&#125;</span><br><span class="line">function front () &#123;</span><br><span class="line">    <span class="keyword">this</span>.pos = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line">function end () &#123;</span><br><span class="line">    <span class="keyword">this</span>.pos = <span class="keyword">this</span>.listSize - <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">function currPos () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.pos</span><br><span class="line">&#125;</span><br><span class="line">function moveTo (pos) &#123;</span><br><span class="line">    <span class="keyword">this</span>.pos = pos</span><br><span class="line">&#125;</span><br><span class="line">function getElement () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.listStore[<span class="keyword">this</span>.pos]</span><br><span class="line">&#125;</span><br><span class="line">function pre () &#123;</span><br><span class="line">    --<span class="keyword">this</span>.pos</span><br><span class="line">&#125;</span><br><span class="line">function next () &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.pos &lt; <span class="keyword">this</span>.listSize) &#123;</span><br><span class="line">        ++<span class="keyword">this</span>.pos</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function hasNext () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.pos &lt; <span class="keyword">this</span>.listSize</span><br><span class="line">&#125;</span><br><span class="line">function hasPre () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.pos &gt;= <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  测试</span></span><br><span class="line">let list = new List()</span><br></pre></td></tr></table></figure>
+注：列表的运用看起来和数组区别不是很大，但是这里重要的是运用到像列表中插入元素的方法。</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/structures/1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/structures/1/"
+    >基础数据结构--手动用数组实现栈及其相关方法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/structures/1/" class="article-date">
+  <time datetime="2021-05-21T07:57:48.000Z" itemprop="datePublished">2021-05-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>栈的定义：栈是一种特殊的列表,栈内的元素只能通过栈的一端去访问，就是栈顶，所以栈就有了<code>先进后出</code>的特点。也就是说除了栈顶可以访问栈内元素，其他都不可以。一般操作栈的方法有以下三个：</p>
+<ul>
+<li>push(): 将元素押入到栈内；</li>
+<li>pop(): 从栈顶删除一个元素，<code>永久性从栈顶删除</code>；</li>
+<li>peek(): 返回栈顶元素，不删除栈顶元素；</li>
+<li>clear(): 清除栈；</li>
+<li>top：保存栈顶元素。<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">function Stack () &#123;</span><br><span class="line">    <span class="comment">//  存储数据的数组</span></span><br><span class="line">    <span class="keyword">this</span>.dataStore = []</span><br><span class="line">    <span class="comment">//  栈顶元素</span></span><br><span class="line">    <span class="keyword">this</span>.top = <span class="number">0</span></span><br><span class="line">    <span class="comment">//  押入栈的方法</span></span><br><span class="line">    <span class="keyword">this</span>.push = push</span><br><span class="line">    <span class="comment">//  删除栈顶元素的方法</span></span><br><span class="line">    <span class="keyword">this</span>.pop = pop</span><br><span class="line">    <span class="comment">//  返回栈顶元素的方法</span></span><br><span class="line">    <span class="keyword">this</span>.peek = peek</span><br><span class="line">    <span class="comment">//  清楚栈的方法</span></span><br><span class="line">    <span class="keyword">this</span>.clear = clear</span><br><span class="line">    <span class="comment">//  保存栈的长度</span></span><br><span class="line">    <span class="keyword">this</span>.length = length</span><br><span class="line">&#125;</span><br><span class="line">function push (item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.dataStore[<span class="keyword">this</span>.top++] = item</span><br><span class="line">&#125;</span><br><span class="line">function pop (item) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore[<span class="keyword">this</span>.top--] = item</span><br><span class="line">&#125;</span><br><span class="line">function peek (item) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore[<span class="keyword">this</span>.top - <span class="number">1</span>]</span><br><span class="line">&#125;</span><br><span class="line">function clear () &#123;</span><br><span class="line">    <span class="keyword">this</span>.top = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line">function length () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.top</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  测试</span></span><br><span class="line">let stack = new Stack()</span><br></pre></td></tr></table></figure>
+注：栈的运用还是有多种，最为典型的如，判断字符串回文，递归计算某个数的阶乘，将一个数制转换成另一种数制。</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/20"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/20/"
+    >leeCode算法--实现一个strStr()函数</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/20/" class="article-date">
+  <time datetime="2021-05-19T06:21:49.000Z" itemprop="datePublished">2021-05-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：实现一个strStr()方法，要求strStr有俩个参数，hayStack和needle参数，找出字符串hayStack中needle的位置，并返回这个位置。如果找不到就返回-1.</p>
+<p>解析：查找位置，只能双层遍历，依次比对。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> strStr = <span class="function">(<span class="params">haystack, needle</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= haystack.length; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> a = i, b = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> (b &lt; needle.length &amp;&amp;</span><br><span class="line">            haystack[a] === needle[b]) &#123;</span><br><span class="line">            a++</span><br><span class="line">            b++</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (b === needle.length) <span class="keyword">return</span> i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">strStr(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>)  <span class="comment">//  0</span></span><br><span class="line">strStr(<span class="string">&#x27;hello&#x27;</span>, <span class="string">&#x27;ll&#x27;</span>)   <span class="comment">//  2</span></span><br><span class="line">strStr(<span class="string">&#x27;aaaaa&#x27;</span>, <span class="string">&#x27;bba&#x27;</span>)  <span class="comment">//  -1</span></span><br></pre></td></tr></table></figure>
+<p>注意：整个代码结构是比较清晰易懂的，但是有几个地地方是需要注意：</p>
+<ul>
+<li>for循环中i是要小于等于（<code>&lt;=</code>）haystack.length,这是因为haystack和needle都可能出现为空的情况；</li>
+<li>双层循环，要用变量接一下外层循环的变量，这里需要知道的是，双层遍历，外层循环一次，内层循环要全循环完，才能开始外层的第二次循环，以此类推；</li>
+<li>注意while循环的条件。</li>
+</ul>
+<p>That’s all!这就是KMP算法。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/19"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/19/"
+    >leeCode算法--删除数组中的指定元素</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/19/" class="article-date">
+  <time datetime="2021-05-16T12:18:35.000Z" itemprop="datePublished">2021-05-16</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<p>解析：看到这个题，与上一个删除有序数组中的重复元素，很相似，只不过这次要删除的元素被指定了，而且数组也不是有序的，但是实现起来要比之前简单，看代码：</p>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var removeDuplicates = <span class="keyword">function</span>(nums, <span class="keyword">val</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!nums) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">let</span> j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>;i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] !== <span class="keyword">val</span>) &#123;</span><br><span class="line">            nums[j] = nums[j]</span><br><span class="line">        &#125;</span><br><span class="line">        j++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> j</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>That’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2021
+        <i class="ri-heart-fill heart_icon"></i> Lee
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Lee前端技术栈"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

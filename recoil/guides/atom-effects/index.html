@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="前端技术栈 前端技术 前端博客 JavaScript HTML5 CSS3 VUE React Angular node Deno typeSctipt webpack wechat flutter recoil" />
+       
+      <meta name="description" content="敲着代码，记着BUG，通过博客的方式，记录下工作中的点点滴滴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Recoil指南--Atom Effects Atom副作用 |  Lee前端技术栈</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Lee前端技术栈" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-recoil/guides/atom-effects"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Recoil指南--Atom Effects Atom副作用
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/recoil/guides/atom-effects/" class="article-date">
+  <time datetime="2020-11-09T10:07:03.000Z" itemprop="datePublished">2020-11-09</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/recoil/">recoil</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">13 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="Atom-Effects-Atom副作用"><a href="#Atom-Effects-Atom副作用" class="headerlink" title="Atom Effects Atom副作用"></a>Atom Effects Atom副作用</h3><p>Atom Effects are a new experimental API for managing side-effects and initializing Recoil atoms. They have a variety of useful applications such as state persistence, state synchronization, managing history, logging, &amp;c. They are defined as part of the atom definition, so each atom can specify and compose their own policies. This API is still evolving, and thus marked as <code>_UNSTABLE</code>.<br>Atom Effects是为了管理副作用和初始化Recoil Atom的实验性的API。它会有多种应用，例如：状态持久化，同步状态，历史管理，日志等。这些都被定义为Atom最初定义的一部分。所以每个部分都可以有指定或者组合自己的策略。这些API还在开发中，所以暂时就把它称作<code>_UNSTABLE</code>版本吧。</p>
+<hr>
+<h3 id="IMPORTANT-NOTE-重要提示"><a href="#IMPORTANT-NOTE-重要提示" class="headerlink" title="IMPORTANT NOTE 重要提示"></a>IMPORTANT NOTE 重要提示</h3><p>This API is currently under development and will change. Please stay tuned…<br>这些API还在开发中。并且会有变化，所以再等等。。。。</p>
+<hr>
+<p>An atom effect is a function with the following definition.<br>Atom副作用是下面定义的函数：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">type AtomEffect&lt;T&gt; = (&#123;</span><br><span class="line">    <span class="attr">node</span>: RecoilState&lt;T&gt;, <span class="comment">// A reference to the atom itself</span></span><br><span class="line">    trigger: <span class="string">&#x27;get&#x27;</span> | <span class="string">&#x27;set&#x27;</span>, <span class="comment">// The action which triggered initialization of the atom</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Callbacks to set or reset the value of the atom.</span></span><br><span class="line">    <span class="comment">// This can be called from the atom effect function directly to initialize the</span></span><br><span class="line">    <span class="comment">// initial value of the atom, or asynchronously called later to change it.</span></span><br><span class="line">    setSelf: (</span><br><span class="line">        | T</span><br><span class="line">        | <span class="built_in">DefaultValue</span></span><br><span class="line">        | Promise&lt;T | <span class="built_in">DefaultValue</span>&gt; <span class="comment">// Only allowed for initialization at this time</span></span><br><span class="line">        | <span class="function">(<span class="params">(T | <span class="built_in">DefaultValue</span></span>) =&gt;</span> T | <span class="built_in">DefaultValue</span>),</span><br><span class="line">    ) =&gt; <span class="keyword">void</span>,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="attr">resetSelf</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">void</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Subscribe to changes in the atom value.</span></span><br><span class="line">    <span class="comment">// The callback is not called due to changes from this effect&#x27;s own setSelf().</span></span><br><span class="line">    onSet: (</span><br><span class="line">        <span class="function">(<span class="params">newValue: T | <span class="built_in">DefaultValue</span>, oldValue: T | <span class="built_in">DefaultValue</span></span>) =&gt;</span> <span class="keyword">void</span>,</span><br><span class="line">    ) =&gt; <span class="keyword">void</span>,</span><br><span class="line"></span><br><span class="line">&#125;) =&gt; <span class="keyword">void</span> | <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">void</span>; <span class="comment">// Optionally return a cleanup handler</span></span><br></pre></td></tr></table></figure>
+<p>Atom effects are attached to <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/atom">atoms</a> via the <code>effects_UNSTABLE</code> option. Each atom can reference an array of these atom effect functions which are called in priority order when the atom is initialized. Atoms are initialized when they are used for the first time within a <code>&lt;RecoilRoot&gt;</code>, but may be re-initialized again if they were unused and cleaned up. The atom effect function may return an optional cleanup handler to manage cleanup side-effects.<br>Atom 副作用是通过Atom的<code>effects_UNSTABLE</code>来添加的。在Atom初始化的时候。每一个Atom都可以引用一个按照优先级调用的atom副作用函数的数组。当第一次应用于<code>&lt;RecoilRoot&gt;</code>时，Atom被初始化。但是也许他们没有被调用或者没有被清除，就会被再次初始化。Atom副作用函数会返回一个可选的处理副作用的函数。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myState = atom(&#123;</span><br><span class="line">    key: <span class="string">&#x27;MyKey&#x27;</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="keyword">null</span>,</span><br><span class="line">    effects_UNSTABLE: [</span><br><span class="line">        () =&gt; &#123;</span><br><span class="line">            ...effect <span class="number">1.</span>..</span><br><span class="line">            <span class="keyword">return</span> () =&gt; ...cleanup effect <span class="number">1.</span>..;</span><br><span class="line">        &#125;,</span><br><span class="line">        () =&gt; &#123; ...effect <span class="number">2.</span>.. &#125;,</span><br><span class="line">    ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/utils/atomFamily">Atom families</a> also support parameterized or non-parameterized effects:<br>Atom也支持参数化或者无参化：</p>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const myStateFamily = atomFamily(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;MyKey&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">effects_UNSTABLE</span>: <span class="function"><span class="params">param</span> =&gt;</span> [</span><br><span class="line">        <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        ...effect <span class="number">1</span> using param...</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> ...cleanup effect <span class="number">1.</span>..;</span><br><span class="line">        &#125;,</span><br><span class="line">        () =&gt; &#123; ...effect <span class="number">2</span> using param... &#125;,</span><br><span class="line">    ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Compared-to-React-Effects-与React副作用相比"><a href="#Compared-to-React-Effects-与React副作用相比" class="headerlink" title="Compared to React Effects 与React副作用相比"></a>Compared to React Effects 与React副作用相比</h4><p>Atom effects could mostly be implemented via React <code>useEffect()</code>. However, the set of atoms are created outside of a React context, and it can be difficult to manage effects from within React components, particularly for dynamically created atoms. They also cannot be used to initialize the initial atom value or be used with server-side rendering. Using atom effects also co-locates the effects with the atom definitions.<br>Atom副作用主要是通过React的<code>useEffect</code>钩子函数来生效。然后atoms是在React上下文之外被创建的。并且在React组建内部管理副作用是非常困难的。特别是动态生成的atoms.这些atoms也常常并不能被用来初始化初始的atom值，或者是用来做服务端渲染。通常atom副作是和定义atom在同一处。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myState = atom(&#123;<span class="attr">key</span>: <span class="string">&#x27;Key&#x27;</span>, <span class="attr">default</span>: <span class="literal">null</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyStateEffect</span>(<span class="params"></span>): <span class="title">React</span>.<span class="title">Node</span> </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> [value, setValue] = useRecoilState(myState);</span><br><span class="line">    useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// Called when the atom value changes</span></span><br><span class="line">        store.set(value);</span><br><span class="line">        store.onChange(setValue);</span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123; store.onChange(<span class="literal">null</span>); &#125;; <span class="comment">// Cleanup effect</span></span><br><span class="line">    &#125;, [value]);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyApp</span>(<span class="params"></span>): <span class="title">React</span>.<span class="title">Node</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">MyStateEffect</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            ...</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Compared-to-Snapshots"><a href="#Compared-to-Snapshots" class="headerlink" title="Compared to Snapshots"></a>Compared to Snapshots</h4><p>The <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/Snapshot#hooks">Snapshot hooks</a> API can also monitor atom state changes and the initializeState prop in <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/RecoilRoot"><RecoilRoot></RecoilRoot></a> can initialize values for initial render. However, these APIs monitor all state changes and can be awkward to manage dynamic atoms, particularly atom families. With atom effects, the side-effect can be defined per-atom alongside the atom definition and multiple policies can be easily composed.<br>Snapshot hooks钩子API可以监听Atom状态的变化并且为初次渲染初始化RecoilRoot组件的初始值。然后，这些API监听所有的状态变化，并且很难管理动态的Atom.尤其是atom系列。有了atom副作用。一些副作用，就可以通过atom提前定义，并且和多种方案组合在一起。</p>
+<h4 id="Logging-Example"><a href="#Logging-Example" class="headerlink" title="Logging Example"></a>Logging Example</h4><p>A simple example of using atom effects are for logging a specific atom’s state changes.<br>一个简单的使用atom副作用来记录特定atom状态的变化：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> currentUserIDState = atom(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;CurrentUserID&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">effects_UNSTABLE</span>: [</span><br><span class="line">        <span class="function">(<span class="params">&#123;onSet&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        onSet(<span class="function"><span class="params">newID</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.debug(<span class="string">&quot;Current user ID:&quot;</span>, newID);</span><br><span class="line">        &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">    ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="History-Example"><a href="#History-Example" class="headerlink" title="History Example"></a>History Example</h4><p>A more complex example of logging might maintain a history of changes. This example provides an effect which maintains a history queue of state changes with callback handlers that undo that particular change:<br>一个更复杂的例子是用来维护变化的历史记录。此示例提供了一个效果，它使用撤消特定更改的回调处理程序维护状态更改的历史队列：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> history: <span class="built_in">Array</span>&lt;&#123;</span><br><span class="line">    <span class="attr">label</span>: <span class="built_in">string</span>,</span><br><span class="line">    <span class="attr">undo</span>: <span class="function">() =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">&#125;&gt; = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> historyEffect = <span class="function"><span class="params">name</span> =&gt;</span> <span class="function">(<span class="params">&#123;setSelf, onSet&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    onSet(<span class="function">(<span class="params">newValue, oldValue</span>) =&gt;</span> &#123;</span><br><span class="line">        history.push(&#123;</span><br><span class="line">            <span class="attr">label</span>: <span class="string">`<span class="subst">$&#123;name&#125;</span>: <span class="subst">$&#123;<span class="built_in">JSON</span>.serialize(oldValue)&#125;</span> -&gt; <span class="subst">$&#123;<span class="built_in">JSON</span>.serialize(newValue)&#125;</span>`</span>,</span><br><span class="line">            <span class="attr">undo</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">                setSelf(oldValue);</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> userInfoState = atomFamily(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;UserInfo&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="literal">null</span>,</span><br><span class="line">    <span class="attr">effects_UNSTABLE</span>: <span class="function"><span class="params">userID</span> =&gt;</span> [</span><br><span class="line">        historyEffect(<span class="string">`<span class="subst">$&#123;userID&#125;</span> user info`</span>),</span><br><span class="line">    ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="State-Synchronization-Example-状态同步案例"><a href="#State-Synchronization-Example-状态同步案例" class="headerlink" title="State Synchronization Example 状态同步案例"></a>State Synchronization Example 状态同步案例</h4><p>It can be useful to use atoms as a local cached value of some other state such as a remote database, local storage, &amp;c. You could set the <code>default</code> value of an atom using the <code>default</code> property with a selector to get the store’s value. However, that is only a one-time lookup; if the store’s value changes the atom value will not change. With effects, we can subscribe to the store and update the atom’s value whenever the store changes. Calling <code>setSelf()</code> from the effect will initialize the atom to that value and will be used for the initial render. If the atom is reset, it will revert to the default value, not the initialized value.<br>将atom作为诸如，远程数据库，本地存储等的本地缓存状态是非常有用的。可以通过selector设置默认属性给atom设置默认的值来获取存储的值。然后，这只是一次性的。如果存储中的值发生了变化，而atom的值是不会有变化的。通过副作用，无论何时，我们都可以订阅存储中的值，并且更新atom的值。从副作用中调用<code>setSelf()</code>函数来初始化atom并且初次渲染。如果atom被重置。他将会再次被设置为默认值，而不是初始值。</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> syncStorageEffect = <span class="keyword">user</span>ID =&gt; (&#123;<span class="built_in">set</span>Self, trigger&#125;) =&gt; &#123;</span><br><span class="line">    // Initialize atom value <span class="keyword">to</span> the remote storage <span class="keyword">state</span></span><br><span class="line">    if (trigger === &#x27;get&#x27;) &#123; // Avoid expensive initialization</span><br><span class="line">        <span class="built_in">set</span>Self(myRemoteStorage.get(<span class="keyword">user</span>ID)); // C<span class="literal">all</span> synchronously <span class="keyword">to</span> initialize</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Subscribe <span class="keyword">to</span> remote storage changes and update the atom value</span><br><span class="line">    myRemoteStorage.<span class="keyword">on</span>Change(<span class="keyword">user</span>ID, <span class="keyword">user</span>Info =&gt; &#123;</span><br><span class="line">        <span class="built_in">set</span>Self(<span class="keyword">user</span>Info); // C<span class="literal">all</span> asynchronously <span class="keyword">to</span> change value</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    // Cleanup remote storage subscription</span><br><span class="line">    return () =&gt; &#123;</span><br><span class="line">        myRemoteStorage.<span class="keyword">on</span>Change(<span class="keyword">user</span>ID, null);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">user</span>InfoState = atomFamily(&#123;</span><br><span class="line">    key: &#x27;UserInfo&#x27;,</span><br><span class="line">    <span class="keyword">default</span>: null,</span><br><span class="line">    effects_UNSTABLE: <span class="keyword">user</span>ID =&gt; [</span><br><span class="line">        historyEffect(`$&#123;<span class="keyword">user</span>ID&#125; <span class="keyword">user</span> info`),</span><br><span class="line">        syncStorageEffect(<span class="keyword">user</span>ID),</span><br><span class="line">    ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Write-Through-Cache-Example"><a href="#Write-Through-Cache-Example" class="headerlink" title="Write-Through Cache Example"></a>Write-Through Cache Example</h4><p>We can also bi-directionally sync atom values with remote storage so changes on the server update the atom value and changes in the local atom are written back to the server. The effect will not call the <code>onSet()</code> handler when changed via that effect’s <code>setSelf()</code> to help avoid feedback loops.<br>我们也可以通过在服务器上的远程存储来更新atom的值也可以重写本地atom的值到服务端的方式来实现双向同步atom的值。当通过副作用的<code>setSelf()</code>来循环调用的时候，副作用不会调用<code>onSet()</code> </p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> syncStorageEffect = <span class="keyword">user</span>ID =&gt; (&#123;<span class="built_in">set</span>Self, <span class="keyword">on</span>Set, trigger&#125;) =&gt; &#123;</span><br><span class="line">    // Initialize atom value <span class="keyword">to</span> the remote storage <span class="keyword">state</span></span><br><span class="line">    if (trigger === &#x27;get&#x27;) &#123; // Avoid expensive initialization</span><br><span class="line">        <span class="built_in">set</span>Self(myRemoteStorage.get(<span class="keyword">user</span>ID)); // C<span class="literal">all</span> synchronously <span class="keyword">to</span> initialize</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // Subscribe <span class="keyword">to</span> remote storage changes and update the atom value</span><br><span class="line">    myRemoteStorage.<span class="keyword">on</span>Change(<span class="keyword">user</span>ID, <span class="keyword">user</span>Info =&gt; &#123;</span><br><span class="line">        <span class="built_in">set</span>Self(<span class="keyword">user</span>Info); // C<span class="literal">all</span> asynchronously <span class="keyword">to</span> change value</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    // Subscribe <span class="keyword">to</span> local changes and update the server value</span><br><span class="line">    <span class="keyword">on</span>Set(<span class="keyword">user</span>Info =&gt; &#123;</span><br><span class="line">        myRemoteStorage.<span class="built_in">set</span>(<span class="keyword">user</span>ID, <span class="keyword">user</span>Info);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    // Cleanup remote storage subscription</span><br><span class="line">    return () =&gt; &#123;</span><br><span class="line">        myRemoteStorage.<span class="keyword">on</span>Change(<span class="keyword">user</span>ID, null);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="Local-Storage-Persistence-本地存储持久化"><a href="#Local-Storage-Persistence-本地存储持久化" class="headerlink" title="Local Storage Persistence 本地存储持久化"></a>Local Storage Persistence 本地存储持久化</h4><p>Atom effects can be used to persist atom state with <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">browser local storage</a>. Note that the following examples are simplified for illustrative purposes and do not cover all cases.<br>Atom副作用可以通过浏览器本地存储做atom状态的持久化。注意下面的例子，非常简明的说明了这点，但并不能涵盖所有。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> localStorageEffect = <span class="function"><span class="params">key</span> =&gt;</span> <span class="function">(<span class="params">&#123;setSelf, onSet&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> savedValue = <span class="built_in">localStorage</span>.getItem(key)</span><br><span class="line">    <span class="keyword">if</span> (savedValue != <span class="literal">null</span>) &#123;</span><br><span class="line">        setSelf(<span class="built_in">JSON</span>.parse(savedValue));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    onSet(<span class="function"><span class="params">newValue</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (newValue <span class="keyword">instanceof</span> DefaultValue) &#123;</span><br><span class="line">            <span class="built_in">localStorage</span>.removeItem(key);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">localStorage</span>.setItem(key, <span class="built_in">JSON</span>.stringify(newValue));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> currentUserIDState = atom(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;CurrentUserID&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">effects_UNSTABLE</span>: [</span><br><span class="line">        localStorageEffect(<span class="string">&#x27;current_user&#x27;</span>),</span><br><span class="line">    ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Backward-Compatibility"><a href="#Backward-Compatibility" class="headerlink" title="Backward Compatibility"></a>Backward Compatibility</h4><p>What if you change the format for an atom? Loading a page with the new format with a localStorage based on the old format could case a problem. You could build effects to handle restoring and validating the value in a type safe way:<br>要是你改变了atom的格式怎么办？用新的格式加在基于旧的格式的页面将会有问题。你可以创建新的副作用来重新存储并且验证值是安全的：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> PersistenceOptions&lt;T&gt;: &#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="built_in">string</span>,</span><br><span class="line">    <span class="attr">restorer</span>: <span class="function">(<span class="params">mixed, DefaultValue</span>) =&gt;</span> T | DefaultValue,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> localStorageEffect = &lt;T&gt;<span class="function">(<span class="params">options: PersistenceOptions&lt;T&gt;</span>) =&gt;</span> <span class="function">(<span class="params">&#123;setSelf, onSet&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> savedValue = <span class="built_in">localStorage</span>.getItem(options.key)</span><br><span class="line">    <span class="keyword">if</span> (savedValue != <span class="literal">null</span>) &#123;</span><br><span class="line">        setSelf(options.restorer(<span class="built_in">JSON</span>.parse(savedValue), <span class="keyword">new</span> DefaultValue()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    onSet(<span class="function"><span class="params">newValue</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (newValue <span class="keyword">instanceof</span> DefaultValue) &#123;</span><br><span class="line">            <span class="built_in">localStorage</span>.removeItem(options.key);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">localStorage</span>.setItem(options.key, <span class="built_in">JSON</span>.stringify(newValue));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> currentUserIDState = atom&lt;<span class="built_in">number</span>&gt;(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;CurrentUserID&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">effects_UNSTABLE</span>: [</span><br><span class="line">        localStorageEffect(&#123;</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&#x27;current_user&#x27;</span>,</span><br><span class="line">        <span class="attr">restorer</span>: <span class="function">(<span class="params">value, defaultValue</span>) =&gt;</span></span><br><span class="line">            <span class="comment">// values are currently persisted as numbers</span></span><br><span class="line">            <span class="keyword">typeof</span> value === <span class="string">&#x27;number&#x27;</span></span><br><span class="line">            ? value</span><br><span class="line">            <span class="comment">// if value was previously persisted as a string, parse it to a number</span></span><br><span class="line">            : <span class="keyword">typeof</span> value === <span class="string">&#x27;string&#x27;</span></span><br><span class="line">            ? <span class="built_in">parseInt</span>(value, <span class="number">10</span>)</span><br><span class="line">            <span class="comment">// if type of value is not recognized, then use the atom&#x27;s default value.</span></span><br><span class="line">            : defaultValue</span><br><span class="line">        &#125;),</span><br><span class="line">    ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>What if the key used to persist the value changes? Or what used to be persisted using one key now uses several? Or vice versa? That can also be handled in a type-safe way:<br>要是持久化数据的key变化了怎么办？或者是之前用一个，现在用了多个key怎么办？反之亦然。这也依然可以通过安全的方式来处理：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> PersistenceOptions&lt;T&gt;: &#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="built_in">string</span>,</span><br><span class="line">    <span class="attr">restorer</span>: <span class="function">(<span class="params">mixed, DefaultValue, <span class="built_in">Map</span>&lt;<span class="built_in">string</span>, mixed&gt;</span>) =&gt;</span> T | DefaultValue,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> localStorageEffect = &lt;T&gt;<span class="function">(<span class="params">options: PersistenceOptions&lt;T&gt;</span>) =&gt;</span> <span class="function">(<span class="params">&#123;setSelf, onSet&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> savedValues = parseValuesFromStorage(<span class="built_in">localStorage</span>);</span><br><span class="line">    <span class="keyword">const</span> savedValue = savedValues.get(options.key);</span><br><span class="line">    setSelf(</span><br><span class="line">        options.restorer(savedValue ?? <span class="keyword">new</span> DefaultValue(), <span class="keyword">new</span> DefaultValue(), savedValues),</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    onSet(<span class="function"><span class="params">newValue</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (newValue <span class="keyword">instanceof</span> DefaultValue) &#123;</span><br><span class="line">            <span class="built_in">localStorage</span>.removeItem(options.key);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">localStorage</span>.setItem(options.key, <span class="built_in">JSON</span>.stringify(newValue));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> currentUserIDState = atom&lt;<span class="built_in">number</span>&gt;(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;CurrentUserID&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">effects_UNSTABLE</span>: [</span><br><span class="line">        localStorageEffect(&#123;</span><br><span class="line">        <span class="attr">key</span>: <span class="string">&#x27;current_user&#x27;</span>,</span><br><span class="line">        <span class="attr">restorer</span>: <span class="function">(<span class="params">value, defaultValue, values</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">typeof</span> value === <span class="string">&#x27;number&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> value;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">const</span> oldValue = values.get(<span class="string">&#x27;old_key&#x27;</span>);</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">typeof</span> oldValue === <span class="string">&#x27;number&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> oldValue;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> defaultValue;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#125;),</span><br><span class="line">    ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="Browser-URL-History-Persistence-浏览器URL历史数据持久化"><a href="#Browser-URL-History-Persistence-浏览器URL历史数据持久化" class="headerlink" title="Browser URL History Persistence 浏览器URL历史数据持久化"></a>Browser URL History Persistence 浏览器URL历史数据持久化</h4><p>Atom state can also be persisted and synced with the browser URL history. This can be useful to have state changes update the current URL so it can be saved or shared with others to restore that state. It can also be integrated with the browser history to leverage the browser forward/back buttons. Examples or a library to provide this type of persistence are coming soon…<br>浏览器同样可以用来做浏览器URL历史的数据持久化和数据的同步。这在处理更新当前URL状态是非常有用的，这对于保存或者和与别的Atom共享重新存储状态是非常有用的。它还可以与浏览器历史记录集成，以利用浏览器前进/后退按钮。提供这个功能的案例或者是库正在开发中…</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://leexiaop.github.io/recoil/guides/atom-effects/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/coding/1/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            手动实现Javascript中new操作符
+          
+        </div>
+      </a>
+    
+    
+      <a href="/recoil/guides/data-query/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Recoil指南--Asynchronous Data Queries 异步数据请求</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2021
+        <i class="ri-heart-fill heart_icon"></i> Lee
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Lee前端技术栈"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

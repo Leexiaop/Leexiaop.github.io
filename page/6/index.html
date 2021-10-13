@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="前端技术栈 前端技术 前端博客 JavaScript HTML5 CSS3 VUE React Angular node Deno typeSctipt webpack wechat flutter recoil" />
+       
+      <meta name="description" content="敲着代码，记着BUG，通过博客的方式，记录下工作中的点点滴滴。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> Lee前端技术栈</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Lee前端技术栈" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
+        target="_blank"><img width="149" height="149" src="/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover1.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">Lee前端技术栈</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  
+  <ul class="ads">
+    
+        <li>
+            <a target="_blank" rel="noopener" href="https://curl.qcloud.com/kvO7hb43">
+                <img src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/ten_1.jpg" width="300" alt="云服务器限时秒杀">
+            </a>
+        </li>
+    
+        <li>
+            <a target="_blank" rel="noopener" href="https://www.vultr.com/?ref=8630075">
+                <img src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/vultr.png" width="300" alt="vultr优惠vps">
+            </a>
+        </li>
+    
+</ul>
+  
+  
+  
+
+<div class="notice" style="margin-top:50px">
+    <i class="ri-heart-fill"></i>
+    <div class="notice-content" id="broad"></div>
+</div>
+<script type="text/javascript">
+    fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("broad").innerHTML = data.hitokoto;
+        })
+        .catch(console.error)
+</script>
+
+<style>
+    .notice {
+        padding: 20px;
+        border: 1px dashed #e6e6e6;
+        color: #969696;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        background: #fbfbfb50;
+        border-radius: 10px;
+    }
+
+    .notice i {
+        float: left;
+        color: #999;
+        font-size: 16px;
+        padding-right: 10px;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    .notice-content {
+        display: initial;
+        vertical-align: middle;
+    }
+</style>
+  
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-coding/7"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/coding/7/"
+    >函数柯理化是什么，手动实现一个柯理化函数</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/coding/7/" class="article-date">
+  <time datetime="2021-02-28T07:05:39.000Z" itemprop="datePublished">2021-02-28</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/coding/">coding</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="函数柯理化"><a href="#函数柯理化" class="headerlink" title="函数柯理化"></a>函数柯理化</h2><ul>
+<li>原理：函数柯理化的本质就是将函数接受的多个参数单一化，并且返回接受余下的参数且返回结果的新函数的一种技术。</li>
+</ul>
+<h3 id="简单版求和"><a href="#简单版求和" class="headerlink" title="简单版求和"></a>简单版求和</h3><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title">add</span> (a) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="type">function</span> (b) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">function</span> <span class="title"></span>(c) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="type">a</span> + b + c</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">console.log(add(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>))   //  <span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="函数柯理化-1"><a href="#函数柯理化-1" class="headerlink" title="函数柯理化"></a>函数柯理化</h3><ul>
+<li>参数长度固定</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> curry = <span class="function">(<span class="params">fn</span>) =&gt;</span></span><br><span class="line">(judge = <span class="function">(<span class="params">...args</span>) =&gt;</span></span><br><span class="line">    args.length === fn.length</span><br><span class="line">    ? fn(...args)</span><br><span class="line">    : <span class="function">(<span class="params">...arg</span>) =&gt;</span> judge(...args, ...arg));</span><br><span class="line"><span class="keyword">const</span> add = <span class="function">(<span class="params">a, b, c</span>) =&gt;</span> a + b + c;</span><br><span class="line"><span class="keyword">const</span> curryAdd = curry(add);</span><br><span class="line"><span class="built_in">console</span>.log(curryAdd(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>)); <span class="comment">// 6</span></span><br><span class="line"><span class="built_in">console</span>.log(curryAdd(<span class="number">1</span>, <span class="number">2</span>)(<span class="number">3</span>)); <span class="comment">// 6</span></span><br><span class="line"><span class="built_in">console</span>.log(curryAdd(<span class="number">1</span>)(<span class="number">2</span>, <span class="number">3</span>)); <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>参数长度不固定</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span> <span class="params">(<span class="rest_arg">...args</span>)</span> </span>&#123;</span><br><span class="line">    args.reduce((a, b) =&gt; a + b)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">currying</span> <span class="params">(fn)</span> </span>&#123;</span><br><span class="line">    let args = []</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">temp</span> <span class="params">(<span class="rest_arg">...newArgs</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (newArgs.length) &#123;</span><br><span class="line">            args = [</span><br><span class="line">                ...args,</span><br><span class="line">                ...newArgs</span><br><span class="line">            ]</span><br><span class="line">            <span class="keyword">return</span> temp</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            let val = fn.apply(<span class="keyword">this</span>, args)</span><br><span class="line">            args = []</span><br><span class="line">            <span class="keyword">return</span> val</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let addCurry = currying(add)</span><br><span class="line">console.log(addCurry(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>))  <span class="comment">//  6</span></span><br></pre></td></tr></table></figure>
+
+<p>that’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-coding/6"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/coding/6/"
+    >函数截流是什么，手动实现一个截流函数</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/coding/6/" class="article-date">
+  <time datetime="2021-02-25T09:47:08.000Z" itemprop="datePublished">2021-02-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/coding/">coding</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="防抖截流"><a href="#防抖截流" class="headerlink" title="防抖截流"></a>防抖截流</h2><ul>
+<li>原理：规定在单位时间内只能触发一次的函数。如果这个单位时间内触发多次函数，但是只执行一次。</li>
+<li>应用场景：<ul>
+<li>拖拽场景：固定时间内只执行一次，防止高频触发位置变动；</li>
+<li>缩放场景：监控浏览器resize；</li>
+</ul>
+</li>
+</ul>
+<h3 id="时间戳实现方式"><a href="#时间戳实现方式" class="headerlink" title="时间戳实现方式"></a>时间戳实现方式</h3><ul>
+<li>用当前执行的时间戳减去上一次执行时候的时间戳，如果大于设置的等待时间，就执行，反之，就不执行。</li>
+</ul>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> throttle = (fun, wait) =&gt; &#123;</span><br><span class="line">    <span class="built_in">let</span> <span class="built_in">context</span>, <span class="built_in">args</span>, previous = <span class="number">0</span></span><br><span class="line">    <span class="built_in">return</span> () &#123;</span><br><span class="line">        <span class="built_in">let</span> now = +<span class="built_in">new</span> Date()</span><br><span class="line">        <span class="built_in">context</span> = this</span><br><span class="line">        <span class="built_in">args</span> = arguments</span><br><span class="line">        <span class="keyword">if</span> (now - previous &gt; wait) &#123;</span><br><span class="line">            fun.<span class="built_in">apply</span>(<span class="built_in">context</span>, <span class="built_in">args</span>)</span><br><span class="line">            previous = now</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用定时器方式"><a href="#使用定时器方式" class="headerlink" title="使用定时器方式"></a>使用定时器方式</h3><ul>
+<li>可以通过出发定时器来实现，如果定时器存在就不执行，反之，就执行。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> throttle = (fun, wait) &#123;</span><br><span class="line">    <span class="keyword">let</span> timer</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> context = <span class="built_in">this</span></span><br><span class="line">        <span class="keyword">let</span> args = <span class="built_in">arguments</span></span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            timer = <span class="literal">null</span></span><br><span class="line">            fun.apply(context, args)</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>that’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-coding/5"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/coding/5/"
+    >函数防抖是什么，手动实现一个防抖函数</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/coding/5/" class="article-date">
+  <time datetime="2021-02-25T09:46:00.000Z" itemprop="datePublished">2021-02-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/coding/">coding</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="防抖函数"><a href="#防抖函数" class="headerlink" title="防抖函数"></a>防抖函数</h2><ul>
+<li>原理：在事件出发n秒之后再执行回调，如果在这n秒内再次触发，则重新开始计时。</li>
+<li>应用场景：<ul>
+<li>按钮提交场景：防止多次点击按钮提交。只执行最后一次；</li>
+<li>搜索框连续输入场景：防止连续发送请求，只发送最后一次。</li>
+</ul>
+</li>
+</ul>
+<h3 id="简易版："><a href="#简易版：" class="headerlink" title="简易版："></a>简易版：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> debounce = <span class="function">(<span class="params">fun, wait</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> timer</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> context = <span class="built_in">this</span></span><br><span class="line">        <span class="keyword">const</span> args = <span class="built_in">arguments</span></span><br><span class="line">        <span class="built_in">clearTimeout</span>(timer)</span><br><span class="line">        timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            fun.apply(context, args)</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="立即执行"><a href="#立即执行" class="headerlink" title="立即执行"></a>立即执行</h3><ul>
+<li>立即触发，然后等到停止出发n秒后再次重新触发执行。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> debounce = <span class="function">(<span class="params">fun, wait, immediate</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> timer</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> context = <span class="built_in">this</span></span><br><span class="line">        <span class="keyword">const</span> args = <span class="built_in">arguments</span></span><br><span class="line">        <span class="keyword">if</span> (timer) <span class="built_in">clearTimeout</span>(timer)</span><br><span class="line">        <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">            <span class="keyword">const</span> callNow = !timer</span><br><span class="line">            timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                timer = <span class="literal">null</span></span><br><span class="line">            &#125;, wait)</span><br><span class="line">            <span class="keyword">if</span> (callNow) &#123;</span><br><span class="line">                fun.apply(context, args)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                fun.apply(context, args)</span><br><span class="line">            &#125;, wait)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="有返回值"><a href="#有返回值" class="headerlink" title="有返回值"></a>有返回值</h3><ul>
+<li>某些情况下，fun可能会有返回值，所以需要返回函数的结果，但是当immediate为false的时候，因为使用了setTimeout,我们将fun.apply(context, args)的返回值赋值给变量，然后再return的时候，值将会一直undefined，所以只有immediate值为true的时候返回函数的执行结果。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> debounce = <span class="function">(<span class="params">fun, wait, immediate</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> timer, result</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> context = <span class="built_in">this</span></span><br><span class="line">        <span class="keyword">const</span> args = <span class="built_in">arguments</span></span><br><span class="line">        <span class="keyword">if</span> (timer) <span class="built_in">clearTimeout</span>(timer)</span><br><span class="line">        <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">            <span class="keyword">const</span> callNow = !timer</span><br><span class="line">            timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                timer = <span class="literal">null</span></span><br><span class="line">            &#125;, wait)</span><br><span class="line">            <span class="keyword">if</span> (callNow) &#123;</span><br><span class="line">                result = fun.apply(context, args)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                fun.apply(context, args)</span><br><span class="line">            &#125;, wait)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>that’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-experience/1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/experience/1/"
+    >常说的单点登陆是如何实现的</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/experience/1/" class="article-date">
+  <time datetime="2021-02-25T09:34:12.000Z" itemprop="datePublished">2021-02-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/experience/">experience</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>编写中，敬请期待。。。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B/" rel="tag">实战案例</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-javascript/2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/javascript/2/"
+    >JavaScript--GET请求和POST请求的区别到底是什么？</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/javascript/2/" class="article-date">
+  <time datetime="2021-02-25T07:25:59.000Z" itemprop="datePublished">2021-02-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>GET请求和POST请求是比较常见的俩种请求，基本都能说出一二，下面是来自w3c的标准答案：</p>
+<ul>
+<li>GET请求的参数是在url中，而POST请求的参数是request body中；</li>
+<li>GET请求会主动被浏览器缓存，而POST请求不会，除非手动设置；</li>
+<li>GET请求的参数会被缓存在浏览器的历史记录中，而PSOT请求不会；</li>
+<li>GET请求会比POST请求更加安全，因为GET请求的参数是在URL中裸奔；</li>
+<li>GET请求在浏览器回退的时候是无害的，而POST请求会再次发起请求；</li>
+<li>GET请求的参数的长度会有限制，而POST请求没有；</li>
+<li>GET请求对参数的数据类型，GET只接受ASCII字符，而POST没有限制；</li>
+<li>GET请求产生的URL地址可以被Bookmark，而POST请求不可以。</li>
+</ul>
+<p>能答出这些答案的说明你很<code>牛逼</code>，但是离<code>相当牛逼</code>还差点对本质上区别的理解，且听我给你慢慢道来：</p>
+<p>本质上来说，GET请求和POST请求其实没什么区别。get请求和post请求是什么，他们是HTTP协议中的俩种请求方法，那么HTTP又是什么呢？HTTP是基于TCP/IP的数据在万维网中传输的协议。因此，HTTP的底层就是TCP/IP，SO，GET请求和POST请求的底层也是TCP/IP,是不是很神奇？所以，GET/POST请求就是TCP链接，他们做的事情其实是一样的，把GET请求的参数放到request body中，把POST请求的参数放到URL上在技术层面将其实是可行的。那么为什么还有上面的那些区别呢？</p>
+<p>其实在万维网的世界中，TCP就像是大货车，是用来运送数据的，这其实很安全，并不会出现丢包少包的现象。但有个很致命的问题就是，公路上跑的大货车都完全一样。根本无法区分。所谓无规矩不成方圆。所以，HTTP就应用而生。HTTP给大货车贴上了不同的标签。是GET，POST，PUT或者是DELETE等等？并且规定了所携带的货物（参数）放在那里？比如，GET请求要放到URL中，而POST请求要放到request body中。所以，这就是上面所说的GET请求的参数在URL，而POST请求参数在request body中的原因。</p>
+<p>可是上面讲数据量的大小也不一样，这又是为什么呢？这是因为还有个运输公司的角色（浏览器）存在着。不同浏览器运输数据的成本也不相同，因此他们在浏览器和服务器数据传输上做了相应的限制。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的部分，恕不处理。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。</p>
+<p>所以，GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。</p>
+<p>但是，但是，但是，但是，还没有完。。。。。</p>
+<p>GET和POST还有一个重大区别：<code>GET产生一个TCP数据包；POST产生两个TCP数据包</code></p>
+<ul>
+<li>对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；</li>
+<li>而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</li>
+</ul>
+<p>这样来说，似乎GET请求会比POST请求更高效，但其实在网络环境比较好的情况下，几乎可以忽略他们的差别。还有一点就是其实并不是所有的浏览器的PSOT请求都是发送俩次，切记fireFox是个例外。</p>
+<p>这才是GET请求和POST请求区别的完整版。。。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%AE%89%E5%85%A8/" rel="tag">网络与安全</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-coding/4"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/coding/4/"
+    >手动实现一个Promise</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/coding/4/" class="article-date">
+  <time datetime="2021-02-25T03:40:42.000Z" itemprop="datePublished">2021-02-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/coding/">coding</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>手写一个Promise是面试中常考的重点，所以想要手写一个Promise，我们必须先知道Promise是什么，有那些特点。在其原型上有那些方法，需要哪些参数等等相关信息。。。。下面我们就先来总结一下：</p>
+<p><code>Promise 是一个对象，代表了未来将要发生的事件，用来传递异步操作的消息。</code></p>
+<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><ul>
+<li>Promise有三种状态：pending(进行中)、fullfilled(成功)、rejected(失败)；</li>
+<li>Promise对象接受一个回掉函数作为参数，该回掉函数接受俩个参数，resolve(成功回调)和reject(失败回调)，resolve的参数除了正常值外，还可以是一个Promise对象的实例，reject的参数通常则是一个Error的实例；</li>
+<li>then方法返回一个Promise实例，并接受俩个参数，即resolve和reject函数；</li>
+<li>catch方法返回一个新的Promise实例；</li>
+<li>finally方法不管是Promise是处于fullfilled状态还是rejected状态，都会执行，而且不接受任何参数；</li>
+<li>Promise.all()方法是将多个Promise对象包装成一个新的Promise对象。该方法的参数可以不是一个数组，但是必须是具有iterator接口的数据类型，其返回值是每个每个Promise的实例。其中只要有一个是rejected状态，整个Promise.all()就会进入到catch中，而要想正常返回值，就必须是所有的Promise都是fullfilled状态。</li>
+<li>Promise.race()是和Promise.all()相类似，接受同样的参数，但是不同的是，Promise.race()中，只要有一个实例正常返回，该实例就会返回到Promise.race()中；</li>
+<li>Promise.resolve()方法是将现有参数转化为Promise对象。如果该方法的参数是一个Promise，那么将不会做任何处理，如果参数是个thenable，那么Promise.resolve()会将该对象转化为Promise对象，并且立即执行then方法。如果参数是一个原始值，或者是一个不具备then方法的对象，则Promise.resolve()方法会返回一个新的Promise，状态为fullfilled,其参数作为then方法中resolve的参数。如果Promise.resolve()不带任何参数，会直接返回一个fullfilled状态的Promise对象。是本轮‘事件循环’的结束时执行。而不是下一轮‘事件循环’的开始；</li>
+<li>Promise.reject()同样是返回一个Promise对象。状态为rejected,无聊参数如何，都将会作为reject的参数返回。</li>
+</ul>
+<h3 id="Promise的优点"><a href="#Promise的优点" class="headerlink" title="Promise的优点"></a>Promise的优点</h3><ol>
+<li>统一的异步API：逐步统一各种不同浏览器中异步API,以及不兼容的模式和手法；</li>
+<li>与事件相比：Promise更适合处理一次性的结果，在结果计算出来之前，或者之后，注册回调函数都是可以的，都是可以拿到正确的值。但是Promise不能处理多次触发的事件，链式调用是Promise的另一个优点，而事件却不能链式调用；</li>
+<li>与回调相比：解决了回调地狱的问题。将异步操作以同步的方式表达出来。</li>
+<li>Promise的额外好处是更好的错误处理，写起来更轻松，可以重用一些同步工具等。</li>
+</ol>
+<h3 id="Promise的缺点"><a href="#Promise的缺点" class="headerlink" title="Promise的缺点"></a>Promise的缺点</h3><ol>
+<li>Promise一旦创建，就会立即执行，并且无法终止；</li>
+<li>Promise内部抛出的错误，不会暴露到Promise的外部，只有通过错误的回调来检测错误；</li>
+<li>当Promise的状态是pending状态的时候，并不能明确Promise进行到什么阶段；</li>
+<li>当Promise开始执行到回调的时候，实际Promise部分已经执行完成，但是其中抛出的错误对上下文并不友好。</li>
+</ol>
+<h3 id="Promise代码"><a href="#Promise代码" class="headerlink" title="Promise代码"></a>Promise代码</h3><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="number">_P</span>romise (fn) &#123;</span><br><span class="line">    const <span class="number">_</span><span class="keyword">this</span> = <span class="keyword">this</span></span><br><span class="line">    <span class="number">_</span><span class="keyword">this</span>.state = <span class="string">&#x27;pending&#x27;</span>     <span class="comment">//  保存Promise的状态</span></span><br><span class="line">    <span class="number">_</span><span class="keyword">this</span>.<span class="keyword">value</span> = <span class="string">&#x27;&#x27;</span>    <span class="comment">//  保存Promise的值 </span></span><br><span class="line">    <span class="number">_</span><span class="keyword">this</span>.reason = <span class="string">&#x27;&#x27;</span>   <span class="comment">//  保存Promise的reason</span></span><br><span class="line">    <span class="number">_</span><span class="keyword">this</span>.onFullfiledCb = []    <span class="comment">//  存储then方法中注册的成功回调函数参数</span></span><br><span class="line">    <span class="number">_</span><span class="keyword">this</span>.onRejectedCb = []     <span class="comment">//  存储then方法中注册的失败回调函数参数</span></span><br><span class="line">    <span class="keyword">function</span> resolve (<span class="keyword">value</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">_</span><span class="keyword">this</span>.state === <span class="string">&#x27;pending&#x27;</span>) &#123;</span><br><span class="line">            <span class="number">_</span><span class="keyword">this</span>.state = <span class="string">&#x27;fullfilled&#x27;</span></span><br><span class="line">            <span class="number">_</span><span class="keyword">this</span>.<span class="keyword">value</span> = <span class="keyword">value</span></span><br><span class="line">            setTimeout(<span class="keyword">function</span>() &#123;</span><br><span class="line">                <span class="number">_</span><span class="keyword">this</span>.onFullfiledCb.map(item =&gt; item(<span class="number">_</span><span class="keyword">this</span>.<span class="keyword">value</span>))</span><br><span class="line">            &#125;, <span class="number">0</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">function</span> reject (reason) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">_</span><span class="keyword">this</span>.state === <span class="string">&#x27;pending&#x27;</span>) &#123;</span><br><span class="line">            <span class="number">_</span><span class="keyword">this</span>.state = <span class="string">&#x27;rejected&#x27;</span></span><br><span class="line">            <span class="number">_</span><span class="keyword">this</span>.reason = reason</span><br><span class="line">            setTimeout(<span class="keyword">function</span> () &#123;</span><br><span class="line">                <span class="number">_</span><span class="keyword">this</span>.onRejectedCb.map(item =&gt; item(<span class="keyword">this</span>.reason))</span><br><span class="line">            &#125;, <span class="number">0</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        fn(resolve, reject)</span><br><span class="line">    &#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">        reject(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="number">_P</span>romise.prototype.<span class="keyword">then</span> = <span class="keyword">function</span> (onFullfiled, onRejected) &#123;</span><br><span class="line">    const <span class="number">_</span>self = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">switch</span>(<span class="keyword">this</span>.state) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;fullfilled&#x27;</span>:</span><br><span class="line">            onFullfiled(self.<span class="keyword">value</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;rejected&#x27;</span>:</span><br><span class="line">            onRejected(self.<span class="keyword">value</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            onRejected(self.<span class="keyword">value</span>)</span><br><span class="line">            </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  测试</span></span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="number">_P</span>romise((resolve, reject) =&gt; &#123;</span><br><span class="line">    resolve(<span class="string">&#x27;我的世界&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line">p.<span class="keyword">then</span>(res =&gt; console.log(res)) <span class="comment">//  我的世界</span></span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-coding/3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/coding/3/"
+    >手动实现Promise.then()的链式调用</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/coding/3/" class="article-date">
+  <time datetime="2021-02-25T03:32:38.000Z" itemprop="datePublished">2021-02-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/coding/">coding</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Promise.then()方法的链式调用的使用，自不必多说，我们再熟悉不过，那么他是如何实现的呢？话不多说直接上代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PENDING = <span class="string">&#x27;PENDING&#x27;</span></span><br><span class="line"><span class="keyword">const</span> FULLFILLED = <span class="string">&#x27;FULLFILLED&#x27;</span></span><br><span class="line"><span class="keyword">const</span> REJECTED = <span class="string">&#x27;REJECTED&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_Promise</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(executor) &#123;</span><br><span class="line">        <span class="comment">//立即调用函数</span></span><br><span class="line">        executor(<span class="keyword">this</span>.resolve, <span class="keyword">this</span>.reject)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//初始化状态</span></span><br><span class="line">    status = PENDING</span><br><span class="line">    <span class="comment">//初始化成功之后的值</span></span><br><span class="line">    success = undefined</span><br><span class="line">    <span class="comment">//初始化失败之后的值</span></span><br><span class="line">    error = undefined</span><br><span class="line">    <span class="comment">//用于保存成功回调，成功回调的默认值需要改成数组，因为只有数组可以存储多个回调函数</span></span><br><span class="line">    successCallback = []</span><br><span class="line">    <span class="comment">//用于保存失败回调，失败回调的默认值需要改成数组，因为只有数组可以存储多个回调函数</span></span><br><span class="line">    failCallback = []</span><br><span class="line">    resolve = (success) =&gt; &#123;</span><br><span class="line">        <span class="comment">//如果状态不是等待 则阻止程序执行</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.state !== PENDING) <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">this</span>.state = FULLFILLED</span><br><span class="line">        <span class="comment">//保存成功之后的值</span></span><br><span class="line">        <span class="keyword">this</span>.success = success</span><br><span class="line">        <span class="comment">//如果有这个回调，那么要执行这个回调，并且把成功的值传递进去</span></span><br><span class="line">        <span class="comment">//this.successCallback &amp;&amp; this.successCallback(this.success);</span></span><br><span class="line">        <span class="comment">//现在呢数组中存储了多个回调函数，所以遍历数组的每个函数并让其执行,上面的代码已经不符合要求</span></span><br><span class="line">        <span class="comment">//重新编写逻辑</span></span><br><span class="line">        <span class="comment">//这里使用while语句用successCallback.length作为循环条件，如果数组中有值，拿到数组中的第一个回调函数传值并执行</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">this</span>.successCallback.length) <span class="keyword">this</span>.successCallback.shift()(<span class="keyword">this</span>.success);</span><br><span class="line">    &#125;</span><br><span class="line">    reject = (rejected) =&gt; &#123;</span><br><span class="line">        <span class="comment">//如果状态不是等待 则阻止程序执行</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.state !== PENDING) <span class="keyword">return</span></span><br><span class="line">        <span class="comment">//把promise状态改为失败</span></span><br><span class="line">        <span class="keyword">this</span>.state = REJECTED</span><br><span class="line">        <span class="comment">//保存失败之后的值</span></span><br><span class="line">        <span class="keyword">this</span>.error = rejected</span><br><span class="line">        <span class="comment">//如果有这个回调,那么要执行这个回调，并且把失败的原因传递进去   </span></span><br><span class="line">        <span class="comment">//this.failCallback &amp;&amp; this.failCallback(this.error);</span></span><br><span class="line">        <span class="comment">//现在呢数组中存储了多个回调函数，所以遍历数组的每个函数并让其执行,上面的代码已经不符合要求</span></span><br><span class="line">        <span class="comment">//重新编写逻辑</span></span><br><span class="line">        <span class="comment">//这里使用while语句用failCallback.length作为循环条件，拿到数组中的第一个回调函数传值并执行</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">this</span>.failCallback.length) <span class="keyword">this</span>.failCallback.shift()(<span class="keyword">this</span>.error);</span><br><span class="line">    &#125;</span><br><span class="line">    then(successCallback, failCallback) &#123;</span><br><span class="line">        <span class="comment">//要实现then方法的链式调用必须创建一promise对象</span></span><br><span class="line">        <span class="comment">//新建一个promise对象</span></span><br><span class="line">        <span class="keyword">return</span> new _Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">            <span class="comment">//逻辑判断如果当前状态为成功 则执行成功的回调并且把保存成功的值传递进去</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.status === FULFILLED) &#123;</span><br><span class="line">                <span class="comment">//保存上一个函数的返回值</span></span><br><span class="line">                let x = successCallback(<span class="keyword">this</span>.success)</span><br><span class="line">                <span class="comment">//并且把返回值传递给下一个then方法</span></span><br><span class="line">                resolve(x);</span><br><span class="line">                <span class="comment">//逻辑判断如果当前状态为成功 则执行失败的回调并且把失败的原因传递进去</span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.status === REJECTED) &#123;</span><br><span class="line">                failCallback(<span class="keyword">this</span>.error)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//当前状态为等待，也就是promise状态为pending，</span></span><br><span class="line">                <span class="comment">//如果是等待的话那应该调用成功回调还是失败回调呢</span></span><br><span class="line">                <span class="comment">//那当然是两个回调都无法调用，应为不知道到底是成功了还是还是失败了</span></span><br><span class="line">                <span class="comment">//在这种情况下应该将成功回调和失败回调进行保存</span></span><br><span class="line">                <span class="comment">//保存成功回调函数</span></span><br><span class="line">                <span class="comment">//在这里有一个问题  this.successCallback一次只能存储一个函数这样的不符合要求</span></span><br><span class="line">                <span class="comment">//所以在上面定义successCallback的时候将其定义为数组，这样就可以存储多个回调 ，将回调push进去</span></span><br><span class="line">                <span class="keyword">this</span>.successCallback.push(successCallback);</span><br><span class="line">                <span class="comment">//保存失败回调函数</span></span><br><span class="line">                <span class="keyword">this</span>.failCallback.push(failCallback);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = _Promise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">promise.then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res);   <span class="comment">//  success</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1000</span></span><br><span class="line">    &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res);   <span class="comment">//  1000</span></span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<p>完美实现Promise.then()的链式调用。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-coding/2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/coding/2/"
+    >手动实现Promise.all()方法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/coding/2/" class="article-date">
+  <time datetime="2021-02-25T02:50:08.000Z" itemprop="datePublished">2021-02-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/coding/">coding</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>手动实现Promise.all()函数是面试中常做的现场coding考察，那么如何实现呢？我们先来看看Promise.all()的用法。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Promise<span class="selector-class">.all</span>(<span class="selector-attr">[p1, p2, p3]</span>)<span class="selector-class">.then</span>(result =&gt; &#123;</span><br><span class="line">    console<span class="selector-class">.log</span>(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>Promise.all()方法接受一个数组为参数，数组中是promise，如果数组中的promise都是resolve状态，那么Promise.all()正常返回resolve,返回的数据为一个数组，就是参数中每个promise的结果组成的数组。如果promise.all()中任何一个是reject，那么promise.all()直接reject。<br>所以Promise.all()的特点可以总结为：</p>
+<ul>
+<li><p>1、接收一个 Promise 实例的数组或具有 Iterator 接口的对象，</p>
+</li>
+<li><p>2、如果元素不是 Promise 对象，则使用 Promise.resolve 转成 Promise 对象</p>
+</li>
+<li><p>3、如果全部成功，状态变为 resolved，返回值将组成一个数组传给回调</p>
+</li>
+<li><p>4、只要有一个失败，状态就变为 rejected，返回值将直接传递给回调all() 的返回值也是新的 Promise 对象</p>
+</li>
+</ul>
+<p>来看具体代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  假设我们已经实现了_Promise</span></span><br><span class="line">_Promise.prototype.all = <span class="function">(<span class="params">promiseList</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> _Promise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">Array</span>.isArray(promiseList)) &#123;</span><br><span class="line">            reject(<span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">&#x27;参数错误！&#x27;</span>))</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">let</span> valueList = <span class="keyword">new</span> <span class="built_in">Array</span>(promiseList.length)</span><br><span class="line">        promiseList.forEach(<span class="function">(<span class="params">promise, index</span>) =&gt;</span> &#123;</span><br><span class="line">            _Promise.resolve(promise).then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">                count++</span><br><span class="line">                valueList[index] = result  <span class="comment">//  将每次返回的结果搜集起来</span></span><br><span class="line">                <span class="keyword">if</span> (count === promiseList.length) &#123;</span><br><span class="line">                    <span class="comment">//  表示所有的promise都有结果，最终将所有的结果都resolve出去</span></span><br><span class="line">                    resolve(valueList)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="function"><span class="params">err</span> =&gt;</span> reject(err))</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看看，其实很简单。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-recoil/api/recoil-state/selector"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/recoil/api/recoil-state/selector/"
+    >Recoil API手册--Selector(options)</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/recoil/api/recoil-state/selector/" class="article-date">
+  <time datetime="2021-02-24T10:41:01.000Z" itemprop="datePublished">2021-02-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/recoil/">recoil</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Selectors represent a function, or <strong>derived state</strong> in Recoil. You can think of them as similar to an “idempotent” or “pure function” without side-effects that always returns the same value for a given set of dependency values. If only a get function is provided, the selector is read-only and returns a <code>RecoilValueReadOnly</code> object. If a <code>set</code> is also provided, it returns a writeable <code>RecoilState</code> object.</p>
+<p>Recoil manages atom and selector state changes to know when to notify components subscribing to that selector to re-render. If an object value of a selector is mutated directly it may bypass this and avoid properly notifying subscribing components. To help detect bugs, Recoil will freeze selector value objects in development mode.</p>
+<hr>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function selector<span class="params">&lt;T&gt;</span>(&#123;</span><br><span class="line"><span class="symbol">    key:</span> string,</span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">    get:</span> (&#123;</span><br><span class="line"><span class="symbol">        get:</span> GetRecoilValue</span><br><span class="line">    &#125;) =&gt; T | Promise<span class="params">&lt;T&gt;</span> | RecoilValue<span class="params">&lt;T&gt;</span>,</span><br><span class="line"></span><br><span class="line">    set?: (</span><br><span class="line">        &#123;</span><br><span class="line"><span class="symbol">            get:</span> GetRecoilValue,</span><br><span class="line"><span class="symbol">            set:</span> SetRecoilState,</span><br><span class="line"><span class="symbol">            reset:</span> ResetRecoilState,</span><br><span class="line">        &#125;,</span><br><span class="line"><span class="symbol">        newValue:</span> T | DefaultValue,</span><br><span class="line">    ) =&gt; void,</span><br><span class="line"></span><br><span class="line">    dangerouslyAllowMutability?: boolean,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="type">ValueOrUpdater</span>&lt;<span class="type">T</span>&gt; = <span class="type">T</span> | <span class="type">DefaultValue</span> | ((prevValue: <span class="type">T</span>) =&gt; <span class="type">T</span> | <span class="type">DefaultValue</span>);</span><br><span class="line"><span class="keyword">type</span> <span class="type">GetRecoilValue</span> = &lt;<span class="type">T</span>&gt;(<span class="type">RecoilValue</span>&lt;<span class="type">T</span>&gt;) =&gt; <span class="type">T</span>;</span><br><span class="line"><span class="keyword">type</span> <span class="type">SetRecoilState</span> = &lt;<span class="type">T</span>&gt;(<span class="type">RecoilState</span>&lt;<span class="type">T</span>&gt;, <span class="type">ValueOrUpdater</span>&lt;<span class="type">T</span>&gt;) =&gt; void;</span><br><span class="line"><span class="keyword">type</span> <span class="type">ResetRecoilState</span> = &lt;<span class="type">T</span>&gt;(<span class="type">RecoilState</span>&lt;<span class="type">T</span>&gt;) =&gt; void;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>key</code> - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application. It needs to be stable across executions if used for persistence.</p>
+</li>
+<li><p><code>get</code> - A function that evaluates the value for the derived state. It may return either a value directly or an asynchronous Promise or another atom or selector representing the same type. It is passed an object as the first parameter containing the following properties:</p>
+<ul>
+<li>get - a function used to retrieve values from other atoms/selectors. All atoms/selectors passed to this function will be implicitly added to a list of <strong>dependencies</strong> for the selector. If any of the selector’s dependencies change, the selector will re-evaluate.</li>
+</ul>
+</li>
+<li><p><code>set?</code> - If this property is set, the selector will return <strong>writeable</strong> state. A function that is passed an object of callbacks as the first parameter and the new incoming value. The incoming value may be a value of type T or maybe an object of type <code>DefaultValue</code> if the user reset the selector. The callbacks include:</p>
+<ul>
+<li><code>get</code> - a function used to retrieve values from other atoms/selectors. This function will not subscribe the selector to the given atoms/selectors.</li>
+<li><code>set</code> - a function used to set the values of upstream Recoil state. The first parameter is the Recoil state and the second parameter is the new value. The new value may be an updater function or a DefaultValue object to propagate reset actions.</li>
+</ul>
+</li>
+<li><p><code>dangerouslyAllowMutability</code> - In some cases it may be desireable allow mutating of objects stored in selectors that don’t represent state changes. Use this option to override freezing objects in development mode.</p>
+</li>
+</ul>
+<hr>
+<p>A selector with a simple static dependency:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mySelector = selector(&#123;</span><br><span class="line">    key: <span class="string">&#x27;MySelector&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span>: (&#123;<span class="keyword">get</span>&#125;) =&gt; <span class="keyword">get</span>(myAtom) * <span class="number">100</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Dynamic-Dependencies"><a href="#Dynamic-Dependencies" class="headerlink" title="Dynamic Dependencies"></a>Dynamic Dependencies</h3><p>A read-only selector has a <code>get</code> method which evaluates the value of the selector based on dependencies. If any of those dependencies are updated, then the selector will re-evaluate. The dependencies are dynamically determined based on the atoms or selectors you actually use when evaluating the selector. Depending on the values of the previous dependencies, you may dynamically use different additional dependencies. Recoil will automatically update the current data-flow graph so that the selector is only subscribed to updates from the current set of dependencies.</p>
+<p>In this example <code>mySelector</code> will depend on the <code>toggleState</code> atom as well as either <code>selectorA</code> or <code>selectorB</code> depending on the state of <code>toggleState</code>.</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> toggleState = atom(&#123;<span class="built_in">key</span>: <span class="string">&#x27;Toggle&#x27;</span>, <span class="keyword">default</span>: <span class="keyword">false</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mySelector = selector(&#123;</span><br><span class="line">    <span class="built_in">key</span>: <span class="string">&#x27;MySelector&#x27;</span>,</span><br><span class="line">    <span class="built_in">get</span>: (&#123;<span class="built_in">get</span>&#125;) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> toggle = <span class="built_in">get</span>(toggleState);</span><br><span class="line">        <span class="keyword">if</span> (toggle) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">get</span>(selectorA);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">get</span>(selectorB);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Writeable-Selectors"><a href="#Writeable-Selectors" class="headerlink" title="Writeable Selectors"></a>Writeable Selectors</h3><p>A bi-directional selector receives the incoming value as a parameter and can use that to propagate the changes back upstream along the data-flow graph. Because the user may either set the selector with a new value or reset the selector, the incoming value is either of the same type that the selector represents or a <code>DefaultValue</code> object which represents a reset action.</p>
+<p>This simple selector essentially wraps an atom to add an additional field. It just passes through set and reset operations to the upstream atom.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> proxySelector = selector(&#123;</span><br><span class="line">    key: <span class="string">&#x27;ProxySelector&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span>: (&#123;<span class="keyword">get</span>&#125;) =&gt; (&#123;...<span class="keyword">get</span>(myAtom), extraField: <span class="string">&#x27;hi&#x27;</span>&#125;),</span><br><span class="line">    <span class="keyword">set</span>: (&#123;<span class="keyword">set</span>&#125;, newValue) =&gt; <span class="keyword">set</span>(myAtom, newValue),</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>This selector transforms the data, so needs to check if the incoming value is a <code>DefaultValue</code>.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> transformSelector = selector(&#123;</span><br><span class="line">    key: <span class="string">&#x27;TransformSelector&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span>: (&#123;<span class="keyword">get</span>&#125;) =&gt; <span class="keyword">get</span>(myAtom) * <span class="number">100</span>,</span><br><span class="line">    <span class="keyword">set</span>: (&#123;<span class="keyword">set</span>&#125;, newValue) =&gt;</span><br><span class="line">        <span class="keyword">set</span>(myAtom, newValue instanceof DefaultValue ? newValue : newValue / <span class="number">100</span>),</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Asynchronous-Selectors"><a href="#Asynchronous-Selectors" class="headerlink" title="Asynchronous Selectors"></a>Asynchronous Selectors</h3><p>Selectors may also have asynchronous evaluation functions and return a <code>Promise</code> to the output value. Please see <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/guides/asynchronous-data-queries">this guide</a> for more information.</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myQuery = selector(&#123;</span><br><span class="line">    key: <span class="string">&#x27;MyQuery&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span>: <span class="keyword">async</span> (&#123;<span class="keyword">get</span>&#125;) =&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">await</span> myAsyncQuery(<span class="keyword">get</span>(queryParamState));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Example-Synchronous"><a href="#Example-Synchronous" class="headerlink" title="Example (Synchronous)"></a>Example (Synchronous)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;atom, selector, useRecoilState, DefaultValue&#125; <span class="keyword">from</span> <span class="string">&#x27;recoil&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> tempFahrenheit = atom(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;tempFahrenheit&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="number">32</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> tempCelsius = selector(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;tempCelsius&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="function">(<span class="params">&#123;get&#125;</span>) =&gt;</span> ((get(tempFahrenheit) - <span class="number">32</span>) * <span class="number">5</span>) / <span class="number">9</span>,</span><br><span class="line">    <span class="attr">set</span>: <span class="function">(<span class="params">&#123;set&#125;, newValue</span>) =&gt;</span></span><br><span class="line">        set(</span><br><span class="line">            tempFahrenheit,</span><br><span class="line">            newValue <span class="keyword">instanceof</span> DefaultValue ? newValue : (newValue * <span class="number">9</span>) / <span class="number">5</span> + <span class="number">32</span></span><br><span class="line">        ),</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TempCelsius</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> [tempF, setTempF] = useRecoilState(tempFahrenheit);</span><br><span class="line">    <span class="keyword">const</span> [tempC, setTempC] = useRecoilState(tempCelsius);</span><br><span class="line">    <span class="keyword">const</span> resetTemp = useResetRecoilState(tempCelsius);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> addTenCelsius = <span class="function">() =&gt;</span> setTempC(tempC + <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">const</span> addTenFahrenheit = <span class="function">() =&gt;</span> setTempF(tempF + <span class="number">10</span>);</span><br><span class="line">    <span class="keyword">const</span> reset = <span class="function">() =&gt;</span> resetTemp();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            Temp (Celsius): &#123;tempC&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            Temp (Fahrenheit): &#123;tempF&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;addTenCelsius&#125;</span>&gt;</span>Add 10 Celsius<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;addTenFahrenheit&#125;</span>&gt;</span>Add 10 Fahrenheit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;reset&#125;</span>&gt;</span>&gt;Reset<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Example-Asynchronous"><a href="#Example-Asynchronous" class="headerlink" title="Example (Asynchronous)"></a>Example (Asynchronous)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;selector, useRecoilValue&#125; <span class="keyword">from</span> <span class="string">&#x27;recoil&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myQuery = selector(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;MyDBQuery&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(getMyRequestUrl());</span><br><span class="line">        <span class="keyword">return</span> response.json();</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">QueryResults</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> queryResults = useRecoilValue(myQuery);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            &#123;queryResults.foo&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ResultsSection</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">React.Suspense</span> <span class="attr">fallback</span>=<span class="string">&#123;</span>&lt;<span class="attr">div</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">div</span>&gt;</span>&#125;&gt;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">QueryResults</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">React.Suspense</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Please see <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/guides/asynchronous-data-queries">this guide</a> for more complex examples.</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-css/1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/css/1/"
+    >CSS--盒子模型</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/css/1/" class="article-date">
+  <time datetime="2021-02-24T10:34:22.000Z" itemprop="datePublished">2021-02-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CSS/">CSS</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>编写中，敬请期待。。。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-javascript/1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/javascript/1/"
+    >JavaScript--如何理解cookie, session, token？</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/javascript/1/" class="article-date">
+  <time datetime="2021-02-24T10:25:55.000Z" itemprop="datePublished">2021-02-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>编写中，敬请期待。。。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%AE%89%E5%85%A8/" rel="tag">网络与安全</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-wechat/2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/wechat/2/"
+    >微信系列--Android机微信小程序手写输入不能获取完整字符</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/wechat/2/" class="article-date">
+  <time datetime="2021-02-24T06:25:23.000Z" itemprop="datePublished">2021-02-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/wechat/">wechat</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>问题描述：<br>微信小程序表单输入使用手写输入法，当输入完成后，点击空白处键盘收起，这时，绑定的input事件或者是change事件并不能获取到完整的输入内容。原因在于，<code>当输入的文字有下划线的时候，手机不认为输入完成</code>。</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">van-field</span> <span class="attr">label</span>=<span class="string">&quot;姓名&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入姓名&quot;</span> <span class="attr">bind:change</span>=<span class="string">&quot;getUsername&quot;</span> <span class="attr">border</span>=<span class="string">&quot;</span></span></span><span class="template-variable">&#123;&#123;<span class="name">false</span>&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">&quot;</span> <span class="attr">value</span>=<span class="string">&quot;</span></span></span><span class="template-variable">&#123;&#123;<span class="name">form.userName</span>&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">&quot;</span> <span class="attr">readonly</span>=<span class="string">&quot;</span></span></span><span class="template-variable">&#123;&#123;<span class="name">isReadonly</span>&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">van-field</span>&gt;</span></span></span><br><span class="line"><span class="xml">getUsername (value) &#123;</span></span><br><span class="line"><span class="xml">    this.setData(&#123;&#x27;form.userName&#x27;: value.detail&#125;)</span></span><br><span class="line"><span class="xml">&#125;,</span></span><br></pre></td></tr></table></figure>
+<p>解决兼容性问题的方法是添加blur事件。</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">van-field</span> <span class="attr">label</span>=<span class="string">&quot;姓名&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入姓名&quot;</span> <span class="attr">bind:blur</span>=<span class="string">&quot;getUsernames&quot;</span> <span class="attr">bind:change</span>=<span class="string">&quot;getUsername&quot;</span> <span class="attr">border</span>=<span class="string">&quot;</span></span></span><span class="template-variable">&#123;&#123;<span class="name">false</span>&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">&quot;</span> <span class="attr">value</span>=<span class="string">&quot;</span></span></span><span class="template-variable">&#123;&#123;<span class="name">form.userName</span>&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">&quot;</span> <span class="attr">readonly</span>=<span class="string">&quot;</span></span></span><span class="template-variable">&#123;&#123;<span class="name">isReadonly</span>&#125;&#125;</span><span class="xml"><span class="tag"><span class="string">&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">van-field</span>&gt;</span></span></span><br><span class="line"><span class="xml">getUsername (value) &#123;</span></span><br><span class="line"><span class="xml">    this.setData(&#123;&#x27;form.userName&#x27;: value.detail&#125;)</span></span><br><span class="line"><span class="xml">&#125;,</span></span><br><span class="line"><span class="xml">getUsernames (value) &#123;</span></span><br><span class="line"><span class="xml">    this.setData(&#123;&#x27;form.userName&#x27;: value.detail.value&#125;)</span></span><br><span class="line"><span class="xml">&#125;,</span></span><br></pre></td></tr></table></figure>
+<p>这样可以保证在失去焦点的时候，能获取到全部的输入值。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B/" rel="tag">实战案例</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-wechat/1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/wechat/1/"
+    >微信系列--微信小程序授权登陆流程</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/wechat/1/" class="article-date">
+  <time datetime="2021-02-22T10:31:23.000Z" itemprop="datePublished">2021-02-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/wechat/">wechat</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>小程序开发了这么久。无论是工作还是面试，总会遇到一些问题，需要去总结。登陆问题一直以来都是面试考察的重点，所以我来总结一下小程序登陆的流程。<br>首先，我们需要搞明白，登陆是为了什么？<br>这么说其实有点蠢，但是我们又不得不这么说，因为很多人不知道登陆是干什么,其实从页面效果来看呢，就是要拿到用户信息展示在页面上，从技术角度来说呢，就是要拿到登陆的凭证–token。仅此而已，OK，知道了这俩点呢。我们就可以开干了。</p>
+<h3 id="手动授权登陆"><a href="#手动授权登陆" class="headerlink" title="手动授权登陆"></a>手动授权登陆</h3><p>在手动授权之前，我们可以先公共微信提供的API来检查用户是不是已经授权过：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">wx</span><span class="selector-class">.getSetting</span>()</span><br></pre></td></tr></table></figure>
+<p>如果没有授权，那么在新版本的小程序登陆中，微信做了限制，要求用户必须手动，所以我们需要在页面中写点代码：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button <span class="attribute">class</span>=<span class="string">&#x27;bottom&#x27;</span> <span class="attribute">type</span>=<span class="string">&#x27;primary&#x27;</span> <span class="attribute">open-type</span>=<span class="string">&quot;getUserInfo&quot;</span> <span class="attribute">lang</span>=<span class="string">&quot;zh_CN&quot;</span> <span class="attribute">bindgetuserinfo</span>=<span class="string">&quot;bindGetUserInfo&quot;</span>&gt;授权登录&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>这里要求必须设置open-type=”getUserInfo”<br>这样点击按钮：<br><img src="/wechat/1/1.png" alt="登陆按钮"><br>就可以调起授权弹窗了。<br><img src="/wechat/1/2.png" alt="手动授权弹窗"><br>点允许，那么授权成功，这时会拿到用户的一些信息，<br><img src="/wechat/1/3.png" alt="用户信息"><br>这样我们再调用：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">wx</span><span class="selector-class">.login</span>()</span><br></pre></td></tr></table></figure>
+<p>用来获取微信的临时凭证，将获取到的信息和appid(小程序管理后台获取)一并发给我们自己的服务端，我们的服务端会拿着这些东西去微信服务器换取openid和session_key,这样我们自己的服务端就可以生成自己自定义的登陆态（token）,r然后返回给前端，前端存储在localStorage.就可以发起业务请求了。<br><img src="/wechat/1/login.png" alt="alt 属性文本"></p>
+</li>
+<li><p>某些业务场景可能会需要手机号，因为获取手机号。所以需要调用，这里也必须要用户自己触发，且必须设置open-type=”getPhoneNumber”：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;button <span class="keyword">open</span>-type=<span class="string">&quot;getPhoneNumber&quot;</span> bindgetphonenumber=<span class="string">&quot;getPhoneNumber&quot;</span>&gt;获取手机号&lt;/button&gt;</span><br><span class="line">getPhoneNumber(e) &#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">if</span> (e.detail.errMsg !== <span class="string">&#x27;getPhoneNumber:ok&#x27;</span>) &#123;</span><br><span class="line">        wx.showToast(&#123;</span><br><span class="line">            title: <span class="string">&#x27;获取手机号失败&#x27;</span>,</span><br><span class="line">            icon: <span class="string">&#x27;none&#x27;</span>,</span><br><span class="line">        &#125;);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>微信授权登陆，大致就是这样！！！！！！！！！！！！！</p>
+</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wechat/" rel="tag">wechat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" rel="tag">微信小程序</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-recoil/api/recoil-state/atom"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/recoil/api/recoil-state/atom/"
+    >Recoil API手册--atom(options)</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/recoil/api/recoil-state/atom/" class="article-date">
+  <time datetime="2021-02-22T01:03:09.000Z" itemprop="datePublished">2021-02-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/recoil/">recoil</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>An atom represents state in Recoil. The <code>atom()</code> function returns a writeable <code>RecoilState</code> object.<br>atom代表了Recoil中的状态，<code>atom()</code>返回了一个可读写的Recoil状态对象。</p>
+<hr>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> atom<span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span>(</span><span class="xquery">&#123;</span></span><br><span class="line"><span class="xquery">   <span class="built_in"> key</span>:<span class="built_in"> string</span>,</span></span><br><span class="line"><span class="xquery">    default: T | Promise<span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span> | RecoilValue</span><span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span>,</span></span></span><br><span class="line"><span class="xml"><span class="xquery">    effects_UNSTABLE?: $ReadOnlyArray&lt;AtomEffect</span><span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span>&gt;,</span></span></span><br><span class="line"><span class="xml"><span class="xquery">    dangerouslyAllowMutability?: boolean,</span></span></span><br><span class="line"><span class="xml"><span class="xquery">&#125;</span></span><span class="xml">): RecoilState</span><span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>key</code> - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.<br><code>key</code>字段是一个用来定义内部atom的唯一的字符串，这个是字符串必须是唯一的，用来区分应用程序中所有的atoms和selector.</li>
+<li><code>default</code> - The initial value of the atom or a Promise or another atom or selector representing a value of the same type.<br><code>default</code>字段用来初始化一个atom或者Promise或者另一个atom或者是selector具有相同类型的初始值。</li>
+<li><code>effects_UNSTABLE</code> - An optional array of Atom Effects for the atom.<br><code>effects_UNSTABLE</code>字段一个可选的atom副作用数组。</li>
+<li><code>dangerouslyAllowMutability</code> - In some cases it may be desireable allow mutating of objects stored in atoms that don’t represent state changes. Use this option to override freezing objects in development mode.<br><code>dangerouslyAllowMutability</code>在某些情况下，他是用来描述允许atoms存储的对象发生转化，但是并不代表状态会发生变化。可以用这个选项在开发环境来冻结对象。</li>
+</ul>
+<hr>
+<p>Recoil manages atom state changes to know when to notify components subscribing to that atom to re-render, so you should use the hooks listed below to change atom state. If an object stored in an atom was mutated directly it may bypass this and cause state changes without properly notifying subscribing components. To help detect bugs Recoil will freeze objects stored in atoms in development mode.</p>
+<p>Recoil管理atom状态是通过通知组建订阅atom状态实现重新渲染，所以，应该使用下面的hooks函数来使得atom状态发生变化。如果一个存储在atom中的对象被直接改变，那就会引起组建没有被通知订阅而atom状态发生变化。为了解决这个bug，Recoil会在开发环境冻结存储在atom中的对象。</p>
+<p>Most often, you’ll use the following hooks to interact with atoms:<br>通常情况下，需要使用下列的hooks函数来使得atoms发生变化。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilState">useRecoilState()</a>: Use this hook when you intend on both reading and writing to the atom. This hook subscribes the component to the atom.<br><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilState">useRecoilState()</a>:当你要读写atom的时候使用这个钩子函数，这个钩子函数会订阅组建的atom.</li>
+<li><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilValue">useRecoilValue()</a>: Use this hook when you intend on only reading the atom. This hook subscribes the component to the atom.<br><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilValue">useRecoilValue()</a>:当只是读取atom的时候。使用这个钩子函数，这个钩子函数会订阅组建的atom.</li>
+<li><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useSetRecoilState">useSetRecoilState()</a>: Use this hook when you intend on only writing to the atom.<br><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useSetRecoilState">useSetRecoilState()</a>:当只是操作atom的时候。使用这个钩子函数。</li>
+<li><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useResetRecoilState">useResetRecoilState()</a>: Use this hook to reset an atom to its default value.<br><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useResetRecoilState">useResetRecoilState()</a>:当重置atom的默认值的时候，使用这个钩子函数。<br>For rare cases where you need to read an atom’s value without subscribing to the component, see <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilCallback">useRecoilCallback()</a>.</li>
+</ul>
+<p>对于极少数需要读取atom的值，而不需要订阅组建，可以参考<a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilCallback">useRecoilCallback()</a>。</p>
+<p>You can initialize an atom either with a static value or with a <code>Promise</code> or a <code>RecoilValue</code> representing a value of the same type. Because the Promise may be pending or the default selector may be asynchronous it means that the atom value may also be pending or throw an error when reading. Note that you cannot currently assign a <code>Promise</code> when setting an atom. Please use <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/selector">selectors</a> for async functions.</p>
+<p>可以用通过一个具有共同类型的静态值或者是一个<code>Promise</code>或者是一个<code>RecoilValue</code>来初始化atom.因为Promise也许是进行中，或者默认的selector会是异步的，这就会使得atom的状态也是处于进行中或者是抛出一个错误。所以，当是这atom的时候，并不能将当前标注为<code>Promise</code>,请使用selector异步函数。</p>
+<p>Atoms cannot be used to store <code>Promise&#39;s</code> or <code>RecoilValue&#39;s</code> directly, but they may be wrapped in an object. Note that <code>Promise&#39;s</code> may be mutable. Atoms can be set to a <code>function</code>, as long as it is pure, but to do so you may need to use the updater form of setters. (e.g. <code>set(myAtom, () =&gt; myFunc);</code>).</p>
+<p>Atoms不能被直接才存储为<code>Promise</code>或者是<code>RecoilValue&#39;s</code>, 但是他们可以被包裹为一个对象。注意<code>Promise</code>可能被改变。Atoms可以被设置为是个函数，只要纯净，就可以使用setters的更新方式。(e.g. <code>set(myAtom, () =&gt; myFunc);</code>).</p>
+<p>案例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;atom, useRecoilState&#125; <span class="keyword">from</span> <span class="string">&#x27;recoil&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> counter = atom(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;myCounter&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="number">0</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Counter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> [count, setCount] = useRecoilState(counter);</span><br><span class="line">    <span class="keyword">const</span> incrementByOne = <span class="function">() =&gt;</span> setCount(count + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            Count: &#123;count&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;incrementByOne&#125;</span>&gt;</span>Increment<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/1/"
+    >LeetCode算法--求俩数之和</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/1/" class="article-date">
+  <time datetime="2021-01-19T03:21:19.000Z" itemprop="datePublished">2021-01-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：给定一个数组nums和一个目标值target,从数组中找到俩个元素的和等于目标值target，并返回这俩个元素的位置。<br>思路一：暴力算法，将数组中的俩个元素相加，如果等于目标值target，那么返回其位置。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let <span class="function"><span class="keyword">fun</span> = <span class="params">(nums, target)</span></span> =&gt; &#123;</span><br><span class="line">    let result = []</span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; nums.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (let j = i + <span class="number">1</span>; j &lt; nums.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] + nums[j] === target) &#123;</span><br><span class="line">                result.push(i, j)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：<br>1,这里需要注意的是循环的边界值，i &lt; nums.length - 1, j &lt; nums.length<br>2,因为做了俩层循环，所以时间复杂度是O(n<sup>2</sup>),声明了三个变量，空间复杂度是O(n)</p>
+<p>思路二：由于上面的暴力算法时间复杂度比较高，所以我们可以再时间复杂度上做一点优化，我们可不可以将时间复杂度降低到O(N)呢？当然是可以的，对于每一个 nums[ i ]，我们首先查询哈希表中是否存在 target - nums[ i ]，然后将 nums[ i ] 插入到哈希表中，即可保证不会让 nums[ i ] 和自己匹配。</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> fun = (nums, target) =&gt; &#123;</span><br><span class="line">    <span class="built_in">let</span> result = []</span><br><span class="line">    <span class="built_in">let</span> <span class="built_in">map</span> = <span class="built_in">new</span> Map()</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">length</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">map</span>.set(nums[i], i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">length</span>;i++) &#123;</span><br><span class="line">        <span class="built_in">let</span> item = target - nums[i]</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">map</span>.has(item) &amp;&amp; <span class="built_in">map</span>.<span class="built_in">get</span>(item) !== i) &#123;</span><br><span class="line">            result.<span class="built_in">push</span>(i);</span><br><span class="line">            result.<span class="built_in">push</span>(<span class="built_in">map</span>.<span class="built_in">get</span>(item))</span><br><span class="line">            <span class="built_in">break</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：<br>我们首先创建了一个map结构，用来保存数组中的元素和位置，作为哈希表。然后按照思路二来实现。遍历一次，也降低了时间复杂度。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/5/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2021
+        <i class="ri-heart-fill heart_icon"></i> Lee
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Lee前端技术栈"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
