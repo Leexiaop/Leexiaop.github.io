@@ -176,6 +176,63 @@
     
     
     <article
+  id="post-react/5"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/react/5/"
+    >React--React中setState方法的理解？</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/react/5/" class="article-date">
+  <time datetime="2021-07-15T07:04:41.000Z" itemprop="datePublished">2021-07-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>我们知道在react中，setState是调用频率非常高的一个函数。</p>
+<h3 id="setState在默认情况下是异步的"><a href="#setState在默认情况下是异步的" class="headerlink" title="setState在默认情况下是异步的"></a>setState在默认情况下是异步的</h3><p>我们知道setState的调用是非常频繁的，那么如果setStates是同步执行，那么就意味着只要调用setState就会修改state,而state的变化，就会直接启动diff算法，从而重新渲染页面，这在性能方面的消耗实在是太过夸张。但是如果是异步执行，那么在多次setState之后，将这些操作一起合并执行。降低性能消耗成为可能。</p>
+<h3 id="同步情况下的setState"><a href="#同步情况下的setState" class="headerlink" title="同步情况下的setState"></a>同步情况下的setState</h3><p>在setTimeout和原生事件中，setState是同步执行的。</p>
+<h3 id="调用setState会发生什么"><a href="#调用setState会发生什么" class="headerlink" title="调用setState会发生什么"></a>调用setState会发生什么</h3><p>调用setState之后首先会将传入setState的参数和原来的state进行合并，得到新的state，那么这样state就被更新了，因为state的更新就会引起页面的重新渲染，所以，会调用触发所谓的调和过程，react的就以相对高效的方式来自动计算出新旧dom的差异，根据差异最小化来重新构建页面。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-react/4"
   class="article article-type-post"
   itemscope
@@ -1041,76 +1098,13 @@ Yes, that’s all!</li>
 </article>
 
     
-    <article
-  id="post-algorithm/20"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/20/"
-    >leeCode算法--实现一个strStr()函数</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/20/" class="article-date">
-  <time datetime="2021-05-19T06:21:49.000Z" itemprop="datePublished">2021-05-19</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>题目：实现一个strStr()方法，要求strStr有俩个参数，hayStack和needle参数，找出字符串hayStack中needle的位置，并返回这个位置。如果找不到就返回-1.</p>
-<p>解析：查找位置，只能双层遍历，依次比对。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> strStr = <span class="function">(<span class="params">haystack, needle</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= haystack.length; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> a = i, b = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> (b &lt; needle.length &amp;&amp;</span><br><span class="line">            haystack[a] === needle[b]) &#123;</span><br><span class="line">            a++</span><br><span class="line">            b++</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (b === needle.length) <span class="keyword">return</span> i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">strStr(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>)  <span class="comment">//  0</span></span><br><span class="line">strStr(<span class="string">&#x27;hello&#x27;</span>, <span class="string">&#x27;ll&#x27;</span>)   <span class="comment">//  2</span></span><br><span class="line">strStr(<span class="string">&#x27;aaaaa&#x27;</span>, <span class="string">&#x27;bba&#x27;</span>)  <span class="comment">//  -1</span></span><br></pre></td></tr></table></figure>
-<p>注意：整个代码结构是比较清晰易懂的，但是有几个地地方是需要注意：</p>
-<ul>
-<li>for循环中i是要小于等于（<code>&lt;=</code>）haystack.length,这是因为haystack和needle都可能出现为空的情况；</li>
-<li>双层循环，要用变量接一下外层循环的变量，这里需要知道的是，双层遍历，外层循环一次，内层循环要全循环完，才能开始外层的第二次循环，以此类推；</li>
-<li>注意while循环的条件。</li>
-</ul>
-<p>That’s all!这就是KMP算法。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/2/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">下一页</a>
   </nav>
   
 </section>

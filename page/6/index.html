@@ -176,6 +176,134 @@
     
     
     <article
+  id="post-css/2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/css/2/"
+    >CSS-flex布局是什么</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/css/2/" class="article-date">
+  <time datetime="2021-03-02T10:37:13.000Z" itemprop="datePublished">2021-03-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CSS/">CSS</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>说起flex布局，应该是我们比较熟悉的一种，但是有很多不常用的属性，我们还是需要总结一下：</p>
+<h3 id="什么是flex布局"><a href="#什么是flex布局" class="headerlink" title="什么是flex布局"></a>什么是flex布局</h3><p>flex布局就是flexible box，就是弹性盒子的意思，也就是为盒子提供最大的灵活性。为任意的盒子指定flex布局：</p>
+<ul>
+<li>任意元素<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.<span class="built_in">container</span> &#123;</span><br><span class="line">    <span class="keyword">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>行内元素<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">    display: <span class="keyword">inline</span>-flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<code>注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。</code><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3>采用flex布局的元素，称为容器，而容器中的子元素则称为项目。<br><img src="/css/2/flex-1.png" alt="flex布局"><br>容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做main start，结束位置叫做main end；交叉轴的开始位置叫做cross start，结束位置叫做cross end。项目默认沿主轴排列。单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size。<h3 id="容器属性"><a href="#容器属性" class="headerlink" title="容器属性"></a>容器属性</h3></li>
+<li>flex-direction </li>
+<li>flex-wrap</li>
+<li>flex-flow</li>
+<li>justify-content</li>
+<li>align-items</li>
+<li>align-content</li>
+</ul>
+<h4 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h4><p>flex-direction决定了主轴的方向，也就是项目排列的方向。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">  flex-direction: <span class="keyword">column</span>-<span class="keyword">reverse</span> | <span class="keyword">column</span>| <span class="keyword">row</span> | <span class="keyword">row</span>-<span class="keyword">reverse</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>column-reverse沿着纵轴的负正方向排列;</p>
+</li>
+<li><p>column沿着纵轴方向负排列；</p>
+</li>
+<li><p>row (默认值)沿着横轴正方向排列；</p>
+</li>
+<li><p>row-reverse 沿着横轴的负方向排列；<br><img src="/css/2/flex-2.png" alt="flex布局"></p>
+<h4 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h4><p>flex-wrap表示容器中的项目是否换行。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">  flex-<span class="built_in">wrap</span>: nowrap | <span class="built_in">wrap</span> | <span class="built_in">wrap</span>-<span class="built_in">reverse</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/css/2/flex-3.png" alt="flex布局"></p>
+</li>
+<li><p>nowrap 不换行<br><img src="/css/2/flex-3-1.png" alt="flex布局"></p>
+</li>
+<li><p>wrap允许换行，第一行在上方。<br><img src="/css/2/flex-3-2.jpeg" alt="flex布局"></p>
+</li>
+<li><p>wrap-reverse 换行，第一行在下方。<br><img src="/css/2/flex-3-3.jpeg" alt="flex布局"></p>
+</li>
+</ul>
+<h4 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h4><p>flex-flow是flex-direction 和flex-wrap的简写， 默认值为row和nowrap</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.<span class="class">box </span>&#123;</span><br><span class="line">  flex-flow: <span class="params">&lt;flex-direction&gt;</span> || <span class="params">&lt;flex-wrap&gt;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h4><p>justify-content属性表示沿主轴排列的对奇方式：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">  justify-content: flex-start | flex-<span class="keyword">end</span> | center | <span class="literal">space</span>-<span class="keyword">between</span> | <span class="literal">space</span>-<span class="keyword">around</span> | <span class="literal">space</span>-evenly;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>center剧中对其，</li>
+<li>flex-start 左对齐</li>
+<li>flex-end右对齐</li>
+<li>space-between俩端对齐</li>
+<li>space-around每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。</li>
+<li>space-evenly 每个项目两侧的间隔以及同项目流两侧的间隔相等。<br><img src="/css/2/flex-4.png" alt="flex布局"></li>
+</ul>
+<h4 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h4><p>align-items是表示其在交叉轴的对齐方式。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">  align-items: flex-start | <span class="type">flex</span>-<span class="keyword">end</span> | <span class="type">center</span> | <span class="type">baseline</span> | <span class="type">stretch</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>flex-start：交叉轴的起点对齐。</li>
+<li>flex-end：交叉轴的终点对齐。</li>
+<li>center：交叉轴的中点对齐。</li>
+<li>baseline: 项目的第一行文字的基线对齐。</li>
+<li>stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。<br><img src="/css/2/flex-5.png" alt="flex布局"><h4 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h4>align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">  align-content: flex-start | <span class="type">flex</span>-<span class="keyword">end</span> | <span class="type">center</span> | <span class="type">space</span>-between | <span class="type">space</span>-around | <span class="type">stretch</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>flex-start：与交叉轴的起点对齐。</li>
+<li>flex-end：与交叉轴的终点对齐。</li>
+<li>center：与交叉轴的中点对齐。</li>
+<li>space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。</li>
+<li>space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</li>
+<li>stretch（默认值）：轴线占满整个交叉轴。</li>
+</ul>
+<h3 id="项目属性"><a href="#项目属性" class="headerlink" title="项目属性"></a>项目属性</h3><ul>
+<li>order</li>
+<li>flex-grow</li>
+<li>flex-shrink</li>
+<li>flex-basis</li>
+<li>flex</li>
+<li>align-self<h4 id="order"><a href="#order" class="headerlink" title="order"></a>order</h4>order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.<span class="class">item </span>&#123;</span><br><span class="line"><span class="symbol">  order:</span> <span class="params">&lt;integer&gt;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/css/2/flex-7.png" alt="flex布局"><h4 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h4>flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex-grow</span>: &lt;number&gt;; <span class="comment">/* default 0 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/css/2/flex-8.png" alt="flex布局"><br>如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。<h4 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h4>flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小.<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex-shrink</span>: &lt;number&gt;; <span class="comment">/* default 1 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。负值对该属性无效。<h4 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h4>flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">flex-basis</span>: &lt;length&gt; | auto; <span class="comment">/* default auto */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。<h4 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h4>flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。<figure class="highlight sml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.item &#123;</span><br><span class="line">  flex: none | [ &lt;<span class="symbol">&#x27;flex</span>-grow&#x27;&gt; &lt;<span class="symbol">&#x27;flex</span>-shrink&#x27;&gt;? || &lt;<span class="symbol">&#x27;flex</span>-basis&#x27;&gt; ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。<h4 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h4>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.item &#123;</span><br><span class="line">  align-self: <span class="built_in">auto</span> | <span class="type">flex</span>-start | <span class="type">flex</span>-<span class="keyword">end</span> | <span class="type">center</span> | <span class="type">baseline</span> | <span class="type">stretch</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/css/2/flex-10.png" alt="flex布局"><br>该属性可能取6个值，除了auto，其他都与align-items属性完全一致。<br>(That’s all!)</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-wechat/3"
   class="article article-type-post"
   itemscope
@@ -1159,92 +1287,13 @@
 </article>
 
     
-    <article
-  id="post-recoil/api/recoil-state/atom"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/recoil/api/recoil-state/atom/"
-    >Recoil API手册--atom(options)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/recoil/api/recoil-state/atom/" class="article-date">
-  <time datetime="2021-02-22T01:03:09.000Z" itemprop="datePublished">2021-02-22</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/recoil/">recoil</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>An atom represents state in Recoil. The <code>atom()</code> function returns a writeable <code>RecoilState</code> object.<br>atom代表了Recoil中的状态，<code>atom()</code>返回了一个可读写的Recoil状态对象。</p>
-<hr>
-<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> atom<span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span>(</span><span class="xquery">&#123;</span></span><br><span class="line"><span class="xquery">   <span class="built_in"> key</span>:<span class="built_in"> string</span>,</span></span><br><span class="line"><span class="xquery">    default: T | Promise<span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span> | RecoilValue</span><span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span>,</span></span></span><br><span class="line"><span class="xml"><span class="xquery">    effects_UNSTABLE?: $ReadOnlyArray&lt;AtomEffect</span><span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span>&gt;,</span></span></span><br><span class="line"><span class="xml"><span class="xquery">    dangerouslyAllowMutability?: boolean,</span></span></span><br><span class="line"><span class="xml"><span class="xquery">&#125;</span></span><span class="xml">): RecoilState</span><span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>key</code> - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.<br><code>key</code>字段是一个用来定义内部atom的唯一的字符串，这个是字符串必须是唯一的，用来区分应用程序中所有的atoms和selector.</li>
-<li><code>default</code> - The initial value of the atom or a Promise or another atom or selector representing a value of the same type.<br><code>default</code>字段用来初始化一个atom或者Promise或者另一个atom或者是selector具有相同类型的初始值。</li>
-<li><code>effects_UNSTABLE</code> - An optional array of Atom Effects for the atom.<br><code>effects_UNSTABLE</code>字段一个可选的atom副作用数组。</li>
-<li><code>dangerouslyAllowMutability</code> - In some cases it may be desireable allow mutating of objects stored in atoms that don’t represent state changes. Use this option to override freezing objects in development mode.<br><code>dangerouslyAllowMutability</code>在某些情况下，他是用来描述允许atoms存储的对象发生转化，但是并不代表状态会发生变化。可以用这个选项在开发环境来冻结对象。</li>
-</ul>
-<hr>
-<p>Recoil manages atom state changes to know when to notify components subscribing to that atom to re-render, so you should use the hooks listed below to change atom state. If an object stored in an atom was mutated directly it may bypass this and cause state changes without properly notifying subscribing components. To help detect bugs Recoil will freeze objects stored in atoms in development mode.</p>
-<p>Recoil管理atom状态是通过通知组建订阅atom状态实现重新渲染，所以，应该使用下面的hooks函数来使得atom状态发生变化。如果一个存储在atom中的对象被直接改变，那就会引起组建没有被通知订阅而atom状态发生变化。为了解决这个bug，Recoil会在开发环境冻结存储在atom中的对象。</p>
-<p>Most often, you’ll use the following hooks to interact with atoms:<br>通常情况下，需要使用下列的hooks函数来使得atoms发生变化。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilState">useRecoilState()</a>: Use this hook when you intend on both reading and writing to the atom. This hook subscribes the component to the atom.<br><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilState">useRecoilState()</a>:当你要读写atom的时候使用这个钩子函数，这个钩子函数会订阅组建的atom.</li>
-<li><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilValue">useRecoilValue()</a>: Use this hook when you intend on only reading the atom. This hook subscribes the component to the atom.<br><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilValue">useRecoilValue()</a>:当只是读取atom的时候。使用这个钩子函数，这个钩子函数会订阅组建的atom.</li>
-<li><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useSetRecoilState">useSetRecoilState()</a>: Use this hook when you intend on only writing to the atom.<br><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useSetRecoilState">useSetRecoilState()</a>:当只是操作atom的时候。使用这个钩子函数。</li>
-<li><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useResetRecoilState">useResetRecoilState()</a>: Use this hook to reset an atom to its default value.<br><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useResetRecoilState">useResetRecoilState()</a>:当重置atom的默认值的时候，使用这个钩子函数。<br>For rare cases where you need to read an atom’s value without subscribing to the component, see <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilCallback">useRecoilCallback()</a>.</li>
-</ul>
-<p>对于极少数需要读取atom的值，而不需要订阅组建，可以参考<a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilCallback">useRecoilCallback()</a>。</p>
-<p>You can initialize an atom either with a static value or with a <code>Promise</code> or a <code>RecoilValue</code> representing a value of the same type. Because the Promise may be pending or the default selector may be asynchronous it means that the atom value may also be pending or throw an error when reading. Note that you cannot currently assign a <code>Promise</code> when setting an atom. Please use <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/selector">selectors</a> for async functions.</p>
-<p>可以用通过一个具有共同类型的静态值或者是一个<code>Promise</code>或者是一个<code>RecoilValue</code>来初始化atom.因为Promise也许是进行中，或者默认的selector会是异步的，这就会使得atom的状态也是处于进行中或者是抛出一个错误。所以，当是这atom的时候，并不能将当前标注为<code>Promise</code>,请使用selector异步函数。</p>
-<p>Atoms cannot be used to store <code>Promise&#39;s</code> or <code>RecoilValue&#39;s</code> directly, but they may be wrapped in an object. Note that <code>Promise&#39;s</code> may be mutable. Atoms can be set to a <code>function</code>, as long as it is pure, but to do so you may need to use the updater form of setters. (e.g. <code>set(myAtom, () =&gt; myFunc);</code>).</p>
-<p>Atoms不能被直接才存储为<code>Promise</code>或者是<code>RecoilValue&#39;s</code>, 但是他们可以被包裹为一个对象。注意<code>Promise</code>可能被改变。Atoms可以被设置为是个函数，只要纯净，就可以使用setters的更新方式。(e.g. <code>set(myAtom, () =&gt; myFunc);</code>).</p>
-<p>案例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;atom, useRecoilState&#125; <span class="keyword">from</span> <span class="string">&#x27;recoil&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> counter = atom(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;myCounter&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="number">0</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Counter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> [count, setCount] = useRecoilState(counter);</span><br><span class="line">    <span class="keyword">const</span> incrementByOne = <span class="function">() =&gt;</span> setCount(count + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            Count: &#123;count&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;incrementByOne&#125;</span>&gt;</span>Increment<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/5/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/5/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">下一页</a>
   </nav>
   
 </section>

@@ -176,6 +176,69 @@
     
     
     <article
+  id="post-algorithm/20"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/20/"
+    >leeCode算法--实现一个strStr()函数</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/20/" class="article-date">
+  <time datetime="2021-05-19T06:21:49.000Z" itemprop="datePublished">2021-05-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：实现一个strStr()方法，要求strStr有俩个参数，hayStack和needle参数，找出字符串hayStack中needle的位置，并返回这个位置。如果找不到就返回-1.</p>
+<p>解析：查找位置，只能双层遍历，依次比对。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> strStr = <span class="function">(<span class="params">haystack, needle</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= haystack.length; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> a = i, b = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> (b &lt; needle.length &amp;&amp;</span><br><span class="line">            haystack[a] === needle[b]) &#123;</span><br><span class="line">            a++</span><br><span class="line">            b++</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (b === needle.length) <span class="keyword">return</span> i</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">strStr(<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span>)  <span class="comment">//  0</span></span><br><span class="line">strStr(<span class="string">&#x27;hello&#x27;</span>, <span class="string">&#x27;ll&#x27;</span>)   <span class="comment">//  2</span></span><br><span class="line">strStr(<span class="string">&#x27;aaaaa&#x27;</span>, <span class="string">&#x27;bba&#x27;</span>)  <span class="comment">//  -1</span></span><br></pre></td></tr></table></figure>
+<p>注意：整个代码结构是比较清晰易懂的，但是有几个地地方是需要注意：</p>
+<ul>
+<li>for循环中i是要小于等于（<code>&lt;=</code>）haystack.length,这是因为haystack和needle都可能出现为空的情况；</li>
+<li>双层循环，要用变量接一下外层循环的变量，这里需要知道的是，双层遍历，外层循环一次，内层循环要全循环完，才能开始外层的第二次循环，以此类推；</li>
+<li>注意while循环的条件。</li>
+</ul>
+<p>That’s all!这就是KMP算法。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-algorithm/19"
   class="article article-type-post"
   itemscope
@@ -1012,69 +1075,13 @@ That’s all!整体思路就是从俩边向中间循环，只要遇到不相等�
 </article>
 
     
-    <article
-  id="post-algorithm/5"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/5/"
-    >排序算法(四)--希尔排序</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/5/" class="article-date">
-  <time datetime="2021-04-22T03:24:23.000Z" itemprop="datePublished">2021-04-22</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>希尔排序的思想：希尔排序又被称作为改进版的插入排序，插入排序是相领俩相的比较，然后互换位置。而那么他们的间隔是1，而希尔排序的间隔要大于1，但是最后要执行一次间隔为1的插入排序，这样效率就比较高。<br>取最优间隔值：h = 3h + 1 ==&gt; 就是间隔去整个length的1/3是相对比较合理的。<br><img src="/algorithm/5/5.gif" alt="希尔排序"></p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var <span class="attr">hillSort</span> = (arr) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="attr">h</span> = <span class="number">1</span></span><br><span class="line">    while(h &lt;= arr.length/<span class="number">3</span>) &#123;</span><br><span class="line">        <span class="attr">h</span> = h * <span class="number">3</span> + <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    for(<span class="keyword">let</span> <span class="attr">gap</span> = h;gap &gt; <span class="number">0</span>;<span class="attr">gap</span> = (gap -<span class="number">1</span>)/<span class="number">3</span>) &#123;</span><br><span class="line">        for (<span class="keyword">let</span> <span class="attr">i</span> = gap;i &lt; arr.length;i++) &#123;</span><br><span class="line">            for(<span class="keyword">let</span> <span class="attr">j</span> = i;j &gt; gap - <span class="number">1</span>; j <span class="attr">-=</span> gap) &#123;</span><br><span class="line">                <span class="keyword">if</span> (arr[j] &lt; arr[j-gap]) &#123;</span><br><span class="line">                    <span class="keyword">let</span> <span class="attr">temp</span> = arr[j]</span><br><span class="line">                    arr[j] = arr[j-gap]</span><br><span class="line">                    arr[j-gap] = temp</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr</span><br><span class="line">&#125;</span><br><span class="line">hillSort([<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">9</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">8</span>])</span><br><span class="line">//  [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
-<p>希尔排序在实际的工作中应用应该比较少。<br>That’s all!</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
   </nav>
   
 </section>

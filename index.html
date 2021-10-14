@@ -176,6 +176,75 @@
     
     
     <article
+  id="post-ts/5"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/ts/5/"
+    >Typescript--泛型的使用</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/ts/5/" class="article-date">
+  <time datetime="2021-10-14T09:00:40.000Z" itemprop="datePublished">2021-10-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/typescript/">typescript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h6 id="泛型的定义"><a href="#泛型的定义" class="headerlink" title="泛型的定义"></a>泛型的定义</h6><p>软件工程中，我们不仅仅要建立一致的定义良好的API，同时也要考虑重用性。组件不仅能够支持当前的数据类型，同时也能支持未来的数据类型。这在创建大型系统时提供了十分灵活的功能。</p>
+<p>在像C#和Java这样的语言中，可以使用泛型来创建重用的组件，一个组件可以支持多种类型的数据，这样用户就可以以自己的数据类型使用组件。</p>
+<p>通俗讲，泛型就是解决类接口方法的复用性，以及对不特定数据类型的支持。</p>
+<p>泛型使用<code>T</code>来定义：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function <span class="function"><span class="keyword">fun</span><span class="type">&lt;T&gt;</span><span class="params">(name: <span class="type">T</span>)</span></span>:T &#123;</span><br><span class="line">    <span class="keyword">return</span> name</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义了一个函数，函数传入的参数类型和函数的返回值类型保持一致，具体的类型是什么，由调用者决定，比如：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function <span class="function"><span class="keyword">fun</span><span class="type">&lt;T&gt;</span><span class="params">(name:<span class="type">T</span>)</span></span>:T&#123;</span><br><span class="line">    <span class="keyword">return</span> name</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">fun</span>:<span class="type">&lt;string&gt;</span><span class="params">(<span class="string">&#x27;xiaoming&#x27;</span>)</span></span> <span class="comment">// xiaoming</span></span><br><span class="line"><span class="function"><span class="keyword">fun</span><span class="type">&lt;number&gt;</span><span class="params">(<span class="string">&#x27;小明&#x27;</span>)</span></span> <span class="comment">//  这是一个错误写法</span></span><br></pre></td></tr></table></figure>
+<p><code>注:</code><br>    我们可能会想起定义函数的时候，使用any关键字，但是这里要强调的是，any关键字其实是放弃了typescript的类型校验。</p>
+<h6 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h6><p>实现一个有最小堆的算法，需要同时支持返回数字和字符串俩种类型，通过类的泛型实现。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">MainClass</span>&lt;<span class="title">T</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> list:T[] = []</span><br><span class="line">    <span class="keyword">add</span> (<span class="keyword">value</span>: T): <span class="keyword">void</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.list.push(<span class="keyword">value</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    min():T&#123;</span><br><span class="line">        <span class="keyword">var</span> minNum = <span class="keyword">this</span>.list[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.list.length;i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (minNum &gt; <span class="keyword">this</span>.list[i]) &#123;</span><br><span class="line">                minNum = <span class="keyword">this</span>.list[i]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> minNum</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> m = MinClass&lt;number&gt;()  <span class="comment">//  实例化类，并且制定了类的T代表的类型是number</span></span><br><span class="line">m.<span class="keyword">add</span>(<span class="number">10</span>)</span><br><span class="line">m.<span class="keyword">add</span>(<span class="number">45</span>)</span><br><span class="line">m.<span class="keyword">add</span>(<span class="number">6</span>)</span><br><span class="line">m.<span class="keyword">add</span>(<span class="number">2</span>)</span><br><span class="line">m.<span class="keyword">add</span>(<span class="number">1</span>)</span><br><span class="line">m.<span class="keyword">add</span>(<span class="number">9</span>)</span><br><span class="line">m.min() <span class="comment">//  1</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h6><ul>
+<li>方法一<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">interface Config &#123;</span><br><span class="line">    &lt;<span class="built_in">T</span>&gt;(value: <span class="built_in">T</span>): <span class="built_in">T</span></span><br><span class="line">&#125;</span><br><span class="line">var setData: Config = <span class="keyword">function</span>&lt;<span class="built_in">T</span>&gt;(value: <span class="built_in">T</span>):<span class="built_in">T</span> &#123;</span><br><span class="line">    <span class="built_in">return</span> vale</span><br><span class="line">&#125;</span><br><span class="line">setData&lt;number&gt;(<span class="number">12344</span>)</span><br></pre></td></tr></table></figure></li>
+<li>方法二<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title">Config</span>&lt;<span class="title">T</span>&gt; &#123;</span><br><span class="line">    (<span class="keyword">value</span>: T): T</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">function <span class="title">getData</span>&lt;<span class="title">T</span>&gt;(<span class="params"><span class="keyword">value</span>: T</span>):T</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">value</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> myGetData:Config&lt;<span class="built_in">string</span>&gt; = <span class="function">getData</span></span><br><span class="line"><span class="function"><span class="title">myGetData</span>(<span class="params"><span class="string">&#x27;xiaoming&#x27;</span></span>)   <span class="comment">//  正确</span></span></span><br><span class="line"><span class="function"><span class="title">myGetData</span>(<span class="params"><span class="number">12345</span></span>)   <span class="comment">//  错误</span></span></span><br></pre></td></tr></table></figure>
+That’s all!</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-algorithm/43"
   class="article article-type-post"
   itemscope
@@ -1120,70 +1189,13 @@ That’s all.</li>
 </article>
 
     
-    <article
-  id="post-algorithm/35"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/35/"
-    >leeCode算法--杨辉三角(I)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/35/" class="article-date">
-  <time datetime="2021-07-26T02:32:43.000Z" itemprop="datePublished">2021-07-26</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>题目： 给定一个非负整数 numRows，生成「杨辉三角」的前 numRows 行。在「杨辉三角」中，每个数是它左上方和右上方的数的和。<br><img src="/algorithm/35/1.gif" alt="杨辉三角"></p>
-<p>分析：在「杨辉三角」中，每个数是它左上方和右上方的数的和。这就是我们要实现的规律。</p>
-<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> generate = numRows =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> result = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>;i &lt; numRows;i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> tempArr = []</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt;= i;j++) &#123;</span><br><span class="line">            <span class="keyword">let</span> <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> (!result[i - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="built_in">sum</span> = <span class="number">1</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">let</span> <span class="built_in">left</span> = result[i - <span class="number">1</span>][j - <span class="number">1</span>] |<span class="type">| 0</span></span><br><span class="line">                <span class="keyword">let</span> <span class="built_in">right</span> = result[i - <span class="number">1</span>][j] |<span class="type">| 0</span></span><br><span class="line">                <span class="built_in">sum</span> = <span class="built_in">left</span> + <span class="built_in">sum</span> + <span class="built_in">right</span></span><br><span class="line">            &#125;</span><br><span class="line">            tempArr.push(<span class="built_in">sum</span> |<span class="type">| 1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        result.push(tempArr)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>That’s all!</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
   
 </section>

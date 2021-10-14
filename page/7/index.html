@@ -176,6 +176,85 @@
     
     
     <article
+  id="post-recoil/api/recoil-state/atom"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/recoil/api/recoil-state/atom/"
+    >Recoil API手册--atom(options)</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/recoil/api/recoil-state/atom/" class="article-date">
+  <time datetime="2021-02-22T01:03:09.000Z" itemprop="datePublished">2021-02-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/recoil/">recoil</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>An atom represents state in Recoil. The <code>atom()</code> function returns a writeable <code>RecoilState</code> object.<br>atom代表了Recoil中的状态，<code>atom()</code>返回了一个可读写的Recoil状态对象。</p>
+<hr>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> atom<span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span>(</span><span class="xquery">&#123;</span></span><br><span class="line"><span class="xquery">   <span class="built_in"> key</span>:<span class="built_in"> string</span>,</span></span><br><span class="line"><span class="xquery">    default: T | Promise<span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span> | RecoilValue</span><span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span>,</span></span></span><br><span class="line"><span class="xml"><span class="xquery">    effects_UNSTABLE?: $ReadOnlyArray&lt;AtomEffect</span><span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span>&gt;,</span></span></span><br><span class="line"><span class="xml"><span class="xquery">    dangerouslyAllowMutability?: boolean,</span></span></span><br><span class="line"><span class="xml"><span class="xquery">&#125;</span></span><span class="xml">): RecoilState</span><span class="xml"><span class="tag">&lt;<span class="name">T</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>key</code> - A unique string used to identify the atom internally. This string should be unique with respect to other atoms and selectors in the entire application.<br><code>key</code>字段是一个用来定义内部atom的唯一的字符串，这个是字符串必须是唯一的，用来区分应用程序中所有的atoms和selector.</li>
+<li><code>default</code> - The initial value of the atom or a Promise or another atom or selector representing a value of the same type.<br><code>default</code>字段用来初始化一个atom或者Promise或者另一个atom或者是selector具有相同类型的初始值。</li>
+<li><code>effects_UNSTABLE</code> - An optional array of Atom Effects for the atom.<br><code>effects_UNSTABLE</code>字段一个可选的atom副作用数组。</li>
+<li><code>dangerouslyAllowMutability</code> - In some cases it may be desireable allow mutating of objects stored in atoms that don’t represent state changes. Use this option to override freezing objects in development mode.<br><code>dangerouslyAllowMutability</code>在某些情况下，他是用来描述允许atoms存储的对象发生转化，但是并不代表状态会发生变化。可以用这个选项在开发环境来冻结对象。</li>
+</ul>
+<hr>
+<p>Recoil manages atom state changes to know when to notify components subscribing to that atom to re-render, so you should use the hooks listed below to change atom state. If an object stored in an atom was mutated directly it may bypass this and cause state changes without properly notifying subscribing components. To help detect bugs Recoil will freeze objects stored in atoms in development mode.</p>
+<p>Recoil管理atom状态是通过通知组建订阅atom状态实现重新渲染，所以，应该使用下面的hooks函数来使得atom状态发生变化。如果一个存储在atom中的对象被直接改变，那就会引起组建没有被通知订阅而atom状态发生变化。为了解决这个bug，Recoil会在开发环境冻结存储在atom中的对象。</p>
+<p>Most often, you’ll use the following hooks to interact with atoms:<br>通常情况下，需要使用下列的hooks函数来使得atoms发生变化。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilState">useRecoilState()</a>: Use this hook when you intend on both reading and writing to the atom. This hook subscribes the component to the atom.<br><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilState">useRecoilState()</a>:当你要读写atom的时候使用这个钩子函数，这个钩子函数会订阅组建的atom.</li>
+<li><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilValue">useRecoilValue()</a>: Use this hook when you intend on only reading the atom. This hook subscribes the component to the atom.<br><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilValue">useRecoilValue()</a>:当只是读取atom的时候。使用这个钩子函数，这个钩子函数会订阅组建的atom.</li>
+<li><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useSetRecoilState">useSetRecoilState()</a>: Use this hook when you intend on only writing to the atom.<br><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useSetRecoilState">useSetRecoilState()</a>:当只是操作atom的时候。使用这个钩子函数。</li>
+<li><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useResetRecoilState">useResetRecoilState()</a>: Use this hook to reset an atom to its default value.<br><a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useResetRecoilState">useResetRecoilState()</a>:当重置atom的默认值的时候，使用这个钩子函数。<br>For rare cases where you need to read an atom’s value without subscribing to the component, see <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilCallback">useRecoilCallback()</a>.</li>
+</ul>
+<p>对于极少数需要读取atom的值，而不需要订阅组建，可以参考<a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/useRecoilCallback">useRecoilCallback()</a>。</p>
+<p>You can initialize an atom either with a static value or with a <code>Promise</code> or a <code>RecoilValue</code> representing a value of the same type. Because the Promise may be pending or the default selector may be asynchronous it means that the atom value may also be pending or throw an error when reading. Note that you cannot currently assign a <code>Promise</code> when setting an atom. Please use <a target="_blank" rel="noopener" href="https://www.recoiljs.cn/docs/api-reference/core/selector">selectors</a> for async functions.</p>
+<p>可以用通过一个具有共同类型的静态值或者是一个<code>Promise</code>或者是一个<code>RecoilValue</code>来初始化atom.因为Promise也许是进行中，或者默认的selector会是异步的，这就会使得atom的状态也是处于进行中或者是抛出一个错误。所以，当是这atom的时候，并不能将当前标注为<code>Promise</code>,请使用selector异步函数。</p>
+<p>Atoms cannot be used to store <code>Promise&#39;s</code> or <code>RecoilValue&#39;s</code> directly, but they may be wrapped in an object. Note that <code>Promise&#39;s</code> may be mutable. Atoms can be set to a <code>function</code>, as long as it is pure, but to do so you may need to use the updater form of setters. (e.g. <code>set(myAtom, () =&gt; myFunc);</code>).</p>
+<p>Atoms不能被直接才存储为<code>Promise</code>或者是<code>RecoilValue&#39;s</code>, 但是他们可以被包裹为一个对象。注意<code>Promise</code>可能被改变。Atoms可以被设置为是个函数，只要纯净，就可以使用setters的更新方式。(e.g. <code>set(myAtom, () =&gt; myFunc);</code>).</p>
+<p>案例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;atom, useRecoilState&#125; <span class="keyword">from</span> <span class="string">&#x27;recoil&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> counter = atom(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;myCounter&#x27;</span>,</span><br><span class="line">    <span class="attr">default</span>: <span class="number">0</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Counter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> [count, setCount] = useRecoilState(counter);</span><br><span class="line">    <span class="keyword">const</span> incrementByOne = <span class="function">() =&gt;</span> setCount(count + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            Count: &#123;count&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;incrementByOne&#125;</span>&gt;</span>Increment<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-algorithm/1"
   class="article article-type-post"
   itemscope
@@ -906,63 +985,6 @@ To summarize, we’ve created a todo list app that meets all of our requirements
 
     
     <article
-  id="post-recoil/introduce/introduce"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/recoil/introduce/introduce/"
-    >Recoil简介</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/recoil/introduce/introduce/" class="article-date">
-  <time datetime="2020-10-28T10:25:18.000Z" itemprop="datePublished">2020-10-28</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/recoil/">recoil</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="Recoil"><a href="#Recoil" class="headerlink" title="Recoil"></a>Recoil</h3><p>A state management library for React。<br>recoil是react的状态管理库，他具备三大特点。</p>
-<h3 id="Minimal-and-Reactish-简练并保持与-React-一致"><a href="#Minimal-and-Reactish-简练并保持与-React-一致" class="headerlink" title="Minimal and Reactish 简练并保持与 React 一致"></a>Minimal and Reactish 简练并保持与 React 一致</h3><p>Recoil works and thinks like React. Add some to your app and get fast and flexible shared state.<br>Recoil 的工作方式和原理与 React 完全一致，在React应用中添加Recoil能够快速，灵活的共享状态。</p>
-<h3 id="Data-Flow-Graph-数据流"><a href="#Data-Flow-Graph-数据流" class="headerlink" title="Data-Flow Graph  数据流"></a>Data-Flow Graph  数据流</h3><p>Derived data and asynchronous queries are tamed with pure functions and efficient subscriptions.<br>纯函数和高效订阅为派生数据和异步查询提供支持。</p>
-<h3 id="Cross-App-Observation-跨应用监听"><a href="#Cross-App-Observation-跨应用监听" class="headerlink" title="Cross-App Observation 跨应用监听"></a>Cross-App Observation 跨应用监听</h3><p>Implement persistence, routing, time-travel debugging, or undo by observing all state changes across your app, without impairing code-splitting.<br>不分割代码，通过对全局应用数据对监听，实现数据，路由，调试的持久化，或者是更改成为可能。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
   id="post-recoil/introduce/installation"
   class="article article-type-post"
   itemscope
@@ -1036,7 +1058,7 @@ To summarize, we’ve created a todo list app that meets all of our requirements
 
     
     <article
-  id="post-recoil/introduce/start"
+  id="post-recoil/introduce/introduce"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -1047,8 +1069,8 @@ To summarize, we’ve created a todo list app that meets all of our requirements
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/recoil/introduce/start/"
-    >Recoil简介--开始应用</a> 
+  <a class="article-title" href="/recoil/introduce/introduce/"
+    >Recoil简介</a> 
 </h2>
  
 
@@ -1056,7 +1078,7 @@ To summarize, we’ve created a todo list app that meets all of our requirements
     </header>
      
     <div class="article-meta">
-      <a href="/recoil/introduce/start/" class="article-date">
+      <a href="/recoil/introduce/introduce/" class="article-date">
   <time datetime="2020-10-28T10:25:18.000Z" itemprop="datePublished">2020-10-28</time>
 </a> 
   <div class="article-category">
@@ -1067,28 +1089,10 @@ To summarize, we’ve created a todo list app that meets all of our requirements
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><h3 id="Create-React-App-创建应用"><a href="#Create-React-App-创建应用" class="headerlink" title="Create React App 创建应用"></a>Create React App 创建应用</h3><p>Recoil is a state management library for React, so you need to have React installed and running to use Recoil. The easiest and recommended way for bootstrapping a React application is to use <a target="_blank" rel="noopener" href="https://github.com/facebook/create-react-app#creating-an-app">Create React App</a>:<br>Recoil是一个为Reactk开发的状态管理库，所以运行Recoil的先安装React,推荐最简单的安装React应用方式就是用如下命令：</p>
-<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">npx</span> <span class="built_in">create-react-app</span> <span class="string">my-app</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><a href>npx</a> is a package runner tool that comes with npm 5.2+ and higher, see instructions for older npm versions.<br>npx是一个npm5.2或更高版本的运行工具包，<a href>点击查看低版本的npm说明</a>。</p>
-</blockquote>
-<p>For more ways to install Create React App, see the <a target="_blank" rel="noopener" href="https://github.com/facebook/create-react-app#creating-an-app">official documentation</a>.<br>更多安装应用方式请查看<a target="_blank" rel="noopener" href="https://github.com/facebook/create-react-app#creating-an-app">官方文档</a>。</p>
-<h3 id="Installation-安装"><a href="#Installation-安装" class="headerlink" title="Installation 安装"></a>Installation 安装</h3><p>The Recoil package lives in npm. To install the latest stable version, run the following command:<br>Recoil包已经发布到npm上，安装最新最稳定的版本只要运行以下命令：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> recoil</span><br></pre></td></tr></table></figure>
-<p>Or if you’re using yarn:<br>或者使用yarn:</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn <span class="builtin-name">add</span> recoil</span><br></pre></td></tr></table></figure>
-<h3 id="RecoilRoot"><a href="#RecoilRoot" class="headerlink" title="RecoilRoot"></a>RecoilRoot</h3><p>Components that use recoil state need <code>RecoilRoot</code> to appear somewhere in the parent tree. A good place to put this is in your root component:<br>组件中使用Recoil状态需要在父级中使用<code>RecoilRoot</code>,组件中最好的方式就是将<code>RecoilRoot</code>放到根组件中。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    RecoilRoot,</span><br><span class="line">    atom,</span><br><span class="line">    selector,</span><br><span class="line">    useRecoilState,</span><br><span class="line">    useRecoilValue,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&#x27;recoil&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">CharacterCounter</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>We’ll implement the <code>CharacterCounter</code> component in the following section.<br>接下来我们会开发一个<code>CharacterCounter</code>的组件。</p>
-<h3 id="Atom"><a href="#Atom" class="headerlink" title="Atom"></a>Atom</h3><p>An <strong>atom</strong> represents a piece of <strong>state</strong>. Atoms can be read from and written to from any component. Components that read the value of an atom are implicitly <strong>subscribed</strong> to that atom, so any atom updates will result in a re-render of all components subscribed to that atom:<br>一个Atom就代表一个state,Atom可以被任何一个组件读取，更新。组件读取 Atom 数据将会隐式订阅它，任何更新都会导致订阅它的组件进行重新渲染。</p>
-<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> textState = atom(&#123;</span><br><span class="line">    key: <span class="string">&#x27;textState&#x27;</span>, // unique ID (<span class="keyword">with</span> respect <span class="keyword">to</span> other atoms/selectors)</span><br><span class="line">    <span class="literal">default</span>: <span class="string">&#x27;&#x27;</span>, // <span class="literal">default</span> value (aka initial value)</span><br><span class="line">&#125;)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>Components that need to read from and write to an atom should use useRecoilState() as shown below:<br>在组件中使用 useRecoilState() 读写 Atom 数据：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CharacterCounter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">TextInput</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">CharacterCount</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TextInput</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [text, setText] = useRecoilState(textState);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> onChange = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    setText(event.target.value);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">value</span>=<span class="string">&#123;text&#125;</span> <span class="attr">onChange</span>=<span class="string">&#123;onChange&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        Echo: &#123;text&#125;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h3><p>A <strong>selector</strong> represents a piece of <strong>derived state</strong>. Derived state is a <strong>transformation</strong> of state. You can think of derived state as the output of passing state to a pure function that modifies the given state in some way:<br>selectore代表派生状态。Derived state是状态的一种转化，在某种意义上你可以认为derived state是纯函数输出的某种state.</p>
-<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> charCountState = selector(&#123;</span><br><span class="line">    <span class="built_in">key</span>: <span class="string">&#x27;charCountState&#x27;</span>, <span class="comment">// unique ID (with respect to other atoms/selectors)</span></span><br><span class="line">    <span class="built_in">get</span>: (&#123;<span class="built_in">get</span>&#125;) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="built_in">text</span> = <span class="built_in">get</span>(textState);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">text</span>.length;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>We can use the <code>useRecoilValue()</code> hook to read the value of <code>charCountState</code>:<br>我们可以用<code>useRecoilValue()</code>钩子来读取<code>charCountState</code>的值：</p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span></span> CharacterCount() &#123;</span><br><span class="line">    const <span class="built_in">count</span> = useRecoilValue(charCountState);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &lt;&gt;<span class="keyword">Character</span> <span class="built_in">Count</span>: &#123;<span class="built_in">count</span>&#125;&lt;/&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><p>略</p>
+  <h3 id="Recoil"><a href="#Recoil" class="headerlink" title="Recoil"></a>Recoil</h3><p>A state management library for React。<br>recoil是react的状态管理库，他具备三大特点。</p>
+<h3 id="Minimal-and-Reactish-简练并保持与-React-一致"><a href="#Minimal-and-Reactish-简练并保持与-React-一致" class="headerlink" title="Minimal and Reactish 简练并保持与 React 一致"></a>Minimal and Reactish 简练并保持与 React 一致</h3><p>Recoil works and thinks like React. Add some to your app and get fast and flexible shared state.<br>Recoil 的工作方式和原理与 React 完全一致，在React应用中添加Recoil能够快速，灵活的共享状态。</p>
+<h3 id="Data-Flow-Graph-数据流"><a href="#Data-Flow-Graph-数据流" class="headerlink" title="Data-Flow Graph  数据流"></a>Data-Flow Graph  数据流</h3><p>Derived data and asynchronous queries are tamed with pure functions and efficient subscriptions.<br>纯函数和高效订阅为派生数据和异步查询提供支持。</p>
+<h3 id="Cross-App-Observation-跨应用监听"><a href="#Cross-App-Observation-跨应用监听" class="headerlink" title="Cross-App Observation 跨应用监听"></a>Cross-App Observation 跨应用监听</h3><p>Implement persistence, routing, time-travel debugging, or undo by observing all state changes across your app, without impairing code-splitting.<br>不分割代码，通过对全局应用数据对监听，实现数据，路由，调试的持久化，或者是更改成为可能。</p>
  
       <!-- reward -->
       
@@ -1186,7 +1190,7 @@ To summarize, we’ve created a todo list app that meets all of our requirements
   
   <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/6/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
+    <a class="extend prev" rel="prev" href="/page/6/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">下一页</a>
   </nav>
   
 </section>
