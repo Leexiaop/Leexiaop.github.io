@@ -6,7 +6,7 @@
   <link href="https://leexiaop.github.io/atom.xml" rel="self"/>
   
   <link href="https://leexiaop.github.io/"/>
-  <updated>2021-10-12T11:43:47.015Z</updated>
+  <updated>2021-10-14T03:06:49.352Z</updated>
   <id>https://leexiaop.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leeCode算法--各位相加问题</title>
+    <link href="https://leexiaop.github.io/algorithm/43/"/>
+    <id>https://leexiaop.github.io/algorithm/43/</id>
+    <published>2021-10-14T02:53:48.000Z</published>
+    <updated>2021-10-14T03:06:49.352Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;题目：给定一个非负整数</summary>
+        
+      
+    
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>Typescript--接口的使用</title>
@@ -509,33 +534,6 @@
     
     
     <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基础数据结构--手动实现集合及其相关方法</title>
-    <link href="https://leexiaop.github.io/algorithm/structures/6/"/>
-    <id>https://leexiaop.github.io/algorithm/structures/6/</id>
-    <published>2021-07-19T08:56:17.000Z</published>
-    <updated>2021-10-10T13:31:34.705Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;集合(set)是一种包含不同元素的数据结构。每个元素只能存在一次，不能有重复元素出现。&lt;br&gt;• 不包含任何成员的集合称为空集，全集则是包含一切可能成员的集合。&lt;br&gt;• 如果两个集合的成员完全相同，则称两个集合相等。&lt;br&gt;•</summary>
-        
-      
-    
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
-    
-    <category term="数据结构" scheme="https://leexiaop.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   

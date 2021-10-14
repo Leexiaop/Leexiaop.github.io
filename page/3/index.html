@@ -96,7 +96,7 @@
   <script>
     try {
       var typed = new Typed("#subtitle", {
-        strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+        strings: ['读万卷书，行万里路，代码运行了那么久，却总觉得不是最优秀。。。', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
         startDelay: 0,
         typeSpeed: 200,
         loop: true,
@@ -174,6 +174,72 @@
     
     
     
+    
+    <article
+  id="post-react/4"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/react/4/"
+    >React--React中React Hooks的实现原理是什么？</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/react/4/" class="article-date">
+  <time datetime="2021-07-15T03:13:33.000Z" itemprop="datePublished">2021-07-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="曾经的react"><a href="#曾经的react" class="headerlink" title="曾经的react"></a>曾经的react</h3><p>react技术栈的迭代是非常快的，但是版本16也许是一次革命性的迭代。从版本16开始，react的底层由stack算法转变为fiber算法，大大提高了性能。而在16.8之后react又新增了hooks的概念。在老版本的react中，开发者所开发的大多都是class组件和少部分的函数组件，对于函数组件来说，它仅仅只是一个纯UI的展示组件，只能接受props，而不能有自己的state。而对于class组件来说，问题也是不少：组件状态复用艰难，让人无奈的this问题，高阶组件和函数组件的嵌套层次太深，复杂组件变得难以理解，以及难以记忆的生命周期等问题很让人头大。</p>
+<h3 id="Hooks能做点什么"><a href="#Hooks能做点什么" class="headerlink" title="Hooks能做点什么"></a>Hooks能做点什么</h3><p>总的来说Hooks的出现就是为了解决这些问题而产生的：</p>
+<ul>
+<li>useState函数可以初始化状态，为函数组件赋予了状态；</li>
+<li>useEffect函数代替了之前的生命周期函数，接受包含命令式，可能有副作用代码的函数；</li>
+<li>useContext接受上下文对象，并返回上下文对象，让深嵌套的组件通信变的简单；</li>
+<li>useReducer 是useState的代替方案，接受类型为state，action =&gt; newState的reducer，并返回与dispatch方法配对的当前状态；</li>
+<li>useCallback返回一个记忆的memoried版本，该版本仅在其输入发生改变时才会更改，尤其是很好的解决了函数需要绑定this这一问题；</li>
+<li>useMemo一个纯记忆函数</li>
+<li>useRef返回一个可变的ref对象，其.current对象被定义为初始化传递的参数</li>
+<li>…</li>
+</ul>
+<h3 id="Hooks的实现原理"><a href="#Hooks的实现原理" class="headerlink" title="Hooks的实现原理"></a>Hooks的实现原理</h3><p>React会维护俩个链表，一个是currentHook，另外一个是WorkInProgressHook,每一个节点类型都是Hooks，每当hooks函数被调用，react就会创建一个hooks对象，并挂在链表的尾部，函数组件之所以能做一些类组件不能做的事儿，就是因为hook对象，函数组件的状态，计算值，缓存等都是交给hook去完成的，这样组件通过Fiber.memoizedState属性指向hook链表的头部来关联hook对象和当前组件，这样就发挥了hooks的作用。每次调用hooks API的时候，就会首先调用createWorkInProgressHook函数。得到hooks的串联不是一个数组，而是一个链式结构，从根节点workInProgressHook向下通过next进行串联，这也是为什么Hooks不能嵌套使用，不能在条件判断中使用，不能在循环中使用，否则链式就会被破坏。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
     
     <article
   id="post-algorithm/25"
@@ -1017,63 +1083,6 @@ Yes, that’s all!</li>
 <li>注意while循环的条件。</li>
 </ul>
 <p>That’s all!这就是KMP算法。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-algorithm/19"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/19/"
-    >leeCode算法--删除数组中的指定元素</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/19/" class="article-date">
-  <time datetime="2021-05-16T12:18:35.000Z" itemprop="datePublished">2021-05-16</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>题目：给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
-<p>解析：看到这个题，与上一个删除有序数组中的重复元素，很相似，只不过这次要删除的元素被指定了，而且数组也不是有序的，但是实现起来要比之前简单，看代码：</p>
-<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var removeDuplicates = <span class="keyword">function</span>(nums, <span class="keyword">val</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!nums) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">let</span> j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>;i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] !== <span class="keyword">val</span>) &#123;</span><br><span class="line">            nums[j] = nums[j]</span><br><span class="line">        &#125;</span><br><span class="line">        j++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> j</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>That’s all!</p>
  
       <!-- reward -->
       
