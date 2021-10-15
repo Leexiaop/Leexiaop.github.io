@@ -176,6 +176,148 @@
     
     
     <article
+  id="post-ts/7"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/ts/7/"
+    >Typescript--装饰器</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/ts/7/" class="article-date">
+  <time datetime="2021-10-15T07:25:05.000Z" itemprop="datePublished">2021-10-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/typescript/">typescript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h6 id="装饰器定义"><a href="#装饰器定义" class="headerlink" title="装饰器定义"></a>装饰器定义</h6><p>装饰器是一种特殊类型的声明，它能够被附加到类声明，方法，属性或者参数上，可以修改类的行为。通俗讲，装饰器就是一个方法，可以注入到类，方法，属性参数上来扩展类，属性，方法，参数的功能。<br>常见的装饰器有：类装饰器，属性装饰器，方法装饰器，参数装饰器。<br>装饰器的写法：普通装饰器（无法传参），装饰器工厂（可传参）<br>装饰器是过去几年中js的最大成就之一，已是es7的标准特性之一</p>
+<h6 id="类装饰器"><a href="#类装饰器" class="headerlink" title="类装饰器"></a>类装饰器</h6><ul>
+<li><p>类装饰器：类装饰器在类声明之前就被声明（紧靠着类声明）。类装饰器应用于类构造函数，可以用来监视，修改或者替换类定义，传入一个参数。</p>
+</li>
+<li><p>普通装饰器（不带参数）</p>
+</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  装饰器是一个普通函数，其参数就是类，可以在装饰器中对类的属性和方法等进行扩展</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logClass</span> (<span class="params">param: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(param)</span><br><span class="line">    param.prototype.run = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;世界那么大，我想去看看&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@logClass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Log</span> </span>&#123;</span><br><span class="line">    contructor () &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> log = <span class="keyword">new</span> Log()</span><br><span class="line">log.run()   <span class="comment">//  世界那么大，我想去看看</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>类装饰器（装饰工厂）—-可传参<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logClass</span>(<span class="params">param: <span class="built_in">string</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">target: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//  target是当前的类</span></span><br><span class="line">        <span class="comment">//  param是装饰器接受的参数</span></span><br><span class="line">        <span class="built_in">console</span>.log(param)  <span class="comment">//  世界那么大</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@logClass</span>(<span class="string">&#x27;世界那么大&#x27;</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Log</span> </span>&#123;</span><br><span class="line">    contructor () &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> log = <span class="keyword">new</span> Log()</span><br></pre></td></tr></table></figure>
+装饰器可以重栽构造函数：类装饰器表达式会在运行时当作函数被调用，类的构造函数作为唯一的参数。如果类装饰器返回一个值，它会使用提供的构造函数来替换类的声明。<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function logClass (target: any) &#123;</span><br><span class="line">    <span class="comment">//  重载构造函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">target</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@logClass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line">    public apiUrl: string | undefined;</span><br><span class="line">    constructor () &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="属性装饰器"><a href="#属性装饰器" class="headerlink" title="属性装饰器"></a>属性装饰器</h6>属性装饰器表达式会在运行时当作函数被调用，传入下列2个参数：</li>
+<li>对于静态成员来说是类的构造函数，对于实例成员是类的原型对象；</li>
+<li>成员的名字</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logClass</span> (<span class="params">target: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//  重载构造函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">target</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logProperty</span> (<span class="params">params: <span class="built_in">string</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">target:<span class="built_in">any</span>, attr: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">        target[arr] = param</span><br><span class="line">        <span class="comment">//  target是类的原型对象</span></span><br><span class="line">        <span class="comment">//  param是装饰器的参数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@logClass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line">    <span class="meta">@logProperty</span>(<span class="string">&#x27;xxxxxx&#x27;</span>)</span><br><span class="line">    <span class="keyword">public</span> apiUrl: <span class="built_in">string</span> | <span class="literal">undefined</span>;</span><br><span class="line">    <span class="title">constructor</span> (<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="方法装饰器"><a href="#方法装饰器" class="headerlink" title="方法装饰器"></a>方法装饰器</h6><p>他会被应用到方法的属性描述符上，可以用来监视，修改或者替换方法的定义。<br>方法装饰器会在运行时，传入三个参数：</p>
+<ul>
+<li>对于静态成员来说是类的构造函数，对于实例成员来说是类的原型对象</li>
+<li>成员的名字</li>
+<li>成员属性的描述符<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params">params: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">target:<span class="built_in">any</span>,methodName， desc:<span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> oMethod = desc.value</span><br><span class="line">        desc.value = <span class="function"><span class="keyword">function</span> (<span class="params">...agrs:<span class="built_in">any</span>[]</span>) </span>&#123;</span><br><span class="line">            args = args.map(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">String</span>(value)</span><br><span class="line">            &#125;)</span><br><span class="line">            oMethod.apply(<span class="built_in">this</span>, args)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> url: <span class="built_in">string</span> | <span class="literal">undefined</span>;</span><br><span class="line">    <span class="title">constructor</span> (<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@get</span>(<span class="string">&quot;http://www.baidu.com&quot;</span>)</span><br><span class="line">    <span class="function"><span class="title">getData</span>(<span class="params">...args:<span class="built_in">any</span>[]</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(args)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> http = <span class="keyword">new</span> HttpClient()</span><br><span class="line">http.getData(<span class="number">1222</span>, <span class="string">&#x27;1122&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h6 id="方法参数装饰器"><a href="#方法参数装饰器" class="headerlink" title="方法参数装饰器"></a>方法参数装饰器</h6>参数装饰器表达式会在运行时当作函数被调用，可以使用参数装饰器为类的原型增加一些元素数据，传入三个参数：</li>
+<li>对于静态成员来说是类的构造函数，对于实例成员来说是类的原型对象</li>
+<li>参数的名字</li>
+<li>参数在函数参数列表中的索引<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logParams</span> (<span class="params">params: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">target:<span class="built_in">any</span>,paramsName:<span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">        target.url = params</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HttpClient</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> url: <span class="built_in">any</span> | <span class="literal">undefined</span></span><br><span class="line">    <span class="title">constructor</span> (<span class="params"></span>) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="title">getData</span>(<span class="params"><span class="meta">@logParams</span>(<span class="string">&#x27;uuid&#x27;</span>) uuid:<span class="built_in">any</span> </span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;ddddd&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> http = <span class="keyword">new</span> HttpClient()</span><br><span class="line">http.getData(<span class="number">1212132</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h6 id="装饰器的执行顺序"><a href="#装饰器的执行顺序" class="headerlink" title="装饰器的执行顺序"></a>装饰器的执行顺序</h6><p>属性装饰器 &gt; 方法装饰器 &gt; 方法参数装饰器 &gt; 类装饰器<br><code>如果有多个同样的装饰器，那么会从下向上之行</code></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-ts/6"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/ts/6/"
+    >Typescript--模块和命名空间</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/ts/6/" class="article-date">
+  <time datetime="2021-10-15T06:36:36.000Z" itemprop="datePublished">2021-10-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/typescript/">typescript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h6 id="模块的概念"><a href="#模块的概念" class="headerlink" title="模块的概念"></a>模块的概念</h6><p>模块的概念：关于术语的一点说明。请务必注意一点，typescript1.5里术语名已经发生变化。内部模块现在叫做“命名空间”。外部模块现在简称为“模块”，模块在其自身的作用域里执行，而不是在全局作用域里执行。这意味着定义在一个模块里的变量，函数，类等在模块外部都是不可见的。除非能明确的使用export的形式之一导出他们，相反，如果想使用其他模块到处的变量，函数，类，接口的时候，就比如导入他们，可以用使用import的形式。</p>
+<p>理解：<br>我们可以使用一些公共的功能单独抽离一个文件作为模块。<br>模块里的变量，函数，类，默认是私有的。如果哦我们要在外部访问模块里的数据（变量，函数，类），我们需要通过export暴露模块里的数据（变量，函数，类）。暴露后我们通过import引入模块就可以使用模块暴露出来的数据（变量，函数，类）了。</p>
+<h6 id="export"><a href="#export" class="headerlink" title="export"></a>export</h6><p>export default 默认导出<br>每个模块都可以有一个default导出，默认导出使用default关键字标记。并且一个模块只能有一个default导出，需要使用特殊形式来导出。</p>
+<h6 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h6><p>在代码量较大的情况下，为了避免各种变量名相互冲突，可以将相似的函数，类，接口等放到命名空间中间。同java的包，.net的命名空间一样，typescript的命名空间可以将代码包裹起来，只对外暴露需要在外部访问的对象，命名空间内的对象通过export对外暴露。<br>命名空间和模块的区别：</p>
+<ul>
+<li>命名空间：内部模块，主要用于组织代码，避免命名冲突，命名空间用关键字<code>namespace</code>表示</li>
+<li>模块：ts的外部模块的简称，侧重代码的复用，一个模块里可能会有多个命名空间</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-ts/5"
   class="article article-type-post"
   itemscope
@@ -1033,153 +1175,6 @@ That’s all.</li>
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-javascript/10"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/javascript/10/"
-    >JavaScript--关于Promise该了解些什么</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/javascript/10/" class="article-date">
-  <time datetime="2021-07-26T09:23:00.000Z" itemprop="datePublished">2021-07-26</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>Promise是解决异步编程的解决方案，比传统的回调解决方案，要更加强大合理。所谓Promise,其实就是一个容器，保存在未来才会结束的事件。从语法上讲，Promise是一个对象。他有俩个特点：<br>（1）Promise的状态不受外界影响，Promise是一个异步操作，有三种状态，padding，fulfilled, rejected.只有异步操作的结果，可以决定当前的状态是哪一种？任何其他操作都无法改变这个状态。<br>（2）一旦状态改变就不会再变。任何时候都可以得到这个结果。只能从padding到fulfilled，从padding到rejected.<br>Promise也有缺点：<br>（1）一旦创建，就无法取消。创建就会立即执行，无法中途取消。<br>（2）如果不设置回调，那么Promise内部的错误不会反映到外部。<br>（3）当Promise处于padding状态的时候，并不能确认进行到什么阶段。<br>Promise的一些方法：</p>
-<h4 id="Promise-prototype-then"><a href="#Promise-prototype-then" class="headerlink" title="Promise.prototype.then()"></a>Promise.prototype.then()</h4><p>then()方法定义在原型上，他的作用是为Promise实例添加状态时的回调函数。可以有俩个为function的参数，第一个为resolved状态的回调，第二个为rejected状态的回调，他们都是可选的。<code>then()返回一个新的Promise</code>,注意不是原来的那个实例，因此可以采用链式调用，后面接着then()</p>
-<h4 id="Promise-prototype-catch"><a href="#Promise-prototype-catch" class="headerlink" title="Promise.prototype.catch()"></a>Promise.prototype.catch()</h4><p>Promise.prototype.catch()方法是.then(null, rejection)或.then(undefined, rejection)的别名，用于指定发生错误时的回调函数。then()方法指定的回调函数，如果运行中抛出错误，也会被catch()方法捕获。<code>如果then()方法的错误被下一个then()方法的第二个参数捕获，则不会被catch()捕获。</code>。如果 Promise 状态已经变成resolved，再抛出错误是无效的。如果没有使用catch()方法处理错误，那么Promise对象跑出的错误不会传递到外层。另外需要注意的是：<code>在链式调用中，如果前面的then()方法并没有错误，那么就会跳过后面的catch()方法,继续执行后面的then()方法，如果这是出现错误只能被其后面的catch捕获，与前面的catch()无关。还有，当在catch()方法中跑出错误时，本身是不能捕获到错误的，只能是后面的catch()来捕获。</code></p>
-<h4 id="Promise-prototype-finally"><a href="#Promise-prototype-finally" class="headerlink" title="Promise.prototype.finally()"></a>Promise.prototype.finally()</h4><p>finally()方法的执行，与Promise的状态无关。finally()方法，旨在与不管promise对象最后的状态是什么都会执行的操作。finally方法的回调函数不接受任何参数，这意味着没有办法知道，前面的 Promise 状态到底是fulfilled还是rejected。这表明，finally方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果。</p>
-<h4 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all()"></a>Promise.all()</h4><p>Promise.all()的参数是一个数组，数组中是一个个Promise实例。当数组中所有的Promise实例的状态都变成fulfilled，Promise的状态才会变成fulfilled，此时返回值是一个数组。反之，只要有一个状态是rejected,那么Promise的状态就会变成rejected，此时返回值是第一个被rejected的实例的返回值。<br>如果某个promise实例是rejected，但是同时有自己的catch()，那么相对于Promise.all()并不会是rejected状态。而应该是正常返回到Promise.all()的fulfilled状态。</p>
-<h4 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a>Promise.race()</h4><p>Promise.race()和Promise.all()相似，他们区别在于。Promise.race()中的Promise实例，只要有一个状态发生变化，那么Promise.race()的状态就会发生变化。</p>
-<h4 id="Promise-allSettled"><a href="#Promise-allSettled" class="headerlink" title="Promise.allSettled()"></a>Promise.allSettled()</h4><p>Promise.allSettled()方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例。只有等到所有这些参数实例都返回结果，不管是fulfilled还是rejected，包装实例才会结束。一旦结束，状态总是fulfilled，不会变成rejected。状态变成fulfilled后，Promise 的监听函数接收到的参数是一个数组，每个成员对应一个传入Promise.allSettled()的 Promise 实例。<br>Promise.allSettle()的最大用处在于：<code>他可以返回所有Promise的结果。</code></p>
-<h4 id="Promise-any"><a href="#Promise-any" class="headerlink" title="Promise.any()"></a>Promise.any()</h4><p>该方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例返回。只要参数实例有一个变成fulfilled状态，包装实例就会变成fulfilled状态；如果所有参数实例都变成rejected状态，包装实例就会变成rejected状态。</p>
-<p>Promise.any()跟Promise.race()方法很像，只有一点不同，就是Promise.any()不会因为某个 Promise 变成rejected状态而结束，必须等到所有参数 Promise 变成rejected状态才会结束。</p>
-<h4 id="Promise-resolve"><a href="#Promise-resolve" class="headerlink" title="Promise.resolve()"></a>Promise.resolve()</h4><p>Promise.resolve()的作用是将现有对象转化为Promise对象。<br>（1）参数是一个Promise对象<br>此时，什么都不做，返回原来的Promise对象<br>（2）参数是一个thenable对象</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> thenable = &#123;</span><br><span class="line">    <span class="attr">then</span>: <span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        resolve(<span class="number">42</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>Promise.resolve()方法会将这个对象转为 Promise 对象，然后就立即执行thenable对象的then()方法。<br>（3）参数不是具有then()方法的对象，或根本就不是对象<br>如果参数是一个原始值，或者是一个不具有then()方法的对象，则Promise.resolve()方法返回一个新的 Promise 对象，状态为resolved。<br>（4）Promise.resolve()方法允许调用时不带参数，直接返回一个resolved状态的 Promise 对象。所以，如果希望得到一个 Promise 对象，比较方便的方法就是直接调用Promise.resolve()方法。</p>
-<h4 id="Promise-reject"><a href="#Promise-reject" class="headerlink" title="Promise.reject()"></a>Promise.reject()</h4><p>Promise.reject(reason)方法也会返回一个新的 Promise 实例，该实例的状态为rejected。后面可以接catch()方法。</p>
-<h4 id="Promise-try"><a href="#Promise-try" class="headerlink" title="Promise.try()"></a>Promise.try()</h4><p>Promise.try()方法有点像try{}catch{}的用法，可以让同步函数，同步执行，异步函数，异步执行的时候，对于抛出的错误可以捕获。</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.<span class="keyword">try</span>(<span class="function"><span class="params">()</span> =&gt;</span> database.users.get(&#123;id: userId&#125;))</span><br><span class="line">    .<span class="keyword">then</span>(...)</span><br><span class="line">    .<span class="keyword">catch</span>(...)</span><br></pre></td></tr></table></figure>
-<h4 id="Promise的应用"><a href="#Promise的应用" class="headerlink" title="Promise的应用"></a>Promise的应用</h4><p>加载图片，一旦加载完成，Promise的状态就发生改变。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> preloadImage = <span class="function"><span class="keyword">function</span> (<span class="params">path</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">        image.onload  = resolve;</span><br><span class="line">        image.onerror = reject;</span><br><span class="line">        image.src = path;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-javascript/9"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/javascript/9/"
-    >JavaScript--关于Set, WeakSet, Map, WeakMap的不同</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/javascript/9/" class="article-date">
-  <time datetime="2021-07-26T07:11:22.000Z" itemprop="datePublished">2021-07-26</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>Set, WeakSet, Map, WeakMap都是ES2015提供的新的数据结构。</p>
-<h3 id="Set结构"><a href="#Set结构" class="headerlink" title="Set结构"></a>Set结构</h3><p>Set类似于数组，但是成员是唯一的，要求没有重复的成员值。Set本身是一种构造函数。用来生成Set数据结构。可以接受一个数组为参数作为初始化。</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">let</span> set = new Set([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">4</span>])<span class="meta"></span></span><br><span class="line"><span class="meta">[...set] // [1,2,3,4]</span></span><br></pre></td></tr></table></figure>
-<p>所以，为数组去重是set结构的一个重要用途。同理，那么也可以为字符串去重。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[...<span class="keyword">new</span> <span class="keyword">Set</span>(<span class="string">&#x27;aaccdd&#x27;</span>)].<span class="keyword">join</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>  <span class="string">&#x27;abc&#x27;</span></span><br></pre></td></tr></table></figure>
-<p>向set结构中不会发生类型转化，所以5和’5’是俩个完全不同的值。这是因为set内部对于值的判断类似于精确元算符号(===)但是，也有例外，<code>NaN被认为是相等的俩个值，俩个对象总是不相等的俩个值</code>。</p>
-<p>set的属性和方法：</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.constructor <span class="comment">//    构造函数，默认就是Set函数</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.size  <span class="comment">//  返回Set成员的数量</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.add(value) <span class="comment">// 向Set中添加成员</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.has(value) <span class="comment">// 表示是否为Set成员</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.delete(value) <span class="comment">//  删除Set成员中的成员，返回是否删除成功true[false]</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.clear<span class="literal">()</span>   <span class="comment">//  清空Set所有成员</span></span><br></pre></td></tr></table></figure>
-<p>set结构的四种遍历方法:<br>（1）keys()，values()，entries()<br>keys方法、values方法、entries方法返回的都是遍历器对象,由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以keys方法和values方法的行为完全一致。<br>（2）forEach()<br>Set 结构的实例与数组一样，也拥有forEach方法，用于对每个成员执行某种操作，没有返回值。</p>
-<h3 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h3><p>WeakSet 结构与 Set 类似，也是不重复的值的集合。但是，它与 Set 有两个区别。</p>
-<p>(1)区别1:<code>WeakSet的成员只能是对象，而不能是其他类型的值。</code><br>(2)区别2:<code>WeakSet中的对象是弱引用对象，即垃圾回收机制不考虑 WeakSet 对该对象的引用，也就是说，如果其他对象都不再引用该对象，那么垃圾回收机制会自动回收该对象所占用的内存，不考虑该对象还存在于 WeakSet 之中。这是因为垃圾回收机制根据对象的可达性（reachability）来判断回收，如果对象还能被访问到，垃圾回收机制就不会释放这块内存。</code><br>(3)区别2:<code>WeakMap是不可以遍历的。</code><br>因为WeakMap方法的以上的特点。WeakSet 的成员是不适合引用的，因为它会随时消失。另外，由于 WeakSet 内部有多少个成员，取决于垃圾回收机制有没有运行，运行前后很可能成员个数是不一样的，而垃圾回收机制何时运行是不可预测的。所以，WeakMap只有以下三个方法：</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Set</span>.prototype.<span class="keyword">add</span>(<span class="keyword">value</span>) // 向<span class="keyword">Set</span>中添加成员</span><br><span class="line"><span class="keyword">Set</span>.prototype.has(<span class="keyword">value</span>) // 表示是否为<span class="keyword">Set</span>成员</span><br><span class="line"><span class="keyword">Set</span>.prototype.<span class="keyword">delete</span>(<span class="keyword">value</span>) //  删除<span class="keyword">Set</span>成员中的成员，返回是否删除成功<span class="keyword">true</span>[<span class="keyword">false</span>]</span><br></pre></td></tr></table></figure>
-
-<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>Map类似于对象，也是键值的集合。对象是’字符串-值’的对应。Map结构是’值-值’的对应关系，也就是说Map结构的键不仅仅可以是字符串，可以是任意类型的值。是一种更加完善的hash结构。<br>Map本身就是一个构造函数，可以通过new字段来创建Map,接受一个表示键值对的数组作为参数。</p>
-<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="built_in">map</span> = <span class="literal">new</span> <span class="built_in">Map</span>(<span class="meta">[</span></span><br><span class="line">    <span class="meta">[</span><span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;张三&#x27;</span><span class="meta">]</span></span><br><span class="line">    <span class="meta">[</span><span class="string">&#x27;age&#x27;</span>, <span class="number">21</span><span class="meta">]</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
-<p>Map结构的属性和方法</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">map<span class="selector-class">.size</span>()  <span class="comment">//  返回map结构成员的总数</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.set</span>(key, value)   <span class="comment">//  为Map添加成员</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.get</span>(key)   <span class="comment">//  为Map成员</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.has</span>(key)   <span class="comment">//  判断是否为Map成员</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.delete</span>(key)   <span class="comment">//  删除Map成员</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.clear</span>(key)   <span class="comment">//  清空Map成员</span></span><br></pre></td></tr></table></figure>
-<p>Map结构的遍历同Set一样，也是有四种方法：<br>（1）keys()，values()，entries()<br>keys方法、values方法、entries方法返回的都是遍历器对象,由于 Map 结构没有键名，只有键值（或者说键名和键值是同一个值），所以keys方法和values方法的行为完全一致。<br>（2）forEach()<br>Map 结构的实例与数组一样，也拥有forEach方法，用于对每个成员执行某种操作，没有返回值。<br>Map结构可以同其他数据结构进行相互转化：<br>（1）Map转为数组：扩展运算符[…map]<br>（2）数组转为Map: new Map([[‘name’, ‘张三’], [‘age’, 23]])<br>（3）对象转map：可以通过Object.entries()参照数组转Map,因为Object.entries()返回的是键值对数组<br>（4）map转对象：通过遍历的方式<br>（5）map转JSON，</p>
-<ul>
-<li>键名是字符串：直接通过JSON.stringify()转化为JSON</li>
-<li>键名是非字符串：选择转为数组 JSON，先将map结构转化为数组，再将数组转化为JSON<br>（6）JSON转map同上，只不过是调用JSON.parse()</li>
-</ul>
-<h3 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h3><p>WeakMap结构与Map结构类似，也是用于生成键值对的集合。但是有俩点区别：<br>（1）WeakMap只接受对象作为键名（null除外），不接受其他类型的值作为键名。<br>（2）WeakMap的键名所指向的对象，不计入垃圾回收机制。WeakMap作为临时存储非常方便。WeakMap 弱引用的只是键名，而不是键值。键值依然是正常引用。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
 
     </footer>
   </div>

@@ -176,6 +176,153 @@
     
     
     <article
+  id="post-javascript/10"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/javascript/10/"
+    >JavaScript--关于Promise该了解些什么</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/javascript/10/" class="article-date">
+  <time datetime="2021-07-26T09:23:00.000Z" itemprop="datePublished">2021-07-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Promise是解决异步编程的解决方案，比传统的回调解决方案，要更加强大合理。所谓Promise,其实就是一个容器，保存在未来才会结束的事件。从语法上讲，Promise是一个对象。他有俩个特点：<br>（1）Promise的状态不受外界影响，Promise是一个异步操作，有三种状态，padding，fulfilled, rejected.只有异步操作的结果，可以决定当前的状态是哪一种？任何其他操作都无法改变这个状态。<br>（2）一旦状态改变就不会再变。任何时候都可以得到这个结果。只能从padding到fulfilled，从padding到rejected.<br>Promise也有缺点：<br>（1）一旦创建，就无法取消。创建就会立即执行，无法中途取消。<br>（2）如果不设置回调，那么Promise内部的错误不会反映到外部。<br>（3）当Promise处于padding状态的时候，并不能确认进行到什么阶段。<br>Promise的一些方法：</p>
+<h4 id="Promise-prototype-then"><a href="#Promise-prototype-then" class="headerlink" title="Promise.prototype.then()"></a>Promise.prototype.then()</h4><p>then()方法定义在原型上，他的作用是为Promise实例添加状态时的回调函数。可以有俩个为function的参数，第一个为resolved状态的回调，第二个为rejected状态的回调，他们都是可选的。<code>then()返回一个新的Promise</code>,注意不是原来的那个实例，因此可以采用链式调用，后面接着then()</p>
+<h4 id="Promise-prototype-catch"><a href="#Promise-prototype-catch" class="headerlink" title="Promise.prototype.catch()"></a>Promise.prototype.catch()</h4><p>Promise.prototype.catch()方法是.then(null, rejection)或.then(undefined, rejection)的别名，用于指定发生错误时的回调函数。then()方法指定的回调函数，如果运行中抛出错误，也会被catch()方法捕获。<code>如果then()方法的错误被下一个then()方法的第二个参数捕获，则不会被catch()捕获。</code>。如果 Promise 状态已经变成resolved，再抛出错误是无效的。如果没有使用catch()方法处理错误，那么Promise对象跑出的错误不会传递到外层。另外需要注意的是：<code>在链式调用中，如果前面的then()方法并没有错误，那么就会跳过后面的catch()方法,继续执行后面的then()方法，如果这是出现错误只能被其后面的catch捕获，与前面的catch()无关。还有，当在catch()方法中跑出错误时，本身是不能捕获到错误的，只能是后面的catch()来捕获。</code></p>
+<h4 id="Promise-prototype-finally"><a href="#Promise-prototype-finally" class="headerlink" title="Promise.prototype.finally()"></a>Promise.prototype.finally()</h4><p>finally()方法的执行，与Promise的状态无关。finally()方法，旨在与不管promise对象最后的状态是什么都会执行的操作。finally方法的回调函数不接受任何参数，这意味着没有办法知道，前面的 Promise 状态到底是fulfilled还是rejected。这表明，finally方法里面的操作，应该是与状态无关的，不依赖于 Promise 的执行结果。</p>
+<h4 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all()"></a>Promise.all()</h4><p>Promise.all()的参数是一个数组，数组中是一个个Promise实例。当数组中所有的Promise实例的状态都变成fulfilled，Promise的状态才会变成fulfilled，此时返回值是一个数组。反之，只要有一个状态是rejected,那么Promise的状态就会变成rejected，此时返回值是第一个被rejected的实例的返回值。<br>如果某个promise实例是rejected，但是同时有自己的catch()，那么相对于Promise.all()并不会是rejected状态。而应该是正常返回到Promise.all()的fulfilled状态。</p>
+<h4 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a>Promise.race()</h4><p>Promise.race()和Promise.all()相似，他们区别在于。Promise.race()中的Promise实例，只要有一个状态发生变化，那么Promise.race()的状态就会发生变化。</p>
+<h4 id="Promise-allSettled"><a href="#Promise-allSettled" class="headerlink" title="Promise.allSettled()"></a>Promise.allSettled()</h4><p>Promise.allSettled()方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例。只有等到所有这些参数实例都返回结果，不管是fulfilled还是rejected，包装实例才会结束。一旦结束，状态总是fulfilled，不会变成rejected。状态变成fulfilled后，Promise 的监听函数接收到的参数是一个数组，每个成员对应一个传入Promise.allSettled()的 Promise 实例。<br>Promise.allSettle()的最大用处在于：<code>他可以返回所有Promise的结果。</code></p>
+<h4 id="Promise-any"><a href="#Promise-any" class="headerlink" title="Promise.any()"></a>Promise.any()</h4><p>该方法接受一组 Promise 实例作为参数，包装成一个新的 Promise 实例返回。只要参数实例有一个变成fulfilled状态，包装实例就会变成fulfilled状态；如果所有参数实例都变成rejected状态，包装实例就会变成rejected状态。</p>
+<p>Promise.any()跟Promise.race()方法很像，只有一点不同，就是Promise.any()不会因为某个 Promise 变成rejected状态而结束，必须等到所有参数 Promise 变成rejected状态才会结束。</p>
+<h4 id="Promise-resolve"><a href="#Promise-resolve" class="headerlink" title="Promise.resolve()"></a>Promise.resolve()</h4><p>Promise.resolve()的作用是将现有对象转化为Promise对象。<br>（1）参数是一个Promise对象<br>此时，什么都不做，返回原来的Promise对象<br>（2）参数是一个thenable对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> thenable = &#123;</span><br><span class="line">    <span class="attr">then</span>: <span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        resolve(<span class="number">42</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Promise.resolve()方法会将这个对象转为 Promise 对象，然后就立即执行thenable对象的then()方法。<br>（3）参数不是具有then()方法的对象，或根本就不是对象<br>如果参数是一个原始值，或者是一个不具有then()方法的对象，则Promise.resolve()方法返回一个新的 Promise 对象，状态为resolved。<br>（4）Promise.resolve()方法允许调用时不带参数，直接返回一个resolved状态的 Promise 对象。所以，如果希望得到一个 Promise 对象，比较方便的方法就是直接调用Promise.resolve()方法。</p>
+<h4 id="Promise-reject"><a href="#Promise-reject" class="headerlink" title="Promise.reject()"></a>Promise.reject()</h4><p>Promise.reject(reason)方法也会返回一个新的 Promise 实例，该实例的状态为rejected。后面可以接catch()方法。</p>
+<h4 id="Promise-try"><a href="#Promise-try" class="headerlink" title="Promise.try()"></a>Promise.try()</h4><p>Promise.try()方法有点像try{}catch{}的用法，可以让同步函数，同步执行，异步函数，异步执行的时候，对于抛出的错误可以捕获。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.<span class="keyword">try</span>(<span class="function"><span class="params">()</span> =&gt;</span> database.users.get(&#123;id: userId&#125;))</span><br><span class="line">    .<span class="keyword">then</span>(...)</span><br><span class="line">    .<span class="keyword">catch</span>(...)</span><br></pre></td></tr></table></figure>
+<h4 id="Promise的应用"><a href="#Promise的应用" class="headerlink" title="Promise的应用"></a>Promise的应用</h4><p>加载图片，一旦加载完成，Promise的状态就发生改变。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> preloadImage = <span class="function"><span class="keyword">function</span> (<span class="params">path</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">        image.onload  = resolve;</span><br><span class="line">        image.onerror = reject;</span><br><span class="line">        image.src = path;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-javascript/9"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/javascript/9/"
+    >JavaScript--关于Set, WeakSet, Map, WeakMap的不同</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/javascript/9/" class="article-date">
+  <time datetime="2021-07-26T07:11:22.000Z" itemprop="datePublished">2021-07-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>Set, WeakSet, Map, WeakMap都是ES2015提供的新的数据结构。</p>
+<h3 id="Set结构"><a href="#Set结构" class="headerlink" title="Set结构"></a>Set结构</h3><p>Set类似于数组，但是成员是唯一的，要求没有重复的成员值。Set本身是一种构造函数。用来生成Set数据结构。可以接受一个数组为参数作为初始化。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">let</span> set = new Set([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">4</span>])<span class="meta"></span></span><br><span class="line"><span class="meta">[...set] // [1,2,3,4]</span></span><br></pre></td></tr></table></figure>
+<p>所以，为数组去重是set结构的一个重要用途。同理，那么也可以为字符串去重。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[...<span class="keyword">new</span> <span class="keyword">Set</span>(<span class="string">&#x27;aaccdd&#x27;</span>)].<span class="keyword">join</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span>  <span class="string">&#x27;abc&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>向set结构中不会发生类型转化，所以5和’5’是俩个完全不同的值。这是因为set内部对于值的判断类似于精确元算符号(===)但是，也有例外，<code>NaN被认为是相等的俩个值，俩个对象总是不相等的俩个值</code>。</p>
+<p>set的属性和方法：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.constructor <span class="comment">//    构造函数，默认就是Set函数</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.size  <span class="comment">//  返回Set成员的数量</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.add(value) <span class="comment">// 向Set中添加成员</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.has(value) <span class="comment">// 表示是否为Set成员</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.delete(value) <span class="comment">//  删除Set成员中的成员，返回是否删除成功true[false]</span></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Set</span>.</span></span>prototype.clear<span class="literal">()</span>   <span class="comment">//  清空Set所有成员</span></span><br></pre></td></tr></table></figure>
+<p>set结构的四种遍历方法:<br>（1）keys()，values()，entries()<br>keys方法、values方法、entries方法返回的都是遍历器对象,由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以keys方法和values方法的行为完全一致。<br>（2）forEach()<br>Set 结构的实例与数组一样，也拥有forEach方法，用于对每个成员执行某种操作，没有返回值。</p>
+<h3 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h3><p>WeakSet 结构与 Set 类似，也是不重复的值的集合。但是，它与 Set 有两个区别。</p>
+<p>(1)区别1:<code>WeakSet的成员只能是对象，而不能是其他类型的值。</code><br>(2)区别2:<code>WeakSet中的对象是弱引用对象，即垃圾回收机制不考虑 WeakSet 对该对象的引用，也就是说，如果其他对象都不再引用该对象，那么垃圾回收机制会自动回收该对象所占用的内存，不考虑该对象还存在于 WeakSet 之中。这是因为垃圾回收机制根据对象的可达性（reachability）来判断回收，如果对象还能被访问到，垃圾回收机制就不会释放这块内存。</code><br>(3)区别2:<code>WeakMap是不可以遍历的。</code><br>因为WeakMap方法的以上的特点。WeakSet 的成员是不适合引用的，因为它会随时消失。另外，由于 WeakSet 内部有多少个成员，取决于垃圾回收机制有没有运行，运行前后很可能成员个数是不一样的，而垃圾回收机制何时运行是不可预测的。所以，WeakMap只有以下三个方法：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Set</span>.prototype.<span class="keyword">add</span>(<span class="keyword">value</span>) // 向<span class="keyword">Set</span>中添加成员</span><br><span class="line"><span class="keyword">Set</span>.prototype.has(<span class="keyword">value</span>) // 表示是否为<span class="keyword">Set</span>成员</span><br><span class="line"><span class="keyword">Set</span>.prototype.<span class="keyword">delete</span>(<span class="keyword">value</span>) //  删除<span class="keyword">Set</span>成员中的成员，返回是否删除成功<span class="keyword">true</span>[<span class="keyword">false</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>Map类似于对象，也是键值的集合。对象是’字符串-值’的对应。Map结构是’值-值’的对应关系，也就是说Map结构的键不仅仅可以是字符串，可以是任意类型的值。是一种更加完善的hash结构。<br>Map本身就是一个构造函数，可以通过new字段来创建Map,接受一个表示键值对的数组作为参数。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="built_in">map</span> = <span class="literal">new</span> <span class="built_in">Map</span>(<span class="meta">[</span></span><br><span class="line">    <span class="meta">[</span><span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;张三&#x27;</span><span class="meta">]</span></span><br><span class="line">    <span class="meta">[</span><span class="string">&#x27;age&#x27;</span>, <span class="number">21</span><span class="meta">]</span></span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<p>Map结构的属性和方法</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">map<span class="selector-class">.size</span>()  <span class="comment">//  返回map结构成员的总数</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.set</span>(key, value)   <span class="comment">//  为Map添加成员</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.get</span>(key)   <span class="comment">//  为Map成员</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.has</span>(key)   <span class="comment">//  判断是否为Map成员</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.delete</span>(key)   <span class="comment">//  删除Map成员</span></span><br><span class="line">Map<span class="selector-class">.prototype</span><span class="selector-class">.clear</span>(key)   <span class="comment">//  清空Map成员</span></span><br></pre></td></tr></table></figure>
+<p>Map结构的遍历同Set一样，也是有四种方法：<br>（1）keys()，values()，entries()<br>keys方法、values方法、entries方法返回的都是遍历器对象,由于 Map 结构没有键名，只有键值（或者说键名和键值是同一个值），所以keys方法和values方法的行为完全一致。<br>（2）forEach()<br>Map 结构的实例与数组一样，也拥有forEach方法，用于对每个成员执行某种操作，没有返回值。<br>Map结构可以同其他数据结构进行相互转化：<br>（1）Map转为数组：扩展运算符[…map]<br>（2）数组转为Map: new Map([[‘name’, ‘张三’], [‘age’, 23]])<br>（3）对象转map：可以通过Object.entries()参照数组转Map,因为Object.entries()返回的是键值对数组<br>（4）map转对象：通过遍历的方式<br>（5）map转JSON，</p>
+<ul>
+<li>键名是字符串：直接通过JSON.stringify()转化为JSON</li>
+<li>键名是非字符串：选择转为数组 JSON，先将map结构转化为数组，再将数组转化为JSON<br>（6）JSON转map同上，只不过是调用JSON.parse()</li>
+</ul>
+<h3 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h3><p>WeakMap结构与Map结构类似，也是用于生成键值对的集合。但是有俩点区别：<br>（1）WeakMap只接受对象作为键名（null除外），不接受其他类型的值作为键名。<br>（2）WeakMap的键名所指向的对象，不计入垃圾回收机制。WeakMap作为临时存储非常方便。WeakMap 弱引用的只是键名，而不是键值。键值依然是正常引用。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-algorithm/35"
   class="article article-type-post"
   itemscope
@@ -909,120 +1056,6 @@
 <p>分析：本地中没什么难度，只是要注意的是不要使用额外空间，空间复杂度是O(1).</p>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var reverseString = function(s) &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">left</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">right</span> = s.length - <span class="number">1</span></span><br><span class="line">    while (<span class="built_in">left</span> &lt;= <span class="built_in">right</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> temp = s[<span class="built_in">left</span>]</span><br><span class="line">        s[<span class="built_in">left</span>] = s[<span class="built_in">right</span>]</span><br><span class="line">        s[<span class="built_in">right</span>] = temp</span><br><span class="line">        <span class="built_in">left</span>++</span><br><span class="line">        <span class="built_in">right</span>--</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line">&#125;;</span><br><span class="line">reverseString([<span class="string">&quot;h&quot;</span>,<span class="string">&quot;e&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;o&quot;</span>])</span><br><span class="line">//  [<span class="string">&quot;o&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;l&quot;</span>,<span class="string">&quot;e&quot;</span>,<span class="string">&quot;h&quot;</span>]</span><br><span class="line">reverseString([<span class="string">&quot;H&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;n&quot;</span>,<span class="string">&quot;n&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;h&quot;</span>])</span><br><span class="line">//  [<span class="string">&quot;h&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;n&quot;</span>,<span class="string">&quot;n&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;H&quot;</span>]</span><br></pre></td></tr></table></figure>
 <p>That’s all!</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-algorithm/27"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/27/"
-    >leeCode算法--找出只出现一次的数字</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/27/" class="article-date">
-  <time datetime="2021-07-16T12:52:48.000Z" itemprop="datePublished">2021-07-16</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>题目：给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。算法应该具有线性复杂度，并且不使用额外的空间。</p>
-<p>解析：在给定的数组中，很有规律，除了只出现一次的元素外，其他的每个元素均只出现俩次，这就让我们想到了<code>异或运算(^)</code>。即，任意数a和0的运算：a⊕a=0;a⊕0=a,所以代码如下：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let singleNumber = nums =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!nums.length) &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    let m = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(let <span class="selector-tag">i</span> of nums) &#123;</span><br><span class="line">        m ^= <span class="selector-tag">i</span></span><br><span class="line">    &#125;</span><br><span class="line">    return m</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">singleNumber</span><span class="params">([<span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>])</span></span>   <span class="comment">//  4</span></span><br><span class="line"><span class="function"><span class="title">singleNumber</span><span class="params">([<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>])</span></span>   <span class="comment">//  1</span></span><br></pre></td></tr></table></figure>
-<p>所以本题的思路是非常难的，代码很简单，快补充一下<code>异或运算</code>啊。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-algorithm/26"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/26/"
-    >leeCode算法--买卖股票的最佳时机(II)</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/26/" class="article-date">
-  <time datetime="2021-07-15T08:16:34.000Z" itemprop="datePublished">2021-07-15</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>题目：给定一个数组 prices ，其中 prices[i] 是一支给定股票第 i 天的价格。设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</p>
-<p>分析：这就是标准的T+1股票，今天买进，只要涨，明天就卖出。</p>
-<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> maxProfit = prices =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">        i &lt; prices.length;i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (prices[i+<span class="number">1</span>] &gt; prices[i]) &#123;</span><br><span class="line">                <span class="built_in">sum</span> += prices[i+<span class="number">1</span>] - prices[i]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line">&#125;</span><br><span class="line">maxProfit([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])  //  <span class="number">4</span></span><br><span class="line">maxProfit([<span class="number">7</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">4</span>])  //  <span class="number">7</span></span><br><span class="line">maxProfit([<span class="number">7</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>])  //  <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<p>没什么好说的。That’s all!</p>
  
       <!-- reward -->
       

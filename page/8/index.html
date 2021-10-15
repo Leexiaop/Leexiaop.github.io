@@ -176,6 +176,142 @@
     
     
     <article
+  id="post-recoil/introduce/concepts"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/recoil/introduce/concepts/"
+    >Recoil简介--核心概念</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/recoil/introduce/concepts/" class="article-date">
+  <time datetime="2020-10-28T10:25:18.000Z" itemprop="datePublished">2020-10-28</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/recoil/">recoil</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="OverViews-概览"><a href="#OverViews-概览" class="headerlink" title="OverViews 概览"></a>OverViews 概览</h3><p>Recoil lets you create a data-flow graph that flows from atoms (shared state) through selectors (pure functions) and down into your React components. Atoms are units of state that components can subscribe to. Selectors transform this state either synchronously or asynchronously.<br>Recoil可以通过Selector(纯函数)和Atoms(共享状态)来创建组件之间共享数据的数据流图。Atoms是组件可以订阅到的状态单元。Selector可以是同步也可以是异步。</p>
+<h3 id="Atoms-共享状态"><a href="#Atoms-共享状态" class="headerlink" title="Atoms 共享状态"></a>Atoms 共享状态</h3><p>Atoms are units of state. They’re updateable and subscribable: when an atom is updated, each subscribed component is re-rendered with the new value. They can be created at runtime, too. Atoms can be used in place of React local component state. If the same atom is used from multiple components, all those components share their state.Atoms are created using the atom function:<br>Atoms就是状态单元，他们是可更新和可订阅的。一但某一个Atom更新，那么订阅他的组件就会得到新值重新渲染。这些Atoms可以在运行时被创建，也可在局部组件中使用。如果同一个Atom被多个组件使用，那么这些组件就会共享这个Atom.Atom可以通过Atom函数来创建：</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fontSizeState = atom(&#123;</span><br><span class="line">    <span class="built_in">key</span>: <span class="string">&#x27;fontSizeState&#x27;</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="number">14</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Atoms need a unique key, which is used for debugging, persistence, and for certain advanced APIs that let you see a map of all atoms. It is an error for two atoms to have the same key, so make sure they’re globally unique. Like React component state, they also have a default value.<br>Atoms需要一个唯一的标示key,用于调试、数据持久化、和确保整个Atom整个系统高阶API正常运行。一旦有俩个Atoms有了相同的key就会报错，所以要确保这个标示全局唯一，就像React组件的状态一样，他们也有自己的默认值。</p>
+<p>To read and write an atom from a component, we use a hook called <code>useRecoilState</code>. It’s just like React’s <code>useState</code>, but now the state can be shared between components:<br>在组件中开发Atom，会用到useRecoilState这个hooks函数。他就像React中的useState一样，但是运用Atom的hooks函数可以让状态在组件之间共享：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FontButton</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> [fontSize, setFontSize] = useRecoilState(fontSizeState);</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> setFontSize((size) =&gt; size + 1)&#125; style=&#123;&#123;fontSize&#125;&#125;&gt;</span></span><br><span class="line"><span class="xml">                Click to Enlarge</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Clicking on the button will increase the font size of the button by one. But now some other component can also use the same font size:<br>点击按钮就会增加按钮中字体的大小，但是这样在其他组件中用到同样字体大小的时候，其他组件的字体大小也会变化：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Text</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> [fontSize, setFontSize] = useRecoilState(fontSizeState);</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">&#123;&#123;fontSize&#125;&#125;</span>&gt;</span>This text will increase in size too.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Selectors-纯函数"><a href="#Selectors-纯函数" class="headerlink" title="Selectors 纯函数"></a>Selectors 纯函数</h3><p>A selector is a pure function that accepts atoms or other selectors as input. When these upstream atoms or selectors are updated, the selector function will be re-evaluated. Components can subscribe to selectors just like atoms, and will then be re-rendered when the selectors change.<br>Selector是一个以Atom和其他的Selector为参数的纯函数。当这些上游的Atoms和Selector更新的时候。该Selecotor就会重新计算。组件也可以像Atom一样订阅Selector.当Selector发生变化的时候，组件也会被重新渲染。<br>Selectors are used to calculate derived data that is based on state. This lets us avoid redundant state, usually obviating the need for reducers to keep state in sync and valid. Instead, a minimal set of state is stored in atoms, while everything else is efficiently computed as a function of that minimal state. Since selectors keep track of what components need them and what state they depend on, they make this functional approach more efficient.<br>Selector被用来基于原始State的派生数据的计算。因为不需要使用 reducer 来保证数据的一致性和有效性，所以可以避免冗余数据。而是数据都是通过基于存储在Atom上的原始数据计算得到的。由于 Selector 会追踪使用它们的组件以及它们依赖的数据状态，所以函数式编程会比较高效。<br>From the point of view of components, selectors and atoms have the same interface and can therefore be substituted for one another.<br>因为 Seletor 和 Atom 给组件提供相同的方法，所以它们可以相互替代。<br>Selectors are defined using the selector function:<br>Selector可以通过Selector函数创建：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fontSizeLabelState = selector(&#123;</span><br><span class="line">    <span class="attr">key</span>: <span class="string">&#x27;fontSizeLabelState&#x27;</span>,</span><br><span class="line">    <span class="attr">get</span>: <span class="function">(<span class="params">&#123;get&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> fontSize = get(fontSizeState);</span><br><span class="line">        <span class="keyword">const</span> unit = <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;fontSize&#125;</span><span class="subst">$&#123;unit&#125;</span>`</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>The <code>get</code> property is the function that is to be computed. It can access the value of atoms and other selectors using the <code>get</code> argument passed to it. Whenever it accesses another atom or selector, a dependency relationship is created such that updating the other atom or selector will cause this one to be recomputed.<br><code>get</code>属性是一个用于计算的函数。它可以使用入参 <code>get</code> 字段来访问输入的 Atom 和 Selector。当它访问其他 Atom 和 Selector 时，这层依赖关系会保证更新状态的同步。<br>In this fontSizeLabelState example, the selector has one dependency: the fontSizeState atom. Conceptually, the fontSizeLabelState selector behaves like a pure function that takes a fontSizeState as input and returns a formatted font size label as output.<br>In this <code>fontSizeLabelState</code> example, the selector has one dependency: the <code>fontSizeState</code> atom. Conceptually, the <code>fontSizeLabelState</code> selector behaves like a pure function that takes a <code>fontSizeLabelState</code> as input and returns a formatted font size label as output.<br>参考上述 <code>fontSizeLabelState</code> 示例，它依赖于 <code>fontSizeLabelState</code>使用 <code>fontSizeLabelState</code> 作为入参，并返回格式化之后的字号文本。<br>Selectors can be read using <code>useRecoilValue()</code>, which takes an atom or selector as an argument and returns the corresponding value. We don’t use the <code>useRecoilState()</code> as the <code>fontSizeLabelState</code> selector is not writeable see the <a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/core/selector">selector API reference</a> for more information on writeable selectors):<br>我们可以通过在 <code>useRecoilValue()</code> 方法中输入 Atom 或者 Selector 来获取对应的数据。这里不用 <code>useRecoilState()</code> 是因为 <code>fontSizeLabelState</code> 是一个不可写 Selector，更多细节参考 <a target="_blank" rel="noopener" href="https://recoiljs.org/docs/api-reference/core/selector">Selector</a>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FontButton</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> [fontSize, setFontSize] = useRecoilState(fontSizeState);</span><br><span class="line">    <span class="keyword">const</span> fontSizeLabel = useRecoilValue(fontSizeLabelState);</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">div</span>&gt;</span>Current font size: $&#123;fontSizeLabel&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> setFontSize(fontSize + 1)&#125; style=&#123;&#123;fontSize&#125;&#125;&gt;</span></span><br><span class="line"><span class="xml">                Click to Enlarge</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Clicking on the button now does two things: it increases the font size of the button while also updating the font size label to reflect the current font size.<br>点击按钮可以看到按钮和文本的字号同时在更新。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-recoil/introduce/motivation"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/recoil/introduce/motivation/"
+    >Recoil简介--设计初衷</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/recoil/introduce/motivation/" class="article-date">
+  <time datetime="2020-10-28T10:25:18.000Z" itemprop="datePublished">2020-10-28</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/recoil/">recoil</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="Motivation-初衷"><a href="#Motivation-初衷" class="headerlink" title="Motivation 初衷"></a>Motivation 初衷</h3><p>For reasons of compatibility and simplicity, it’s best to use React’s built-in state management capabilities rather than external global state. But React has certain limitations:<br>秉承简单与兼容性至上的原则，最好的状态管理方式当然是直接使用 React 内置能力而不是外部全部状态。然而 React 确实存在着一些问题：</p>
+<ul>
+<li>Component state can only be shared by pushing it up to the common ancestor, but this might include a huge tree that then needs to re-render.<br>组件状态只能与其祖先组件进行共享，这可能会带来组件树中大量的重绘开销。</li>
+<li>Context can only store a single value, not an indefinite set of values each with its own consumers.<br>Context 只能保存一个特定值而不是与其 Consumer 共享一组不确定的值。</li>
+<li>Both of these make it difficult to code-split the top of the tree (where the state has to live) from the leaves of the tree (where the state is used).<br>以上两点导致组件树顶部组件（状态生产者）与组件树底部组件（状态消费者）之间的代码拆分变得非常困难。</li>
+</ul>
+<p>We want to improve this while keeping both the API and the semantics and behavior as Reactish as possible.<br>我们希望在尽可能保持 React 代码风格和语义化的前提下解决以上问题。</p>
+<p>Recoil defines a directed graph orthogonal to but also intrinsic and attached to your React tree. State changes flow from the roots of this graph (which we call atoms) through pure functions (which we call selectors) and into components. With this approach:<br>Recoil 在组件树中定义了一个正交且内聚的单向图谱。状态变更通过以下方法从图谱的底部（atoms）通过纯函数（selectors）进入组件：</p>
+<ul>
+<li>We get a boilerplate-free API where shared state has the same simple get/set interface as React local state (yet can be encapsulated with reducers etc. if needed).<br>我们提供了一些无依赖的方法，这些方法像 React 局部状态一样暴露相同的 get/set 接口（简单理解为 reducers 之类的概念亦可）。</li>
+<li>We have the possibility of compatibility with Concurrent Mode and other new React features as they become available.<br>我们能够与一些 React 新功能（比如并发模式）兼容。</li>
+<li>The state definition is incremental and distributed, making code-splitting possible.<br>状态定义是可伸缩和分布式的，代码拆分成为可能。</li>
+<li>State can be replaced with derived data without modifying the components that use it.<br>不用修改组件即可派生数据状态。</li>
+<li>Derived data can move between being synchronous and asynchronous without modifying the components that use it.<br>派生数据状态支持同步和异步。</li>
+<li>We can treat navigation as a first-class concept, even encoding state transitions in links.<br>我们把跳转看作一级概念，甚至可以对链接中的状态流转进行编码。</li>
+<li>It’s easy to persist the entire application state in a way that is backwards-compatible, so persisted states can survive application changes.<br>所以可以简单地使用向后兼容的方式来持久化整个应用的状态，应用变更时持久化状态也可以因此得以保留。</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-recoil/introduce/start"
   class="article article-type-post"
   itemscope

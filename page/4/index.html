@@ -176,6 +176,144 @@
     
     
     <article
+  id="post-algorithm/structures/2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/structures/2/"
+    >基础数据结构--手动实现列表及其相关方法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/structures/2/" class="article-date">
+  <time datetime="2021-05-24T02:47:49.000Z" itemprop="datePublished">2021-05-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>列表的定义：列表是一组有序的数据。其中的元素可以是任意类型。列表一般有的属性为：</p>
+<ul>
+<li>listSize: 保存列表中元素的个数；</li>
+<li>pos: 列表中当前元素的位置；</li>
+<li>length(): 列表中元素的个数；</li>
+<li>clear(): 清空列表；</li>
+<li>toString(): 返回列表中的元素；</li>
+<li>getElement(): 返回当前位置的元素；</li>
+<li>insert(): 在现有元素的前后插入某个元素；</li>
+<li>append(): 在列表的末尾添加元素；</li>
+<li>find(): 查找列表中的指定元素；</li>
+<li>remove(): 删除列表中的指定元素；</li>
+<li>front(): 将当前元素移动到列表的第一个元素；</li>
+<li>end(): 将当前元素移动到列表的最后一个元素；</li>
+<li>pre(): 将当前元素前移一位；</li>
+<li>next(): 将当前元素后移一位；</li>
+<li>hasNext(): 判断后一位元素；</li>
+<li>hasPre(): 判断前一位元素；</li>
+<li>currPos(): 返回列表的当前位置；</li>
+<li>moveTo(): 将当前元素移动到指定位置；</li>
+<li>contains(): 判断给定的元素是不是包含在列表中。<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">function List () &#123;</span><br><span class="line">    <span class="comment">//  保存在列表中的数据</span></span><br><span class="line">    <span class="keyword">this</span>.dataStore = []</span><br><span class="line">    <span class="comment">//  列表的当前位置</span></span><br><span class="line">    <span class="keyword">this</span>.pos = <span class="number">0</span></span><br><span class="line">    <span class="comment">//  列表的元素个数</span></span><br><span class="line">    <span class="keyword">this</span>.listSize = <span class="number">0</span></span><br><span class="line">    <span class="keyword">this</span>.append = append</span><br><span class="line">    <span class="keyword">this</span>.</span><br><span class="line">&#125;</span><br><span class="line">function append (item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.dataStore[<span class="keyword">this</span>.listSize++] = item</span><br><span class="line">&#125;</span><br><span class="line">function find (item) &#123;</span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.dataStore.length;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.dataStore[i] === item) &#123;</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">function remove (item) &#123;</span><br><span class="line">    <span class="comment">//  先查找到要删除元素的位置</span></span><br><span class="line">    let index = find(item)</span><br><span class="line">    <span class="comment">//  判断是否找到了该元素</span></span><br><span class="line">    <span class="keyword">if</span> (index &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">//  splice方法删除找到的元素</span></span><br><span class="line">        <span class="keyword">this</span>.dataStore.splice(index, <span class="number">1</span>)</span><br><span class="line">        <span class="comment">//  整个列表的长度减1</span></span><br><span class="line">        --<span class="keyword">this</span>.listSize</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">function toString () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  item 要插入的元素</span></span><br><span class="line"><span class="comment">//  after在那个元素后插入</span></span><br><span class="line">function insert (item, after) &#123;</span><br><span class="line">    let index = find(after)</span><br><span class="line">    <span class="keyword">if</span> (index &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.dataStore.splice(index + <span class="number">1</span>, <span class="number">0</span>, item)</span><br><span class="line">        ++<span class="keyword">this</span>.listSize</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">function clear () &#123;</span><br><span class="line">    delete <span class="keyword">this</span>.dataStore</span><br><span class="line">    <span class="keyword">this</span>.listSize = <span class="number">0</span></span><br><span class="line">    <span class="keyword">this</span>.pos = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line">function contains (item) &#123;</span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.dataStore.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.dataStore[i] === item) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">function length () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.listSize</span><br><span class="line">&#125;</span><br><span class="line">function front () &#123;</span><br><span class="line">    <span class="keyword">this</span>.pos = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line">function end () &#123;</span><br><span class="line">    <span class="keyword">this</span>.pos = <span class="keyword">this</span>.listSize - <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">function currPos () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.pos</span><br><span class="line">&#125;</span><br><span class="line">function moveTo (pos) &#123;</span><br><span class="line">    <span class="keyword">this</span>.pos = pos</span><br><span class="line">&#125;</span><br><span class="line">function getElement () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.listStore[<span class="keyword">this</span>.pos]</span><br><span class="line">&#125;</span><br><span class="line">function pre () &#123;</span><br><span class="line">    --<span class="keyword">this</span>.pos</span><br><span class="line">&#125;</span><br><span class="line">function next () &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.pos &lt; <span class="keyword">this</span>.listSize) &#123;</span><br><span class="line">        ++<span class="keyword">this</span>.pos</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function hasNext () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.pos &lt; <span class="keyword">this</span>.listSize</span><br><span class="line">&#125;</span><br><span class="line">function hasPre () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.pos &gt;= <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  测试</span></span><br><span class="line">let list = new List()</span><br></pre></td></tr></table></figure>
+注：列表的运用看起来和数组区别不是很大，但是这里重要的是运用到像列表中插入元素的方法。</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-algorithm/structures/1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/structures/1/"
+    >基础数据结构--手动用数组实现栈及其相关方法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/structures/1/" class="article-date">
+  <time datetime="2021-05-21T07:57:48.000Z" itemprop="datePublished">2021-05-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>栈的定义：栈是一种特殊的列表,栈内的元素只能通过栈的一端去访问，就是栈顶，所以栈就有了<code>先进后出</code>的特点。也就是说除了栈顶可以访问栈内元素，其他都不可以。一般操作栈的方法有以下三个：</p>
+<ul>
+<li>push(): 将元素押入到栈内；</li>
+<li>pop(): 从栈顶删除一个元素，<code>永久性从栈顶删除</code>；</li>
+<li>peek(): 返回栈顶元素，不删除栈顶元素；</li>
+<li>clear(): 清除栈；</li>
+<li>top：保存栈顶元素。<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">function Stack () &#123;</span><br><span class="line">    <span class="comment">//  存储数据的数组</span></span><br><span class="line">    <span class="keyword">this</span>.dataStore = []</span><br><span class="line">    <span class="comment">//  栈顶元素</span></span><br><span class="line">    <span class="keyword">this</span>.top = <span class="number">0</span></span><br><span class="line">    <span class="comment">//  押入栈的方法</span></span><br><span class="line">    <span class="keyword">this</span>.push = push</span><br><span class="line">    <span class="comment">//  删除栈顶元素的方法</span></span><br><span class="line">    <span class="keyword">this</span>.pop = pop</span><br><span class="line">    <span class="comment">//  返回栈顶元素的方法</span></span><br><span class="line">    <span class="keyword">this</span>.peek = peek</span><br><span class="line">    <span class="comment">//  清楚栈的方法</span></span><br><span class="line">    <span class="keyword">this</span>.clear = clear</span><br><span class="line">    <span class="comment">//  保存栈的长度</span></span><br><span class="line">    <span class="keyword">this</span>.length = length</span><br><span class="line">&#125;</span><br><span class="line">function push (item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.dataStore[<span class="keyword">this</span>.top++] = item</span><br><span class="line">&#125;</span><br><span class="line">function pop (item) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore[<span class="keyword">this</span>.top--] = item</span><br><span class="line">&#125;</span><br><span class="line">function peek (item) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore[<span class="keyword">this</span>.top - <span class="number">1</span>]</span><br><span class="line">&#125;</span><br><span class="line">function clear () &#123;</span><br><span class="line">    <span class="keyword">this</span>.top = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line">function length () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.top</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  测试</span></span><br><span class="line">let stack = new Stack()</span><br></pre></td></tr></table></figure>
+注：栈的运用还是有多种，最为典型的如，判断字符串回文，递归计算某个数的阶乘，将一个数制转换成另一种数制。</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-algorithm/20"
   class="article article-type-post"
   itemscope
@@ -928,132 +1066,6 @@ That’s all!整体思路就是从俩边向中间循环，只要遇到不相等�
 <li>将计数组的索引按出现的次数平铺在原数组中，并返回<br><img src="/algorithm/8/8.gif" alt="计数排序"><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var countSort =<span class="function"> (<span class="params">arr</span>, <span class="params">max</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> countArr = <span class="keyword">new</span> <span class="constructor">Array(<span class="params">max</span> + 1)</span></span><br><span class="line">    <span class="keyword">let</span> sortIndex = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!countArr<span class="literal">[<span class="identifier">arr</span>[<span class="identifier">i</span>]</span>]) &#123;</span><br><span class="line">            countArr<span class="literal">[<span class="identifier">arr</span>[<span class="identifier">i</span>]</span>] = <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">        countArr<span class="literal">[<span class="identifier">arr</span>[<span class="identifier">i</span>]</span>]++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; countArr.length;j++) &#123;</span><br><span class="line">        <span class="comment">//  判断countArr中存放的次数是大于0的</span></span><br><span class="line">        <span class="keyword">while</span>(countArr<span class="literal">[<span class="identifier">j</span>]</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            arr<span class="literal">[<span class="identifier">sortIndex</span><span class="operator">++</span>]</span> = j</span><br><span class="line">            <span class="comment">//  在countArr中存放的是数量</span></span><br><span class="line">            <span class="comment">//  所以需要没存一次就减少一次</span></span><br><span class="line">            countArr<span class="literal">[<span class="identifier">j</span>]</span>--</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> arr = <span class="literal">[<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">12</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">1</span>]</span></span><br><span class="line">count<span class="constructor">Sort(<span class="params">arr</span>, 12)</span></span><br><span class="line"><span class="comment">//  [1, 1, 2, 3, 3, 3, 4, 5, 5, 5, 7, 8, 8, 9, 9, 12]</span></span><br></pre></td></tr></table></figure>
 注：<br>  我们可以看到，计数排序并不是像其他排序一样，通过比较大小，所以，计数排序是适合特定情况下的排序，计数排序要求输入的数据必须是有确定范围的整数。</li>
 </ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-algorithm/7"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/7/"
-    >排序算法(六)--快速排序</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/7/" class="article-date">
-  <time datetime="2021-04-26T12:16:50.000Z" itemprop="datePublished">2021-04-26</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>快速排序的思想：先在整个数列中找到一个基准（pivot），以这个基准为参照，重新排列整个数列，将其中的项目小于基准的排在基准的一边，将大于基准的排在基准的另一侧。等于基准排在哪边无所谓。递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。<br><img src="/algorithm/7/7.gif" alt="快速排序"></p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">quickSort (arr, <span class="keyword">l</span>, r) &#123;</span><br><span class="line">    //  一个元素不需要排序，直接返回</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">l</span> &gt;= r) <span class="keyword">return</span> arr</span><br><span class="line">    //  找到基准的下标</span><br><span class="line">    <span class="keyword">let</span> partitionIndex = partition(arr, <span class="keyword">l</span>, r)</span><br><span class="line">    //  对基准左侧的数组排序,同时基准向左移动</span><br><span class="line">    quickSort(arr, <span class="keyword">l</span>, partitionIndex - <span class="number">1</span>)</span><br><span class="line">    //  对基准右侧的数组排序,同时基准向右移动</span><br><span class="line">    quickSort(arr, partitionIndex + <span class="number">1</span>, r)</span><br><span class="line">&#125;</span><br><span class="line">partition (arr, <span class="keyword">l</span>, r) &#123;</span><br><span class="line">    //  取每段数组的最右边的元素为基准值</span><br><span class="line">    <span class="keyword">let</span> pivot = arr[r]</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">left</span> = <span class="keyword">l</span></span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">right</span> = r - <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">left</span> &lt; <span class="keyword">right</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">left</span> &lt;= <span class="keyword">right</span> &amp;&amp; arr[<span class="keyword">left</span>] &lt;= pivot) &#123;</span><br><span class="line">            <span class="keyword">left</span>++</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">left</span> &lt;= <span class="keyword">right</span> &amp;&amp; arr[<span class="keyword">right</span>] &gt; pivot) &#123;</span><br><span class="line">            <span class="keyword">right</span>--</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">left</span> &lt; <span class="keyword">right</span>) &#123;</span><br><span class="line">            this.swap(arr, <span class="keyword">left</span>, <span class="keyword">right</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //  最后剩下的元素做交换</span><br><span class="line">    swap(arr, <span class="keyword">left</span>, r)</span><br><span class="line">    //  这里返回的是<span class="keyword">left</span>,不是<span class="keyword">right</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">left</span></span><br><span class="line">&#125;</span><br><span class="line">swap (arr, i, <span class="keyword">j</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> temp = arr[i]</span><br><span class="line">    arr[i] = arr[<span class="keyword">j</span>]</span><br><span class="line">    arr[<span class="keyword">j</span>] = temp</span><br><span class="line">&#125;,</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">7</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">8</span>]</span><br><span class="line">quickSort(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>)</span><br><span class="line">console.<span class="built_in">log</span>(arr)</span><br><span class="line">//  [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br></pre></td></tr></table></figure>
-<p>注：快速排序稳定，且效率高，所以使用也比较多。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-algorithm/6"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/6/"
-    >排序算法(五)--归并排序</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/6/" class="article-date">
-  <time datetime="2021-04-23T09:06:48.000Z" itemprop="datePublished">2021-04-23</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>归并排序的思想：归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。作为一种典型的分而治之思想的算法应用，归并排序的实现由两种方法：</p>
-<ul>
-<li>自上而下的递归（所有递归的方法都可以用迭代重写，所以就有了第 2 种方法）；</li>
-<li>自下而上的迭代；</li>
-</ul>
-<p>实现的步骤：</p>
-<ul>
-<li>申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列；</li>
-<li>设定两个指针，最初位置分别为两个已经排序序列的起始位置；</li>
-<li>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置；</li>
-<li>重复步骤 3 直到某一指针达到序列尾；</li>
-<li>将另一序列剩下的所有元素直接复制到合并序列尾。</li>
-</ul>
-<p>时间复杂度为：nlogn。</p>
-<p><img src="/algorithm/6/6.gif" alt="归并排序"></p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">var mergeSort = (arr) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> arr</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> middle = Math.<span class="built_in">floor</span>(arr.length/<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">left</span> = arr.slice(<span class="number">0</span>, middle)</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">right</span> = arr.slice(middle)</span><br><span class="line">    <span class="keyword">return</span> merge(mergeSort(<span class="keyword">left</span>), mergeSort(<span class="keyword">right</span>))</span><br><span class="line">&#125;</span><br><span class="line">var merge = (<span class="keyword">left</span>, <span class="keyword">right</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> result = []</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">left</span>.length &amp;&amp; <span class="keyword">right</span>.length) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">left</span>[<span class="number">0</span>] &lt;= <span class="keyword">right</span>[<span class="number">0</span>]) &#123;</span><br><span class="line">            result.push(<span class="keyword">left</span>.shift())</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            result.push(<span class="keyword">right</span>.shift())</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">left</span>.length) &#123;</span><br><span class="line">        result.push(<span class="keyword">left</span>.shift())</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">right</span>.length) &#123;</span><br><span class="line">        result.push(<span class="keyword">right</span>.shift())</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line">mergeSort([<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">9</span>,<span class="number">6</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">8</span>])</span><br><span class="line">//  [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br></pre></td></tr></table></figure>
-<p>归并排序是应用比较多的一种排序，是稳定的，掌握，掌握，掌握！！！<br>That’s all!</p>
  
       <!-- reward -->
       

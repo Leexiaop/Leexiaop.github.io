@@ -15,7 +15,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Recoil基础--基础介绍 |  Lee前端技术栈</title>
+      <title>Typescript--模块和命名空间 |  Lee前端技术栈</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -59,7 +59,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-recoil/tutorial/introduce"
+  id="post-ts/6"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Recoil基础--基础介绍
+  Typescript--模块和命名空间
 </h1>
  
 
@@ -78,11 +78,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/recoil/tutorial/introduce/" class="article-date">
-  <time datetime="2020-11-02T10:25:18.000Z" itemprop="datePublished">2020-11-02</time>
+      <a href="/ts/6/" class="article-date">
+  <time datetime="2021-10-15T06:36:36.000Z" itemprop="datePublished">2021-10-15</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/recoil/">recoil</a>
+    <a class="article-category-link" href="/categories/typescript/">typescript</a>
   </div>
   
 <div class="word_count">
@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">215</span>
+            <span class="post-count">526</span>
         </span>
     </span>
 
@@ -114,13 +114,13 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p>This section assumes you have installed Recoil and React. See the <a target="_blank" rel="noopener" href="https://recoiljs.org/docs/introduction/getting-started">Getting Started</a> page for how to get started with Recoil and React from scratch. Components in the following sections are assumed to have a <code>&lt;RecoilRoot /&gt;</code> in the parent tree.<br>这一章节主要是安装Recoil和React,可以查看<a target="_blank" rel="noopener" href="https://recoiljs.org/docs/introduction/getting-started">开始</a>页如何安装Recoil和React,在下面的章节中，根组件中都会使用<code>&lt;RecoilRoot /&gt;</code>组件。<br>In this tutorial, we’ll be building a simple todo-list application. Our app will be able to do the following:<br>我们会创建一个简单的todo-list的应用。我们的应用会做到以下几点：</p>
+  <h6 id="模块的概念"><a href="#模块的概念" class="headerlink" title="模块的概念"></a>模块的概念</h6><p>模块的概念：关于术语的一点说明。请务必注意一点，typescript1.5里术语名已经发生变化。内部模块现在叫做“命名空间”。外部模块现在简称为“模块”，模块在其自身的作用域里执行，而不是在全局作用域里执行。这意味着定义在一个模块里的变量，函数，类等在模块外部都是不可见的。除非能明确的使用export的形式之一导出他们，相反，如果想使用其他模块到处的变量，函数，类，接口的时候，就比如导入他们，可以用使用import的形式。</p>
+<p>理解：<br>我们可以使用一些公共的功能单独抽离一个文件作为模块。<br>模块里的变量，函数，类，默认是私有的。如果哦我们要在外部访问模块里的数据（变量，函数，类），我们需要通过export暴露模块里的数据（变量，函数，类）。暴露后我们通过import引入模块就可以使用模块暴露出来的数据（变量，函数，类）了。</p>
+<h6 id="export"><a href="#export" class="headerlink" title="export"></a>export</h6><p>export default 默认导出<br>每个模块都可以有一个default导出，默认导出使用default关键字标记。并且一个模块只能有一个default导出，需要使用特殊形式来导出。</p>
+<h6 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h6><p>在代码量较大的情况下，为了避免各种变量名相互冲突，可以将相似的函数，类，接口等放到命名空间中间。同java的包，.net的命名空间一样，typescript的命名空间可以将代码包裹起来，只对外暴露需要在外部访问的对象，命名空间内的对象通过export对外暴露。<br>命名空间和模块的区别：</p>
 <ul>
-<li>Add todo items 添加todo项</li>
-<li>Edit todo items 开发todo项</li>
-<li>Delete todo items 删除todo项</li>
-<li>Filter todo items 过滤todo项</li>
-<li>Display useful stats 展示state<br>Along the way, we’ll cover atoms, selectors, atom families, and the hooks exposed by the Recoil API. We’ll also cover optimization<br>这样，我们会很好的覆盖到Atoms,selectors,atom全家桶，以及Recoil API 暴露的hooks。</li>
+<li>命名空间：内部模块，主要用于组织代码，避免命名冲突，命名空间用关键字<code>namespace</code>表示</li>
+<li>模块：ts的外部模块的简称，侧重代码的复用，一个模块里可能会有多个命名空间</li>
 </ul>
  
       <!-- reward -->
@@ -186,12 +186,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://leexiaop.github.io/recoil/tutorial/introduce/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://leexiaop.github.io/ts/6/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li></ul>
 
     </footer>
   </div>
@@ -199,19 +199,19 @@
    
   <nav class="article-nav">
     
-      <a href="/recoil/tutorial/atoms/" class="article-nav-link">
+      <a href="/ts/7/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Recoil基础--Atoms共享状态
+            Typescript--装饰器
           
         </div>
       </a>
     
     
-      <a href="/recoil/introduce/introduce/" class="article-nav-link">
+      <a href="/ts/5/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Recoil简介</div>
+        <div class="article-nav-title">Typescript--泛型的使用</div>
       </a>
     
   </nav>
