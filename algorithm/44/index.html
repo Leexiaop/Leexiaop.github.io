@@ -15,7 +15,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Recoil简介--开始应用 |  Lee前端技术栈</title>
+      <title>JavaScript算法套路(一) 二叉树的前、中、后序递归遍历 |  Lee前端技术栈</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -59,7 +59,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-recoil/introduce/start"
+  id="post-algorithm/44"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Recoil简介--开始应用
+  JavaScript算法套路(一) 二叉树的前、中、后序递归遍历
 </h1>
  
 
@@ -78,11 +78,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/recoil/introduce/start/" class="article-date">
-  <time datetime="2020-10-28T10:25:18.000Z" itemprop="datePublished">2020-10-28</time>
+      <a href="/algorithm/44/" class="article-date">
+  <time datetime="2022-02-17T12:08:19.000Z" itemprop="datePublished">2022-02-17</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/recoil/">recoil</a>
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
   </div>
   
 <div class="word_count">
@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">722</span>
+            <span class="post-count">815</span>
         </span>
     </span>
 
@@ -114,28 +114,30 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><h3 id="Create-React-App-创建应用"><a href="#Create-React-App-创建应用" class="headerlink" title="Create React App 创建应用"></a>Create React App 创建应用</h3><p>Recoil is a state management library for React, so you need to have React installed and running to use Recoil. The easiest and recommended way for bootstrapping a React application is to use <a target="_blank" rel="noopener" href="https://github.com/facebook/create-react-app#creating-an-app">Create React App</a>:<br>Recoil是一个为Reactk开发的状态管理库，所以运行Recoil的先安装React,推荐最简单的安装React应用方式就是用如下命令：</p>
-<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">npx</span> <span class="built_in">create-react-app</span> <span class="string">my-app</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><a href>npx</a> is a package runner tool that comes with npm 5.2+ and higher, see instructions for older npm versions.<br>npx是一个npm5.2或更高版本的运行工具包，<a href>点击查看低版本的npm说明</a>。</p>
-</blockquote>
-<p>For more ways to install Create React App, see the <a target="_blank" rel="noopener" href="https://github.com/facebook/create-react-app#creating-an-app">official documentation</a>.<br>更多安装应用方式请查看<a target="_blank" rel="noopener" href="https://github.com/facebook/create-react-app#creating-an-app">官方文档</a>。</p>
-<h3 id="Installation-安装"><a href="#Installation-安装" class="headerlink" title="Installation 安装"></a>Installation 安装</h3><p>The Recoil package lives in npm. To install the latest stable version, run the following command:<br>Recoil包已经发布到npm上，安装最新最稳定的版本只要运行以下命令：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">install</span> recoil</span><br></pre></td></tr></table></figure>
-<p>Or if you’re using yarn:<br>或者使用yarn:</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn <span class="builtin-name">add</span> recoil</span><br></pre></td></tr></table></figure>
-<h3 id="RecoilRoot"><a href="#RecoilRoot" class="headerlink" title="RecoilRoot"></a>RecoilRoot</h3><p>Components that use recoil state need <code>RecoilRoot</code> to appear somewhere in the parent tree. A good place to put this is in your root component:<br>组件中使用Recoil状态需要在父级中使用<code>RecoilRoot</code>,组件中最好的方式就是将<code>RecoilRoot</code>放到根组件中。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">    RecoilRoot,</span><br><span class="line">    atom,</span><br><span class="line">    selector,</span><br><span class="line">    useRecoilState,</span><br><span class="line">    useRecoilValue,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&#x27;recoil&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">CharacterCounter</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">RecoilRoot</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>We’ll implement the <code>CharacterCounter</code> component in the following section.<br>接下来我们会开发一个<code>CharacterCounter</code>的组件。</p>
-<h3 id="Atom"><a href="#Atom" class="headerlink" title="Atom"></a>Atom</h3><p>An <strong>atom</strong> represents a piece of <strong>state</strong>. Atoms can be read from and written to from any component. Components that read the value of an atom are implicitly <strong>subscribed</strong> to that atom, so any atom updates will result in a re-render of all components subscribed to that atom:<br>一个Atom就代表一个state,Atom可以被任何一个组件读取，更新。组件读取 Atom 数据将会隐式订阅它，任何更新都会导致订阅它的组件进行重新渲染。</p>
-<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> textState = atom(&#123;</span><br><span class="line">    key: <span class="string">&#x27;textState&#x27;</span>, // unique ID (<span class="keyword">with</span> respect <span class="keyword">to</span> other atoms/selectors)</span><br><span class="line">    <span class="literal">default</span>: <span class="string">&#x27;&#x27;</span>, // <span class="literal">default</span> value (aka initial value)</span><br><span class="line">&#125;)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>Components that need to read from and write to an atom should use useRecoilState() as shown below:<br>在组件中使用 useRecoilState() 读写 Atom 数据：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CharacterCounter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">TextInput</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">CharacterCount</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TextInput</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [text, setText] = useRecoilState(textState);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> onChange = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    setText(event.target.value);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">value</span>=<span class="string">&#123;text&#125;</span> <span class="attr">onChange</span>=<span class="string">&#123;onChange&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">br</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        Echo: &#123;text&#125;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h3><p>A <strong>selector</strong> represents a piece of <strong>derived state</strong>. Derived state is a <strong>transformation</strong> of state. You can think of derived state as the output of passing state to a pure function that modifies the given state in some way:<br>selectore代表派生状态。Derived state是状态的一种转化，在某种意义上你可以认为derived state是纯函数输出的某种state.</p>
-<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> charCountState = selector(&#123;</span><br><span class="line">    <span class="built_in">key</span>: <span class="string">&#x27;charCountState&#x27;</span>, <span class="comment">// unique ID (with respect to other atoms/selectors)</span></span><br><span class="line">    <span class="built_in">get</span>: (&#123;<span class="built_in">get</span>&#125;) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> <span class="built_in">text</span> = <span class="built_in">get</span>(textState);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">text</span>.length;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>We can use the <code>useRecoilValue()</code> hook to read the value of <code>charCountState</code>:<br>我们可以用<code>useRecoilValue()</code>钩子来读取<code>charCountState</code>的值：</p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span></span> CharacterCount() &#123;</span><br><span class="line">    const <span class="built_in">count</span> = useRecoilValue(charCountState);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &lt;&gt;<span class="keyword">Character</span> <span class="built_in">Count</span>: &#123;<span class="built_in">count</span>&#125;&lt;/&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><p>略</p>
+  <p>Leetcode算法刷了那么多，是不是过了没多久就全忘记了，再遇到类似的题目，只能隐隐约约的记得曾经刷过，但依旧毫无思路。对，这是绝大多数人的通病，当然我也不例外，所以我潜心研究这到底是为什么，到底是为什么。终于找到了终结所在–光刷题，只是做了题，根本没有明白其内在原理，根本没有总结过做算法的套路。那么我就从二叉树的遍历开始，来总结一下相应的算法套路。</p>
+<h3 id="二叉树预备知识"><a href="#二叉树预备知识" class="headerlink" title="二叉树预备知识"></a>二叉树预备知识</h3><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     <span class="number">1</span></span><br><span class="line">  /     <span class="string">\</span></span><br><span class="line">  <span class="number">2</span>       <span class="number">5</span></span><br><span class="line">/   <span class="string">\</span>      <span class="string">\</span></span><br><span class="line"><span class="number">3</span>    <span class="number">4</span>       <span class="number">6</span></span><br></pre></td></tr></table></figure>
+<p>数据结构<code>树</code>的节点，最多有俩个子节点，就是二叉树。我是前端，那么前端的朋友一定会说，前端没有二叉树这种数据结构，如何表示呢？用<code>数组</code>,对，就是数组来表示，应该是这样的：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tree = [<span class="number">1</span>, <span class="number">2</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="literal">null</span>, <span class="number">6</span>];</span><br></pre></td></tr></table></figure>
+
+<h3 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h3><p>二叉树的遍历由深度优先和广度优先之分，那我们今天就先来说说深度优先，即：</p>
+<ul>
+<li>前序遍历</li>
+<li>中序遍历</li>
+<li>后续遍历</li>
+</ul>
+<p>那么你一定想知道这三种遍历有什么区别呢？对，共同点，都是从左枝叶开始遍历，那区别就是<code>遍历根结点的位置在哪儿</code>，我们来看下上面二叉树的遍历顺序：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>  前序遍历</span><br><span class="line"><span class="number">1</span>、<span class="number">2</span>、<span class="number">3</span>、<span class="number">4</span>、<span class="number">5</span>、<span class="number">6</span></span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>  中序遍历</span><br><span class="line"><span class="number">3</span>、<span class="number">2</span>、<span class="number">4</span>、<span class="number">1</span>、<span class="number">5</span>、<span class="number">6</span></span><br><span class="line"></span><br><span class="line"><span class="regexp">//</span>  后序遍历</span><br><span class="line"><span class="number">3</span>、<span class="number">4</span>、<span class="number">2</span>、<span class="number">6</span>、<span class="number">5</span>、<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>所以我们就明白了。</p>
+<h3 id="总结套路"><a href="#总结套路" class="headerlink" title="总结套路"></a>总结套路</h3><p>标题我们已经写过了，我们是用递归的方法来实现二叉树的遍历。那么我们要总结一下，如果写程序：</p>
+<ul>
+<li>要确定参数是什么<br>那二叉树的遍历，无论是前序遍历、中序遍历还是后续遍历，我们需要有树，要有节点，那么我们的参数就是<code>节点</code>喽。。。</li>
+<li>终止条件是什么<br>递归遍历，我们必须先想好终止的条件是什么。要不然就会造成栈溢出的情况对吧。那么对于二叉树来说，只要没有节点了，我们就改终止遍历了对吧，所以终止条件就是<code>节点不存在</code>。</li>
+<li>单层递归的逻辑<br>我们说了，二叉树前、中、后的遍历，是看根节点遍历的位置，所以这就是逻辑，对吧，是不是很简单。。。</li>
+</ul>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>我们就照着以上总结的逻辑来用Javascript实现吧：</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition <span class="keyword">for</span> a binary tree <span class="type">node</span>.</span><br><span class="line"> * <span class="keyword">function</span> TreeNode(val, left, right) &#123;</span><br><span class="line"> *     this.val = (val===undefined ? <span class="number">0</span> : val)</span><br><span class="line"> *     this.left = (left===undefined ? null : left)</span><br><span class="line"> *     this.right = (right===undefined ? null : right)</span><br><span class="line"> * &#125;</span><br><span class="line"> */</span><br><span class="line">/**</span><br><span class="line"> * @param &#123;TreeNode&#125;<span class="built_in"> root</span></span><br><span class="line"> * @<span class="keyword">return</span> <span class="built_in">&#123;number</span>[]&#125;</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">//  前序遍历 </span><br><span class="line">var preOrderTraversal = <span class="keyword">function</span><span class="built_in">(root</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> result = [];</span><br><span class="line">    <span class="keyword">function</span> <span class="keyword">order</span> (<span class="type">node</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="type">node</span>) <span class="keyword">return</span>;</span><br><span class="line">        result.push(<span class="type">node</span>.val);</span><br><span class="line">        <span class="keyword">order</span>(<span class="type">node</span>.left);</span><br><span class="line">        <span class="keyword">order</span>(<span class="type">node</span>.right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">order</span><span class="built_in">(root</span>);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//  中序遍历</span><br><span class="line">var midOrderTraversal = <span class="keyword">function</span><span class="built_in">(root</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> result = [];</span><br><span class="line">    <span class="keyword">function</span> <span class="keyword">order</span> (<span class="type">node</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="type">node</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">order</span>(<span class="type">node</span>.left);</span><br><span class="line">        result.push(<span class="type">node</span>.val);</span><br><span class="line">        <span class="keyword">order</span>(<span class="type">node</span>.right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">order</span><span class="built_in">(root</span>);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">//  后续遍历</span><br><span class="line">var backOrderTraversal = <span class="keyword">function</span><span class="built_in">(root</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> result = [];</span><br><span class="line">    <span class="keyword">function</span> <span class="keyword">order</span> (<span class="type">node</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="type">node</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">order</span>(<span class="type">node</span>.left);</span><br><span class="line">        <span class="keyword">order</span>(<span class="type">node</span>.right);</span><br><span class="line">        result.push(<span class="type">node</span>.val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">order</span><span class="built_in">(root</span>);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>是不是就发现很简答了，所以不要慌，要总结，才能学会。。。</p>
  
       <!-- reward -->
       
@@ -200,12 +202,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://leexiaop.github.io/recoil/introduce/start/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://leexiaop.github.io/algorithm/44/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
 
     </footer>
   </div>
@@ -213,15 +215,11 @@
    
   <nav class="article-nav">
     
-      <a href="/recoil/introduce/motivation/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Recoil简介--设计初衷
-          
-        </div>
-      </a>
     
+      <a href="/ts/7/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Typescript--装饰器</div>
+      </a>
     
   </nav>
 

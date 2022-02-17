@@ -6,7 +6,7 @@
   <link href="https://leexiaop.github.io/atom.xml" rel="self"/>
   
   <link href="https://leexiaop.github.io/"/>
-  <updated>2021-10-15T10:09:35.903Z</updated>
+  <updated>2022-02-17T12:58:42.320Z</updated>
   <id>https://leexiaop.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript算法套路(一) 二叉树的前、中、后序递归遍历</title>
+    <link href="https://leexiaop.github.io/algorithm/44/"/>
+    <id>https://leexiaop.github.io/algorithm/44/</id>
+    <published>2022-02-17T12:08:19.000Z</published>
+    <updated>2022-02-17T12:58:42.320Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Leetcode算法刷了那么多，是不是过了没多久就全忘记了，再遇到类似的题目，只能隐隐约约的记得曾经刷过，但依旧毫无思路。对，这是绝大多数人的通病，当然我也不例外，所以我潜心研究这到底是为什么，到底是为什么。终于找到了终结所在–光刷题，只是做了题，根本没有明白其内在原理，根</summary>
+        
+      
+    
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>Typescript--装饰器</title>
@@ -493,33 +518,6 @@
         
     <summary type="html">&lt;p&gt;题目：给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。&lt;/p&gt;
 &lt;figure class=&quot;highlight maxima&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
-        
-      
-    
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leeCode算法--合并俩个有序列表</title>
-    <link href="https://leexiaop.github.io/algorithm/33/"/>
-    <id>https://leexiaop.github.io/algorithm/33/</id>
-    <published>2021-07-21T03:19:15.000Z</published>
-    <updated>2021-10-10T13:31:34.691Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;题目：将两个升序链表合并为一个新的&lt;strong&gt;升序&lt;/strong&gt;链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 &lt;/p&gt;
-&lt;p&gt;分析：我们首先要创建俩个链表，然后比较俩个链表元素的大小，然后合并为一个新的链表。&lt;/p&gt;
-&lt;figure</summary>
         
       
     

@@ -176,6 +176,71 @@
     
     
     <article
+  id="post-react/1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/react/1/"
+    >React--React技术栈设计初衷什么？</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/react/1/" class="article-date">
+  <time datetime="2021-05-24T09:46:01.000Z" itemprop="datePublished">2021-05-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>React作为当前最为流行的三大前端技术栈之一，备受大家开发者的关注。我们就来讲讲React技术栈的设计初衷是什么？打开React的官网可以醒目的看到一行大字—用于构建用户界面的JavaScript库。这基本就概括了React的核心：构建用户界面。</p>
+<h3 id="声明式"><a href="#声明式" class="headerlink" title="声明式"></a>声明式</h3><p>React是声明式的编码方式，这使得React构建用户界面变的异常简单，这可以为应用的每一个状态设计简洁的UI视图，当数据改变时，React可以更有效的更新并且正确的渲染组件。以声明式编写UI，可以让代码更加可靠并方便调试。</p>
+<h3 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h3><p>组件化应该算是React的又一大特点，React里使用了更加简化的组建模式，它将整个UI上的每一个功能模块定义成组件。然后将小的组件通过组合或者嵌套的方式再构成更大的组件。React组件具有以下特点：</p>
+<ul>
+<li>可组合：可以将简单的组件组合成复杂的组件</li>
+<li>可重用：每个组件都是独立的，可以被其他组件调用</li>
+<li>可维护：组件是独立的，将逻辑和UI封装，可维护性更高</li>
+<li>可测试：组件的独立性决定了组件更容易测试</li>
+</ul>
+<h3 id="一次学习，随处遍写"><a href="#一次学习，随处遍写" class="headerlink" title="一次学习，随处遍写"></a>一次学习，随处遍写</h3><p>我认为React最强大的地方就在于一次学习，随处编写。就是说，无论你现在用的是什么技术栈，都可以随时引入React来开发新特性，而不需要重构现在的代码。React同时也支持服务端渲染，或者使用React Native开发原生App。React组件可以映射为对应的原声控件。在输出憝时候，到底输出的是web Dom, Ios，android控件是由平台决定的。</p>
+<h3 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h3><p>当前Web应用越来越广泛。性能方面是一个不得不考虑的问题。传统页面每次刷新页面，都需要手动更新dom,这样性能的消耗是非常大的，因此，React使用虚拟DOM这一JavaScript对象树在每次页面更新后都会重新重新计算虚拟DOM，并且和上一次的虚拟DOM做对比，然后将变化的虚拟DOM更新到真实DOM上。这样就可以大大降低直接更新真是DOM带来的性能消耗。当然React也提供了shouldComponentUpdate这样的生命周期函数，和pureComponent来减少不必要的虚拟DOM的对比，以保证性能。</p>
+<h3 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h3><p>函数式编程并不是起源于React,但是在我看来一定是扬于React,在新版本的React开发中，React提倡开发者使用函数式编程来开发组件。这样可以减少冗余代码，此外由于组件自身就是函数，更利于测试。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-algorithm/structures/2"
   class="article article-type-post"
   itemscope
@@ -1006,66 +1071,6 @@ That’s all!整体思路就是从俩边向中间循环，只要遇到不相等�
   <p>基数排序的思想：基数排序并不是比较排序，是桶排序的一种，基数排序要求，在基数排序之前先必须知道排序前的位数，然后将个位数先排，如果相等放在一个桶里，然后是十位，然后是百位，以此类推。<br><img src="/algorithm/9/9.gif" alt="基数排序"></p>
 <figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> radixSort = (arr, numberLength) =&gt; &#123;</span><br><span class="line">    <span class="built_in">let</span> <span class="built_in">mod</span> = <span class="number">10</span></span><br><span class="line">    <span class="built_in">let</span> dev = <span class="number">1</span></span><br><span class="line">    <span class="built_in">let</span> counter = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> i = <span class="number">0</span>;</span><br><span class="line">        i &lt; numberLength;</span><br><span class="line">        i++, <span class="built_in">mod</span> *= <span class="number">10</span>, dev *= <span class="number">10</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">let</span> j = <span class="number">0</span>; j &lt; arr.<span class="built_in">length</span>;j++) &#123;</span><br><span class="line">                <span class="built_in">let</span> <span class="built_in">num</span> = parseInt((arr[j] <span class="symbol">%</span> <span class="built_in">mod</span>) / dev)</span><br><span class="line">                <span class="keyword">if</span> (!counter[<span class="built_in">num</span>]) &#123;</span><br><span class="line">                    counter[<span class="built_in">num</span>] = []</span><br><span class="line">                &#125;</span><br><span class="line">                counter[<span class="built_in">num</span>].<span class="built_in">push</span>(arr[j])</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">let</span> pos = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">let</span> m = <span class="number">0</span>; m &lt; counter.<span class="built_in">length</span>; m++) &#123;</span><br><span class="line">                <span class="built_in">let</span> value = null</span><br><span class="line">                <span class="keyword">if</span> (counter[m]) &#123;</span><br><span class="line">                    <span class="keyword">while</span> (value = counter[m].shift()) &#123;</span><br><span class="line">                        arr[pos++] = value</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> arr = [<span class="number">342</span>, <span class="number">234</span>, <span class="number">675</span>, <span class="number">543</span>, <span class="number">23</span>, <span class="number">543</span>, <span class="number">764</span>]</span><br><span class="line">//  <span class="number">3</span>是表示最大数的个数</span><br><span class="line">console.<span class="built_in">log</span>(radixSort(arr, <span class="number">3</span>))</span><br><span class="line">//  [<span class="number">23</span>, <span class="number">234</span>, <span class="number">342</span>, <span class="number">543</span>, <span class="number">543</span>, <span class="number">675</span>, <span class="number">764</span>]</span><br></pre></td></tr></table></figure>
 <p>注：基数排序和计数排序是有异曲同工之妙，他们都是在特定的情况下，才可以的。基数排序是稳定的。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-algorithm/8"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/8/"
-    >排序算法(七)--计数排序</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/8/" class="article-date">
-  <time datetime="2021-04-29T07:49:41.000Z" itemprop="datePublished">2021-04-29</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>技数排序的思想：</p>
-<ul>
-<li>在数组中找到最大的一个，然后生成一个新的数组，计数数组</li>
-<li>将原数组中的项作为计数数组的索引，将原数组中项出现的次数记录在计数数组中</li>
-<li>将计数组的索引按出现的次数平铺在原数组中，并返回<br><img src="/algorithm/8/8.gif" alt="计数排序"><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var countSort =<span class="function"> (<span class="params">arr</span>, <span class="params">max</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> countArr = <span class="keyword">new</span> <span class="constructor">Array(<span class="params">max</span> + 1)</span></span><br><span class="line">    <span class="keyword">let</span> sortIndex = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length;i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!countArr<span class="literal">[<span class="identifier">arr</span>[<span class="identifier">i</span>]</span>]) &#123;</span><br><span class="line">            countArr<span class="literal">[<span class="identifier">arr</span>[<span class="identifier">i</span>]</span>] = <span class="number">0</span></span><br><span class="line">        &#125;</span><br><span class="line">        countArr<span class="literal">[<span class="identifier">arr</span>[<span class="identifier">i</span>]</span>]++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>;j &lt; countArr.length;j++) &#123;</span><br><span class="line">        <span class="comment">//  判断countArr中存放的次数是大于0的</span></span><br><span class="line">        <span class="keyword">while</span>(countArr<span class="literal">[<span class="identifier">j</span>]</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            arr<span class="literal">[<span class="identifier">sortIndex</span><span class="operator">++</span>]</span> = j</span><br><span class="line">            <span class="comment">//  在countArr中存放的是数量</span></span><br><span class="line">            <span class="comment">//  所以需要没存一次就减少一次</span></span><br><span class="line">            countArr<span class="literal">[<span class="identifier">j</span>]</span>--</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> arr = <span class="literal">[<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">12</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">1</span>]</span></span><br><span class="line">count<span class="constructor">Sort(<span class="params">arr</span>, 12)</span></span><br><span class="line"><span class="comment">//  [1, 1, 2, 3, 3, 3, 4, 5, 5, 5, 7, 8, 8, 9, 9, 12]</span></span><br></pre></td></tr></table></figure>
-注：<br>  我们可以看到，计数排序并不是像其他排序一样，通过比较大小，所以，计数排序是适合特定情况下的排序，计数排序要求输入的数据必须是有确定范围的整数。</li>
-</ul>
  
       <!-- reward -->
       
