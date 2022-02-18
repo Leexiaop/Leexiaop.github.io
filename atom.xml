@@ -6,7 +6,7 @@
   <link href="https://leexiaop.github.io/atom.xml" rel="self"/>
   
   <link href="https://leexiaop.github.io/"/>
-  <updated>2022-02-17T12:58:42.320Z</updated>
+  <updated>2022-02-18T07:10:39.497Z</updated>
   <id>https://leexiaop.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>JavaScript算法套路(一) 二叉树的前、中、后序递归遍历</title>
+    <title>JavaScript算法套路之二叉树的前、中、后序递归遍历</title>
     <link href="https://leexiaop.github.io/algorithm/44/"/>
     <id>https://leexiaop.github.io/algorithm/44/</id>
-    <published>2022-02-17T12:08:19.000Z</published>
-    <updated>2022-02-17T12:58:42.320Z</updated>
+    <published>2022-02-18T06:23:50.000Z</published>
+    <updated>2022-02-18T07:10:39.497Z</updated>
     
     
       
@@ -29,6 +29,32 @@
         
         
     <summary type="html">&lt;p&gt;Leetcode算法刷了那么多，是不是过了没多久就全忘记了，再遇到类似的题目，只能隐隐约约的记得曾经刷过，但依旧毫无思路。对，这是绝大多数人的通病，当然我也不例外，所以我潜心研究这到底是为什么，到底是为什么。终于找到了终结所在–光刷题，只是做了题，根本没有明白其内在原理，根</summary>
+        
+      
+    
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript算法套路之二叉树理论基础</title>
+    <link href="https://leexiaop.github.io/algorithm/45/"/>
+    <id>https://leexiaop.github.io/algorithm/45/</id>
+    <published>2022-02-17T12:08:19.000Z</published>
+    <updated>2022-02-18T07:11:28.816Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;学习算法，数据结构必须了解。据说二叉树是在学习算法路上的第一道要突破的屏障。那么就来总结一下二叉的一些简单理论：&lt;/p&gt;
+&lt;h3 id=&quot;二叉树的定义&quot;&gt;&lt;a href=&quot;#二叉树的定义&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -492,32 +518,6 @@
         
         
     <summary type="html">&lt;p&gt;题目： 给定一个非负整数 numRows，生成「杨辉三角」的前 numRows 行。在「杨辉三角」中，每个数是它左上方和右上方的数的和。&lt;br&gt;&lt;img src=&quot;/algorithm/35/1.gif&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leeCode算法--最大子序和</title>
-    <link href="https://leexiaop.github.io/algorithm/34/"/>
-    <id>https://leexiaop.github.io/algorithm/34/</id>
-    <published>2021-07-25T04:07:31.000Z</published>
-    <updated>2021-10-10T13:31:34.693Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;题目：给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。&lt;/p&gt;
-&lt;figure class=&quot;highlight maxima&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span</summary>
         
       
     

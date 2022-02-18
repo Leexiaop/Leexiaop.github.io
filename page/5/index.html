@@ -176,6 +176,62 @@
     
     
     <article
+  id="post-algorithm/9"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/9/"
+    >排序算法(八)--基数排序</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/9/" class="article-date">
+  <time datetime="2021-04-30T07:50:55.000Z" itemprop="datePublished">2021-04-30</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>基数排序的思想：基数排序并不是比较排序，是桶排序的一种，基数排序要求，在基数排序之前先必须知道排序前的位数，然后将个位数先排，如果相等放在一个桶里，然后是十位，然后是百位，以此类推。<br><img src="/algorithm/9/9.gif" alt="基数排序"></p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> radixSort = (arr, numberLength) =&gt; &#123;</span><br><span class="line">    <span class="built_in">let</span> <span class="built_in">mod</span> = <span class="number">10</span></span><br><span class="line">    <span class="built_in">let</span> dev = <span class="number">1</span></span><br><span class="line">    <span class="built_in">let</span> counter = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> i = <span class="number">0</span>;</span><br><span class="line">        i &lt; numberLength;</span><br><span class="line">        i++, <span class="built_in">mod</span> *= <span class="number">10</span>, dev *= <span class="number">10</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">let</span> j = <span class="number">0</span>; j &lt; arr.<span class="built_in">length</span>;j++) &#123;</span><br><span class="line">                <span class="built_in">let</span> <span class="built_in">num</span> = parseInt((arr[j] <span class="symbol">%</span> <span class="built_in">mod</span>) / dev)</span><br><span class="line">                <span class="keyword">if</span> (!counter[<span class="built_in">num</span>]) &#123;</span><br><span class="line">                    counter[<span class="built_in">num</span>] = []</span><br><span class="line">                &#125;</span><br><span class="line">                counter[<span class="built_in">num</span>].<span class="built_in">push</span>(arr[j])</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">let</span> pos = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">let</span> m = <span class="number">0</span>; m &lt; counter.<span class="built_in">length</span>; m++) &#123;</span><br><span class="line">                <span class="built_in">let</span> value = null</span><br><span class="line">                <span class="keyword">if</span> (counter[m]) &#123;</span><br><span class="line">                    <span class="keyword">while</span> (value = counter[m].shift()) &#123;</span><br><span class="line">                        arr[pos++] = value</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> arr = [<span class="number">342</span>, <span class="number">234</span>, <span class="number">675</span>, <span class="number">543</span>, <span class="number">23</span>, <span class="number">543</span>, <span class="number">764</span>]</span><br><span class="line">//  <span class="number">3</span>是表示最大数的个数</span><br><span class="line">console.<span class="built_in">log</span>(radixSort(arr, <span class="number">3</span>))</span><br><span class="line">//  [<span class="number">23</span>, <span class="number">234</span>, <span class="number">342</span>, <span class="number">543</span>, <span class="number">543</span>, <span class="number">675</span>, <span class="number">764</span>]</span><br></pre></td></tr></table></figure>
+<p>注：基数排序和计数排序是有异曲同工之妙，他们都是在特定的情况下，才可以的。基数排序是稳定的。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-algorithm/8"
   class="article article-type-post"
   itemscope
@@ -1167,79 +1223,6 @@
 <li><p>2）闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。</p>
 </li>
 </ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-javascript/4"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/javascript/4/"
-    >JavaScript--词法作用域是什么？</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/javascript/4/" class="article-date">
-  <time datetime="2021-03-09T07:08:42.000Z" itemprop="datePublished">2021-03-09</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>我们知道，作用域是用来查找变量的一套规则，JavaScript引擎在执行代码的时候，会经历三个阶段：词法分析，语法分析，生成代码这三个阶段，我们所说的词法作用域就是发生在词法分析阶段。</p>
-<p>简单地说，词法作用域就是定义在词法阶段的作用域。换句话说，词法作用域是由你在写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变(大部分情况下是这样的)。</p>
-<p><code>作用域查找会在找到第一个匹配的标识符时停止</code>。在多层的嵌套作用域中可以定义同名的标识符，这叫作“遮蔽效应”(内部的标识符“遮蔽”了外部的标识符)。抛开遮蔽效应，作用域查找始终从运行时所处的最内部作用域开始，逐级向外或者说向上进行，直到遇见第一个匹配的标识符为止。</p>
-<p>全局变量会自动成为全局对象(比如浏览器中的 window 对象)的属性，因此 可以不直接通过全局对象的词法名称，而是间接地通过对全局对象属性的引 用来对其进行访问。</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a</span><br></pre></td></tr></table></figure>
-<p>通过这种技术可以访问那些被同名变量所遮蔽的全局变量。但非全局的变量 如果被遮蔽了，无论如何都无法被访问到。</p>
-<p><code>无论函数在哪里被调用，也无论它如何被调用，它的词法作用域都只由函数被声明时所处 的位置决定。</code>词法作用域查找只会查找一级标识符.</p>
-<p>这里比较坑的地方就是欺骗词法。那么什么是欺骗词法呢？如果词法作用域完全由写代码期间函数所声明的位置来定义，怎样才能在运行时来“修改”(也可以说欺骗)词法作用域呢，这就是所谓的欺骗词法。通常会有俩中机制来实现，但是，<code>欺骗词法作用域会导致性能下降</code>。</p>
-<h5 id="eval-函数"><a href="#eval-函数" class="headerlink" title="eval()函数"></a>eval()函数</h5><p>JavaScript 中的 eval(..) 函数可以接受一个字符串为参数，并将其中的内容视为好像在书 写时就存在于程序中这个位置的代码。换句话说，可以在你写的代码中用程序生成代码并运行，就好像代码是写在那个位置的一样。根据这个原理来理解 eval(..)，它是如何通过代码欺骗和假装成书写时(也就是词法期) 代码就在那，来实现修改词法作用域环境的，这个原理就变得清晰易懂了。在执行 eval(..) 之后的代码时，引擎并不“知道”或“在意”前面的代码是以动态形式插 入进来，并对词法作用域的环境进行修改的。引擎只会如往常地进行词法作用域查找。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">str, a</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">eval</span>( str ); <span class="comment">// 欺骗!</span></span><br><span class="line">    <span class="built_in">console</span>.log( a, b );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = <span class="number">2</span>;</span><br><span class="line">foo( <span class="string">&quot;var b = 3;&quot;</span>, <span class="number">1</span> ); <span class="comment">// 1, 3</span></span><br></pre></td></tr></table></figure>
-
-<p>默认情况下，如果 eval(..) 中所执行的代码包含有一个或多个声明(无论是变量还是函数)，就会对 eval(..) 所处的词法作用域进行修改。技术上，通过一些技巧(已经超出我 们的讨论范围)可以间接调用 eval(..) 来使其运行在全局作用域中，并对全局作用域进行 修改。但无论何种情况，eval(..) 都可以在运行期修改书写期的词法作用域。<br>在严格模式的程序中，eval(..) 在运行时有其自己的词法作用域，意味着其 中的声明无法修改所在的作用域。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">str</span>) </span>&#123; <span class="string">&quot;use strict&quot;</span>;</span><br><span class="line"><span class="built_in">eval</span>( str );</span><br><span class="line"><span class="built_in">console</span>.log( a ); <span class="comment">// ReferenceError: a is not defined &#125;</span></span><br><span class="line">foo( <span class="string">&quot;var a = 2&quot;</span> );</span><br></pre></td></tr></table></figure>
-<h5 id="with"><a href="#with" class="headerlink" title="with"></a>with</h5><p>JavaScript 中另一个难以掌握(并且现在也不推荐使用)的用来欺骗词法作用域的功能是 with 关键字。with 通常被当作重复引用同一个对象中的多个属性的快捷方式，可以不需要重复引用对象本身。看下面的俩段代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">b</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">c</span>: <span class="number">3</span> </span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 单调乏味的重复 &quot;obj&quot; </span></span><br><span class="line">    obj.a = <span class="number">2</span>;</span><br><span class="line">    obj.b = <span class="number">3</span>;</span><br><span class="line">    obj.c = <span class="number">4</span>;</span><br><span class="line"><span class="comment">// 简单的快捷方式 </span></span><br><span class="line"><span class="keyword">with</span> (obj) &#123;</span><br><span class="line">    a = <span class="number">3</span>;</span><br><span class="line">    b = <span class="number">4</span>;</span><br><span class="line">    c = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 但实际上这不仅仅是为了方便地访问对象属性。考虑如下代码:</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">with</span> (obj) &#123;</span><br><span class="line">        a = <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> o1 = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">3</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> o2 = &#123;</span><br><span class="line">    <span class="attr">b</span>: <span class="number">3</span></span><br><span class="line">&#125;;</span><br><span class="line">foo( o1 );</span><br><span class="line"><span class="built_in">console</span>.log( o1.a ); <span class="comment">// 2</span></span><br><span class="line">foo( o2 );</span><br><span class="line"><span class="built_in">console</span>.log( o2.a ); <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log( a ); <span class="comment">// 2——不好，a 被泄漏到全局作用域上了!</span></span><br></pre></td></tr></table></figure>
-<p>with 可以将一个没有或有多个属性的对象处理为一个完全隔离的词法作用域，因此这个对 象的属性也会被处理为定义在这个作用域中的词法标识符。尽管 with 块可以将一个对象处理为词法作用域，但是这个块内部正常的 var 声明并不会被限制在这个块的作用域中，而是被添加到 with 所处的函数作 用域中。<br>eval(..) 函数如果接受了含有一个或多个声明的代码，就会修改其所处的词法作用域，而 with 声明实际上是根据你传递给它的对象凭空创建了一个全新的词法作用域。</p>
-<p><code>另外一个不推荐使用 eval(..) 和 with 的原因是会被严格模式所影响(限 制)。with 被完全禁止，而在保留核心功能的前提下，间接或非安全地使用 eval(..) 也被禁止了。</code></p>
-<h5 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h5><p>eval(..) 和 with 会在运行时修改或创建新的作用域，以此来欺骗其他在书写时定义的词法作用域。这对性能造成了很大的影响，JavaScript 引擎会在编译阶段进行数项的性能优化。其中有些优化依赖于能够根据代码的 词法进行静态分析，并预先确定所有变量和函数的定义位置，才能在执行过程中快速找到 标识符。</p>
-<p>但如果引擎在代码中发现了 eval(..) 或 with，它只能简单地假设关于标识符位置的判断都是无效的，因为无法在词法分析阶段明确知道 eval(..) 会接收到什么代码，这些代码会 如何对作用域进行修改，也无法知道传递给 with 用来创建新词法作用域的对象的内容到底是什么。</p>
-<p>最悲观的情况是如果出现了 eval(..) 或 with，所有的优化可能都是无意义的，因此最简 单的做法就是完全不做任何优化。如果代码中大量使用 eval(..) 或 with，那么运行起来一定会变得非常慢。无论引擎多聪 明，试图将这些悲观情况的副作用限制在最小范围内，也无法避免如果没有这些优化，代 码会运行得更慢这个事实。</p>
  
       <!-- reward -->
       

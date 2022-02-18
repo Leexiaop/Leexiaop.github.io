@@ -176,6 +176,63 @@
     
     
     <article
+  id="post-algorithm/structures/3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/structures/3/"
+    >基础数据结构--手动实现队列及其相关方法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/structures/3/" class="article-date">
+  <time datetime="2021-05-25T03:04:26.000Z" itemprop="datePublished">2021-05-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>队列的定义：队列其实应该是属于列表的一种，又像是俩个栈拼接形成一样来存储有序数据。队列是一种先进先出的数据结构，就像是公交车一样，前门上车后门下车.所以对于队列的操作最主要的就是俩种：对列尾部插入，队列头部删除。既入队和出对。</p>
+<p>队列实现的属性有：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">function Queue () &#123;</span><br><span class="line">    <span class="comment">//  存储数据</span></span><br><span class="line">    <span class="keyword">this</span>.dataStore = []</span><br><span class="line">    <span class="comment">//  向队尾push数据</span></span><br><span class="line">    <span class="keyword">this</span>.enqueue = enqueue</span><br><span class="line">    <span class="comment">//  从队头删除数据</span></span><br><span class="line">    <span class="keyword">this</span>.dequeue = dequeue</span><br><span class="line">    <span class="comment">//  获取对首元素</span></span><br><span class="line">    <span class="keyword">this</span>.front = front</span><br><span class="line">    <span class="comment">//  获取队尾元素</span></span><br><span class="line">    <span class="keyword">this</span>.back = back</span><br><span class="line">    <span class="comment">//  判断对列是不是空</span></span><br><span class="line">    <span class="keyword">this</span>.empty = empty</span><br><span class="line">    <span class="comment">//  显示队列中的所有元素</span></span><br><span class="line">    <span class="keyword">this</span>.toString = toString</span><br><span class="line">&#125;</span><br><span class="line">function enqueue (item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.dataStore.push(item)</span><br><span class="line">&#125;</span><br><span class="line">function dequeue () &#123;</span><br><span class="line">    <span class="keyword">this</span>.dataStore.shift()</span><br><span class="line">&#125;</span><br><span class="line">function empty () &#123;</span><br><span class="line">    <span class="keyword">return</span> !!<span class="keyword">this</span>.dataStore.length</span><br><span class="line">&#125;</span><br><span class="line">function front () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore[<span class="number">0</span>]</span><br><span class="line">&#125;</span><br><span class="line">function back () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore[<span class="keyword">this</span>.dataStore.length - <span class="number">1</span>]</span><br><span class="line">&#125;</span><br><span class="line">function toString () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.dataStore.reduce((total, curr) =&gt; &#123;</span><br><span class="line">        total += curr</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  测试</span></span><br><span class="line"><span class="keyword">var</span> queue = new Queue()</span><br></pre></td></tr></table></figure>
+<p>注：队列是一种比较重要的数据结构，诸如，排队，排序问题，利用队列将是非常好的解决方式。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-react/1"
   class="article article-type-post"
   itemscope
@@ -1015,62 +1072,6 @@ That’s all!整体思路就是从俩边向中间循环，只要遇到不相等�
 <li>使用的映射函数能够将输入的 N 个数据均匀的分配到 K 个桶中<br>元素分布在桶中：<br><img src="/algorithm/10/1.png" alt="桶排序--1"><br>元素在每个桶中排序<br><img src="/algorithm/10/2.png" alt="桶排序--2"><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  默认bucketSize = 5，默认分5个桶</span></span><br><span class="line">var bucketSort = (arr, bucketSize = <span class="number">5</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!arr.<span class="built_in">length</span>) <span class="keyword">return</span></span><br><span class="line">    let <span class="built_in">min</span> = arr[<span class="number">0</span>]</span><br><span class="line">    let <span class="built_in">max</span> = arr[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">//  用来装桶的桶</span></span><br><span class="line">    let list = []</span><br><span class="line">    <span class="comment">//  返回的结果</span></span><br><span class="line">    let result = []</span><br><span class="line">    <span class="comment">//  获取数组中的最小值和最大值</span></span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">1</span>; i &lt; arr.<span class="built_in">length</span> - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">max</span> = arr[i] &lt;= <span class="built_in">max</span> ? <span class="built_in">max</span> : arr[i]</span><br><span class="line">        <span class="built_in">min</span> = arr[i] &gt;= <span class="built_in">min</span> ? <span class="built_in">min</span> : arr[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//  桶的数量为bucketCount</span></span><br><span class="line">    let bucketCount = (<span class="built_in">max</span> - <span class="built_in">min</span>)/bucketSize</span><br><span class="line">    <span class="keyword">for</span> (let a = <span class="number">0</span>; a &lt; arr.<span class="built_in">length</span>; a++) &#123;</span><br><span class="line">        <span class="comment">//  获取桶的编号</span></span><br><span class="line">        let <span class="keyword">index</span> = Math.<span class="built_in">floor</span>((arr[a] - <span class="built_in">min</span>)/bucketCount)</span><br><span class="line">        <span class="keyword">if</span> (list[<span class="keyword">index</span>]) &#123;</span><br><span class="line">            let k = list[<span class="keyword">index</span>].<span class="built_in">length</span> - <span class="number">1</span></span><br><span class="line">            <span class="comment">//  对桶进行排序</span></span><br><span class="line">            <span class="keyword">while</span> (k &gt;= <span class="number">0</span> &amp;&amp; list[<span class="keyword">index</span>][k] &gt; arr[a]) &#123;</span><br><span class="line">                <span class="comment">//  桶前面的数字放到后面去</span></span><br><span class="line">                list[<span class="keyword">index</span>][k + <span class="number">1</span>] = list[<span class="keyword">index</span>][k]</span><br><span class="line">                k--</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//  不用排序的，直接加在桶的最后面</span></span><br><span class="line">            list[<span class="keyword">index</span>][k+<span class="number">1</span>] = arr[a]</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//  没有值则生成桶，并把值放到对应的桶中</span></span><br><span class="line">            list[<span class="keyword">index</span>]=[];</span><br><span class="line">            list[<span class="keyword">index</span>][<span class="number">0</span>]=arr[a]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    let n = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> (n &lt;= bucketSize) &#123;</span><br><span class="line">        <span class="keyword">if</span> (list[n]) &#123;</span><br><span class="line">            result = result.concat(list[n])</span><br><span class="line">        &#125;</span><br><span class="line">        n++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line">arr = [<span class="number">43</span>, <span class="number">25</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">37</span>, <span class="number">25</span>, <span class="number">21</span>, <span class="number">29</span>, <span class="number">49</span>]</span><br><span class="line">console.<span class="built_in">log</span>(bucketSort(arr))</span><br><span class="line"><span class="comment">//  [3, 9, 21, 25, 25, 29, 37, 43, 49]</span></span><br></pre></td></tr></table></figure>
 注：桶排序是一种思想，实际中并不常用。</li>
 </ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-algorithm/9"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/9/"
-    >排序算法(八)--基数排序</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/9/" class="article-date">
-  <time datetime="2021-04-30T07:50:55.000Z" itemprop="datePublished">2021-04-30</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>基数排序的思想：基数排序并不是比较排序，是桶排序的一种，基数排序要求，在基数排序之前先必须知道排序前的位数，然后将个位数先排，如果相等放在一个桶里，然后是十位，然后是百位，以此类推。<br><img src="/algorithm/9/9.gif" alt="基数排序"></p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> radixSort = (arr, numberLength) =&gt; &#123;</span><br><span class="line">    <span class="built_in">let</span> <span class="built_in">mod</span> = <span class="number">10</span></span><br><span class="line">    <span class="built_in">let</span> dev = <span class="number">1</span></span><br><span class="line">    <span class="built_in">let</span> counter = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">let</span> i = <span class="number">0</span>;</span><br><span class="line">        i &lt; numberLength;</span><br><span class="line">        i++, <span class="built_in">mod</span> *= <span class="number">10</span>, dev *= <span class="number">10</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">let</span> j = <span class="number">0</span>; j &lt; arr.<span class="built_in">length</span>;j++) &#123;</span><br><span class="line">                <span class="built_in">let</span> <span class="built_in">num</span> = parseInt((arr[j] <span class="symbol">%</span> <span class="built_in">mod</span>) / dev)</span><br><span class="line">                <span class="keyword">if</span> (!counter[<span class="built_in">num</span>]) &#123;</span><br><span class="line">                    counter[<span class="built_in">num</span>] = []</span><br><span class="line">                &#125;</span><br><span class="line">                counter[<span class="built_in">num</span>].<span class="built_in">push</span>(arr[j])</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">let</span> pos = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">let</span> m = <span class="number">0</span>; m &lt; counter.<span class="built_in">length</span>; m++) &#123;</span><br><span class="line">                <span class="built_in">let</span> value = null</span><br><span class="line">                <span class="keyword">if</span> (counter[m]) &#123;</span><br><span class="line">                    <span class="keyword">while</span> (value = counter[m].shift()) &#123;</span><br><span class="line">                        arr[pos++] = value</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">let</span> arr = [<span class="number">342</span>, <span class="number">234</span>, <span class="number">675</span>, <span class="number">543</span>, <span class="number">23</span>, <span class="number">543</span>, <span class="number">764</span>]</span><br><span class="line">//  <span class="number">3</span>是表示最大数的个数</span><br><span class="line">console.<span class="built_in">log</span>(radixSort(arr, <span class="number">3</span>))</span><br><span class="line">//  [<span class="number">23</span>, <span class="number">234</span>, <span class="number">342</span>, <span class="number">543</span>, <span class="number">543</span>, <span class="number">675</span>, <span class="number">764</span>]</span><br></pre></td></tr></table></figure>
-<p>注：基数排序和计数排序是有异曲同工之妙，他们都是在特定的情况下，才可以的。基数排序是稳定的。</p>
  
       <!-- reward -->
       
