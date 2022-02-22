@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">425</span>
+            <span class="post-count">536</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -142,7 +142,7 @@
 </ul>
 </li>
 </ol>
- 
+<h3 id="JavaScript创建二叉查找树"><a href="#JavaScript创建二叉查找树" class="headerlink" title="JavaScript创建二叉查找树"></a>JavaScript创建二叉查找树</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">function TreeNode (<span class="keyword">data</span>, left, right) &#123;</span><br><span class="line">	<span class="keyword">this</span>.<span class="keyword">val</span> = <span class="keyword">data</span>;</span><br><span class="line">	<span class="keyword">this</span>.left = left;</span><br><span class="line">	<span class="keyword">this</span>.right = right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function BST() &#123;</span><br><span class="line">	<span class="comment">//	保存二叉树的节点</span></span><br><span class="line">	<span class="keyword">this</span>.root = <span class="literal">null</span>;</span><br><span class="line">	<span class="keyword">this</span>.insert = insert;</span><br><span class="line">&#125;</span><br><span class="line">function insert(<span class="keyword">data</span>) &#123;</span><br><span class="line">	let node = new TreeNode(<span class="keyword">data</span>, <span class="literal">null</span>, <span class="literal">null</span>);</span><br><span class="line">	<span class="keyword">if</span> (!<span class="keyword">this</span>.root) &#123;</span><br><span class="line">		<span class="keyword">this</span>.root = node;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		let current = <span class="keyword">this</span>.root;</span><br><span class="line">		let parent = <span class="literal">null</span>;</span><br><span class="line">		<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">			parent = current</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">data</span> &lt; current.<span class="keyword">val</span>) &#123;</span><br><span class="line">				current = current.left;</span><br><span class="line">				<span class="keyword">if</span> (current === <span class="literal">null</span>) &#123;</span><br><span class="line">					parent.left = node;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				current = current.right;</span><br><span class="line">				<span class="keyword">if</span> (current === <span class="literal">null</span>) &#123;</span><br><span class="line">					parent.right = node;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
       <!-- reward -->
       
     </div>

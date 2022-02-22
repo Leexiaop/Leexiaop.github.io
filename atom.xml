@@ -6,7 +6,7 @@
   <link href="https://leexiaop.github.io/atom.xml" rel="self"/>
   
   <link href="https://leexiaop.github.io/"/>
-  <updated>2022-02-18T07:10:39.497Z</updated>
+  <updated>2022-02-22T11:29:58.046Z</updated>
   <id>https://leexiaop.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript算法套路之二叉树的前、中、后序迭代遍历</title>
+    <link href="https://leexiaop.github.io/algorithm/46/"/>
+    <id>https://leexiaop.github.io/algorithm/46/</id>
+    <published>2022-02-18T08:12:04.000Z</published>
+    <updated>2022-02-22T11:29:58.046Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;递归的实现就是：每一次递归调用都会把函数的局部变量、参数值和返回地址等压入调用栈中，然后递归返回的时候，从栈顶弹出上一次递归的各项参数，所以这就是递归为什么可以返回上一层位置的原因。所以。我们用栈当然就能实现同样的遍历了。&lt;/p&gt;
+&lt;p&gt;栈的特点是&lt;code&gt;先进性后出&lt;/</summary>
+        
+      
+    
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>JavaScript算法套路之二叉树的前、中、后序递归遍历</title>
@@ -46,7 +72,7 @@
     <link href="https://leexiaop.github.io/algorithm/45/"/>
     <id>https://leexiaop.github.io/algorithm/45/</id>
     <published>2022-02-17T12:08:19.000Z</published>
-    <updated>2022-02-18T07:11:28.816Z</updated>
+    <updated>2022-02-22T09:36:57.817Z</updated>
     
     
       
@@ -502,31 +528,6 @@
     
     
     <category term="JavaScript" scheme="https://leexiaop.github.io/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leeCode算法--杨辉三角(I)</title>
-    <link href="https://leexiaop.github.io/algorithm/35/"/>
-    <id>https://leexiaop.github.io/algorithm/35/</id>
-    <published>2021-07-26T02:32:43.000Z</published>
-    <updated>2021-10-10T13:31:34.693Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;题目： 给定一个非负整数 numRows，生成「杨辉三角」的前 numRows 行。在「杨辉三角」中，每个数是它左上方和右上方的数的和。&lt;br&gt;&lt;img src=&quot;/algorithm/35/1.gif&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
-    
-    
-    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
     
   </entry>
   

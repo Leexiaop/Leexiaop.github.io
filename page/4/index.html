@@ -176,6 +176,73 @@
     
     
     <article
+  id="post-react/2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/react/2/"
+    >React--React中组件间的如何通信？</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/react/2/" class="article-date">
+  <time datetime="2021-05-27T03:39:43.000Z" itemprop="datePublished">2021-05-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>我们之前说过React是一个组件至上的技术栈，所以，组件之间的通信就是大家关注的话题。主要有以下几种：</p>
+<h3 id="父子组件"><a href="#父子组件" class="headerlink" title="父子组件"></a>父子组件</h3><p>父子组件的传值通过props来实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parent = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> name = <span class="string">&quot;I&#x27;m Lee!&quot;</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Child</span> <span class="attr">name</span>=<span class="string">&quot;&#123;name&#125;&quot;</span>/&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                props.name</span><br><span class="line">            &#125;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="子父组件"><a href="#子父组件" class="headerlink" title="子父组件"></a>子父组件</h3><p>子父组件的通信主要是通过callback来实现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parent = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> onChildClick = <span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(item) <span class="comment">//    点我</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Child</span> <span class="attr">callback</span>=<span class="string">&#123;onChildClick&#125;/</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> child = <span class="function"><span class="params">props</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;</span> <span class="attr">props.callback</span>(&#x27;点我&#x27;) &#125;&gt;</span>点我<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="父孙组件"><a href="#父孙组件" class="headerlink" title="父孙组件"></a>父孙组件</h3><p>父孙组建有俩中方式：</p>
+<ul>
+<li>以父子组件传值的方式，层层向下传递；</li>
+<li>context上下文的方式：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> context = createContext()</span><br><span class="line"><span class="keyword">var</span> parent = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> [count, setCount] = useState(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">context.Provider</span> <span class="attr">value</span>=<span class="string">&#123;</span> <span class="attr">count</span> &#125;&gt;</span></span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">Child</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">context.Provider</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> child = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">Son</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> son = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">context.Consumer</span>&gt;</span></span></span><br><span class="line"><span class="xml">            &#123;</span></span><br><span class="line"><span class="xml">                count =&gt; <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;count&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">            &#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">context.Consumer</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="无关-兄弟-组件"><a href="#无关-兄弟-组件" class="headerlink" title="无关(兄弟)组件"></a>无关(兄弟)组件</h3>非嵌套关系的组件通信主要有以下三种方式：</li>
+<li>兄弟组件，可以通过找到共同的父组件，通过父子，子父组件的方式实现通信</li>
+<li>可以通过redux, mobx, recoil等全局状态库来实现全局状态管理</li>
+<li>可以通过自定义事件（发布订阅）</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-algorithm/structures/3"
   class="article article-type-post"
   itemscope
@@ -1013,65 +1080,6 @@ That’s all!整体思路就是从俩边向中间循环，只要遇到不相等�
 </ul>
 <figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// 因为声明的多个函数都需要数据长度，所以把<span class="built_in">len</span>设置成为全局变量</span><br><span class="line"><span class="built_in">var</span> <span class="built_in">len</span></span><br><span class="line"><span class="built_in">var</span> buildMaxHeap = (arr) =&gt; &#123;   // 建立大顶堆</span><br><span class="line">    <span class="built_in">len</span> = arr.length;</span><br><span class="line">    for (<span class="built_in">var</span> i = Math.floor(<span class="built_in">len</span>/<span class="number">2</span>); i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        heapify(arr, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">var</span> heapify = (arr, i) =&gt; &#123;     // 堆调整</span><br><span class="line">    <span class="built_in">var</span> <span class="built_in">left</span> = <span class="number">2</span> * i + <span class="number">1</span>,</span><br><span class="line">        <span class="built_in">right</span> = <span class="number">2</span> * i + <span class="number">2</span>,</span><br><span class="line">        largest = i;</span><br><span class="line">    <span class="built_in">if</span> (<span class="built_in">left</span> &lt; <span class="built_in">len</span> &amp;&amp; arr[<span class="built_in">left</span>] &gt; arr[largest]) &#123;</span><br><span class="line">        largest = <span class="built_in">left</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">if</span> (<span class="built_in">right</span> &lt; <span class="built_in">len</span> &amp;&amp; arr[<span class="built_in">right</span>] &gt; arr[largest]) &#123;</span><br><span class="line">        largest = <span class="built_in">right</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">if</span> (largest != i) &#123;</span><br><span class="line">        swap(arr, i, largest);</span><br><span class="line">        heapify(arr, largest);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">var</span> swap = (arr, i, j) =&gt; &#123;</span><br><span class="line">    <span class="built_in">var</span> temp = arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">var</span> heapSort = (arr) =&gt; &#123;</span><br><span class="line">    buildMaxHeap(arr);</span><br><span class="line"></span><br><span class="line">    for (<span class="built_in">var</span> i = arr.length-<span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swap(arr, <span class="number">0</span>, i);</span><br><span class="line">        <span class="built_in">len</span>--;</span><br><span class="line">        heapify(arr, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">var</span> arr1=[<span class="number">8</span>,<span class="number">39</span>,<span class="number">400</span>,<span class="number">500</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">20</span>,<span class="number">44</span>,<span class="number">440</span>];</span><br><span class="line">console.log(heapSort(arr1))</span><br><span class="line">//  [<span class="number">3</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">20</span>,<span class="number">39</span>,<span class="number">44</span>,<span class="number">400</span>,<span class="number">440</span>,<span class="number">500</span>]</span><br></pre></td></tr></table></figure>
 <p>注：堆排序对堆知识的要求比较高。但是思想相对简单。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-algorithm/10"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/10/"
-    >排序算法(九)--桶排序</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/10/" class="article-date">
-  <time datetime="2021-05-06T13:11:37.000Z" itemprop="datePublished">2021-05-06</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>桶排序的思想：桶排序是计数排序的升级版。它利用了函数的映射关系，高效与否的关键就在于这个映射函数的确定。</p>
-<ul>
-<li>在额外空间充足的情况下，尽量增大桶的数量</li>
-<li>使用的映射函数能够将输入的 N 个数据均匀的分配到 K 个桶中<br>元素分布在桶中：<br><img src="/algorithm/10/1.png" alt="桶排序--1"><br>元素在每个桶中排序<br><img src="/algorithm/10/2.png" alt="桶排序--2"><figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  默认bucketSize = 5，默认分5个桶</span></span><br><span class="line">var bucketSort = (arr, bucketSize = <span class="number">5</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (!arr.<span class="built_in">length</span>) <span class="keyword">return</span></span><br><span class="line">    let <span class="built_in">min</span> = arr[<span class="number">0</span>]</span><br><span class="line">    let <span class="built_in">max</span> = arr[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">//  用来装桶的桶</span></span><br><span class="line">    let list = []</span><br><span class="line">    <span class="comment">//  返回的结果</span></span><br><span class="line">    let result = []</span><br><span class="line">    <span class="comment">//  获取数组中的最小值和最大值</span></span><br><span class="line">    <span class="keyword">for</span> (let i = <span class="number">1</span>; i &lt; arr.<span class="built_in">length</span> - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">max</span> = arr[i] &lt;= <span class="built_in">max</span> ? <span class="built_in">max</span> : arr[i]</span><br><span class="line">        <span class="built_in">min</span> = arr[i] &gt;= <span class="built_in">min</span> ? <span class="built_in">min</span> : arr[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//  桶的数量为bucketCount</span></span><br><span class="line">    let bucketCount = (<span class="built_in">max</span> - <span class="built_in">min</span>)/bucketSize</span><br><span class="line">    <span class="keyword">for</span> (let a = <span class="number">0</span>; a &lt; arr.<span class="built_in">length</span>; a++) &#123;</span><br><span class="line">        <span class="comment">//  获取桶的编号</span></span><br><span class="line">        let <span class="keyword">index</span> = Math.<span class="built_in">floor</span>((arr[a] - <span class="built_in">min</span>)/bucketCount)</span><br><span class="line">        <span class="keyword">if</span> (list[<span class="keyword">index</span>]) &#123;</span><br><span class="line">            let k = list[<span class="keyword">index</span>].<span class="built_in">length</span> - <span class="number">1</span></span><br><span class="line">            <span class="comment">//  对桶进行排序</span></span><br><span class="line">            <span class="keyword">while</span> (k &gt;= <span class="number">0</span> &amp;&amp; list[<span class="keyword">index</span>][k] &gt; arr[a]) &#123;</span><br><span class="line">                <span class="comment">//  桶前面的数字放到后面去</span></span><br><span class="line">                list[<span class="keyword">index</span>][k + <span class="number">1</span>] = list[<span class="keyword">index</span>][k]</span><br><span class="line">                k--</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//  不用排序的，直接加在桶的最后面</span></span><br><span class="line">            list[<span class="keyword">index</span>][k+<span class="number">1</span>] = arr[a]</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//  没有值则生成桶，并把值放到对应的桶中</span></span><br><span class="line">            list[<span class="keyword">index</span>]=[];</span><br><span class="line">            list[<span class="keyword">index</span>][<span class="number">0</span>]=arr[a]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    let n = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> (n &lt;= bucketSize) &#123;</span><br><span class="line">        <span class="keyword">if</span> (list[n]) &#123;</span><br><span class="line">            result = result.concat(list[n])</span><br><span class="line">        &#125;</span><br><span class="line">        n++</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line">arr = [<span class="number">43</span>, <span class="number">25</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">37</span>, <span class="number">25</span>, <span class="number">21</span>, <span class="number">29</span>, <span class="number">49</span>]</span><br><span class="line">console.<span class="built_in">log</span>(bucketSort(arr))</span><br><span class="line"><span class="comment">//  [3, 9, 21, 25, 25, 29, 37, 43, 49]</span></span><br></pre></td></tr></table></figure>
-注：桶排序是一种思想，实际中并不常用。</li>
-</ul>
  
       <!-- reward -->
       
