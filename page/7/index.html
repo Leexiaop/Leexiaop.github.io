@@ -176,6 +176,76 @@
     
     
     <article
+  id="post-coding/2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/coding/2/"
+    >手动实现Promise.all()方法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/coding/2/" class="article-date">
+  <time datetime="2021-02-25T02:50:08.000Z" itemprop="datePublished">2021-02-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/coding/">coding</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>手动实现Promise.all()函数是面试中常做的现场coding考察，那么如何实现呢？我们先来看看Promise.all()的用法。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Promise<span class="selector-class">.all</span>(<span class="selector-attr">[p1, p2, p3]</span>)<span class="selector-class">.then</span>(result =&gt; &#123;</span><br><span class="line">    console<span class="selector-class">.log</span>(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>Promise.all()方法接受一个数组为参数，数组中是promise，如果数组中的promise都是resolve状态，那么Promise.all()正常返回resolve,返回的数据为一个数组，就是参数中每个promise的结果组成的数组。如果promise.all()中任何一个是reject，那么promise.all()直接reject。<br>所以Promise.all()的特点可以总结为：</p>
+<ul>
+<li><p>1、接收一个 Promise 实例的数组或具有 Iterator 接口的对象，</p>
+</li>
+<li><p>2、如果元素不是 Promise 对象，则使用 Promise.resolve 转成 Promise 对象</p>
+</li>
+<li><p>3、如果全部成功，状态变为 resolved，返回值将组成一个数组传给回调</p>
+</li>
+<li><p>4、只要有一个失败，状态就变为 rejected，返回值将直接传递给回调all() 的返回值也是新的 Promise 对象</p>
+</li>
+</ul>
+<p>来看具体代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  假设我们已经实现了_Promise</span></span><br><span class="line">_Promise.prototype.all = <span class="function">(<span class="params">promiseList</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> _Promise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">Array</span>.isArray(promiseList)) &#123;</span><br><span class="line">            reject(<span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">&#x27;参数错误！&#x27;</span>))</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">let</span> valueList = <span class="keyword">new</span> <span class="built_in">Array</span>(promiseList.length)</span><br><span class="line">        promiseList.forEach(<span class="function">(<span class="params">promise, index</span>) =&gt;</span> &#123;</span><br><span class="line">            _Promise.resolve(promise).then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">                count++</span><br><span class="line">                valueList[index] = result  <span class="comment">//  将每次返回的结果搜集起来</span></span><br><span class="line">                <span class="keyword">if</span> (count === promiseList.length) &#123;</span><br><span class="line">                    <span class="comment">//  表示所有的promise都有结果，最终将所有的结果都resolve出去</span></span><br><span class="line">                    resolve(valueList)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="function"><span class="params">err</span> =&gt;</span> reject(err))</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看看，其实很简单。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-recoil/api/recoil-state/selector"
   class="article article-type-post"
   itemscope
@@ -1099,68 +1169,6 @@ To summarize, we’ve created a todo list app that meets all of our requirements
 <li>Filter todo items 过滤item</li>
 <li>Display useful stats 展示统计</li>
 </ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recoil/" rel="tag">recoil</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-recoil/tutorial/atoms"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/recoil/tutorial/atoms/"
-    >Recoil基础--Atoms共享状态</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/recoil/tutorial/atoms/" class="article-date">
-  <time datetime="2020-11-02T10:25:18.000Z" itemprop="datePublished">2020-11-02</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/recoil/">recoil</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="Atoms共享状态"><a href="#Atoms共享状态" class="headerlink" title="Atoms共享状态"></a>Atoms共享状态</h1><p>Atoms contain the source of truth for our application state. In our todo-list, the source of truth will be an array of objects, with each object representing a todo item.<br>Atoms包含了应用的状态资源，在我们的todo-list的例子里，数据来源是一个包含了多个对象的数组，每一个对象就是一个todo item项.<br>We’ll call our list atom <code>todoListState</code> and create it using the <code>atom()</code> function:<br>用 <code>atom()</code>方法创建列表的Atom，并调用<code>todoListState</code>:</p>
-<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> todoListState = atom(&#123;</span><br><span class="line">    <span class="built_in">key</span>: <span class="string">&#x27;todoListState&#x27;</span>,</span><br><span class="line">    <span class="keyword">default</span>: [],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>We give our atom a unique <code>key</code> and set the <code>default</code> value to an empty array. To read the contents of this atom, we can use the <code>useRecoilValue()</code> hook in our TodoList component:<br>给atom添加一个唯一的<code>标示</code>，设置一个空数组作为<code>默认值</code>。我们可以在组件中使用用<code>useRecoilValue()</code>钩子函数：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TodoList</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> todoList = useRecoilValue(todoListState);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">            <span class="xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="xml">                &#123;/* <span class="tag">&lt;<span class="name">TodoListStats</span> /&gt;</span> */&#125;</span></span><br><span class="line"><span class="xml">                &#123;/* <span class="tag">&lt;<span class="name">TodoListFilters</span> /&gt;</span> */&#125;</span></span><br><span class="line"><span class="xml">                <span class="tag">&lt;<span class="name">TodoItemCreator</span> /&gt;</span></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">                &#123;todoList.map((todoItem) =&gt; (</span></span><br><span class="line"><span class="xml">                    <span class="tag">&lt;<span class="name">TodoItem</span> <span class="attr">key</span>=<span class="string">&#123;todoItem.id&#125;</span> <span class="attr">item</span>=<span class="string">&#123;todoItem&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">                ))&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The commented-out components will be implemented in the sections that follow.<br>注释部分的组件将会在接下来的部分讲解。<br>To create new todo items, we need to access a setter function that will update the contents of the <code>todoListState</code>. We can use the <code>useSetRecoilState()</code> hook to get a setter function in our <code>TodoItemCreator</code> component:<br>创建新的todo items项，需要创建一个新的setter函数来更新<code>todoListState</code>的内容。那么在<code>TodoItemCreator</code>组件中，我们可以通过<code>useSetRecoilState()</code>钩子函数来创建这个setter函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TodoItemCreator</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> [inputValue, setInputValue] = useState(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    <span class="keyword">const</span> setTodoList = useSetRecoilState(todoListState);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> addItem = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        setTodoList(<span class="function">(<span class="params">oldTodoList</span>) =&gt;</span> [</span><br><span class="line">        ...oldTodoList,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">id</span>: getId(),</span><br><span class="line">            <span class="attr">text</span>: inputValue,</span><br><span class="line">            <span class="attr">isComplete</span>: <span class="literal">false</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        ]);</span><br><span class="line">        setInputValue(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> onChange = <span class="function">(<span class="params">&#123;target: &#123;value&#125;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        setInputValue(value);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">value</span>=<span class="string">&#123;inputValue&#125;</span> <span class="attr">onChange</span>=<span class="string">&#123;onChange&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;addItem&#125;</span>&gt;</span>Add<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// utility for creating unique Id</span></span><br><span class="line"><span class="keyword">let</span> id = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getId</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> id++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Notice we use the <strong>updater</strong> form of the setter function so that we can create a new todo list based on the old todo list.<br>注意我们使用了setter函数中新的更新器，以至于我们能基于之前的todo list来创建新的todo list.<br>The <code>TodoItem</code> component will display the value of the todo item while allowing you to change its text and delete the item. We use <code>useRecoilState()</code> to read <code>todoListState</code> and to get a setter function that we use to update the item text, mark it as completed, and delete it:<br>当更改<code>TodoItem</code>组件的内容或者删除其中一个item的时候，<code>TodoItem</code>组件就展示todo item项的内容。我们通过使用<code>useRecoilState()</code>来读取<code>todoListState</code>并且通过setter函数得到更新的item内容，这意味着更新的完成，并且已经删除。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">TodoItem</span>(<span class="params">&#123;item&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [todoList, setTodoList] = useRecoilState(todoListState);</span><br><span class="line">  <span class="keyword">const</span> index = todoList.findIndex(<span class="function">(<span class="params">listItem</span>) =&gt;</span> listItem === item);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> editItemText = <span class="function">(<span class="params">&#123;target: &#123;value&#125;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newList = replaceItemAtIndex(todoList, index, &#123;</span><br><span class="line">            ...item,</span><br><span class="line">            <span class="attr">text</span>: value,</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        setTodoList(newList);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> toggleItemCompletion = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newList = replaceItemAtIndex(todoList, index, &#123;</span><br><span class="line">            ...item,</span><br><span class="line">            <span class="attr">isComplete</span>: !item.isComplete,</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        setTodoList(newList);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> deleteItem = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newList = removeItemAtIndex(todoList, index);</span><br><span class="line"></span><br><span class="line">        setTodoList(newList);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">value</span>=<span class="string">&#123;item.text&#125;</span> <span class="attr">onChange</span>=<span class="string">&#123;editItemText&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">input</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">                <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">                <span class="attr">checked</span>=<span class="string">&#123;item.isComplete&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">                <span class="attr">onChange</span>=<span class="string">&#123;toggleItemCompletion&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">            /&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;deleteItem&#125;</span>&gt;</span>X<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">replaceItemAtIndex</span>(<span class="params">arr, index, newValue</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...arr.slice(<span class="number">0</span>, index), newValue, ...arr.slice(index + <span class="number">1</span>)];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeItemAtIndex</span>(<span class="params">arr, index</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [...arr.slice(<span class="number">0</span>, index), ...arr.slice(index + <span class="number">1</span>)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>And with that we’ve got a fully functional todo list! In the next section we’ll see how we can use selectors to take our list to the next level.<br>这样我们就得到了完整的todolist 组件。在下一个章节，我们将看看selectors是如何将我们的组件提升到一个新的高度的。</p>
  
       <!-- reward -->
       

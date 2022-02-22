@@ -176,6 +176,60 @@
     
     
     <article
+  id="post-css/5"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/css/5/"
+    >CSS--BFC模型是什么</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/css/5/" class="article-date">
+  <time datetime="2021-03-14T10:56:33.000Z" itemprop="datePublished">2021-03-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CSS/">CSS</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>编写中，敬请期待。。。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-javascript/5"
   class="article article-type-post"
   itemscope
@@ -1338,76 +1392,6 @@
 <p>测试</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = _Promise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">promise.then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res);   <span class="comment">//  success</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1000</span></span><br><span class="line">    &#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res);   <span class="comment">//  1000</span></span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
 <p>完美实现Promise.then()的链式调用。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-coding/2"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/coding/2/"
-    >手动实现Promise.all()方法</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/coding/2/" class="article-date">
-  <time datetime="2021-02-25T02:50:08.000Z" itemprop="datePublished">2021-02-25</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/coding/">coding</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>手动实现Promise.all()函数是面试中常做的现场coding考察，那么如何实现呢？我们先来看看Promise.all()的用法。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Promise<span class="selector-class">.all</span>(<span class="selector-attr">[p1, p2, p3]</span>)<span class="selector-class">.then</span>(result =&gt; &#123;</span><br><span class="line">    console<span class="selector-class">.log</span>(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>Promise.all()方法接受一个数组为参数，数组中是promise，如果数组中的promise都是resolve状态，那么Promise.all()正常返回resolve,返回的数据为一个数组，就是参数中每个promise的结果组成的数组。如果promise.all()中任何一个是reject，那么promise.all()直接reject。<br>所以Promise.all()的特点可以总结为：</p>
-<ul>
-<li><p>1、接收一个 Promise 实例的数组或具有 Iterator 接口的对象，</p>
-</li>
-<li><p>2、如果元素不是 Promise 对象，则使用 Promise.resolve 转成 Promise 对象</p>
-</li>
-<li><p>3、如果全部成功，状态变为 resolved，返回值将组成一个数组传给回调</p>
-</li>
-<li><p>4、只要有一个失败，状态就变为 rejected，返回值将直接传递给回调all() 的返回值也是新的 Promise 对象</p>
-</li>
-</ul>
-<p>来看具体代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  假设我们已经实现了_Promise</span></span><br><span class="line">_Promise.prototype.all = <span class="function">(<span class="params">promiseList</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> _Promise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">Array</span>.isArray(promiseList)) &#123;</span><br><span class="line">            reject(<span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">&#x27;参数错误！&#x27;</span>))</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">let</span> valueList = <span class="keyword">new</span> <span class="built_in">Array</span>(promiseList.length)</span><br><span class="line">        promiseList.forEach(<span class="function">(<span class="params">promise, index</span>) =&gt;</span> &#123;</span><br><span class="line">            _Promise.resolve(promise).then(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">                count++</span><br><span class="line">                valueList[index] = result  <span class="comment">//  将每次返回的结果搜集起来</span></span><br><span class="line">                <span class="keyword">if</span> (count === promiseList.length) &#123;</span><br><span class="line">                    <span class="comment">//  表示所有的promise都有结果，最终将所有的结果都resolve出去</span></span><br><span class="line">                    resolve(valueList)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="function"><span class="params">err</span> =&gt;</span> reject(err))</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看看，其实很简单。</p>
  
       <!-- reward -->
       

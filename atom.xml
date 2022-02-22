@@ -6,7 +6,7 @@
   <link href="https://leexiaop.github.io/atom.xml" rel="self"/>
   
   <link href="https://leexiaop.github.io/"/>
-  <updated>2022-02-22T11:29:58.046Z</updated>
+  <updated>2022-02-22T12:21:50.437Z</updated>
   <id>https://leexiaop.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript算法套路之二叉树的层序遍历</title>
+    <link href="https://leexiaop.github.io/algorithm/47/"/>
+    <id>https://leexiaop.github.io/algorithm/47/</id>
+    <published>2022-02-22T11:47:32.000Z</published>
+    <updated>2022-02-22T12:21:50.437Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;二叉树的层序遍历，也就是二叉树的广度月优先遍历，层序遍历，很好理解，就是一层一层的遍历。想要实现二叉树的层序遍历，还需要借助&lt;code&gt;队列&lt;/code&gt;。队列的先进先出，符合一层一层的遍历。&lt;/p&gt;
+&lt;figure class=&quot;highlight</summary>
+        
+      
+    
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/categories/algorithm/"/>
+    
+    
+    <category term="algorithm" scheme="https://leexiaop.github.io/tags/algorithm/"/>
+    
+  </entry>
   
   <entry>
     <title>JavaScript算法套路之二叉树的前、中、后序迭代遍历</title>
@@ -493,32 +519,6 @@
         
         
     <summary type="html">&lt;p&gt;Promise是解决异步编程的解决方案，比传统的回调解决方案，要更加强大合理。所谓Promise,其实就是一个容器，保存在未来才会结束的事件。从语法上讲，Promise是一个对象。他有俩个特点：&lt;br&gt;（1）Promise的状态不受外界影响，Promise是一个异步操作，有</summary>
-        
-      
-    
-    
-    
-    <category term="JavaScript" scheme="https://leexiaop.github.io/categories/JavaScript/"/>
-    
-    
-    <category term="JavaScript" scheme="https://leexiaop.github.io/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript--关于Set, WeakSet, Map, WeakMap的不同</title>
-    <link href="https://leexiaop.github.io/javascript/9/"/>
-    <id>https://leexiaop.github.io/javascript/9/</id>
-    <published>2021-07-26T07:11:22.000Z</published>
-    <updated>2021-10-10T13:31:34.714Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Set, WeakSet, Map, WeakMap都是ES2015提供的新的数据结构。&lt;/p&gt;
-&lt;h3 id=&quot;Set结构&quot;&gt;&lt;a href=&quot;#Set结构&quot; class=&quot;headerlink&quot;</summary>
         
       
     

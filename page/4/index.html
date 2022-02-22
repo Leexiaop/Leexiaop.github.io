@@ -176,6 +176,66 @@
     
     
     <article
+  id="post-algorithm/structures/4"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/structures/4/"
+    >基础数据结构--手动实现链表及其相关方法</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/structures/4/" class="article-date">
+  <time datetime="2021-05-27T03:42:02.000Z" itemprop="datePublished">2021-05-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="单向链表"><a href="#单向链表" class="headerlink" title="单向链表"></a>单向链表</h3><p>链表的定义：链表是由一组节点组合而成的集合，每个节点都使用一个对象的引用指向他的后继。指向另一个节点的引用叫做链。链表靠他们相互之间的关系进行引用。所以对于链表的操作也很简单，既，查找，删除，插入等。只是改变元素的指向关系即可。<br>实现链表：</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Node</span> </span>(item) &#123;</span><br><span class="line">    <span class="comment">//  element保存节点上的数据</span></span><br><span class="line">    <span class="built_in">this</span>.element = item</span><br><span class="line">    <span class="comment">//  next表示指向下一个节点的链</span></span><br><span class="line">    <span class="built_in">this</span>.next = <span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Llist</span> </span>() &#123;</span><br><span class="line">    <span class="comment">//  链表的头</span></span><br><span class="line">    <span class="built_in">this</span>.header = <span class="keyword">new</span> <span class="type">Node</span>(<span class="string">&#x27;head&#x27;</span>)</span><br><span class="line">    <span class="comment">//  查找链表元素</span></span><br><span class="line">    <span class="built_in">this</span>.find = find</span><br><span class="line">    <span class="comment">//  向链表中插入元素</span></span><br><span class="line">    <span class="built_in">this</span>.insert = insert</span><br><span class="line">    <span class="comment">//  删除链表的某一个元素</span></span><br><span class="line">    <span class="built_in">this</span>.remove = remove</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">find</span> </span>(item) &#123;</span><br><span class="line">    <span class="comment">//  拿到列表的头节点</span></span><br><span class="line">    let currNode = <span class="built_in">this</span>.header</span><br><span class="line">    <span class="keyword">while</span>(currNode !== item) &#123;</span><br><span class="line">        <span class="comment">//  如果当前节点不是要找的节点</span></span><br><span class="line">        <span class="comment">//  就指向下一个节点</span></span><br><span class="line">        currNode = currNode.next</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currNode</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insert</span> </span>(<span class="keyword">new</span><span class="type">Item</span>, oldItem) &#123;</span><br><span class="line">    <span class="comment">//  先找到要在插入元素的前一个元素</span></span><br><span class="line">    let currNode = <span class="built_in">this</span>.find(oldItem)</span><br><span class="line">    const <span class="keyword">new</span><span class="type">Node</span> = Node(<span class="keyword">new</span><span class="type">Item</span>)</span><br><span class="line">    <span class="comment">//  前一个元素指向新节点</span></span><br><span class="line">    currNode.next = <span class="keyword">new</span><span class="type">Node</span></span><br><span class="line">    <span class="comment">//  新元素指向之前元素的下一个</span></span><br><span class="line">    <span class="keyword">new</span><span class="type">Node</span>.next = currNode.next</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">remove</span> </span>(item) &#123;</span><br><span class="line">    <span class="comment">//  首先要找到前一个元素</span></span><br><span class="line">    <span class="keyword">var</span> currNode = <span class="built_in">this</span>.header</span><br><span class="line">    <span class="keyword">while</span> (!(currNode ===  <span class="literal">null</span>) &amp;&amp;</span><br><span class="line">        currNode.next.element !== item) &#123;</span><br><span class="line">            currNode = currNode.next</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span> (!(currNode.next === <span class="literal">null</span>)) &#123;</span><br><span class="line">        currNode.next = currNode.next.next</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><p>双向了链表较单项链表而言，双向链表比单向链表要多一个属性，就是前驱。这样在删除元素的时候，就不需要再查找前一个元素了。也就是说，每个元素总有一个属性，指向了他的前一个元素。</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> Node (<span class="type">item</span>) &#123;</span><br><span class="line">    this.<span class="type">element</span> = <span class="type">item</span></span><br><span class="line">    this.<span class="keyword">next</span> = null</span><br><span class="line">    this.<span class="keyword">previous</span> = null</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> Llist () &#123;</span><br><span class="line">    this.header = new Node(<span class="string">&#x27;head&#x27;</span>)</span><br><span class="line">    this.find = find</span><br><span class="line">    this<span class="built_in">.remove</span> =<span class="built_in"> remove</span></span><br><span class="line">    this.<span class="keyword">insert</span> = <span class="keyword">insert</span></span><br><span class="line">    //  查找最后一个元素</span><br><span class="line">    this.findLast = findList</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> find (<span class="type">item</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> currNode = this.header</span><br><span class="line">    while (!(currNode.<span class="type">element</span> === <span class="type">item</span>)) &#123;</span><br><span class="line">        currNode = currNode.<span class="keyword">next</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currNode</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="keyword">insert</span> (newElement, <span class="type">item</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> curr = this.find(<span class="type">item</span>)</span><br><span class="line">    <span class="keyword">let</span> newNode = new Node(newElement)</span><br><span class="line">    curr.<span class="keyword">next</span> = newNode</span><br><span class="line">    newNode.<span class="keyword">next</span> = curr.<span class="keyword">next</span></span><br><span class="line">    newNode.<span class="keyword">previous</span> = curr</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span><span class="built_in"> remove</span> (<span class="type">item</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> curr = this.find(<span class="type">item</span>)</span><br><span class="line">    <span class="keyword">if</span> (!(curr.<span class="keyword">next</span> === <span class="type">item</span>)) &#123;</span><br><span class="line">        curr.<span class="keyword">previous</span>.<span class="keyword">next</span> = curr.<span class="keyword">next</span></span><br><span class="line">        curr.<span class="keyword">next</span>.<span class="keyword">previous</span> = curr.<span class="keyword">previous</span></span><br><span class="line">        curr.<span class="keyword">next</span> = null</span><br><span class="line">        curr.<span class="keyword">previous</span> = null</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> findLast (<span class="type">item</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> curr = this.header</span><br><span class="line">    while (!(curr.<span class="keyword">next</span> === <span class="type">item</span>)) &#123;</span><br><span class="line">        curr = curr.<span class="keyword">next</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> curr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><p>循环链表和单向链表很相似，唯一的区别就是循环链表的头节点的next属性指向自己。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Llist</span> <span class="params">(item)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.header = <span class="keyword">new</span> Node(item)</span><br><span class="line">    <span class="keyword">this</span>.header.next = <span class="keyword">this</span>.header</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>That’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-react/2"
   class="article article-type-post"
   itemscope
@@ -1013,73 +1073,6 @@ That’s all!整体思路就是从俩边向中间循环，只要遇到不相等�
     <div class="article-entry" itemprop="articleBody">
        
   <p>前面说完了十种基础排序，是时候做一个总结了。排序算法可以分为内部排序和外部排序，内部排序是数据记录在内存中进行排序，而外部排序是因排序的数据很大，一次不能容纳全部的排序记录，在排序过程中需要访问外存。常见的内部排序算法有：插入排序、希尔排序、选择排序、冒泡排序、归并排序、快速排序、堆排序、基数排序等。<br><img src="/algorithm/12/1.png" alt="基础排序算法"><br><img src="/algorithm/12/2.png" alt="基础排序算法"><br>所以选择方法，还是要选择稳定的，时间复杂度和空间复杂度低的方法。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-algorithm/11"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/11/"
-    >排序算法(十)--堆排序</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/11/" class="article-date">
-  <time datetime="2021-05-06T14:16:06.000Z" itemprop="datePublished">2021-05-06</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>堆排序思想：堆排序（HeapSort）是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。堆排序可以说是一种利用堆的概念来排序的选择排序。分为两种方法：</p>
-<ul>
-<li>大顶堆：每个节点的值都大于或等于其子节点的值，在堆排序算法中用于升序排列；</li>
-<li>小顶堆：每个节点的值都小于或等于其子节点的值，在堆排序算法中用于降序排列；</li>
-</ul>
-<p>堆排序的平均时间复杂度为 Ο(nlogn)。<br>算法步骤：</p>
-<ul>
-<li>创建一个堆 H[0……n-1]；</li>
-<li>把堆首（最大值）和堆尾互换；</li>
-<li>把堆的尺寸缩小 1，并调用 shift_down(0)，目的是把新的数组顶端数据调整到相应位置；</li>
-<li>重复步骤 2，直到堆的尺寸为 1。</li>
-</ul>
-<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// 因为声明的多个函数都需要数据长度，所以把<span class="built_in">len</span>设置成为全局变量</span><br><span class="line"><span class="built_in">var</span> <span class="built_in">len</span></span><br><span class="line"><span class="built_in">var</span> buildMaxHeap = (arr) =&gt; &#123;   // 建立大顶堆</span><br><span class="line">    <span class="built_in">len</span> = arr.length;</span><br><span class="line">    for (<span class="built_in">var</span> i = Math.floor(<span class="built_in">len</span>/<span class="number">2</span>); i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        heapify(arr, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">var</span> heapify = (arr, i) =&gt; &#123;     // 堆调整</span><br><span class="line">    <span class="built_in">var</span> <span class="built_in">left</span> = <span class="number">2</span> * i + <span class="number">1</span>,</span><br><span class="line">        <span class="built_in">right</span> = <span class="number">2</span> * i + <span class="number">2</span>,</span><br><span class="line">        largest = i;</span><br><span class="line">    <span class="built_in">if</span> (<span class="built_in">left</span> &lt; <span class="built_in">len</span> &amp;&amp; arr[<span class="built_in">left</span>] &gt; arr[largest]) &#123;</span><br><span class="line">        largest = <span class="built_in">left</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">if</span> (<span class="built_in">right</span> &lt; <span class="built_in">len</span> &amp;&amp; arr[<span class="built_in">right</span>] &gt; arr[largest]) &#123;</span><br><span class="line">        largest = <span class="built_in">right</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">if</span> (largest != i) &#123;</span><br><span class="line">        swap(arr, i, largest);</span><br><span class="line">        heapify(arr, largest);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">var</span> swap = (arr, i, j) =&gt; &#123;</span><br><span class="line">    <span class="built_in">var</span> temp = arr[i];</span><br><span class="line">    arr[i] = arr[j];</span><br><span class="line">    arr[j] = temp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">var</span> heapSort = (arr) =&gt; &#123;</span><br><span class="line">    buildMaxHeap(arr);</span><br><span class="line"></span><br><span class="line">    for (<span class="built_in">var</span> i = arr.length-<span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        swap(arr, <span class="number">0</span>, i);</span><br><span class="line">        <span class="built_in">len</span>--;</span><br><span class="line">        heapify(arr, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">var</span> arr1=[<span class="number">8</span>,<span class="number">39</span>,<span class="number">400</span>,<span class="number">500</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">20</span>,<span class="number">44</span>,<span class="number">440</span>];</span><br><span class="line">console.log(heapSort(arr1))</span><br><span class="line">//  [<span class="number">3</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">20</span>,<span class="number">39</span>,<span class="number">44</span>,<span class="number">400</span>,<span class="number">440</span>,<span class="number">500</span>]</span><br></pre></td></tr></table></figure>
-<p>注：堆排序对堆知识的要求比较高。但是思想相对简单。</p>
  
       <!-- reward -->
       

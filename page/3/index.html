@@ -176,6 +176,66 @@
     
     
     <article
+  id="post-algorithm/31"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/algorithm/31/"
+    >leeCode算法--求俩个数组的交集</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/algorithm/31/" class="article-date">
+  <time datetime="2021-07-19T03:10:48.000Z" itemprop="datePublished">2021-07-19</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>题目：给定两个数组，编写一个函数来计算它们的交集。</p>
+<p>分析：这是一个较为基础且常见的题，方法很多，比如：双指针法，去重法，二分查找法等：</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var intersection = function(nums1, nums2) &#123;</span><br><span class="line">    let arr = <span class="comment">[]</span></span><br><span class="line">    for (let i =0;i&lt;nums1.length;i++) &#123;</span><br><span class="line">        for (let j=0;j&lt;nums2.length;j++) &#123;</span><br><span class="line">            if (arr.indexOf(nums1<span class="comment">[i]</span>) === -1</span><br><span class="line">                &amp;&amp; arr.indexOf(nums2<span class="comment">[j]</span>) ===-1</span><br><span class="line">                    &amp;&amp; nums1<span class="comment">[i]</span> === nums2<span class="comment">[j]</span>) &#123;</span><br><span class="line">                arr.push(nums2<span class="comment">[j]</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr</span><br><span class="line">&#125;</span><br><span class="line">intersection(<span class="comment">[1,2,2,1]</span>, <span class="comment">[2,2]</span>)  //  <span class="comment">[2]</span></span><br><span class="line">intersection(<span class="comment">[4,9,5]</span>, <span class="comment">[9,4,9,8,4]</span>)  //  <span class="comment">[4,9]</span></span><br></pre></td></tr></table></figure>
+<p>运行结果： 执行用时：596 ms, 在所有 JavaScript 提交中击败了5.22的用户<br>内存消耗：38 MB, 在所有 JavaScript 提交中击败了99.13%的用户<br>可以看到双指针法的时间复杂度较高，而空间复杂度低。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> intersection = function(nums1, nums2) &#123;</span><br><span class="line">    return <span class="selector-attr">[...new Set(nums1)]</span><span class="selector-class">.filter</span>(n =&gt; nums2<span class="selector-class">.includes</span>(n))</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">intersection</span><span class="params">([<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>], [<span class="number">2</span>,<span class="number">2</span>])</span></span>  <span class="comment">//  [2]</span></span><br><span class="line"><span class="function"><span class="title">intersection</span><span class="params">([<span class="number">4</span>,<span class="number">9</span>,<span class="number">5</span>], [<span class="number">9</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">4</span>])</span></span>  <span class="comment">//  [4,9]</span></span><br></pre></td></tr></table></figure>
+<p>先用new Set()对nums1去重，再过滤，这种方法本人认为局限性较大。</p>
+<p>That’s all!</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-algorithm/30"
   class="article article-type-post"
   itemscope
@@ -986,66 +1046,6 @@ Yes, that’s all!</li>
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-algorithm/structures/4"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/algorithm/structures/4/"
-    >基础数据结构--手动实现链表及其相关方法</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/algorithm/structures/4/" class="article-date">
-  <time datetime="2021-05-27T03:42:02.000Z" itemprop="datePublished">2021-05-27</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h3 id="单向链表"><a href="#单向链表" class="headerlink" title="单向链表"></a>单向链表</h3><p>链表的定义：链表是由一组节点组合而成的集合，每个节点都使用一个对象的引用指向他的后继。指向另一个节点的引用叫做链。链表靠他们相互之间的关系进行引用。所以对于链表的操作也很简单，既，查找，删除，插入等。只是改变元素的指向关系即可。<br>实现链表：</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Node</span> </span>(item) &#123;</span><br><span class="line">    <span class="comment">//  element保存节点上的数据</span></span><br><span class="line">    <span class="built_in">this</span>.element = item</span><br><span class="line">    <span class="comment">//  next表示指向下一个节点的链</span></span><br><span class="line">    <span class="built_in">this</span>.next = <span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Llist</span> </span>() &#123;</span><br><span class="line">    <span class="comment">//  链表的头</span></span><br><span class="line">    <span class="built_in">this</span>.header = <span class="keyword">new</span> <span class="type">Node</span>(<span class="string">&#x27;head&#x27;</span>)</span><br><span class="line">    <span class="comment">//  查找链表元素</span></span><br><span class="line">    <span class="built_in">this</span>.find = find</span><br><span class="line">    <span class="comment">//  向链表中插入元素</span></span><br><span class="line">    <span class="built_in">this</span>.insert = insert</span><br><span class="line">    <span class="comment">//  删除链表的某一个元素</span></span><br><span class="line">    <span class="built_in">this</span>.remove = remove</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">find</span> </span>(item) &#123;</span><br><span class="line">    <span class="comment">//  拿到列表的头节点</span></span><br><span class="line">    let currNode = <span class="built_in">this</span>.header</span><br><span class="line">    <span class="keyword">while</span>(currNode !== item) &#123;</span><br><span class="line">        <span class="comment">//  如果当前节点不是要找的节点</span></span><br><span class="line">        <span class="comment">//  就指向下一个节点</span></span><br><span class="line">        currNode = currNode.next</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currNode</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insert</span> </span>(<span class="keyword">new</span><span class="type">Item</span>, oldItem) &#123;</span><br><span class="line">    <span class="comment">//  先找到要在插入元素的前一个元素</span></span><br><span class="line">    let currNode = <span class="built_in">this</span>.find(oldItem)</span><br><span class="line">    const <span class="keyword">new</span><span class="type">Node</span> = Node(<span class="keyword">new</span><span class="type">Item</span>)</span><br><span class="line">    <span class="comment">//  前一个元素指向新节点</span></span><br><span class="line">    currNode.next = <span class="keyword">new</span><span class="type">Node</span></span><br><span class="line">    <span class="comment">//  新元素指向之前元素的下一个</span></span><br><span class="line">    <span class="keyword">new</span><span class="type">Node</span>.next = currNode.next</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">remove</span> </span>(item) &#123;</span><br><span class="line">    <span class="comment">//  首先要找到前一个元素</span></span><br><span class="line">    <span class="keyword">var</span> currNode = <span class="built_in">this</span>.header</span><br><span class="line">    <span class="keyword">while</span> (!(currNode ===  <span class="literal">null</span>) &amp;&amp;</span><br><span class="line">        currNode.next.element !== item) &#123;</span><br><span class="line">            currNode = currNode.next</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">if</span> (!(currNode.next === <span class="literal">null</span>)) &#123;</span><br><span class="line">        currNode.next = currNode.next.next</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><p>双向了链表较单项链表而言，双向链表比单向链表要多一个属性，就是前驱。这样在删除元素的时候，就不需要再查找前一个元素了。也就是说，每个元素总有一个属性，指向了他的前一个元素。</p>
-<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> Node (<span class="type">item</span>) &#123;</span><br><span class="line">    this.<span class="type">element</span> = <span class="type">item</span></span><br><span class="line">    this.<span class="keyword">next</span> = null</span><br><span class="line">    this.<span class="keyword">previous</span> = null</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> Llist () &#123;</span><br><span class="line">    this.header = new Node(<span class="string">&#x27;head&#x27;</span>)</span><br><span class="line">    this.find = find</span><br><span class="line">    this<span class="built_in">.remove</span> =<span class="built_in"> remove</span></span><br><span class="line">    this.<span class="keyword">insert</span> = <span class="keyword">insert</span></span><br><span class="line">    //  查找最后一个元素</span><br><span class="line">    this.findLast = findList</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> find (<span class="type">item</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> currNode = this.header</span><br><span class="line">    while (!(currNode.<span class="type">element</span> === <span class="type">item</span>)) &#123;</span><br><span class="line">        currNode = currNode.<span class="keyword">next</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> currNode</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="keyword">insert</span> (newElement, <span class="type">item</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> curr = this.find(<span class="type">item</span>)</span><br><span class="line">    <span class="keyword">let</span> newNode = new Node(newElement)</span><br><span class="line">    curr.<span class="keyword">next</span> = newNode</span><br><span class="line">    newNode.<span class="keyword">next</span> = curr.<span class="keyword">next</span></span><br><span class="line">    newNode.<span class="keyword">previous</span> = curr</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span><span class="built_in"> remove</span> (<span class="type">item</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> curr = this.find(<span class="type">item</span>)</span><br><span class="line">    <span class="keyword">if</span> (!(curr.<span class="keyword">next</span> === <span class="type">item</span>)) &#123;</span><br><span class="line">        curr.<span class="keyword">previous</span>.<span class="keyword">next</span> = curr.<span class="keyword">next</span></span><br><span class="line">        curr.<span class="keyword">next</span>.<span class="keyword">previous</span> = curr.<span class="keyword">previous</span></span><br><span class="line">        curr.<span class="keyword">next</span> = null</span><br><span class="line">        curr.<span class="keyword">previous</span> = null</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> findLast (<span class="type">item</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> curr = this.header</span><br><span class="line">    while (!(curr.<span class="keyword">next</span> === <span class="type">item</span>)) &#123;</span><br><span class="line">        curr = curr.<span class="keyword">next</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> curr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="循环链表"><a href="#循环链表" class="headerlink" title="循环链表"></a>循环链表</h3><p>循环链表和单向链表很相似，唯一的区别就是循环链表的头节点的next属性指向自己。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Llist</span> <span class="params">(item)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.header = <span class="keyword">new</span> Node(item)</span><br><span class="line">    <span class="keyword">this</span>.header.next = <span class="keyword">this</span>.header</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">    .</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>That’s all!</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
 
     </footer>
   </div>
